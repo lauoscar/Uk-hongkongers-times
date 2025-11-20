@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英国旅游频道 - UK Hong Konger Times</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #f4efe6;
+            --paper: #fffdf8;
+            --ink: #111;
+            --muted: #666;
+            --card-radius: 12px;
+            --pad: 14px;
+            --soft-gray: rgba(34,34,34,0.06);
+            --accent: #000;
+            --travel-blue: #006699;
+            --travel-green: #339966;
+            --travel-gold: #cc9900;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+            background-size: 10px 10px, 10px 10px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--paper);
+            border-bottom: 3px double #000;
+            padding: 8px 12px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            position: relative;
+            z-index: 2200;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        }
+        
+        .header-left {
+            flex: 1;
+            text-align: left;
+            min-width: 260px;
+        }
+        
+        .site-title {
+            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-size: 48px;
+            color: #000;
+            margin: 0;
+            text-align: center;
+            flex: 1;
+            letter-spacing: 1px;
+        }
+        
+        .site-subtitle {
+            font-family: 'serif';
+            font-size: 22px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: -8px;
+        }
+        
+        .header-right {
+            width: 300px;
+            text-align: right;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            background: var(--paper);
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-family: 'UnifrakturCook', serif;
+            font-size: 24px;
+            color: #000;
+            text-decoration: none;
+            margin-right: 30px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-menu li {
+            margin: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--ink);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(0,0,0,0.05);
+            border-color: var(--muted);
+            text-decoration: none;
+        }
+        
+        .nav-menu a.active {
+            background: rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-wrap {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 18px;
+        }
+        
+        .card {
+            background: var(--paper);
+            padding: var(--pad);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--soft-gray);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+        
+        .widget-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .widget-head h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .widget-sub {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        /* Travel Section */
+        .travel-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+        
+        .travel-card {
+            background: var(--paper);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .travel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .travel-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--soft-gray);
+        }
+        
+        .travel-content {
+            padding: 16px;
+        }
+        
+        .travel-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+        
+        .travel-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+        
+        .travel-region {
+            font-size: 12px;
+            color: var(--muted);
+            font-style: italic;
+        }
+        
+        .travel-tag {
+            display: inline-block;
+            background: var(--travel-blue);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        /* Article Modal */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+        
+        .article-modal-content {
+            background-color: var(--paper);
+            margin: 40px auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 900px;
+            border-radius: var(--card-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .article-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--muted);
+        }
+        
+        .article-modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--ink);
+            border-bottom: 2px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .article-modal-body {
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .article-modal-body p {
+            margin-bottom: 16px;
+        }
+        
+        .article-modal-body strong {
+            font-weight: bold;
+        }
+        
+        .article-modal-body h4 {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--travel-blue);
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 6px;
+        }
+        
+        .article-modal-body .chinese-section {
+            font-family: 'Noto Serif TC', serif;
+        }
+        
+        .article-modal-body .english-section {
+            margin-top: 30px;
+            border-top: 1px solid var(--soft-gray);
+            padding-top: 20px;
+        }
+        
+        .article-modal-date {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 20px;
+            border-top: 1px solid var(--soft-gray);
+            padding-top: 10px;
+        }
+        
+        /* Ad Boxes */
+        .ad-box {
+            background: #fafafa;
+            border: 1px dashed #ccc;
+            padding: 12px;
+            text-align: center;
+            color: #777;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .ad-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .ad-link {
+            display: block;
+            font-size: 20px;
+            color: #0066cc;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--paper);
+            border-top: 3px double #000;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .footer-left {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-wrap {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .site-title {
+                font-size: 32px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+            }
+            
+            .nav-menu a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .travel-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-right {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div id="dateNow">2025年1月15日 星期三</div>
+            <div id="headerQuote">"Discover the beauty and diversity of British travel destinations."</div>
+        </div>
+        
+        <div>
+            <div class="site-title">The UK Hong Konger Times</div>
+            <div class="site-subtitle">UK Travel Channel</div>
+        </div>
+        
+        <div class="header-right">
+            <div class="ad-box">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">UK Hong Konger Times</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">首頁 Home</a></li>
+       <li><a href="weekly-news.html" >本週重點新聞Weekly News</a></li>
+      <li><a href="uk-travel.html" class="active">旅遊頻道Travel</a></li>
+      <li><a href="uk-festivals.html" >節日頻道Festivals</a></li>
+      <li><a href="uk-food.html" >美食頻道Food Digest</a></li>
+      <li><a href="uk-cities.html" >城市專題A Pulse of Nation</a></li>
+      <li><a href="uk-society.html" >週刊專題Weekly Nexus</a></li>
+      <li><!-- 在新标签页打开 --><a href="lifeinuk.html" >Life in the UK Test-Practice Quiz</a></li>
+                <li><a href="bnoguide.html" >BNO移民指南</a></li>                              
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main-wrap">
+        <main>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>英國旅遊頻道：探索不列顛的無限魅力</h3>
+                    <div class="widget-sub">UK Travel Channel: Discover the Endless Charm of Britain</div>
+                </div>
+                <p>歡迎來到英國旅遊頻道！在這專題中，我們將帶您深入探索英國各地的旅遊勝地、自然奇觀和文化景點。從倫敦的都市繁華到蘇格蘭高地的壯麗風光，從威爾斯的古老城堡到英格蘭湖區的寧靜湖泊，每個目的地都展現了英國獨特的魅力。無論您是計劃第一次英國之旅，還是想要探索更多鮮為人知的景點，這裡都將為您提供豐富的旅遊資訊和實用建議。</p>
+                
+                <div class="travel-section">
+                    <div class="travel-card" onclick="openArticleModal('london')">
+                        <img src="https://locationpro.org/london.jpg" alt="倫敦 London" class="travel-image">
+                        <div class="travel-content">
+                            <div class="travel-title">倫敦 London</div>
+                            <div class="travel-subtitle">世界級大都會的無限魅力</div>
+                            <div class="travel-region">英格蘭</div>
+                            <div class="travel-tag">城市探索</div>
+                        </div>
+                    </div>
+                    
+                    <div class="travel-card" onclick="openArticleModal('scotland')">
+                        <img src="https://locationpro.org/scotland.jpg" alt="蘇格蘭高地 Scottish Highlands" class="travel-image">
+                        <div class="travel-content">
+                            <div class="travel-title">蘇格蘭高地 Scottish Highlands</div>
+                            <div class="travel-subtitle">壯麗自然與古老城堡的完美融合</div>
+                            <div class="travel-region">蘇格蘭</div>
+                            <div class="travel-tag">自然風光</div>
+                        </div>
+                    </div>
+                    
+                    <div class="travel-card" onclick="openArticleModal('cotswolds')">
+                        <img src="https://locationpro.org/cotswolds.jpg" alt="科茨沃爾德 Cotswolds" class="travel-image">
+                        <div class="travel-content">
+                            <div class="travel-title">科茨沃爾德 Cotswolds</div>
+                            <div class="travel-subtitle">英格蘭最美鄉村的田園詩篇</div>
+                            <div class="travel-region">英格蘭</div>
+                            <div class="travel-tag">鄉村風光</div>
+                        </div>
+                    </div>
+                    
+                    <div class="travel-card" onclick="openArticleModal('lake')">
+                        <img src="https://locationpro.org/lake-district.jpg" alt="湖區 Lake District" class="travel-image">
+                        <div class="travel-content">
+                            <div class="travel-title">湖區 Lake District</div>
+                            <div class="travel-subtitle">英國最受歡迎的國家公園</div>
+                            <div class="travel-region">英格蘭</div>
+                            <div class="travel-tag">自然風光</div>
+                        </div>
+                    </div>
+                    
+                    <div class="travel-card" onclick="openArticleModal('wales')">
+                        <img src="https://locationpro.org/wales.jpg" alt="威爾斯 Wales" class="travel-image">
+                        <div class="travel-content">
+                            <div class="travel-title">威爾斯 Wales</div>
+                            <div class="travel-subtitle">城堡之國與壯麗海岸線</div>
+                            <div class="travel-region">威爾斯</div>
+                            <div class="travel-tag">歷史文化</div>
+                        </div>
+                    </div>
+                    
+                    <div class="travel-card" onclick="openArticleModal('cornwall')">
+                        <img src="https://locationpro.org/cornwall.jpg" alt="康沃爾 Cornwall" class="travel-image">
+                        <div class="travel-content">
+                            <div class="travel-title">康沃爾 Cornwall</div>
+                            <div class="travel-subtitle">英國最南端的海岸奇觀</div>
+                            <div class="travel-region">英格蘭</div>
+                            <div class="travel-tag">海岸風光</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>廣告贊助</h3>
+                </div>
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/47HvT9A" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+                
+                <div class="ad-box">
+                    <h4>NordPass - Password Manager</h4>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="ad-link">Secure Your Passwords</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="widget-head">
+                    <h3>關於本頻道</h3>
+                </div>
+                <p>英國旅遊頻道是UK Hong Konger Times的專題系列，致力於為讀者提供英國各地的旅遊資訊、景點介紹和實用旅行建議。</p>
+                <p>從城市探索到鄉村漫步，從海岸線到國家公園，我們將帶您發現英國最迷人的旅遊目的地。</p>
+            </div>
+            
+            <div class="card">
+                <div class="widget-head">
+                    <h3>旅遊小貼士</h3>
+                </div>
+                <ul style="padding-left: 20px;">
+                    <li>英國天氣多變，建議隨身攜帶雨具</li>
+                    <li>提前預訂火車票可節省費用</li>
+                    <li>許多博物館和美術館免費入場</li>
+                    <li>夏季是旅遊旺季，住宿需提前預訂</li>
+                    <li>嘗試當地特色美食是旅行的重要部分</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <strong>The UK Hong Konger Times</strong><br>
+                <div style="margin-top: 8px;">
+                    <strong>About:</strong> The UK Hong Konger Times aggregates live public data to help Hongkongers in the UK.
+                </div>
+                <div style="font-size: 12px; margin-top: 8px;">
+                    <strong>Full Disclaimer:</strong> The content is for informational purposes only and does not constitute professional advice.
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/3L35nyP" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Article Modal -->
+    <div id="articleModal" class="article-modal">
+        <div class="article-modal-content">
+            <span class="article-modal-close" onclick="closeArticleModal()">&times;</span>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--soft-gray); padding-bottom: 10px;">
+                <div>
+                    <strong style="font-family: 'UnifrakturCook', serif; font-size: 20px;">UK Hong Konger Times</strong>
+                </div>
+                <div class="ad-box" style="padding: 8px; margin: 0;">
+                    <a href="https://amzn.to/47HvT9A" target="_blank" style="font-size: 16px; color: #0066cc; text-decoration: none;">Shop Amazon</a>
+                </div>
+            </div>
+            
+            <div id="articleModalTitle" class="article-modal-title"></div>
+            <div id="articleModalBody" class="article-modal-body"></div>
+            <div id="articleModalDate" class="article-modal-date"></div>
+            
+            <div class="ad-box" style="margin-top: 20px;">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 文章内容数据 - 使用 GitHub 图片链接
+        const ARTICLE_CONTENT = {
+            london: {
+                title: "倫敦 London：世界級大都會的無限魅力",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/london-detail.png" alt="倫敦 London" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>景點精選</h4>
+                        <p>倫敦作為世界級大都會，擁有無數令人驚嘆的景點。從歷史悠久的倫敦塔和西敏寺，到現代化的倫敦眼和碎片大廈，這座城市完美融合了傳統與現代。大英博物館收藏著來自世界各地的珍貴文物，而國家美術館則展示了歐洲繪畫的瑰寶。白金漢宮的衛兵換崗儀式是遊客必看的傳統表演，而泰晤士河畔的塔橋則是倫敦最著名的地標之一。對於藝術愛好者，泰特現代美術館展示了世界級的當代藝術作品，而西區劇院則提供了頂級的戲劇和音樂劇表演。</p>
+                        
+                        <h4>交通指南</h4>
+                        <p>倫敦擁有世界上最古老和最完善的地鐵系統，俗稱"管子"，是遊覽城市最便捷的方式。遊客可以購買Oyster卡或使用非接觸式支付卡來乘坐地鐵、巴士和有軌電車。倫敦的紅色雙層巴士是城市的象徵，提供了欣賞城市風光的獨特視角。對於長途旅行，倫敦擁有眾多火車站，連接英國各地。希斯羅機場是英國最繁忙的機場，提供全球目的地的航班。在市內，許多景點都可以步行到達，特別是位於市中心的歷史區域。</p>
+                        
+                        <h4>住宿推薦</h4>
+                        <p>倫敦提供各種類型的住宿選擇，從豪華酒店到經濟型旅舍應有盡有。梅費爾和騎士橋地區集中了頂級酒店，如The Ritz和The Dorchester，提供奢華的住宿體驗。科文特花園和蘇活區的精品酒店則更加時尚和現代，靠近劇院和餐廳。對於預算有限的旅客，國王十字和帕丁頓地區有更多經濟實惠的選擇。近年來，服務式公寓也越來越受歡迎，特別適合家庭或長期停留的旅客。無論選擇何種住宿，建議提前預訂，特別是在旅遊旺季。</p>
+                        
+                        <h4>美食體驗</h4>
+                        <p>倫敦的美食場景極其多元，反映了其國際化的人口構成。從米其林星級餐廳到街頭小吃攤，滿足各種口味和預算。博羅市場是美食愛好者的天堂，提供新鮮的當地產品和國際美食。傳統的英式下午茶是不可錯過的體驗，許多歷史悠久的酒店提供這項服務。中國城則提供了正宗的中國和東亞美食。近年來，倫敦的咖啡文化也日益繁榮，擁有眾多獨立咖啡館。對於追求獨特用餐體驗的旅客，倫敦眼上的香檳體驗或碎片大廈的餐廳提供了難忘的用餐環境。</p>
+                        
+                        <h4>購物天堂</h4>
+                        <p>倫敦是世界著名的購物目的地，提供從奢侈品牌到獨特紀念品的各種選擇。牛津街是歐洲最繁忙的購物街，擁有眾多高街品牌和百貨公司。攝政街和邦德街則集中了奢侈品牌，如Burberry和Louis Vuitton。對於尋找獨特商品的旅客，科文特花園的獨立精品店和卡納比街的潮流服飾是不錯的選擇。哈羅德百貨和塞爾福里奇百貨公司是購物愛好者的必訪之地，提供廣泛的商品選擇。倫敦的市集文化也十分興盛，波特貝羅路市集的古董和卡姆登市集的另類風格都極具特色。</p>
+                        
+                        <h4>實用貼士</h4>
+                        <p>遊覽倫敦時，建議提前計劃行程，因為城市規模龐大，景點分散。許多博物館和美術館免費入場，但特展可能需要預訂門票。使用倫敦地鐵應用程序可以方便地規劃路線和查看實時信息。倫敦的天气多變，建議隨身攜帶雨具和分層穿著。購買London Pass可以節省多個景點的門票費用。對於首次訪問的旅客，參加導覽遊是了解城市歷史和文化的好方法。最後，不要忘記探索倫敦的公園，如海德公園和攝政公園，它們為都市生活提供了寶貴的綠色空間。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Featured Attractions</h4>
+                        <p>As a world-class metropolis, London boasts countless stunning attractions. From the historic Tower of London and Westminster Abbey to the modern London Eye and The Shard, the city perfectly blends tradition with modernity. The British Museum houses precious artifacts from around the world, while the National Gallery displays treasures of European painting. The Changing of the Guard ceremony at Buckingham Palace is a must-see traditional performance for visitors, and Tower Bridge along the Thames is one of London's most famous landmarks. For art lovers, Tate Modern showcases world-class contemporary art, while the West End offers top-tier theater and musical performances.</p>
+                        
+                        <h4>Transportation Guide</h4>
+                        <p>London has the world's oldest and most comprehensive underground system, colloquially known as the "Tube," which is the most convenient way to explore the city. Visitors can purchase Oyster cards or use contactless payment cards to ride the Tube, buses, and trams. London's red double-decker buses are city icons, providing unique perspectives for sightseeing. For long-distance travel, London has numerous railway stations connecting destinations across Britain. Heathrow Airport is Britain's busiest airport, offering flights to global destinations. Within the city, many attractions are within walking distance, particularly in the historic central areas.</p>
+                        
+                        <h4>Accommodation Recommendations</h4>
+                        <p>London offers various types of accommodation, from luxury hotels to budget hostels. The Mayfair and Knightsbridge areas concentrate top-tier hotels like The Ritz and The Dorchester, providing luxurious stays. Boutique hotels in Covent Garden and Soho are more fashionable and modern, close to theaters and restaurants. For budget-conscious travelers, the King's Cross and Paddington areas have more affordable options. In recent years, serviced apartments have become increasingly popular, especially suitable for families or extended stays. Regardless of choice, advance booking is recommended, particularly during peak tourist seasons.</p>
+                        
+                        <h4>Food Experiences</h4>
+                        <p>London's food scene is extremely diverse, reflecting its international population. From Michelin-starred restaurants to street food stalls, it caters to all tastes and budgets. Borough Market is a paradise for food lovers, offering fresh local produce and international cuisine. Traditional English afternoon tea is an experience not to be missed, with many historic hotels providing this service. Chinatown offers authentic Chinese and East Asian cuisine. In recent years, London's coffee culture has also flourished, with numerous independent cafes. For travelers seeking unique dining experiences, champagne experiences on the London Eye or restaurants in The Shard provide unforgettable dining environments.</p>
+                        
+                        <h4>Shopping Paradise</h4>
+                        <p>London is a world-famous shopping destination offering everything from luxury brands to unique souvenirs. Oxford Street is Europe's busiest shopping street with numerous high-street brands and department stores. Regent Street and Bond Street concentrate luxury brands like Burberry and Louis Vuitton. For visitors seeking unique items, independent boutiques in Covent Garden and trendy clothing on Carnaby Street are good choices. Harrods and Selfridges are must-visit destinations for shopping enthusiasts, offering extensive product selections. London's market culture is also thriving, with Portobello Road Market's antiques and Camden Market's alternative styles both being highly distinctive.</p>
+                        
+                        <h4>Practical Tips</h4>
+                        <p>When visiting London, advance planning is recommended as the city is large with scattered attractions. Many museums and galleries offer free admission, but special exhibitions may require ticket reservations. Using London Tube apps can conveniently plan routes and check real-time information. London's weather is changeable, so carrying rain gear and dressing in layers is advisable. Purchasing a London Pass can save on entry fees to multiple attractions. For first-time visitors, joining guided tours is a good way to learn about the city's history and culture. Finally, don't forget to explore London's parks like Hyde Park and Regent's Park, which provide valuable green spaces for urban life.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            scotland: {
+                title: "蘇格蘭高地 Scottish Highlands：壯麗自然與古老城堡的完美融合",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/scotland-detail.jpg" alt="蘇格蘭高地 Scottish Highlands" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>景點精選</h4>
+                        <p>蘇格蘭高地是英國最壯麗的自然景觀之一，擁有令人驚嘆的山脈、湖泊和海岸線。尼斯湖以其神秘的水怪傳說而聞名，遊客可以乘船遊覽湖面，欣賞周圍的壯麗風景。本尼維斯山是英國最高的山峰，提供了挑戰性的徒步路線和全景視野。格倫科峽谷以其戲劇性的景觀而聞名，是蘇格蘭最具標誌性的地點之一。愛蓮朵娜城堡坐落在三個湖泊交匯處的小島上，被譽為蘇格蘭最浪漫的城堡。斯凱島以其崎嶇的山脈和獨特的地質特徵而聞名，特別是老人石和庫林山脈。對於威士忌愛好者，斯佩塞地區擁有眾多著名的威士忌酒廠，提供品酒之旅。</p>
+                        
+                        <h4>交通指南</h4>
+                        <p>探索蘇格蘭高地的最佳方式是自駕，這提供了最大的靈活性來探索偏遠地區。從格拉斯哥或愛丁堡出發，沿著A82公路向北行駛，可以欣賞到一些最壯觀的風景。火車也是一個不錯的選擇，西高地線被譽為世界上最美麗的火車路線之一，連接格拉斯哥與馬萊格。對於沒有自駕的旅客，可以參加從愛丁堡或格拉斯哥出發的導覽遊，這些旅遊通常涵蓋主要景點。在偏遠地區，公共交通可能有限，因此建議提前計劃。斯凱島可以通過天空橋到達，也有從馬萊格出發的渡輪。</p>
+                        
+                        <h4>住宿推薦</h4>
+                        <p>蘇格蘭高地提供各種獨特的住宿體驗。傳統的蘇格蘭城堡酒店，如Inverlochy Castle Hotel，提供豪華的住宿和歷史氛圍。許多鄉村旅館和賓館提供舒適的住宿和當地美食，讓旅客體驗真正的蘇格蘭熱情好客。對於預算有限的旅客，有眾多旅舍和露營地可供選擇。在偏遠地區，可以考慮住在自炊式小屋，這提供了更多的獨立性。無論選擇何種住宿，建議提前預訂，特別是在夏季旅遊旺季。許多住宿地點都位於風景優美的地點，提供了欣賞高地壯麗景色的機會。</p>
+                        
+                        <h4>美食體驗</h4>
+                        <p>蘇格蘭高地提供獨特的美食體驗，強調當地食材和傳統烹飪方法。傳統的蘇格蘭菜餚如哈吉斯、尼普和塔蒂是必須嘗試的。新鮮的海鮮是高地美食的重要組成部分，特別是來自西海岸的鮭魚和扇貝。許多餐廳和酒吧提供蘇格蘭威士忌搭配餐點，創造完美的飲食體驗。對於甜點愛好者，蘇格蘭短bread和克蘭納坎是傳統的選擇。在高地，有許多農場商店和市場出售當地產品，如奶酪、蜂蜜和熏魚。許多住宿地點也提供使用當地食材烹製的餐點，讓旅客品嚐到真正的高地風味。</p>
+                        
+                        <h4>戶外活動</h4>
+                        <p>蘇格蘭高地是戶外愛好者的天堂，提供眾多活動選擇。徒步旅行是最受歡迎的活動之一，有路線適合所有能力水平，從輕鬆的湖邊散步到具有挑戰性的山地攀登。西高地步道是英國最著名的長距離步道之一，全長96英里。釣魚愛好者可以在眾多河流和湖泊中釣鮭魚和鱒魚。高地球場提供了世界級的高爾夫體驗，特別是皇家多諾赫球場。水上活動如皮划艇和帆船在湖泊和海岸線上很受歡迎。冬季，一些滑雪場提供滑雪和滑雪板機會。野生動物觀察也是受歡迎的活動，有機會看到紅鹿、金雕和海豹。</p>
+                        
+                        <h4>實用貼士</h4>
+                        <p>遊覽蘇格蘭高地時，準備應對多變的天氣至關重要，即使在夏季，天氣也可能迅速變化。建議攜帶分層衣物、防水外套和結實的步行鞋。中midges（小飛蟲）在夏季可能很煩人，特別是在靜水區域，因此攜帶防蟲劑是明智的。在偏遠地區，手機信號可能有限，因此建議攜帶地圖並告知他人您的行程。許多景點和住宿地點在冬季可能關閉或營業時間有限，因此建議提前檢查。蘇格蘭的駕駛規則與英國其他地區相同，但在偏遠的單軌道路上，有指定的通過點讓車輛交會。最後，尊重當地環境，遵循"不留痕跡"原則，保護這片美麗的自然景觀。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Featured Attractions</h4>
+                        <p>The Scottish Highlands are one of Britain's most magnificent natural landscapes, boasting stunning mountains, lochs, and coastlines. Loch Ness is famous for its mysterious monster legend, and visitors can take boat tours to admire the surrounding spectacular scenery. Ben Nevis is Britain's highest mountain, offering challenging hiking routes and panoramic views. Glencoe Valley is renowned for its dramatic landscape and is one of Scotland's most iconic locations. Eilean Donan Castle, situated on a small island where three lochs meet, is hailed as Scotland's most romantic castle. The Isle of Skye is famous for its rugged mountains and unique geological features, particularly the Old Man of Storr and the Cuillin Mountains. For whisky enthusiasts, the Speyside region has numerous famous distilleries offering tasting tours.</p>
+                        
+                        <h4>Transportation Guide</h4>
+                        <p>The best way to explore the Scottish Highlands is by self-driving, which provides maximum flexibility to reach remote areas. Starting from Glasgow or Edinburgh and driving north along the A82 road offers some of the most spectacular scenery. Train travel is also a good option, with the West Highland Line renowned as one of the world's most beautiful railway routes, connecting Glasgow with Mallaig. For travelers without cars, guided tours departing from Edinburgh or Glasgow are available, typically covering major attractions. In remote areas, public transportation may be limited, so advance planning is recommended. The Isle of Skye can be reached via the Skye Bridge or by ferry from Mallaig.</p>
+                        
+                        <h4>Accommodation Recommendations</h4>
+                        <p>The Scottish Highlands offer various unique accommodation experiences. Traditional Scottish castle hotels like Inverlochy Castle Hotel provide luxurious stays with historical atmosphere. Many country inns and guesthouses offer comfortable accommodations and local cuisine, allowing visitors to experience genuine Scottish hospitality. For budget-conscious travelers, numerous hostels and campsites are available. In remote areas, self-catering cottages can be considered for more independence. Regardless of choice, advance booking is recommended, especially during the summer tourist season. Many accommodations are located in scenic spots, offering opportunities to admire the Highlands' magnificent landscapes.</p>
+                        
+                        <h4>Food Experiences</h4>
+                        <p>The Scottish Highlands offer unique food experiences emphasizing local ingredients and traditional cooking methods. Traditional Scottish dishes like haggis, neeps and tatties are must-tries. Fresh seafood is an important part of Highland cuisine, particularly salmon and scallops from the west coast. Many restaurants and pubs offer Scottish whisky paired with meals, creating perfect dining experiences. For dessert lovers, Scottish shortbread and cranachan are traditional choices. In the Highlands, numerous farm shops and markets sell local products like cheese, honey, and smoked fish. Many accommodations also provide meals cooked with local ingredients, allowing visitors to taste authentic Highland flavors.</p>
+                        
+                        <h4>Outdoor Activities</h4>
+                        <p>The Scottish Highlands are a paradise for outdoor enthusiasts, offering numerous activity options. Hiking is one of the most popular activities, with routes suitable for all ability levels, from easy lakeside walks to challenging mountain climbs. The West Highland Way is one of Britain's most famous long-distance trails, stretching 96 miles. Fishing enthusiasts can angle for salmon and trout in numerous rivers and lochs. Highland courses offer world-class golf experiences, particularly Royal Dornoch. Water activities like kayaking and sailing are popular on lochs and coastlines. In winter, some ski resorts offer skiing and snowboarding opportunities. Wildlife watching is also popular, with chances to see red deer, golden eagles, and seals.</p>
+                        
+                        <h4>Practical Tips</h4>
+                        <p>When visiting the Scottish Highlands, preparing for changeable weather is crucial - even in summer, conditions can change rapidly. Layered clothing, waterproof jackets, and sturdy walking shoes are recommended. Midges can be bothersome in summer, particularly around still water areas, so carrying insect repellent is wise. In remote areas, mobile phone signals may be limited, so carrying maps and informing others of your itinerary is advisable. Many attractions and accommodations may close or have limited hours in winter, so checking in advance is recommended. Scottish driving rules are the same as elsewhere in Britain, but on remote single-track roads, there are designated passing places for vehicles. Finally, respect the local environment by following "leave no trace" principles to protect this beautiful natural landscape.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            cotswolds: {
+                title: "科茨沃爾德 Cotswolds：英格蘭最美鄉村的田園詩篇",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/cotswolds-detail.jpg" alt="科茨沃爾德 Cotswolds" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>景點精選</h4>
+                        <p>科茨沃爾德被譽為英格蘭最美麗的鄉村地區，擁有連綿起伏的丘陵、古老的村莊和蜂蜜色的石頭小屋。拜伯里被稱為英格蘭最美麗的村莊，其阿靈頓排屋是攝影師的最愛。水上伯頓以其跨越溫德拉什河的六座石橋而聞名，被稱為"科茨沃爾德的威尼斯"。布爾德擁有美麗的修道院花園和迷人的街道，是探索該地區的理想基地。奇平卡姆登是一個保存完好的市場小鎮，擁有豐富的歷史建築和獨特的商店。對於花園愛好者，海德科特莊園花園和基夫茨科特 Court花園是必訪之地，展示了英國園藝的精髓。斯諾希爾擁有美麗的鄉村教堂和周圍的田園風光，是典型英格蘭鄉村的代表。</p>
+                        
+                        <h4>交通指南</h4>
+                        <p>探索科茨沃爾德的最佳方式是自駕，這提供了探索偏遠村莊和鄉間小路的靈活性。該地區的主要城鎮如切爾滕納姆和賽倫塞斯特有良好的道路連接。火車是另一個選擇，有服務連接倫敦帕丁頓與科茨沃爾德門戶城鎮如莫頓因馬什和金斯頓。對於沒有自駕的旅客，當地巴士服務連接主要城鎮和村莊，但班次可能有限，特別是在週末和偏遠地區。許多旅客選擇參加從倫敦、牛津或巴斯出發的導覽遊，這些旅遊通常涵蓋主要景點。騎自行車也是一個受歡迎的選擇，有眾多指定的自行車路線穿越風景優美的鄉村。</p>
+                        
+                        <h4>住宿推薦</h4>
+                        <p>科茨沃爾德提供各種獨特的住宿體驗，從豪華鄉村酒店到舒適的旅館。許多歷史悠久的莊園和鄉村房屋已改建為酒店，提供豪華的住宿和精美的餐飲。傳統的科茨沃爾德石屋旅館提供舒適的住宿和當地特色早餐。對於更加獨特的體驗，可以考慮住在改建的穀倉或農舍，這些通常提供自炊設施。該地區還有眾多床和早餐選擇，讓旅客體驗當地熱情好客。對於預算有限的旅客，有旅舍和露營地可供選擇。無論選擇何種住宿，建議提前預訂，特別是在夏季和節日期間。</p>
+                        
+                        <h4>美食體驗</h4>
+                        <p>科茨沃爾德的美食場景強調當地食材和傳統烹飪方法。該地區以其優質的農產品而聞名，包括奶酪、肉類和蘋果酒。許多餐廳和酒吧提供使用當地食材烹製的菜餚，如科茨沃爾德羊肉和本地野味。傳統的英式酒吧是體驗當地美食和文化的重要部分，許多提供自釀啤酒和舒適的氛圍。對於甜點愛好者，科茨沃爾德奶油茶是不可錯過的體驗，包括新鮮烤的司康餅、凝脂奶油和果醬。該地區有眾多農場商店和市場出售當地產品，是購買紀念品或野餐用品的理想地點。許多住宿地點也提供使用當地食材烹製的餐點，讓旅客品嚐到真正的科茨沃爾德風味。</p>
+                        
+                        <h4>戶外活動</h4>
+                        <p>科茨沃爾德是戶外愛好者的理想目的地，提供眾多活動選擇。徒步旅行是最受歡迎的活動之一，有眾多路線穿越風景優美的鄉村。科茨沃爾德步道是全長102英里的長距離步道，穿越該地區一些最美麗的風景。騎自行車也很受歡迎，有路線適合所有能力水平，從輕鬆的鄉間小路到具有挑戰性的山地路線。高爾夫愛好者可以在該地區眾多風景優美的球場上打球。對於更加放鬆的活動，可以考慮在溫德拉什河上划船或釣魚。該地區還擁有眾多花園和莊園可供探索，提供了寧靜的環境和美麗的景觀。野生動物觀察也是受歡迎的活動，有機會看到當地的鳥類和其他動物。</p>
+                        
+                        <h4>實用貼士</h4>
+                        <p>遊覽科茨沃爾德時，建議穿著舒適的步行鞋，因為探索村莊和鄉間小路需要大量步行。該地區的天氣可能多變，因此建議攜帶分層衣物和雨具。許多村莊的停車場有限，特別是在旅遊旺季，因此建議早到或考慮使用公共交通。科茨沃爾德的許多景點，如教堂和花園，依賴捐款維持，因此建議攜帶現金。該地區的移動信號在偏遠地區可能不穩定，因此建議提前下載地圖或使用GPS設備。尊重當地社區很重要，特別是在小村莊中，保持噪音水平並遵守停車規定。最後，不要急於匆忙 - 科茨沃爾德的美麗在於其寧靜的節奏和悠閒的氛圍，所以花時間欣賞風景並沉浸在鄉村生活中。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Featured Attractions</h4>
+                        <p>The Cotswolds is hailed as England's most beautiful rural area, with rolling hills, ancient villages, and honey-colored stone cottages. Bibury is called England's most beautiful village, with Arlington Row being a photographer's favorite. Bourton-on-the-Water is famous for its six stone bridges spanning the River Windrush, earning it the nickname "Venice of the Cotswolds." Burford has beautiful abbey gardens and charming streets, making it an ideal base for exploring the region. Chipping Campden is a well-preserved market town with rich historical architecture and unique shops. For garden enthusiasts, Hidcote Manor Garden and Kiftsgate Court Gardens are must-visits, showcasing the essence of English gardening. Snowshill has a beautiful country church and surrounding pastoral scenery, representing typical English countryside.</p>
+                        
+                        <h4>Transportation Guide</h4>
+                        <p>The best way to explore the Cotswolds is by self-driving, which provides flexibility to reach remote villages and country lanes. Major towns in the area like Cheltenham and Cirencester have good road connections. Train travel is another option, with services connecting London Paddington with Cotswolds gateway towns like Moreton-in-Marsh and Kingham. For travelers without cars, local bus services connect major towns and villages, but frequencies may be limited, especially on weekends and in remote areas. Many visitors choose guided tours departing from London, Oxford, or Bath, typically covering major attractions. Cycling is also popular, with numerous designated bike routes through scenic countryside.</p>
+                        
+                        <h4>Accommodation Recommendations</h4>
+                        <p>The Cotswolds offers various unique accommodation experiences, from luxury country hotels to comfortable inns. Many historic manors and country houses have been converted into hotels, providing luxurious stays and fine dining. Traditional Cotswold stone inns offer comfortable accommodations and local specialty breakfasts. For more unique experiences, consider staying in converted barns or farmhouses, often providing self-catering facilities. The area also has numerous bed and breakfast options, allowing visitors to experience local hospitality. For budget-conscious travelers, hostels and campsites are available. Regardless of choice, advance booking is recommended, especially during summer and holiday periods.</p>
+                        
+                        <h4>Food Experiences</h4>
+                        <p>The Cotswolds' food scene emphasizes local ingredients and traditional cooking methods. The area is famous for its high-quality produce, including cheese, meats, and cider. Many restaurants and pubs offer dishes cooked with local ingredients like Cotswold lamb and local game. Traditional English pubs are an important part of experiencing local cuisine and culture, with many offering craft beers and cozy atmospheres. For dessert lovers, Cotswold cream tea is an experience not to be missed, including freshly baked scones, clotted cream, and jam. The area has numerous farm shops and markets selling local products, ideal for souvenirs or picnic supplies. Many accommodations also provide meals cooked with local ingredients, allowing visitors to taste authentic Cotswold flavors.</p>
+                        
+                        <h4>Outdoor Activities</h4>
+                        <p>The Cotswolds is an ideal destination for outdoor enthusiasts, offering numerous activity options. Hiking is one of the most popular activities, with many routes through scenic countryside. The Cotswold Way is a 102-mile long-distance trail passing through some of the area's most beautiful scenery. Cycling is also popular, with routes suitable for all ability levels, from easy country lanes to challenging mountain routes. Golf enthusiasts can play on the area's many scenic courses. For more relaxed activities, consider boating or fishing on the River Windrush. The area also has numerous gardens and estates to explore, providing tranquil environments and beautiful landscapes. Wildlife watching is also popular, with opportunities to see local birds and other animals.</p>
+                        
+                        <h4>Practical Tips</h4>
+                        <p>When visiting the Cotswolds, comfortable walking shoes are recommended as exploring villages and country lanes involves considerable walking. The area's weather can be changeable, so layered clothing and rain gear are advisable. Many villages have limited parking, especially during peak tourist seasons, so arriving early or considering public transport is recommended. Many Cotswolds attractions, like churches and gardens, rely on donations for maintenance, so carrying cash is suggested. Mobile signals may be unstable in remote areas, so downloading maps in advance or using GPS devices is advisable. Respecting local communities is important, particularly in small villages, by maintaining noise levels and observing parking regulations. Finally, don't rush - the beauty of the Cotswolds lies in its peaceful pace and relaxed atmosphere, so take time to appreciate the scenery and immerse yourself in country life.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            lake: {
+                title: "湖區 Lake District：英國最受歡迎的國家公園",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/lake-district-detail.jpg" alt="湖區 Lake District" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>景點精選</h4>
+                        <p>湖區是英國最受歡迎的國家公園，以其壯麗的山脈、寧靜的湖泊和豐富的文學遺產而聞名。溫德米爾湖是英格蘭最大的天然湖泊，提供遊船之旅和水上活動。格拉斯米爾與詩人威廉·華茲華斯有著密切的聯繫，他的故居鴿舍是重要的文學遺址。凱西克是探索北部湖區的理想基地，靠近德文特湖和著名的鉛筆博物館。斯科費爾峰是英格蘭最高的山峰，提供了挑戰性的徒步路線和壯觀的全景。烏爾斯沃特被稱為"英國最美麗的湖泊"，擁有戲劇性的景觀和寧靜的氛圍。霍克斯黑德是一個迷人的村莊，擁有歷史悠久的建築和與碧翠絲·波特相關的景點。對於文學愛好者，華茲華斯博物館和碧翠絲·波特畫廊提供了深入了解這些著名作家的機會。</p>
+                        
+                        <h4>交通指南</h4>
+                        <p>探索湖區的最佳方式是自駕，這提供了探索偏遠地區和風景優美路線的靈活性。從曼徹斯特或蘭開斯特出發，沿著M6高速公路可以輕鬆到達湖區。火車是另一個選擇，有服務連接倫敦和湖區的主要城鎮如溫德米爾和彭里斯。對於沒有自駕的旅客，湖區擁有完善的巴士網絡，連接主要城鎮和景點。許多旅客選擇參加從倫敦、曼徹斯特或利物浦出發的導覽遊，這些旅遊通常涵蓋主要景點。在湖區內，渡輪服務連接溫德米爾湖、烏爾斯沃特湖和德文特湖的不同地點，提供了獨特的旅行體驗。騎自行車也是一個受歡迎的選擇，有眾多指定的自行車路線穿越風景優美的鄉村。</p>
+                        
+                        <h4>住宿推薦</h4>
+                        <p>湖區提供各種獨特的住宿體驗，從豪華鄉村酒店到舒適的旅館。許多歷史悠久的莊園和鄉村房屋已改建為酒店，提供豪華的住宿和精美的餐飲。傳統的湖區旅館提供舒適的住宿和當地特色早餐，許多擁有湖泊或山脈的壯麗景色。對於更加獨特的體驗，可以考慮住在改建的農舍或鄉村小屋，這些通常提供自炊設施。該地區還有眾多床和早餐選擇，讓旅客體驗當地熱情好客。對於預算有限的旅客，有旅舍和露營地可供選擇。無論選擇何種住宿，建議提前預訂，特別是在夏季旅遊旺季和節日期間。</p>
+                        
+                        <h4>美食體驗</h4>
+                        <p>湖區的美食場景強調當地食材和傳統烹飪方法。該地區以其優質的農產品而聞名，包括赫德威克羊肉、當地奶酪和坎伯蘭香腸。許多餐廳和酒吧提供使用當地食材烹製的菜餚，如湖區魚派和傳統的坎伯蘭美食。傳統的英式酒吧是體驗當地美食和文化的重要部分，許多提供自釀啤酒和舒適的氛圍。對於甜點愛好者，格拉斯米爾薑餅是必須嘗試的當地特色。該地區有眾多農場商店和市場出售當地產品，是購買紀念品或野餐用品的理想地點。許多住宿地點也提供使用當地食材烹製的餐點，讓旅客品嚐到真正的湖區風味。</p>
+                        
+                        <h4>戶外活動</h4>
+                        <p>湖區是戶外愛好者的天堂，提供眾多活動選擇。徒步旅行是最受歡迎的活動之一，有路線適合所有能力水平，從輕鬆的湖邊散步到具有挑戰性的山地攀登。溫德米爾湖和德文特湖提供各種水上活動，如划船、帆船和站立式槳板。釣魚愛好者可以在眾多湖泊和河流中釣魚，特別是鱒魚和鮭魚。湖區提供了世界級的攀岩和登山機會，特別是在蘭代爾和博羅代爾地區。對於更加放鬆的活動，可以考慮乘坐蒸汽火車穿越風景優美的鄉村，或在寧靜的湖泊旁野餐。野生動物觀察也是受歡迎的活動，有機會看到紅松鼠、鹿和各種鳥類。</p>
+                        
+                        <h4>實用貼士</h4>
+                        <p>遊覽湖區時，準備應對多變的天氣至關重要，即使在夏季，天氣也可能迅速變化。建議攜帶分層衣物、防水外套和結實的步行鞋。湖區的道路可能狹窄且彎曲，特別是在偏遠地區，因此駕駛時需要小心。許多景點的停車場有限，特別是在旅遊旺季，因此建議早到或考慮使用公共交通。湖區的許多景點，如國家信託財產，需要入場費或依賴捐款維持，因此建議攜帶現金。該地區的移動信號在偏遠地區可能不穩定，因此建議提前下載地圖或使用GPS設備。尊重當地環境很重要，遵循"不留痕跡"原則，保護這片美麗的自然景觀。最後，不要急於匆忙 - 湖區的美麗在於其寧靜的湖泊和壯麗的山脈，所以花時間欣賞風景並沉浸在自然中。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Featured Attractions</h4>
+                        <p>The Lake District is Britain's most popular national park, famous for its magnificent mountains, tranquil lakes, and rich literary heritage. Windermere is England's largest natural lake, offering boat tours and water activities. Grasmere is closely associated with poet William Wordsworth, with his former home Dove Cottage being an important literary site. Keswick is an ideal base for exploring the northern Lake District, near Derwentwater and the famous Pencil Museum. Scafell Pike is England's highest mountain, offering challenging hiking routes and spectacular panoramic views. Ullswater is called "England's most beautiful lake," with dramatic landscapes and a serene atmosphere. Hawkshead is a charming village with historic buildings and attractions related to Beatrix Potter. For literature lovers, the Wordsworth Museum and Beatrix Potter Gallery provide in-depth insights into these famous writers.</p>
+                        
+                        <h4>Transportation Guide</h4>
+                        <p>The best way to explore the Lake District is by self-driving, which provides flexibility to reach remote areas and scenic routes. From Manchester or Lancaster, the Lake District is easily accessible via the M6 motorway. Train travel is another option, with services connecting London with major Lake District towns like Windermere and Penrith. For travelers without cars, the Lake District has a comprehensive bus network connecting major towns and attractions. Many visitors choose guided tours departing from London, Manchester, or Liverpool, typically covering major attractions. Within the Lake District, ferry services connect different points on Windermere, Ullswater, and Derwentwater, providing unique travel experiences. Cycling is also popular, with numerous designated bike routes through scenic countryside.</p>
+                        
+                        <h4>Accommodation Recommendations</h4>
+                        <p>The Lake District offers various unique accommodation experiences, from luxury country hotels to comfortable inns. Many historic manors and country houses have been converted into hotels, providing luxurious stays and fine dining. Traditional Lake District inns offer comfortable accommodations and local specialty breakfasts, many with stunning views of lakes or mountains. For more unique experiences, consider staying in converted farmhouses or country cottages, often providing self-catering facilities. The area also has numerous bed and breakfast options, allowing visitors to experience local hospitality. For budget-conscious travelers, hostels and campsites are available. Regardless of choice, advance booking is recommended, especially during the summer tourist season and holiday periods.</p>
+                        
+                        <h4>Food Experiences</h4>
+                        <p>The Lake District's food scene emphasizes local ingredients and traditional cooking methods. The area is famous for its high-quality produce, including Herdwick lamb, local cheeses, and Cumberland sausages. Many restaurants and pubs offer dishes cooked with local ingredients like Lake District fish pie and traditional Cumberland cuisine. Traditional English pubs are an important part of experiencing local cuisine and culture, with many offering craft beers and cozy atmospheres. For dessert lovers, Grasmere gingerbread is a must-try local specialty. The area has numerous farm shops and markets selling local products, ideal for souvenirs or picnic supplies. Many accommodations also provide meals cooked with local ingredients, allowing visitors to taste authentic Lake District flavors.</p>
+                        
+                        <h4>Outdoor Activities</h4>
+                        <p>The Lake District is a paradise for outdoor enthusiasts, offering numerous activity options. Hiking is one of the most popular activities, with routes suitable for all ability levels, from easy lakeside walks to challenging mountain climbs. Windermere and Derwentwater offer various water activities like boating, sailing, and stand-up paddleboarding. Fishing enthusiasts can angle in numerous lakes and rivers, particularly for trout and salmon. The Lake District provides world-class rock climbing and mountaineering opportunities, especially in the Langdale and Borrowdale areas. For more relaxed activities, consider taking a steam train through scenic countryside or picnicking by tranquil lakes. Wildlife watching is also popular, with chances to see red squirrels, deer, and various bird species.</p>
+                        
+                        <h4>Practical Tips</h4>
+                        <p>When visiting the Lake District, preparing for changeable weather is crucial - even in summer, conditions can change rapidly. Layered clothing, waterproof jackets, and sturdy walking shoes are recommended. Lake District roads can be narrow and winding, especially in remote areas, so caution is needed when driving. Many attractions have limited parking, particularly during peak tourist seasons, so arriving early or considering public transport is advisable. Many Lake District attractions, like National Trust properties, require entry fees or rely on donations for maintenance, so carrying cash is suggested. Mobile signals may be unstable in remote areas, so downloading maps in advance or using GPS devices is advisable. Respecting the local environment is important by following "leave no trace" principles to protect this beautiful natural landscape. Finally, don't rush - the beauty of the Lake District lies in its tranquil lakes and magnificent mountains, so take time to appreciate the scenery and immerse yourself in nature.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            wales: {
+                title: "威爾斯 Wales：城堡之國與壯麗海岸線",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/wales-detail.jpg" alt="威爾斯 Wales" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>景點精選</h4>
+                        <p>威爾斯被稱為"城堡之國"，擁有眾多令人印象深刻的歷史遺址。卡那封城堡是聯合國教科文組織世界遺產，曾是愛德華一世統治威爾斯的據點。康威城堡是歐洲最完好的中世紀防禦工事之一，擁有保存完好的城牆和塔樓。卡迪夫城堡位於威爾斯首府中心，擁有豐富的歷史和華麗的內部裝飾。斯諾登尼亞國家公園是威爾斯的自然瑰寶，擁有英格蘭和威爾斯的最高峰斯諾登山。布雷肯比肯斯國家公園擁有壯麗的景觀、黑暗的天空保護區和豐富的野生動物。彭布羅克郡海岸國家公園擁有英國一些最美麗的海岸線，包括著名的巴里島。對於鐵路愛好者，威爾斯高地鐵路提供了穿越壯麗景觀的難忘旅程。</p>
+                        
+                        <h4>交通指南</h4>
+                        <p>探索威爾斯的最佳方式是自駕，這提供了探索偏遠地區和風景優美路線的靈活性。從英格蘭出發，可以通過M4和M48高速公路進入南威爾斯，或通過A55高速公路進入北威爾斯。火車是另一個選擇，有服務連接倫敦和威爾斯的主要城鎮如卡迪夫、斯旺西和班戈。對於沒有自駕的旅客，威爾斯擁有完善的巴士網絡，連接主要城鎮和景點。許多旅客選擇參加從倫敦、伯明翰或曼徹斯特出發的導覽遊，這些旅遊通常涵蓋主要景點。在威爾斯內，一些風景優美的鐵路線，如威爾斯高地鐵路和康威河谷線，提供了獨特的旅行體驗。騎自行車也是一個受歡迎的選擇，有眾多指定的自行車路線穿越風景優美的鄉村和海岸線。</p>
+                        
+                        <h4>住宿推薦</h4>
+                        <p>威爾斯提供各種獨特的住宿體驗，從豪華城堡酒店到舒適的鄉村旅館。許多歷史悠久的城堡和莊園已改建為酒店，提供豪華的住宿和精美的餐飲。傳統的威爾斯旅館提供舒適的住宿和當地特色早餐，許多擁有壯麗的山脈或海岸景色。對於更加獨特的體驗，可以考慮住在改建的農舍或鄉村小屋，這些通常提供自炊設施。該地區還有眾多床和早餐選擇，讓旅客體驗威爾斯著名的熱情好客。對於預算有限的旅客，有旅舍和露營地可供選擇。無論選擇何種住宿，建議提前預訂，特別是在夏季旅遊旺季和節日期間。</p>
+                        
+                        <h4>美食體驗</h4>
+                        <p>威爾斯的美食場景強調當地食材和傳統烹飪方法。該地區以其優質的農產品而聞名，包括威爾斯羊肉、當地奶酪和著名的威爾斯蛋糕。許多餐廳和酒吧提供使用當地食材烹製的菜餚，如卡伍羊肉和威爾斯 rarebit。傳統的威爾斯酒吧是體驗當地美食和文化的重要部分，許多提供自釀啤酒和舒適的氛圍。對於甜點愛好者，威爾斯蛋糕和巴拉的 brith 是必須嘗試的當地特色。該地區有眾多農場商店和市場出售當地產品，是購買紀念品或野餐用品的理想地點。許多住宿地點也提供使用當地食材烹製的餐點，讓旅客品嚐到真正的威爾斯風味。</p>
+                        
+                        <h4>戶外活動</h4>
+                        <p>威爾斯是戶外愛好者的天堂，提供眾多活動選擇。徒步旅行是最受歡迎的活動之一，有路線適合所有能力水平，從輕鬆的沿海散步到具有挑戰性的山地攀登。彭布羅克郡海岸小徑是全長186英里的長距離步道，沿著一些英國最美麗的海岸線。斯諾登尼亞國家公園提供了世界級的登山和攀岩機會，特別是在斯諾登山和特里凡山地區。水上活動如衝浪、皮划艇和帆船在海岸線上很受歡迎，特別是在彭布羅克郡和安格爾西。對於更加放鬆的活動，可以考慮乘坐蒸汽火車穿越風景優美的鄉村，或在寧靜的湖泊旁野餐。野生動物觀察也是受歡迎的活動，有機會看到海豹、海豚和各種鳥類。</p>
+                        
+                        <h4>實用貼士</h4>
+                        <p>遊覽威爾斯時，準備應對多變的天氣至關重要，即使在夏季，天氣也可能迅速變化。建議攜帶分層衣物、防水外套和結實的步行鞋。威爾斯的道路可能狹窄且彎曲，特別是在偏遠地區和國家公園內，因此駕駛時需要小心。許多景點的停車場有限，特別是在旅遊旺季，因此建議早到或考慮使用公共交通。威爾斯的許多景點，如卡德伊德里斯和斯諾登山，需要適當的裝備和準備，因此建議檢查天氣條件並攜帶必要的地圖和設備。該地區的移動信號在偏遠地區可能不穩定，因此建議提前下載地圖或使用GPS設備。尊重當地環境很重要，遵循"不留痕跡"原則，保護這片美麗的自然景觀。最後，學習一些威爾斯語短語，如"bore da"（早上好）和"diolch"（謝謝），可以增強您的旅行體驗。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Featured Attractions</h4>
+                        <p>Wales is known as the "Land of Castles," boasting numerous impressive historical sites. Caernarfon Castle is a UNESCO World Heritage Site, once Edward I's stronghold for ruling Wales. Conwy Castle is one of Europe's finest medieval fortifications, with well-preserved walls and towers. Cardiff Castle, located in the heart of Wales' capital, has rich history and lavish interiors. Snowdonia National Park is Wales' natural gem, containing Snowdon, the highest mountain in England and Wales. Brecon Beacons National Park features spectacular landscapes, dark sky reserves, and abundant wildlife. Pembrokeshire Coast National Park has some of Britain's most beautiful coastline, including famous Barafundle Bay. For railway enthusiasts, the Welsh Highland Railway offers unforgettable journeys through magnificent scenery.</p>
+                        
+                        <h4>Transportation Guide</h4>
+                        <p>The best way to explore Wales is by self-driving, which provides flexibility to reach remote areas and scenic routes. From England, South Wales is accessible via the M4 and M48 motorways, while North Wales is accessible via the A55. Train travel is another option, with services connecting London with major Welsh towns like Cardiff, Swansea, and Bangor. For travelers without cars, Wales has a comprehensive bus network connecting major towns and attractions. Many visitors choose guided tours departing from London, Birmingham, or Manchester, typically covering major attractions. Within Wales, some scenic railway lines like the Welsh Highland Railway and Conwy Valley Line provide unique travel experiences. Cycling is also popular, with numerous designated bike routes through scenic countryside and coastlines.</p>
+                        
+                        <h4>Accommodation Recommendations</h4>
+                        <p>Wales offers various unique accommodation experiences, from luxury castle hotels to comfortable country inns. Many historic castles and manors have been converted into hotels, providing luxurious stays and fine dining. Traditional Welsh inns offer comfortable accommodations and local specialty breakfasts, many with stunning mountain or coastal views. For more unique experiences, consider staying in converted farmhouses or country cottages, often providing self-catering facilities. The area also has numerous bed and breakfast options, allowing visitors to experience Wales' famous hospitality. For budget-conscious travelers, hostels and campsites are available. Regardless of choice, advance booking is recommended, especially during the summer tourist season and holiday periods.</p>
+                        
+                        <h4>Food Experiences</h4>
+                        <p>Wales' food scene emphasizes local ingredients and traditional cooking methods. The area is famous for its high-quality produce, including Welsh lamb, local cheeses, and famous Welsh cakes. Many restaurants and pubs offer dishes cooked with local ingredients like cawl (lamb stew) and Welsh rarebit. Traditional Welsh pubs are an important part of experiencing local cuisine and culture, with many offering craft beers and cozy atmospheres. For dessert lovers, Welsh cakes and bara brith are must-try local specialties. The area has numerous farm shops and markets selling local products, ideal for souvenirs or picnic supplies. Many accommodations also provide meals cooked with local ingredients, allowing visitors to taste authentic Welsh flavors.</p>
+                        
+                        <h4>Outdoor Activities</h4>
+                        <p>Wales is a paradise for outdoor enthusiasts, offering numerous activity options. Hiking is one of the most popular activities, with routes suitable for all ability levels, from easy coastal walks to challenging mountain climbs. The Pembrokeshire Coast Path is a 186-mile long-distance trail along some of Britain's most beautiful coastline. Snowdonia National Park provides world-class mountaineering and rock climbing opportunities, particularly on Snowdon and Tryfan. Water activities like surfing, kayaking, and sailing are popular along the coastline, especially in Pembrokeshire and Anglesey. For more relaxed activities, consider taking a steam train through scenic countryside or picnicking by tranquil lakes. Wildlife watching is also popular, with chances to see seals, dolphins, and various bird species.</p>
+                        
+                        <h4>Practical Tips</h4>
+                        <p>When visiting Wales, preparing for changeable weather is crucial - even in summer, conditions can change rapidly. Layered clothing, waterproof jackets, and sturdy walking shoes are recommended. Welsh roads can be narrow and winding, especially in remote areas and national parks, so caution is needed when driving. Many attractions have limited parking, particularly during peak tourist seasons, so arriving early or considering public transport is advisable. Many Welsh attractions, like Cadair Idris and Snowdon, require proper equipment and preparation, so checking weather conditions and carrying necessary maps and equipment is recommended. Mobile signals may be unstable in remote areas, so downloading maps in advance or using GPS devices is advisable. Respecting the local environment is important by following "leave no trace" principles to protect this beautiful natural landscape. Finally, learning some Welsh phrases like "bore da" (good morning) and "diolch" (thank you) can enhance your travel experience.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            cornwall: {
+                title: "康沃爾 Cornwall：英國最南端的海岸奇觀",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/cornwall-detail.jpg" alt="康沃爾 Cornwall" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>景點精選</h4>
+                        <p>康沃爾位於英格蘭最西南端，擁有英國一些最美麗的海岸線和獨特的文化遺產。聖艾夫斯是一個迷人的漁村，擁有美麗的海灘、藝術畫廊和狹窄的街道。天涯海角是英格蘭的最西點，提供了戲劇性的海岸景觀和歷史悠久的燈塔。伊甸園項目是一個非凡的生態旅遊景點，擁有巨大的生物群落和令人驚嘆的植物收藏。廷塔傑爾城堡與亞瑟王傳說密切相關，坐落在壯觀的海岸線上。聖邁克爾山是一個潮汐島，擁有中世紀的城堡和修道院，可以步行或乘船到達。紐基是英國的衝浪之都，擁有眾多美麗的海灘和活躍的衝浪文化。對於花園愛好者，康沃爾擁有眾多世界級的花園，如赫利根失落花園和特雷巴花園。</p>
+                        
+                        <h4>交通指南</h4>
+                        <p>探索康沃爾的最佳方式是自駕，這提供了探索偏遠海岸線和風景優美路線的靈活性。從倫敦出發，沿著M4和A30高速公路可以到達康沃爾。火車是另一個選擇，有夜班車服務連接倫敦帕丁頓與康沃爾的主要城鎮如彭贊斯和紐基。對於沒有自駕的旅客，康沃爾擁有完善的巴士網絡，連接主要城鎮和景點。許多旅客選擇參加從倫敦、布里斯托或埃克塞特出發的導覽遊，這些旅遊通常涵蓋主要景點。在康沃爾內，一些風景優美的鐵路線，如聖艾夫斯灣線和洛伊爾鐵路，提供了獨特的旅行體驗。騎自行車也是一個受歡迎的選擇，有眾多指定的自行車路線穿越風景優美的海岸線和鄉村。</p>
+                        
+                        <h4>住宿推薦</h4>
+                        <p>康沃爾提供各種獨特的住宿體驗，從豪華海濱酒店到舒適的鄉村旅館。許多歷史悠久的莊園和鄉村房屋已改建為酒店，提供豪華的住宿和精美的餐飲。傳統的康沃爾旅館提供舒適的住宿和當地特色早餐，許多擁有壯麗的海岸景色。對於更加獨特的體驗，可以考慮住在改建的漁民小屋或鄉村農舍，這些通常提供自炊設施。該地區還有眾多床和早餐選擇，讓旅客體驗康沃爾著名的熱情好客。對於預算有限的旅客，有旅舍和露營地可供選擇。無論選擇何種住宿，建議提前預訂，特別是在夏季旅遊旺季和節日期間。</p>
+                        
+                        <h4>美食體驗</h4>
+                        <p>康沃爾的美食場景強調當地食材和傳統烹飪方法。該地區以其優質的海鮮而聞名，特別是康沃爾螃蟹、龍蝦和沙丁魚。康沃爾餡餅是必須嘗試的當地特色，傳統上包含牛肉、土豆和洋蔥。許多餐廳和酒吧提供使用當地食材烹製的菜餚，如新鮮海鮮和康沃爾農產品。傳統的康沃爾酒吧是體驗當地美食和文化的重要部分，許多提供自釀啤酒和舒適的氛圍。對於甜點愛好者，康沃爾奶油茶是不可錯過的體驗，包括新鮮烤的司康餅、凝脂奶油和果醬。該地區有眾多農場商店和市場出售當地產品，是購買紀念品或野餐用品的理想地點。許多住宿地點也提供使用當地食材烹製的餐點，讓旅客品嚐到真正的康沃爾風味。</p>
+                        
+                        <h4>戶外活動</h4>
+                        <p>康沃爾是戶外愛好者的天堂，提供眾多活動選擇。衝浪是最受歡迎的活動之一，紐基和聖艾夫斯擁有英國一些最好的衝浪海灘。徒步旅行也很受歡迎，有路線適合所有能力水平，從輕鬆的沿海散步到具有挑戰性的海岸小徑。西南海岸小徑穿過康沃爾，提供了戲劇性的海岸景觀和隱蔽的海灣。水上活動如划船、帆船和站立式槳板在海岸線上很受歡迎。對於更加放鬆的活動，可以考慮在美麗的海灘上放鬆，或探索迷人的漁村和港口。野生動物觀察也是受歡迎的活動，有機會看到海豹、海豚和各種海鳥。高爾夫愛好者可以在該地區眾多風景優美的海濱球場上打球。</p>
+                        
+                        <h4>實用貼士</h4>
+                        <p>遊覽康沃爾時，準備應對多變的天氣至關重要，即使在夏季，天氣也可能迅速變化。建議攜帶分層衣物、防水外套和結實的步行鞋。康沃爾的道路可能狹窄且彎曲，特別是在沿海村莊和偏遠地區，因此駕駛時需要小心。許多景點的停車場有限，特別是在旅遊旺季，因此建議早到或考慮使用公共交通。康沃爾的許多海灘有強烈的潮汐和海流，因此建議檢查潮汐時間並遵循安全指南。該地區的移動信號在偏遠地區可能不穩定，因此建議提前下載地圖或使用GPS設備。尊重當地環境很重要，遵循"不留痕跡"原則，保護這片美麗的自然景觀。最後，不要急於匆忙 - 康沃爾的美麗在於其戲劇性的海岸線和悠閒的氛圍，所以花時間欣賞風景並沉浸在沿海生活中。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Featured Attractions</h4>
+                        <p>Cornwall, located at England's southwestern tip, boasts some of Britain's most beautiful coastlines and unique cultural heritage. St Ives is a charming fishing village with beautiful beaches, art galleries, and narrow streets. Land's End is England's westernmost point, offering dramatic coastal views and a historic lighthouse. The Eden Project is an extraordinary ecotourism attraction with massive biomes and stunning plant collections. Tintagel Castle is closely associated with Arthurian legends, situated on a spectacular coastline. St Michael's Mount is a tidal island with a medieval castle and priory, accessible by foot or boat. Newquay is Britain's surfing capital, with numerous beautiful beaches and an active surf culture. For garden enthusiasts, Cornwall has many world-class gardens like The Lost Gardens of Heligan and Trebah Garden.</p>
+                        
+                        <h4>Transportation Guide</h4>
+                        <p>The best way to explore Cornwall is by self-driving, which provides flexibility to reach remote coastlines and scenic routes. From London, Cornwall is accessible via the M4 and A30 motorways. Train travel is another option, with sleeper services connecting London Paddington with major Cornish towns like Penzance and Newquay. For travelers without cars, Cornwall has a comprehensive bus network connecting major towns and attractions. Many visitors choose guided tours departing from London, Bristol, or Exeter, typically covering major attractions. Within Cornwall, some scenic railway lines like the St Ives Bay Line and Looe Valley Line provide unique travel experiences. Cycling is also popular, with numerous designated bike routes through scenic coastlines and countryside.</p>
+                        
+                        <h4>Accommodation Recommendations</h4>
+                        <p>Cornwall offers various unique accommodation experiences, from luxury seaside hotels to comfortable country inns. Many historic manors and country houses have been converted into hotels, providing luxurious stays and fine dining. Traditional Cornish inns offer comfortable accommodations and local specialty breakfasts, many with stunning coastal views. For more unique experiences, consider staying in converted fishermen's cottages or country farmhouses, often providing self-catering facilities. The area also has numerous bed and breakfast options, allowing visitors to experience Cornwall's famous hospitality. For budget-conscious travelers, hostels and campsites are available. Regardless of choice, advance booking is recommended, especially during the summer tourist season and holiday periods.</p>
+                        
+                        <h4>Food Experiences</h4>
+                        <p>Cornwall's food scene emphasizes local ingredients and traditional cooking methods. The area is famous for its high-quality seafood, particularly Cornish crab, lobster, and pilchards. Cornish pasties are must-try local specialties, traditionally containing beef, potato, and onion. Many restaurants and pubs offer dishes cooked with local ingredients like fresh seafood and Cornish produce. Traditional Cornish pubs are an important part of experiencing local cuisine and culture, with many offering craft beers and cozy atmospheres. For dessert lovers, Cornish cream tea is an experience not to be missed, including freshly baked scones, clotted cream, and jam. The area has numerous farm shops and markets selling local products, ideal for souvenirs or picnic supplies. Many accommodations also provide meals cooked with local ingredients, allowing visitors to taste authentic Cornish flavors.</p>
+                        
+                        <h4>Outdoor Activities</h4>
+                        <p>Cornwall is a paradise for outdoor enthusiasts, offering numerous activity options. Surfing is one of the most popular activities, with Newquay and St Ives having some of Britain's best surfing beaches. Hiking is also popular, with routes suitable for all ability levels, from easy coastal walks to challenging coastal paths. The South West Coast Path passes through Cornwall, offering dramatic coastal views and hidden coves. Water activities like boating, sailing, and stand-up paddleboarding are popular along the coastline. For more relaxed activities, consider relaxing on beautiful beaches or exploring charming fishing villages and harbors. Wildlife watching is also popular, with chances to see seals, dolphins, and various seabirds. Golf enthusiasts can play on the area's many scenic seaside courses.</p>
+                        
+                        <h4>Practical Tips</h4>
+                        <p>When visiting Cornwall, preparing for changeable weather is crucial - even in summer, conditions can change rapidly. Layered clothing, waterproof jackets, and sturdy walking shoes are recommended. Cornwall's roads can be narrow and winding, especially in coastal villages and remote areas, so caution is needed when driving. Many attractions have limited parking, particularly during peak tourist seasons, so arriving early or considering public transport is advisable. Many Cornish beaches have strong tides and currents, so checking tide times and following safety guidelines is recommended. Mobile signals may be unstable in remote areas, so downloading maps in advance or using GPS devices is advisable. Respecting the local environment is important by following "leave no trace" principles to protect this beautiful natural landscape. Finally, don't rush - the beauty of Cornwall lies in its dramatic coastline and relaxed atmosphere, so take time to appreciate the scenery and immerse yourself in coastal life.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            }
+        };
+
+        // 文章弹窗功能
+        function openArticleModal(travel) {
+            const article = ARTICLE_CONTENT[travel];
+            if (article) {
+                document.getElementById('articleModalTitle').innerHTML = article.title;
+                document.getElementById('articleModalBody').innerHTML = article.content;
+                document.getElementById('articleModalDate').innerHTML = article.date;
+                document.getElementById('articleModal').style.display = 'block';
+            }
+        }
+
+        function closeArticleModal() {
+            document.getElementById('articleModal').style.display = 'none';
+        }
+
+        // 点击弹窗外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('articleModal');
+            if (event.target == modal) {
+                closeArticleModal();
+            }
+        }
+
+        // 更新日期
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dateNow').innerText = now.toLocaleDateString('zh-HK', options);
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDate();
+        });
+    </script>
+</body>
+</html>

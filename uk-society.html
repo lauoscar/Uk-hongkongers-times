@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英国社会专题 - UK Hong Konger Times</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #f4efe6;
+            --paper: #fffdf8;
+            --ink: #111;
+            --muted: #666;
+            --card-radius: 12px;
+            --pad: 14px;
+            --soft-gray: rgba(34,34,34,0.06);
+            --accent: #000;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+            background-size: 10px 10px, 10px 10px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--paper);
+            border-bottom: 3px double #000;
+            padding: 8px 12px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            position: relative;
+            z-index: 2200;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        }
+        
+        .header-left {
+            flex: 1;
+            text-align: left;
+            min-width: 260px;
+        }
+        
+        .site-title {
+            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-size: 48px;
+            color: #000;
+            margin: 0;
+            text-align: center;
+            flex: 1;
+            letter-spacing: 1px;
+        }
+        
+        .site-subtitle {
+            font-family: 'serif';
+            font-size: 22px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: -8px;
+        }
+        
+        .header-right {
+            width: 300px;
+            text-align: right;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            background: var(--paper);
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-family: 'UnifrakturCook', serif;
+            font-size: 24px;
+            color: #000;
+            text-decoration: none;
+            margin-right: 30px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-menu li {
+            margin: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--ink);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(0,0,0,0.05);
+            border-color: var(--muted);
+            text-decoration: none;
+        }
+        
+        /* Main Content */
+        .main-wrap {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 18px;
+        }
+        
+        .card {
+            background: var(--paper);
+            padding: var(--pad);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--soft-gray);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+        
+        .widget-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .widget-head h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .widget-sub {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        /* UK Unlocked Section */
+        .uk-unlocked-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+        
+        .episode-card {
+            background: var(--paper);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .episode-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--soft-gray);
+        }
+        
+        .episode-content {
+            padding: 16px;
+        }
+        
+        .episode-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+        
+        .episode-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+        
+        .episode-date {
+            font-size: 12px;
+            color: var(--muted);
+            font-style: italic;
+        }
+        
+        /* Article Modal */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+        
+        .article-modal-content {
+            background-color: var(--paper);
+            margin: 40px auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 900px;
+            border-radius: var(--card-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .article-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--muted);
+        }
+        
+        .article-modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--ink);
+            border-bottom: 2px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .article-modal-body {
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .article-modal-body p {
+            margin-bottom: 16px;
+        }
+        
+        .article-modal-body strong {
+            font-weight: bold;
+        }
+        
+        .article-modal-date {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 20px;
+            border-top: 1px solid var(--soft-gray);
+            padding-top: 10px;
+        }
+        
+        /* Ad Boxes */
+        .ad-box {
+            background: #fafafa;
+            border: 1px dashed #ccc;
+            padding: 12px;
+            text-align: center;
+            color: #777;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .ad-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .ad-link {
+            display: block;
+            font-size: 20px;
+            color: #0066cc;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--paper);
+            border-top: 3px double #000;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .footer-left {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-wrap {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .site-title {
+                font-size: 32px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+            }
+            
+            .nav-menu a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .uk-unlocked-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-right {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div id="dateNow">2025年1月15日 星期三</div>
+            <div id="headerQuote">"The only limit to our realization of tomorrow is our doubts of today." — Franklin D. Roosevelt</div>
+        </div>
+        
+        <div>
+            <div class="site-title">The UK Hong Konger Times</div>
+            <div class="site-subtitle">LocationPro.org</div>
+        </div>
+        
+        <div class="header-right">
+            <div class="ad-box">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">UK Hong Konger Times</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">首頁 Home</a></li>
+       <li><a href="weekly-news.html" >本週重點新聞Weekly News</a></li>
+      <li><a href="uk-travel.html" >旅遊頻道Travel</a></li>
+      <li><a href="uk-festivals.html" >節日頻道Festivals</a></li>
+      <li><a href="uk-food.html" >美食頻道Food Digest</a></li>
+      <li><a href="uk-cities.html" >城市專題A Pulse of Nation</a></li>
+      <li><a href="uk-society.html" class="active">週刊專題Weekly Nexus</a></li>
+      <li><!-- 在新标签页打开 --><a href="lifeinuk.html" >Life in the UK Test-Practice Quiz</a></li>
+                <li><a href="bnoguide.html" >BNO移民指南</a></li>                        
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main-wrap">
+        <main>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>UK Unlocked: 探索英國</h3>
+                    <div class="widget-sub">UK-HKer Times Weekly Nexus — 港英時報週刊</div>
+                </div>
+                <p>歡迎來到《UK Unlocked: 探索英國》專題頁面。這是一個深入探索英國地理、文化和歷史的週刊系列，從蘇格蘭高地到康沃爾海岸，帶您領略大不列顛的獨特魅力。</p>
+                
+                <div class="uk-unlocked-section">
+                    <div class="episode-card" onclick="openArticleModal('episode1')">
+                        <!-- 替换为您的 GitHub 图片链接 -->
+                        <img src="https://locationpro.org/episode1.jpg" alt="Episode 1" class="episode-image">
+                        <div class="episode-content">
+                            <div class="episode-title">Episode 1: First Glimpse of Great Britain</div>
+                            <div class="episode-subtitle">第一期：大不列顛初探</div>
+                            <div class="episode-date">by LocationPro November 1st, 2025</div>
+                        </div>
+                    </div>
+                    
+                    <div class="episode-card" onclick="openArticleModal('episode2')">
+                        <!-- 替换为您的 GitHub 图片链接 -->
+                        <img src="https://locationpro.org/episode2.jpg" alt="Episode 2" class="episode-image">
+                        <div class="episode-content">
+                            <div class="episode-title">Episode 2: London - The World's Melting Pot on the Thames</div>
+                            <div class="episode-subtitle">第二期：倫敦——泰晤士河畔的世界熔爐</div>
+                            <div class="episode-date">by LocationPro November 5th, 2025</div>
+                        </div>
+                    </div>
+                    
+                    <div class="episode-card" onclick="openArticleModal('episode3')">
+                        <!-- 替换为您的 GitHub 图片链接 -->
+                        <img src="https://locationpro.org/episode3.jpg" alt="Episode 3" class="episode-image">
+                        <div class="episode-content">
+                            <div class="episode-title">Episode 3: The Scottish Highlands - Heart of Wilderness and Ancient Soul</div>
+                            <div class="episode-subtitle">第三期：蘇格蘭高地——荒野之心與古老靈魂</div>
+                            <div class="episode-date">by LocationPro November 9th, 2025</div>
+                        </div>
+                    </div>
+                    
+                    <div class="episode-card" onclick="openArticleModal('episode4')">
+                        <!-- 替换为您的 GitHub 图片链接 -->
+                        <img src="https://locationpro.org/episode4.jpg" alt="Episode 4" class="episode-image">
+                        <div class="episode-content">
+                            <div class="episode-title">Episode 4: Wales - Land of Mountains, Song and the Dragon</div>
+                            <div class="episode-subtitle">第四期：威爾斯——山巒、歌謠與巨龍之地</div>
+                            <div class="episode-date">by LocationPro November 15th, 2025</div>
+                        </div>
+                    </div>
+                    
+                    <div class="episode-card" onclick="openArticleModal('episode5')">
+                        <!-- 替换为您的 GitHub 图片链接 -->
+                        <img src="https://locationpro.org/episode5.jpg" alt="Episode 5" class="episode-image">
+                        <div class="episode-content">
+                            <div class="episode-title">Episode 5: The Lake District - A Poet's Landscape</div>
+                            <div class="episode-subtitle">第五期：英格蘭湖區——詩人筆下的山水田園</div>
+                            <div class="episode-date">by LocationPro November 20th, 2025</div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+        </main>
+        
+        <aside>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>廣告贊助</h3>
+                </div>
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/47HvT9A" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+                
+                <div class="ad-box">
+                    <h4>NordPass - Password Manager</h4>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="ad-link">Secure Your Passwords</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="widget-head">
+                    <h3>關於本專題</h3>
+                </div>
+                <p>《UK Unlocked: 探索英國》是UK Hong Konger Times的週刊系列，專為在英港人設計，幫助大家深入了解英國的地理、文化和歷史。</p>
+                <p>每週我們將探索英國的不同地區，從城市到鄉村，從歷史古蹟到現代地標，為您呈現一個全面而真實的英國。</p>
+            </div>
+        </aside>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <strong>The UK Hong Konger Times</strong><br>
+                <div style="margin-top: 8px;">
+                    <strong>About:</strong> The UK Hong Konger Times aggregates live public data to help Hongkongers in the UK.
+                </div>
+                <div style="font-size: 12px; margin-top: 8px;">
+                    <strong>Full Disclaimer:</strong> The content is for informational purposes only and does not constitute professional advice.
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/3L35nyP" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Article Modal -->
+    <div id="articleModal" class="article-modal">
+        <div class="article-modal-content">
+            <span class="article-modal-close" onclick="closeArticleModal()">&times;</span>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--soft-gray); padding-bottom: 10px;">
+                <div>
+                    <strong style="font-family: 'UnifrakturCook', serif; font-size: 20px;">UK Hong Konger Times</strong>
+                </div>
+                <div class="ad-box" style="padding: 8px; margin: 0;">
+                    <a href="https://amzn.to/47HvT9A" target="_blank" style="font-size: 16px; color: #0066cc; text-decoration: none;">Shop Amazon</a>
+                </div>
+            </div>
+            
+            <div id="articleModalTitle" class="article-modal-title"></div>
+            <div id="articleModalBody" class="article-modal-body"></div>
+            <div id="articleModalDate" class="article-modal-date"></div>
+            
+            <div class="ad-box" style="margin-top: 20px;">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 文章内容数据 - 使用 GitHub 图片链接
+        const ARTICLE_CONTENT = {
+            episode1: {
+                title: "UK Unlocked: A Journey Through Britain Episode 1: First Glimpse of Great Britain 第一期：大不列顛初探",
+                content: `
+                    <p><strong>Welcome to UK Unlocked!</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/episode1.jpg" alt="Great Britain Map" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>Hello and welcome to the very first episode of "UK Unlocked," your new weekly guide to the fascinating geography of the United Kingdom. Over the coming weeks, we'll journey from the rugged highlands of Scotland to the dramatic coastlines of Cornwall, exploring the landscapes, cities, and natural wonders that make this island nation so unique.</p>
+
+                    <p>In this premiere issue, we start with the big picture: an introduction to Great Britain itself.</p>
+
+                    <p><strong>What is "Great Britain"?</strong></p>
+
+                    <p>First, let's clear up some common confusion. "Great Britain" is a geographical term, not a political one. It refers to the largest island in the British Isles, which comprises three countries: England, Scotland, and Wales.</p>
+
+                    <p>The United Kingdom (UK), however, is a sovereign state. Its full name is the "United Kingdom of Great Britain and Northern Ireland." So, the UK includes Great Britain AND Northern Ireland.</p>
+
+                    <p><strong>A Land Shaped by Ice and Sea</strong></p>
+
+                    <p>The British landscape is a tapestry woven by millennia of geological activity. During the last Ice Age, massive glaciers carved out deep valleys (like the Scottish lochs and Lake District), shaped rolling hills, and deposited the fertile soils of the lowlands. Being an island, the sea has always been a central force, creating a long and incredibly varied coastline of cliffs, beaches, and estuaries.</p>
+
+                    <p><strong>The Lay of the Land</strong></p>
+
+                    <p>· The North & West: Dominated by older, harder rocks, this region is mountainous and rugged. Think of the Scottish Highlands, the Cambrian Mountains in Wales, and the Lake District in England. It's generally wetter and more sparsely populated.</p>
+                    <p>· The South & East: Characterised by younger, softer rocks and chalk, this area features rolling hills, wide river valleys (like the Thames), and fertile plains. It's drier, sunnier, and home to most of the population, including the capital, London.</p>
+
+                    <p><strong>A Human Landscape</strong></p>
+
+                    <p>Humans have left their mark for thousands of years. From the mysterious stone circles of Stonehenge and the Roman walls of Hadrian, to the industrial heartlands of the Midlands and the global metropolis of London, the geography of Britain is deeply intertwined with its history.</p>
+
+                    <p><strong>Spotlight: The Pennines</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/pennines.jpg" alt="The Pennines" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>Often called "the backbone of England," the Pennines are a range of mountains and hills running down the centre of northern England. They are a classic example of Britain's "uplands" – a source of wild beauty, major rivers, and a popular destination for hikers on the famous Pennine Way trail.</p>
+
+                    <p><strong>Did You Know?</strong></p>
+                    <p>No part of the UK is more than 70 miles (113 km) from the coast. This proximity to the sea has profoundly influenced British culture, trade, and climate.</p>
+
+                    <p>Join us next week as we dive deeper into the capital city: London!</p>
+                    
+                    <div style="border-top: 1px solid var(--soft-gray); margin-top: 20px; padding-top: 10px;">
+                        <p><strong>第一期：大不列顛初探</strong></p>
+                        <p>歡迎來到《UK Unlocked：探索英國》！</p>
+
+                        <p>大家好，歡迎閱讀《UK Unlocked：探索英國》創刊號！這是一套全新的連續週刊，將每週帶領您深入探索英國引人入勝的地理風貌。在未來的幾週裡，我們將從蘇格蘭崎嶇的高地一路走到康沃爾戲劇性的海岸線，發掘這個島國獨特的地景、城市與自然奇觀。</p>
+
+                        <p>在第一期內容中，我們先從宏觀視角開始：認識「大不列顛」本身。</p>
+
+                        <p><strong>什麼是「大不列顛」？</strong></p>
+
+                        <p>首先，讓我們釐清一個常見的混淆點。「大不列顛」是一個地理名詞，而非政治名稱。它指的是不列顛群島中最大的島嶼，包含三個構成國：英格蘭、蘇格蘭和威爾斯。</p>
+
+                        <p>而「聯合王國」則是一個主權國家，全名為「大不列顛及北愛爾蘭聯合王國」。因此，聯合王國包含了「大不列顛」以及「北愛爾蘭」。</p>
+
+                        <p><strong>被冰與海塑造的土地</strong></p>
+
+                        <p>英國的地景猶如一幅由數千年地質活動編織而成的錦繡。在上一個冰河時期，巨大的冰川刻劃出深邃的谷地（如蘇格蘭的湖泊和英格蘭的湖區），塑造了起伏的丘陵，並沉積了低地的肥沃土壤。作為一個島國，海洋始終是核心力量，造就了擁有懸崖、沙灘和河口的多變海岸線。</p>
+
+                        <p><strong>地形概覽</strong></p>
+
+                        <p>· 北部與西部： 主要由古老堅硬的岩石構成，此地區多山且崎嶇。例如蘇格蘭高地、威爾斯的坎布里安山脈和英格蘭的湖區。這裡通常更潮濕，人口也更稀疏。</p>
+                        <p>· 南部與東部： 以較年輕、鬆軟的岩石和白堊岩為特徵，此區域主要是起伏的丘陵、寬廣的河谷（如泰晤士河）和肥沃的平原。這裡更乾燥、陽光更充足，並且是大多數人口的聚居地，包括首都倫敦。</p>
+
+                        <p><strong>人文地景</strong></p>
+
+                        <p>人類在這片土地上的印記已有數千年之久。從神秘的巨石陣和羅人哈德良長城，到英格蘭中部地區的工業中心地帶，以及全球大都市倫敦，英國的地理與其歷史緊密交織。</p>
+
+                        <p><strong>焦點地帶：奔寧山脈</strong></p>
+
+                        <p>奔寧山脈常被稱為「英格蘭的脊梁」，是貫穿英格蘭北部的一系列山脈與丘陵。它是英國「高地」的典型範例——擁有原始之美，是許多主要河流的源頭，也是徒步愛好者挑戰著名長程步道「奔寧之路」的熱門目的地。</p>
+
+                        <p><strong>你知道嗎？</strong></p>
+                        <p>在英國，沒有任何一個地方距離海岸超過70英里（約113公里）。這種與海洋的親近性，深深地影響了英國的文化、貿易和氣候。</p>
+
+                        <p>下週，我們將深入探索首都：倫敦！敬請期待！</p>
+                    </div>
+                `,
+                date: "by LocationPro November 1st, 2025"
+            },
+            episode2: {
+                title: "UK Unlocked: A Journey Through Britain Episode 2: London - The World's Melting Pot on the Thames 第二期：倫敦——泰晤士河畔的世界熔爐",
+                content: `
+                    <p><strong>London: Where History and Modernity Collide</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/episode2.jpg" alt="London Skyline" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>Welcome back to UK Unlocked! In our second episode, we descend from the broad overview of Great Britain to zoom in on its pulsating heart: London. This is not just a city; it's a global hub, a historical treasure trove, and a vibrant cultural mosaic, all built around the life-giving River Thames.</p>
+
+                    <p><strong>A City Built on a River</strong></p>
+
+                    <p>The River Thames is the reason London exists. The Romans established "Londinium" here nearly 2,000 years ago at the first point from the sea where the river could be easily bridged. The Thames has been the city's main artery for trade, transportation, and power ever since. A walk along the South Bank offers a living timeline of the city's history, from the Tower of London to Shakespeare's Globe, and on to the modern Tate Modern art gallery.</p>
+
+                    <p><strong>A Tale of Two Cities? The Geography of London</strong></p>
+
+                    <p>London's geography is often informally divided by the river:</p>
+
+                    <p>· North of the Thames: This is the historic and commercial core. Here you find the City of London (the historic financial district, "the Square Mile"), the West End with its world-class theatres and shopping, and the political powerhouse of Westminster, home to the Houses of Parliament and Buckingham Palace.</p>
+
+                    <p>· South of the Thames: Traditionally less affluent, the South Bank has been transformed in recent decades into a major centre for arts and entertainment. It's also the gateway to many vibrant and creative neighbourhoods like Brixton and Bermondsey.</p>
+
+                    <p><strong>The Real London is in its "Villages"</strong></p>
+
+                    <p>While the centre draws the crowds, London's true character is found in its distinct neighbourhoods, each with its own unique identity. From the intellectual buzz of Bloomsbury to the colourful streets of Notting Hill, the curry houses of Brick Lane in the East End to the artistic vibe of Shoreditch, London is a collection of "villages" that together form a colossal metropolis.</p>
+                    
+                    <p><strong>Spotlight: The Tube and the Urban Landscape</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/underground.jpg" alt="London Underground" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>London's growth was supercharged by the world's first underground railway, the London Underground (affectionately known as "the Tube"). Opened in 1863, it allowed the city to expand far beyond a walkable core, creating the vast suburban sprawl we see today. The Tube map itself is a geographic icon, simplifying the complex city into an elegant, colour-coded diagram.</p>
+
+                    <p><strong>Did You Know?</strong></p>
+
+                    <p>London is a forest city. It is home to over 8 million trees, and approximately 47% of its land area is classified as "green space," including numerous parks like Hyde Park and Hampstead Heath. This makes it one of the world's greenest major cities.</p>
+
+                    <p><strong>Next Issue Preview: The Wild North - Scotland's Highlands</strong></p>
+
+                    <p>Join us next week as we leave the urban energy behind and head to the breathtaking, rugged landscapes of the Scottish Highlands, a world of ancient mountains, deep lochs, and vast skies.</p>
+
+                    <div style="border-top: 1px solid var(--soft-gray); margin-top: 20px; padding-top: 10px;">
+                        <p><strong>第二期：倫敦——泰晤士河畔的世界熔爐</strong></p>
+                        <p><strong>倫敦：歷史與現代的交匯點</strong></p>
+
+                        <p>歡迎回到《UK Unlocked》！在第二期中，我們將從大不列顛的宏觀視角拉近，聚焦於其跳動的心臟：倫敦。這不僅僅是一座城市；它是一個全球樞紐、一個歷史寶庫，也是一個充滿活力的文化萬花筒，一切都圍繞著孕育生命的泰晤士河而建。</p>
+
+                        <p><strong>一座因河而興的城市</strong></p>
+
+                        <p>泰晤士河是倫敦存在的原因。近兩千年前，羅馬人在此建立了「倫丁尼姆」，選址於河流從出海處起第一個易於架橋的地點。自此，泰晤士河便一直是這座城市貿易、交通與權力的主要動脈。沿著南岸漫步，就如同走過一部城市的活歷史，從倫敦塔到莎士比亞環球劇場，再到現代的泰特現代藝術館。</p>
+
+                        <p><strong>雙城記？倫敦的地理格局</strong></p>
+
+                        <p>倫敦的地理格局常被泰晤士河非正式地劃分：</p>
+
+                        <p>· 河北岸： 這裡是歷史與商業的核心。您會找到倫敦金融城（歷史悠久的金融區，又稱「平方英里」）、擁有世界級劇院與購物區的西區，以及權力中心西敏市，是國會大廈和白金漢宮的所在地。</p>
+
+                        <p>· 河南岸： 過去較不富裕的南岸，在近幾十年已轉型為主要的藝術與娛樂中心。它也是通往許多充滿活力與創意街區的門戶，例如布里克斯頓和柏蒙西。</p>
+
+                        <p><strong>真正的倫敦藏於其「村莊」裡</strong></p>
+
+                        <p>雖然市中心吸引了大批人群，但倫敦的真正特色體現在其獨特的街區中，每個區域都有自己鮮明的個性。從布盧姆茨伯里的書香氣息，到諾丁山的色彩繽紛；從東區布里克巷的咖哩餐廳，到肖爾迪奇的藝術氛圍——倫敦是由眾多「村莊」組成的巨大都市。</p>
+                        
+                        <p><strong>焦點地帶：地鐵與城市地貌</strong></p>
+
+                        <p>倫敦的成長被世界上第一條地下鐵路——倫敦地鐵（親切地稱為「The Tube」）——急速推動。自1863年開通以來，它讓城市得以擴展到遠超過可步行範圍的核心地帶，形成了今日所見的廣闊郊區。地鐵路線圖本身就是一個地理標誌，將複雜的城市簡化為一個優雅、顏色分明的圖解。</p>
+
+                        <p><strong>你知道嗎？</strong></p>
+
+                        <p>倫敦是一座森林城市。它擁有超過800萬棵樹木，並且大約47%的土地被歸類為「綠色空間」，包括海德公園、漢普斯特德荒野等眾多公園。這使它成為世界上綠化程度最高的主要城市之一。</p>
+
+                        <p><strong>下期預告：荒野之北——蘇格蘭高地</strong></p>
+
+                        <p>下週，我們將告別都市的喧囂，前往令人驚嘆、崎嶇壯麗的蘇格蘭高地，探索一個由古老山脈、深邃湖泊和廣闊天空組成的世界。敬請期待！</p>
+                    </div>
+                `,
+                date: "by LocationPro November 5th, 2025"
+            },
+            episode3: {
+                title: "UK Unlocked: A Journey Through Britain Episode 3: The Scottish Highlands - Heart of Wilderness and Ancient Soul 第三期：蘇格蘭高地——荒野之心與古老靈魂",
+                content: `
+                    <p><strong>The Call of the Wild: Entering the Highlands</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/episode3.jpg" alt="Scottish Highlands" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>Welcome back, explorers, to UK Unlocked! This week, we journey north, far beyond the bustling streets of London, to a land where nature commands respect and history whispers on the wind: the Scottish Highlands. This is one of Europe's last great wildernesses, a vast, sparsely populated region of breathtaking beauty and profound solitude. </p>
+
+                    <p><strong>The Geological Divide: A Line of Fire and Ice</strong></p>
+
+                    <p>The Highlands are physically separated from the Scottish Lowlands by a dramatic geological fault line: the Great Glen. This long, straight valley, home to Loch Ness, slices diagonally across Scotland. The landscape itself tells a story of violent origins, shaped by colossal tectonic shifts and the relentless scraping of glaciers, which carved the deep, iconic lochs (lakes) and glens (valleys) that define the region.</p>
+
+                    <p><strong>A Sparse and Rugged Terrain</strong></p>
+
+                    <p>The term "Highlands" is a perfect description. This is a mountainous land, dominated by the Cairngorms plateau—one of the highest and most challenging mountain ranges in the UK—and iconic peaks like Ben Nevis, Britain's tallest mountain. The combination of ancient, nutrient-poor rock, a cool, wet climate, and historical deforestation has resulted in a landscape of sweeping moors and peat bogs, often shrouded in a low-hanging mist the Scots call "haar."</p>
+
+                    <p><strong>The Human Story: Clans, Clearances, and Culture</strong></p>
+
+                    <p>The history of the Highlands is as dramatic as its scenery. For centuries, it was a world apart, governed by the powerful clan system. The Gaelic language and culture thrived here. However, the 18th and 19th centuries brought turmoil, including the pivotal Battle of Culloden and the subsequent Highland Clearances, where many tenants were forcibly removed from their lands to make way for sheep farming. This led to widespread emigration, shaping the Scottish diaspora across the globe. Today, the culture is being revitalised, with Gaelic signs dotting the landscape and traditional ceilidh music filling village halls.</p>
+
+                    <p><strong>Spotlight: Loch Ness and the Great Glen</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/loch-ness.jpg" alt="Loch Ness" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>While its legendary monster, "Nessie," captures the imagination, Loch Ness is a geographic marvel in its own right. It is the largest body of fresh water in the UK by volume, lying deep within the Great Glen fault. The loch is incredibly deep and dark, its conditions shaped by the surrounding peatlands. It serves as a powerful symbol of the Highlands' mystery and scale.</p>
+                    
+                    <p><strong>Did You Know?</strong></p>
+
+                    <p>The Scottish Highlands are home to some of the UK's most unique wildlife. Here, you can spot red deer roaming the hillsides, golden eagles soaring overhead, and if you're incredibly lucky, the elusive Scottish wildcat, one of the most endangered mammals in the world.</p>
+
+                    <p><strong>Next Issue Preview: The Land of Song - Wales</strong></p>
+
+                    <p>From the silent majesty of the Highlands, we next travel to a land of soaring peaks and stirring choirs: Wales. We'll explore its ancient Celtic heart, its industrial past, and its stunning coastal paths.</p>
+
+                    <div style="border-top: 1px solid var(--soft-gray); margin-top: 20px; padding-top: 10px;">
+                        <p><strong>第三期：蘇格蘭高地——荒野之心與古老靈魂</strong></p>
+                        <p><strong>野性的呼喚：進入高地</strong></p>
+
+                        <p>各位探索者，歡迎回到《UK Unlocked》！本週，我們向北遠行，遠離倫敦喧囂的街道，前往一片大自然令人肅然起敬、歷史在風中低語的土地：蘇格蘭高地。這是歐洲最後的廣袤荒野之一，一個地廣人稀、擁有令人驚嘆之美和深沈孤寂的地區。</p>
+
+                        <p><strong>地理分界：火與冰的界線</strong></p>
+
+                        <p>高地通過一個戲劇性的地質斷層線——大格倫——與蘇格蘭低地實際分開。這條長而直的山谷，是尼斯湖的家園，斜斜地橫切過蘇格蘭。這裡的地貌本身訴說著狂暴的起源，由巨大的地殼變動和無情的冰川侵蝕所塑造，雕刻出定義了該地區的深邃而標誌性的湖泊與谷地。</p>
+
+                        <p><strong>稀疏而崎嶇的土地</strong></p>
+
+                        <p>「高地」一詞是個完美的描述。這是一片多山的土地，主要由凱恩戈姆山高原——英國最高、最具挑戰性的山脈之一——和像英國最高峰本尼維斯山這樣的標誌性山峰所主宰。古老貧瘠的岩石、涼爽潮濕的氣候，加上歷史上的森林砍伐，共同造就了廣闊的荒原和泥炭沼澤景觀，這些地方常常籠罩在一層被蘇格蘭人稱為「海霧」的低垂霧氣中。</p>
+
+                        <p><strong>人文故事：氏族、清理與文化</strong></p>
+
+                        <p>高地的歷史如其風景般充滿戲劇性。幾個世紀以來，這是一個自成一格的世界，由強大的氏族系統統治。蓋爾語和文化在這裡蓬勃發展。然而，18和19世紀帶來了動盪，包括關鍵的卡洛登戰役以及隨後的高地清理，許多佃農被強行從土地上驅離，為牧羊場讓路。這導致了大規模的移民潮，塑造了遍布全球的蘇格蘭裔社群。如今，文化正在復興，蓋爾語標誌點綴著風景，傳統的凱利舞音樂迴盪在村莊禮堂中。</p>
+
+                        <p><strong>焦點地帶：尼斯湖與大格倫</strong></p>
+
+                        <p>雖然傳說中的怪物「尼斯湖水怪」抓住了世人的想像力，但尼斯湖本身就是一個地理奇觀。它是英國體積最大的淡水體，深藏在大格倫斷層中。這個湖泊異常深邃與黑暗，其環境由周圍的泥炭地所塑造。它是高地神祕與廣闊的強力象徵。</p>
+                        
+                        <p><strong>你知道嗎？</strong></p>
+
+                        <p>蘇格蘭高地是英國一些最獨特野生動物的家園。在這裡，你可以看到馬鹿在山坡上漫步，金雕在頭頂盤旋，如果運氣極佳，甚至可能瞥見難以捉摸的蘇格蘭野貓，它是世界上最瀕危的哺乳動物之一。</p>
+
+                        <p><strong>下期預告：歌謠之鄉——威爾斯</strong></p>
+
+                        <p>從高地的沈默雄偉中，我們接下來將前往一個擁有高聳山峰和動人合唱團的土地：威爾斯。我們將探索它古老的塞爾特心臟、工業歷史以及令人驚嘆的海岸小徑。敬請期待！</p>
+                    </div>
+                `,
+                date: "by LocationPro November 9th, 2025"
+            },
+
+        
+                    episode4: {
+                        title: "UK Unlocked: A Journey Through Britain Episode 4: Wales - Land of Mountains, Song and the Dragon  第四期：威爾斯——山巒、歌謠與巨龍之地",
+                        content: `
+                            <p><strong>Wales: A Resilient Celtic Spirit</strong></p>
+                            <!-- 替换为您的 GitHub 图片链接 -->
+                            <img src="https://locationpro.org/episode4.jpg" alt="The Wales" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                            <p>Welcome back to UK Unlocked! This week, we venture into the western part of Great Britain, to a land where the Welsh language sings from the signs, castles crown the hills, and choirs fill the valleys: Wales. This small but mighty nation, with its own distinct culture and language, boasts some of the most dramatic and beautiful landscapes in the United Kingdom.</p>
+        
+                            <p><strong>A Mountainous Heart </strong></p>
+        
+                            <p>The geography of Wales is dominated by its highlands. The Snowdonia National Park in the north is the crown jewel, home to Mount Snowdon, the highest peak in Wales and England. Ancient, glaciated mountains here surround deep valleys and sparkling lakes, offering a paradise for hikers and climbers. Further south, the Brecon Beacons National Park offers rolling, whale-backed hills, expansive moorlands, and spectacular waterfalls, such as the famous Henrhyd Falls.</p>
+        
+                            <p><strong>A Coast of Legends and Industry</strong></p>
+        
+                            <p>Wales is a peninsula, and its coastline is a tale of two halves:</p>
+        
+                            <p>· The north and west coasts are wild and rugged, part of the Pembrokeshire Coast National Park—the only national park in the UK dedicated primarily to coastline. Its cliff-top paths offer breathtaking views of secluded coves, sea stacks, and abundant birdlife. </p>
+        
+                            <p>· To the south, the coastline tells a different story, shaped by its industrial past. The valleys here once powered the Industrial Revolution with their coal and iron, leaving a legacy that is now preserved and interpreted in sites like the Blaenavon Industrial Landscape, a UNESCO World Heritage Site.</p>
+        
+                            <p><strong>A Language and Culture Reborn</strong></p>
+        
+                            <p>Wales is a land of strong cultural identity. The Welsh language (Cymraeg) is a living tongue, spoken by a significant portion of the population and seen on every road sign. It is a direct link to the ancient Celtic Britons who once ruled this land. The tradition of choral singing, particularly in male voice choirs, is a powerful expression of community, born in the chapels and mining villages. And of course, the red dragon (Y Ddraig Goch) on the national flag symbolizes the fierce and proud spirit of the Welsh people.</p>
+                            
+                            <p><strong>Spotlight: The Welsh Castles</strong></p>
+                            <!-- 替换为您的 GitHub 图片链接 -->
+                            <img src="https://locationpro.org/walescastle.jpg" alt="The Wales Castle" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                            <p>The landscape of Wales is dotted with over 600 castles, a testament to its turbulent history of resistance against English rule. King Edward I built a formidable "Iron Ring" of castles in the 13th century to subdue the Welsh princes. Majestic fortresses like Conwy, Caernarfon, Harlech, and Beaumaris are not just ruins; they are masterpieces of medieval military architecture and stand as powerful, enduring symbols of Welsh history and resilience.</p>
+        
+                            <p><strong>Did You Know?</strong></p>
+        
+                            <p>Wales is home to the town with the longest place name in Europe: Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch. The name was invented in the 19th century to attract tourists, and it translates roughly as "St Mary's Church in the hollow of the white hazel near a rapid whirlpool and the Church of St Tysilio of the red cave."</p>
+        
+                            <p><strong>Next Issue Preview: England's Green and Pleasant Land - The Lake District</strong></p>
+        
+                            <p>Join us next time as we explore the landscape that inspired poets: the serene lakes, gentle fells, and picturesque villages of the Lake District in northwest England.</p>
+        
+                            <div style="border-top: 1px solid var(--soft-gray); margin-top: 20px; padding-top: 10px;">
+                                <p><strong>第四期：威爾斯——山巒、歌謠與巨龍之地</strong></p>
+                                <p><strong>威爾斯：不屈的塞爾特靈魂</strong></p>
+        
+                                <p>歡迎回到《UK Unlocked》！本週，我們前往大不列顛的西部，探索一個路標上吟唱著威爾斯語、城堡冠冕山丘、合唱之聲響徹谷地的土地：威爾斯。這個小而強大的民族國家，擁有獨特的文化和語言，以及聯合王國境內一些最為壯麗優美的地景。</p>
+        
+                                <p><strong>山脈構築的心臟</strong></p>
+        
+                                <p>威爾斯的地理由其高地主宰。北部的斯諾登尼亞國家公園是皇冠上的明珠，這裡是威爾斯及英格蘭最高峰——斯諾登山的所在地。古老的水川侵蝕山脈環繞著深邃的谷地和閃閃發光的湖泊，為徒步者和登山者提供了天堂。再往南，布雷肯比肯斯國家公園呈現出起伏的鯨背狀山丘、廣袤的荒原和壯觀的瀑布，例如著名的亨瑞斯瀑布。</p>
+        
+                                <p><strong>傳說與工業交織的海岸</strong></p>
+        
+                                <p>威爾斯是一個半島，其海岸線訴說著兩種故事：</p>
+        
+                                <p>· 北部和西部海岸狂野而崎嶇，是彭布羅克郡海岸國家公園的一部分——這也是英國唯一主要致力於保護海岸線的國家公園。其懸崖頂部的小徑，可俯瞰隱蔽海灣、海蝕柱和豐富鳥類生態的壯麗景色。</p>
+        
+                                <p>· 而在南部，海岸線則講述著被工業過往塑造的不同故事。這裡的谷地曾以煤炭和鐵礦推動了工業革命，留下的遺產如今在像布萊納文工業景觀這樣的地點（聯合國教科文組織世界遺產）得到保存和詮釋。</p>
+        
+                                <p><strong>語言與文化的復興</strong></p>
+        
+                                <p>威爾斯是一片擁有強烈文化認同的土地。威爾斯語是一種活生生的語言，相當比例的人口在使用它，並且在每個路標上都能看到。它是連接曾統治這片土地的古老塞爾特不列顛人的直接紐帶。合唱的傳統，尤其是男聲合唱，是社區精神的有力表達，誕生於教堂和礦村之中。當然，國旗上的紅龍象徵著威爾斯人民激烈而自豪的精神。</p>
+                                
+                                <p><strong>焦點地帶：威爾斯城堡</strong></p>
+        
+                                <p>威爾斯的地景點綴著600多座城堡，見證了其抵抗英格蘭統治的動盪歷史。愛德華一世在13世紀修建了一條堅固的「鐵環」城堡群，以征服威爾斯親王。像康威城堡、卡那封城堡、哈勒赫城堡和博馬里斯城堡這樣雄偉的堡壘，不僅僅是廢墟；它們是中世紀軍事建築的傑作，是威爾斯歷史與韌性的強有力且持久的象徵。</p>
+        
+                                <p><strong>你知道嗎？</strong></p>
+        
+                                <p>威爾斯擁有歐洲最長地名的小鎮：蘭韋爾普爾古因吉爾戈格里惠爾恩德羅布爾蘭蒂西利奧戈戈戈赫。這個名字是在19世紀為了吸引遊客而創造的，大致翻譯為「位於急流渦旋聖蒂西利奧紅色洞穴附近的白色榛樹山谷中的聖瑪利亞教堂」。</p>
+        
+                                <p><strong>下期預告：英格蘭的綠色宜人土地——湖區</strong></p>
+        
+                                <p>下一期，我們將探索激發詩人靈感的風景：位於英格蘭西北部，擁有寧靜湖泊、溫柔山丘和如畫村莊的湖區。</p>
+                            </div>
+                        `,
+                        date: "by LocationPro November 16th, 2025"
+                    },
+                    
+                    
+                    episode5: {
+                title: "UK Unlocked: A Journey Through Britain Episode 5: The Lake District - A Poet's Landscape 第五期：英格蘭湖區——詩人筆下的山水田園",
+                content: `
+                    <p><strong>The Lake District: Where Nature Inspires Verse</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/episode5.jpg" alt="The Lake District" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>Hello again, and welcome to the fifth episode of UK Unlocked! This week, we immerse ourselves in a landscape that is as much a cultural icon as a natural one: England's Lake District. This compact region in the northwest of England, with its serene waters, gentle "fells," and stone-wall-divided valleys, has been a profound source of inspiration for poets, artists, and anyone seeking the solace of nature for over two centuries.</p>
+
+                    <p><strong>A Landscape Sculpted by Ice</strong></p>
+
+                    <p>The classic Lake District scenery is the work of ancient glaciers. During the last Ice Age, ice sheets carved out deep, U-shaped valleys. As the glaciers retreated, they left behind hollows that filled with water, creating the ribbon-like lakes that give the area its name—such as Windermere (the largest lake in England), Ullswater, and Derwentwater. The glaciers also sculpted the rugged, but not overly precipitous, mountains known locally as "fells," including the highest peak in England, Scafell Pike.</p>
+
+                    <p><strong>The Romantic Poets and the Birth of Tourism</strong></p>
+
+                    <p>In the late 18th and early 19th centuries, the Lake District became the heartland of the Romantic movement in Britain. The poets William Wordsworth, Samuel Taylor Coleridge, and Robert Southey (known as the "Lake Poets") lived and wrote here, rejecting industrialisation and celebrating the sublime power of nature. Wordsworth's guidebooks and his famous claim that the Lakes were "a sort of national property" helped transform the region from a remote corner of England into a popular destination, effectively giving birth to modern tourism.</p>
+
+                    <p><strong>A Working Landscape: Herdwick Sheep and Dry Stone Walls</strong></p>
+
+                    <p>The beauty of the Lake District is not untamed wilderness; it is a "working landscape" shaped by centuries of farming. The most iconic resident is the hardy Herdwick sheep, a breed native to the fells, known for their coarse wool and remarkable ability to thrive in the harsh upland climate. The intricate network of dry stone walls, built without mortar, crisscrosses the valleys and fellsides. These walls are both a testament to human labour and a crucial part of the distinctive character of the Lake District.</p>
+                    
+                    <p><strong>Spotlight: Windermere and the Central Lakes</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/windermere.jpg" alt="Windermere" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>While the Lake District is full of quiet corners, the area around Windermere and Bowness-on-Windermere serves as the main hub. Windermere lake offers classic activities like steamboat cruises, providing stunning views of the surrounding fells. From here, visitors can easily explore the charming villages of Ambleside and Grasmere, where Wordsworth is buried. Grasmere is also famous for its delicious, spicy-sweet Grasmere Gingerbread.</p>
+
+                    <p><strong>Did You Know?</strong></p>
+
+                    <p>The Lake District was designated a UNESCO World Heritage Site in 2017. It was recognised not just for its breathtaking natural beauty, but also as a landscape of "outstanding universal value" that has been shaped by and inspired human interaction over centuries—a rare dual designation for both cultural and natural significance.</p>
+
+                    <p><strong>Next Issue Preview: The Rugged Shores of Cornwall</strong></p>
+
+                    <p>From the serene lakes, our next journey will take us to the far southwest, to the dramatic cliffs, Celtic heritage, and surfing beaches of Cornwall.</p>
+
+                    <div style="border-top: 1px solid var(--soft-gray); margin-top: 20px; padding-top: 10px;">
+                        <p><strong>第五期：英格蘭湖區——詩人筆下的山水田園</strong></p>
+                        <p><strong>湖區：激發詩歌的自然之境</strong></p>
+
+                        <p>歡迎來到《UK Unlocked》第五期！本週，我們將沉浸於一個既是自然景觀也是文化標誌的地方：英格蘭湖區。這個位於英格蘭西北部的精緻區域，擁有寧靜的水域、溫柔的「山丘」和石牆分隔的谷地，在過去兩個多世紀裡，一直是詩人、藝術家以及所有尋求自然慰藉人們的深刻靈感源泉。</p>
+
+                        <p><strong>冰川雕塑的地景</strong></p>
+
+                        <p>經典的湖區風光是由古代冰川塑造的。在上一個冰河時期，冰蓋刻劃出深邃的U形谷。隨著冰川退卻，它們留下了充滿水的凹地，形成了帶狀的湖泊，該地區也因此得名——例如溫德米爾湖（英格蘭最大的湖泊）、亞瑟湖和德文特湖。冰川也雕琢了粗獷但並不過於陡峭的山脈，當地人稱之為「山丘」，其中包括英格蘭最高峰斯科費爾峰。</p>
+
+                        <p><strong>浪漫主義詩人與旅遊業的誕生</strong></p>
+
+                        <p>在18世紀末和19世紀初，湖區成為英國浪漫主義運動的中心。詩人威廉·華茲華斯、塞繆爾·泰勒·柯勒律治和羅伯特·騷塞（被稱為「湖畔詩人」）在這裡生活寫作，抗拒工業化，歌頌自然的超凡力量。華茲華斯的旅遊指南以及他著名的宣稱——湖區是「某種形式的國家財產」——幫助該地區從英格蘭的偏遠角落轉變為熱門目的地，實際上催生了現代旅遊業。</p>
+
+                        <p><strong>勞作的地景：赫德威克羊與乾石牆</strong></p>
+
+                        <p>湖區的美並非未經馴服的荒野；它是一個被數百年農牧業塑造的「勞作地景」。最具標誌性的居民是強韌的赫德威克羊，這是一種原產於此地的羊，以其粗羊毛和在高地嚴酷氣候下茁壯成長的非凡能力而聞名。由錯綜複雜的乾石牆（不使用灰漿砌成）組成的網絡，縱橫交錯在谷地和山腰。這些牆壁既是人類勞動的證明，也是湖區獨特風貌的重要組成部分。</p>
+                        
+                        <p><strong>焦點地帶：溫德米爾與湖區中心</strong></p>
+
+                        <p>雖然湖區充滿了安靜的角落，但溫德米爾和波尼斯-溫德米爾周邊地區是主要樞紐。溫德米爾湖提供了像蒸汽船遊覽這樣的經典活動，可以欣賞周圍山丘的壯麗景色。從這裡，遊客可以輕鬆探索安布賽德和格拉斯米爾這些迷人的村莊，華茲華斯便安葬於格拉斯米爾。格拉斯米爾也以其美味、辛辣中帶甜的格拉斯米爾薑餅而聞名。</p>
+
+                        <p><strong>你知道嗎？</strong></p>
+
+                        <p>湖區於2017年被聯合國教科文組織列為世界遺產。它之所以得到認可，不僅是因為其令人驚嘆的自然美景，還因為它是一個在數個世紀中被人類活動塑造和激發靈感的「具突出普世價值」的地景——這是罕見的同時符合文化與自然遺產標準的雙重認定。</p>
+
+                        <p><strong>下期預告：康沃爾的崎嶇海岸</strong></p>
+
+                        <p>從寧靜的湖泊出發，我們的下一段旅程將前往遙遠的西南方，探索康沃爾戲劇性的懸崖、塞爾特傳統和衝浪海灘。</p>
+                    </div>
+                `,
+                date: "by LocationPro November 24th, 2025"
+                    },
+            
+          
+        };
+
+
+        // 文章弹窗功能
+        function openArticleModal(episode) {
+            const article = ARTICLE_CONTENT[episode];
+            if (article) {
+                document.getElementById('articleModalTitle').innerHTML = article.title;
+                document.getElementById('articleModalBody').innerHTML = article.content;
+                document.getElementById('articleModalDate').innerHTML = article.date;
+                document.getElementById('articleModal').style.display = 'block';
+            }
+        }
+
+        function closeArticleModal() {
+            document.getElementById('articleModal').style.display = 'none';
+        }
+
+        // 点击弹窗外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('articleModal');
+            if (event.target == modal) {
+                closeArticleModal();
+            }
+        }
+
+        // 更新日期
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dateNow').innerText = now.toLocaleDateString('zh-HK', options);
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDate();
+        });
+    </script>
+</body>
+</html>

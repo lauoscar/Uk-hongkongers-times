@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNO移民英国指南 - UK Hong Konger Times</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #f4efe6;
+            --paper: #fffdf8;
+            --ink: #111;
+            --muted: #666;
+            --card-radius: 12px;
+            --pad: 14px;
+            --soft-gray: rgba(34,34,34,0.06);
+            --accent: #000;
+            --immigration-blue: #1a5276;
+            --immigration-green: #27ae60;
+            --immigration-red: #c0392b;
+            --immigration-purple: #8e44ad;
+            --immigration-orange: #e67e22;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+            background-size: 10px 10px, 10px 10px;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background: var(--paper);
+            border-bottom: 3px double #000;
+            padding: 8px 12px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            position: relative;
+            z-index: 2200;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        }
+        
+        .header-left {
+            flex: 1;
+            text-align: left;
+            min-width: 260px;
+        }
+        
+        .site-title {
+            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-size: 48px;
+            color: #000;
+            margin: 0;
+            text-align: center;
+            flex: 1;
+            letter-spacing: 1px;
+        }
+        
+        .site-subtitle {
+            font-family: 'serif';
+            font-size: 22px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: -8px;
+        }
+        
+        .header-right {
+            width: 300px;
+            text-align: right;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            background: var(--paper);
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-family: 'UnifrakturCook', serif;
+            font-size: 24px;
+            color: #000;
+            text-decoration: none;
+            margin-right: 30px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-menu li {
+            margin: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--ink);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(0,0,0,0.05);
+            border-color: var(--muted);
+            text-decoration: none;
+        }
+        
+        .nav-menu a.active {
+            background: rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-wrap {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 18px;
+        }
+        
+        .card {
+            background: var(--paper);
+            padding: var(--pad);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--soft-gray);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+        
+        .widget-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .widget-head h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .widget-sub {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        /* Family Type Tabs */
+        .family-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .family-tab {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px;
+            text-align: center;
+            background: var(--paper);
+            border: 1px solid var(--soft-gray);
+            border-radius: var(--card-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .family-tab:hover {
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .family-tab.active {
+            background: var(--immigration-blue);
+            color: white;
+            border-color: var(--immigration-blue);
+        }
+        
+        .family-tab.couple.active {
+            background: var(--immigration-green);
+            border-color: var(--immigration-green);
+        }
+        
+        .family-tab.children.active {
+            background: var(--immigration-purple);
+            border-color: var(--immigration-purple);
+        }
+        
+        .family-tab.singleparent.active {
+            background: var(--immigration-orange);
+            border-color: var(--immigration-orange);
+        }
+        
+        .family-tab.elderly.active {
+            background: var(--immigration-red);
+            border-color: var(--immigration-red);
+        }
+        
+        /* Timeline Section */
+        .timeline-container {
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 8px; /* 調整以對齊圓點中心 */
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--soft-gray);
+            z-index: 1;
+        }
+        
+        .timeline-phase {
+            position: relative;
+            text-align: center;
+            flex: 1;
+            z-index: 2;
+            cursor: pointer;
+        }
+        
+        .timeline-phase .phase-dot {
+            width: 18px;
+            height: 18px;
+            background: var(--paper);
+            border: 2px solid var(--soft-gray);
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            position: relative;
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-phase.active .phase-dot {
+            background: var(--immigration-blue);
+            border-color: var(--immigration-blue);
+            transform: scale(1.1);
+        }
+        
+        .timeline-phase .phase-label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .phase-content {
+            display: none; /* 預設隱藏 */
+            animation: fadeIn 0.4s ease;
+            margin-bottom: 30px;
+        }
+        
+        .phase-content.active {
+            display: block; /* JS控制顯示 */
+        }
+        
+        .phase-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: var(--immigration-blue);
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 8px;
+        }
+        
+        .phase-subtitle {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0 12px;
+            color: var(--ink);
+        }
+        
+        .phase-list {
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .phase-list li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .phase-list-zh {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 4px;
+            padding-left: 20px;
+        }
+        
+        .important-note {
+            background: rgba(192, 57, 43, 0.05);
+            border-left: 4px solid var(--immigration-red);
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .tip-note {
+            background: rgba(39, 174, 96, 0.05);
+            border-left: 4px solid var(--immigration-green);
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tip-note-purple {
+            background: rgba(142, 68, 173, 0.05);
+            border-left: 4px solid var(--immigration-purple);
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .tip-note-orange {
+            background: rgba(230, 126, 34, 0.05);
+            border-left: 4px solid var(--immigration-orange);
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .tip-note-red {
+            background: rgba(192, 57, 43, 0.05);
+            border-left: 4px solid var(--immigration-red);
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .phase-paragraph {
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        .phase-paragraph-zh {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        /* Ad Boxes */
+        .ad-box {
+            background: #fafafa;
+            border: 1px dashed #ccc;
+            padding: 12px;
+            text-align: center;
+            color: #777;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .ad-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .ad-link {
+            display: block;
+            font-size: 20px;
+            color: #0066cc;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--paper);
+            border-top: 3px double #000;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .footer-left {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .phase-content h4 {
+            font-size: 16px;
+            margin: 16px 0 8px;
+            color: var(--immigration-blue);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-wrap {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .site-title {
+                font-size: 32px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+            .header-left, .header-right {
+                text-align: center;
+                width: 100%;
+                min-width: unset;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+            }
+            
+            .nav-menu a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .family-tabs {
+                flex-direction: column;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .timeline::before {
+                display: none;
+            }
+            
+            .timeline-phase {
+                text-align: left;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .timeline-phase .phase-dot {
+                margin: 0;
+                flex-shrink: 0;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-right {
+                text-align: center;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div id="dateNow"></div>
+            <div id="headerQuote">"Complete guide to BNO immigration for Hong Kongers"</div>
+        </div>
+        
+        <div>
+            <div class="site-title">The UK Hong Konger Times</div>
+            <div class="site-subtitle">BNO移民英國指南</div>
+        </div>
+        
+        <div class="header-right">
+            <div class="ad-box">
+                <h4>Visit Amazon for Great Deals</h4>
+                <a href="https://amzn.to/47HvT9A" target="_blank" class="ad-link">Shop Amazon Today</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">UK Hong Konger Times</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">首頁 Home</a></li>
+      <li><a href="weekly-news.html" >本週重點新聞Weekly News</a></li>
+      <li><a href="uk-travel.html" >旅遊頻道Travel</a></li>
+      <li><a href="uk-festivals.html" >節日頻道Festivals</a></li>
+      <li><a href="uk-food.html" >美食頻道Food Digest</a></li>
+      <li><a href="uk-cities.html" >城市專題A Pulse of Nation</a></li>
+      <li><a href="uk-society.html" >週刊專題Weekly Nexus</a></li>
+      <li><!-- 在新标签页打开 --><a href="lifeinuk.html" >Life in the UK Test-Practice Quiz</a></li>
+                <li><a href="bnoguide.html" class="active">BNO移民指南</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main-wrap">
+        <main>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>BNO移民英國完整指南</h3>
+                    <div class="widget-sub">Complete Guide to BNO Immigration to the UK</div>
+                </div>
+                <p class="phase-paragraph">歡迎來到 BNO 移民英國指南！本指南專為不同家庭情況的香港人設計，提供從準備、申請到定居英國的完整資訊。無論您是單身人士、夫妻、有幼兒的家庭、單親家庭還是有年老長者的家庭，這裏都有針對您情況的具體建議。</p>
+                
+                <div class="family-tabs">
+                    <div class="family-tab active" data-family="single">單人人士<br>Single Person</div>
+                    <div class="family-tab couple" data-family="couple">兩人夫妻家庭<br>Couple without Children</div>
+                    <div class="family-tab children" data-family="children">有幼兒的家庭<br>Family with Young Children</div>
+                    <div class="family-tab singleparent" data-family="singleparent">單親家庭<br>Single Parent Family</div>
+                    <div class="family-tab elderly" data-family="elderly">有年老老人的家庭<br>Family with Elderly Dependants</div>
+                </div>
+                
+                <!-- 
+                    注意：此處的 .timeline-container 及其 .timeline-phase 
+                    將由 JS 動態控制，以匹配每個 content-section 內部的 .timeline-phase 狀態。
+                    為了簡化並修正錯誤，我們將把時間線 *移入* 每個 content-section 內部。
+                -->
+                
+                <!-- 內容區塊 -->
+                <div id="content-container">
+
+                    <!-- ================================= 
+                         1. 單人人士 (Single Person)
+                        ================================== -->
+                    <div class="content-section active" id="content-single">
+                        
+                        <div class="timeline-container">
+                            <div class="timeline">
+                                <div class="timeline-phase active" data-phase="preparation">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">移民前準備<br>Pre-immigration</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="arrival">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">抵達英國時<br>Upon Arrival</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="settlement">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">定居英國後<br>After Settlement</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 移民前準備 (Preparation) -->
+                        <div class="phase-content active" data-phase="preparation">
+                            <div class="phase-title">單人人士 - 移民前準備</div>
+                            
+                            <div class="tip-note">
+                                <strong>單人人士提示 (Single Person Tip)：</strong> 恭喜！您是所有組合中最靈活的。您的決策可以更快速，初期住宿選擇也更多，例如可以考慮合租 (House Share) 或租住單間公寓 (Studio)，以大幅降低生活成本並更快建立社交網絡。
+                            </div>
+                            
+                            <div class="phase-subtitle">BNO 簽證申請 (BNO Visa Application)</div>
+                            <div class="phase-paragraph">
+                                BNO 簽證是您和家人移居英國的主要途徑。俗稱「5+1」方案，即住滿5年後可申請永居 (ILR)，再住1年可申請入籍。
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>申請資格 (Eligibility)：</strong> 持有 BNO 身份（護照過期或遺失亦可），通常居住在香港。</li>
+                                <li><strong>申請方式 (Application Method)：</strong> 大部分申請人可透過「UK Immigration: ID Check」手機 App 掃描 BNO/HKSAR 護照完成申請，獲批後會得到數碼身份 (eVisa)，無需 BRP 卡。</li>
+                                <li><strong>健康要求 (TB Test)：</strong> 必須在英國內政部指定的香港診所進行肺結核測試。</li>
+                                <li><strong>財務要求 (Financial Requirement)：</strong> 需證明有足夠資金支持在英國生活至少6個月。官方沒有硬性規定，但單人通常建議 £3,000 - £4,000。</li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">相關費用 (Application Fees)</div>
+                            <table>
+                                <tr>
+                                    <th>項目 (Item)</th>
+                                    <th>費用 (每位成人) (Cost per Adult)</th>
+                                </tr>
+                                <tr>
+                                    <td>BNO簽證 (2.5年)</td>
+                                    <td>£180</td>
+                                </tr>
+                                <tr>
+                                    <td>BNO簽證 (5年)</td>
+                                    <td>£250</td>
+                                </tr>
+                                <tr>
+                                    <td>移民健康附加費 (IHS)</td>
+                                    <td>每年 £1,035 (5年簽證需一次繳清 £5,175)</td>
+                                </tr>
+                            </table>
+
+                            <div class="phase-subtitle">重要文件準備 (Document Preparation)</div>
+                            <ul class="phase-list">
+                                <li>護照 (BNO, HKSAR) 及簽證批准信 (Visa Decision Letter)</li>
+                                <li>TB 測試報告 (TB Test Report)</li>
+                                <li>財務證明（最近6個月的銀行月結單, Bank Statements）</li>
+                                <li>學歷和專業資格證明（正本及英文翻譯, Academic/Professional Certificates）</li>
+                                <li>國際駕駛執照（「國際車牌」, International Driving Permit)</li>
+                            </ul>
+
+                            <div class="phase-subtitle">財務與稅務 (Finance and Tax)</div>
+                            <ul class="phase-list">
+                                <li><strong>處理強積金 (MPF)：</strong> 以「永久離開香港」為理由提早領取。</li>
+                                <li><strong>處理香港稅務 (Tax Clearance)：</strong> 辦理清稅。您需要通知稅務局您將離港，並提交最終的報稅表。僱主需提供 IR56G 表格。完成後，您會收到「不反對通知書」(Letter of No Objection)。</li>
+                                <li><strong>安排匯款 (Money Transfer)：</strong> 了解並開設離岸戶口或匯款工具，如 Wise, Revolut。</li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">搬運家當安排 (Shipping)</div>
+                            <div class="phase-paragraph">
+                                選擇海運公司時，應比較至少3-5家報價，確認包含保險和門到門 (Door-to-Door) 服務。海運時間通常為8-12週。
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>合箱 (Groupage)：</strong> 單人或物品不多，可選合箱，較便宜但時間較長。</li>
+                                <li><strong>20呎貨櫃 (20ft Container)：</strong> 適合小家庭，約 £3,000 - £5,000。</li>
+                                <li><strong>40呎貨櫃 (40ft Container)：</strong> 適合大家庭，約 £5,000 - £7,000。</li>
+                                <li><strong>禁運物品 (Prohibited Items)：</strong> 嚴禁攜帶易燃品、部分食品（如肉類、奶製品）、植物及仿製商品。</li>
+                                <li><strong>保險 (Insurance)：</strong> 必須購買足額保險。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">準備物品、行李及電器 (Packing & Appliances)</div>
+                            <div class="phase-paragraph">
+                                英國電壓為 230V/50Hz，使用 G 型插頭，與香港 (220V/50Hz) 基本兼容。
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>手提行李 (Hand Luggage)：</strong>
+                                    <div class="phase-list-zh">（必須隨身攜帶）</div>
+                                    - 所有重要文件：護照、簽證信、TB 報告、財務證明、學歷證明。
+                                    - 現金和銀行卡、手提電腦、電話、充電器。
+                                    - 足夠數量的任何處方藥物（連同醫生紙）。
+                                    - 一套更換衣物。
+                                </li>
+                                <li><strong>寄艙行李 (Checked-in Luggage)：</strong>
+                                    <div class="phase-list-zh">（首一至兩週的必需品）</div>
+                                    - 更多衣物（特別是保暖外套，即使是夏天抵達）。
+                                    - 少量香港品牌的護膚品或藥品。
+                                    - 少量小型電器，如風筒、電飯煲（單人適用的小型號）。
+                                    - 香港人常用物品：如萬用刀（中式菜刀）、蒸架、保溫瓶。
+                                </li>
+                                <li><strong>船運 (Sea-Shipping)：</strong>
+                                    <div class="phase-list-zh">（非緊急但重要物品）</div>
+                                    - 大部分衣物（特別是冬季大褸、厚被）。
+                                    - 書籍、紀念品。
+                                    - 廚房用品全套（如全套碗碟、煲具）。
+                                    - 昂貴或有紀念價值的傢俬。
+                                </li>
+                                <li><strong>建議攜帶的電器 (Bring These)：</strong>
+                                    - **電飯煲 (Rice Cooker)：** 英國本地的選擇少、功能單一且昂貴。香港的電飯煲在英國可正常使用。
+                                    - **萬用刀/中式廚刀 (Chinese Cleaver)：** 英國難以買到合適的。
+                                    - 任何香港常用的專業設備（如相機、電腦）。
+                                </li>
+                                <li><strong>建議不要攜帶的物品 (Don't Bring)：</strong>
+                                    - **大型電器 (Large Appliances)：** 如雪櫃、洗衣機。英國租屋通常已配備 (Furnished/White Goods included)。
+                                    - **電視 (Television)：** 英國電視制式 (DVB-T2) 與香港 (DTMB) 不同，或需另加機頂盒。
+                                    - **大型傢俬 (Bulky Furniture)：** 除非非常昂貴或有紀念價值，否則船運費用可能高於物品本身。可在 IKEA 或二手市場輕易買到。
+                                </li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">寵物移民 (Pet Relocation)</div>
+                            <div class="phase-paragraph">
+                                （單人人士亦可有寵物）英國對寵物入境有嚴格要求（俗稱「TRACES」）。此過程需時數月，涉及晶片、疫苗、血液測試和健康證明。必須提早規劃並諮詢專業寵物移民公司。
+                            </div>
+
+                            <div class="phase-subtitle">詳細預算規劃 (Detailed Budget - Single)</div>
+                            <table>
+                                <tr>
+                                    <th>項目 (Item)</th>
+                                    <th>單人預算 (倫敦以外) (Outside London)</th>
+                                    <th>單人預算 (倫敦) (London)</th>
+                                </tr>
+                                <tr>
+                                    <td>簽證及IHS (5年)</td>
+                                    <td>~ £5,425</td>
+                                    <td>~ £5,425</td>
+                                </tr>
+                                <tr>
+                                    <td>機票 (單程)</td>
+                                    <td>~ £600</td>
+                                    <td>~ £600</td>
+                                </tr>
+                                <tr>
+                                    <td>初期住宿 (1個月 Airbnb)</td>
+                                    <td>~ £1,200</td>
+                                    <td>~ £2,200</td>
+                                </tr>
+                                <tr>
+                                    <td>租屋按金 (5週) 及首月租金</td>
+                                    <td>~ £1,800</td>
+                                    <td>~ £3,000</td>
+                                </tr>
+                                <tr>
+                                    <td>生活開支 (首3個月)</td>
+                                    <td>~ £2,000</td>
+                                    <td>~ £3,000</td>
+                                </tr>
+                                <tr>
+                                    <td>應急資金 (Emergency Fund)</td>
+                                    <td>~ £3,000</td>
+                                    <td>~ £4,000</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>總計 (建議) (Total)</strong></td>
+                                    <td><strong>~ £14,025</strong></td>
+                                    <td><strong>~ £18,225</strong></td>
+                                </tr>
+                            </table>
+
+                            <div class="phase-subtitle">各事項的時間安排 (Timeline)</div>
+                            <ul class="phase-list">
+                                <li><strong>6-12個月前：</strong> 決定是否移民、研究英國地區、整理財務、申請 BNO 護照（如需）。</li>
+                                <li><strong>3-6個月前：</strong> 申請 BNO 簽證、預約 TB Test、開始處理香港資產、聯絡海運公司。</li>
+                                <li><strong>1-3個月前：</strong> 預訂機票、預訂初期住宿 (Airbnb)、處理 MPF、辦理清稅、處理寵物移民手續。</li>
+                                <li><strong>1個月前：</strong> 安排國際車牌、取消香港服務（電話、寬頻）、打包海運物品。</li>
+                                <li><strong>1週前：</strong> 換領英鎊、收拾隨身行李、確認所有文件齊備。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- 抵達英國時 (Arrival) -->
+                        <div class="phase-content" data-phase="arrival">
+                            <div class="phase-title">單人人士 - 抵達英國時</div>
+
+                            <div class="phase-paragraph">
+                                抵達英國後的首數星期至為關鍵。請按優先次序處理以下事項，這將是您建立英國生活的重要基石。
+                            </div>
+
+                            <div class="phase-subtitle">1. 領取 BRP 或確認 eVisa (BRP Collection / eVisa)</div>
+                            <ul class="phase-list">
+                                <li><strong>BRP 卡：</strong> 如果您是透過簽證中心申請（而非手機 App），您需要在抵英後10天內，前往指定的郵局領取 BRP (Biometric Residence Permit) 卡。</li>
+                                <li><strong>eVisa (數碼簽證)：</strong> 如果您是使用「UK Immigration: ID Check」App 申請，您將不會有 BRP 卡。您的身份已綁定到您的護照，您需要創建一個 UKVI 帳戶來查看和分享您的「Share Code」以證明您的身份。</li>
+                            </ul>
+                            <div class="important-note">
+                                <strong>重要：</strong> 英國正逐步淘汰 BRP 卡，全面轉向 eVisa。即使您現在持有 BRP，也應創建 UKVI 帳戶。
+                            </div>
+
+                            <div class="phase-subtitle">2. 開設英國銀行戶口 (Bank Account)</div>
+                            <div class="phase-paragraph">
+                                這是處理日常開支、出糧和繳交帳單的必需品。
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>數碼銀行 (Digital Banks)：</strong> 如 Monzo, Starling, Revolut。開戶快捷，通常只需手機 App、護照和一個英國地址（即使是臨時的 Airbnb 地址亦可），是新移民首選。</li>
+                                <li><strong>傳統銀行 (High Street Banks)：</strong> 如 HSBC, Barclays, Lloyds。通常需要預約，並要求嚴格的地址證明 (Proof of Address)，如租約或 Council Tax 帳單，對新移民較困難。</li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">3. 申請國民保險號碼 (NI Number)</div>
+                            <div class="phase-paragraph">
+                                National Insurance (NI) Number 是您在英國工作、繳稅和申請福利的唯一識別碼。
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>如何申請：</strong> 您可以在抵達英國後，於英國政府官網 (GOV.UK) 在線申請。</li>
+                                <li>您需要提供身份證明（護照或 BRP）和地址。</li>
+                                <li>您**可以**在沒有 NI Number 的情況下開始工作，但必須盡快申請，並在收到後通知僱主。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">4. 註冊 NHS 及 GP (GP Registration)</div>
+                            <div class="phase-paragraph">
+                                雖然您已支付 IHS 費用，但仍需主動向居住地區的 GP 診所 (General Practitioner surgery) 註冊，才能免費看醫生和獲得醫療服務。
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>步驟1：</strong> 在 NHS 網站使用您的郵區編號 (Postcode) 尋找最近的 GP。</li>
+                                <li><strong>步驟2：</strong> 檢查您是否在他們的「Catchment Area」（服務區域）內。</li>
+                                <li><strong>步驟3：</strong> 在 GP 診所的網站上填寫 GMS1 註冊表格（或親身索取）。</li>
+                                <li><strong>步驟4：</strong> 提交表格，並附上身份證明（護照）和地址證明（如租約、銀行信）。（註：即使沒有地址證明，他們亦應接受您的註冊。）</li>
+                                <li><strong>步驟5：</strong> 數天或數週後，您會收到確認信及您的 NHS 號碼。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">5. 購買英國電話 SIM 卡 (UK SIM Card)</div>
+                            <div class="phase-paragraph">
+                                擁有英國本地號碼對聯絡、申請服務和接收驗證碼至關重要。主要營運商包括 EE, O2, Vodafone, Three，以及 Giffgaff, Voxi 等虛擬營運商 (MVNO)。
+                            </div>
+
+                            <div class="phase-subtitle">機場到市區交通 (Airport Transport)</div>
+                            <div class="phase-paragraph">
+                                香港有直航航班前往以下主要英國城市。以下是最經濟的交通方法：
+                            </div>
+                            <table>
+                                <tr>
+                                    <th>機場 (Airport)</th>
+                                    <th>最經濟交通 (Cheapest Option)</th>
+                                    <th>中價/便捷 (Mid-range/Faster)</th>
+                                    <th>昂貴/最快 (Fastest/Premium)</th>
+                                </tr>
+                                <tr>
+                                    <td>倫敦希斯路 (LHR)</td>
+                                    <td><strong>地鐵 (Piccadilly Line)：</strong> 約 £6，需時 1 小時到市中心。</td>
+                                    <td><strong>Elizabeth Line：</strong> 約 £13，需時 35 分鐘。</td>
+                                    <td><strong>Heathrow Express：</strong> 約 £25，15 分鐘到 Paddington。</td>
+                                </tr>
+                                <tr>
+                                    <td>倫敦格域 (LGW)</td>
+                                    <td><strong>巴士 (National Express)：</strong> 約 £10，需時 1.5-2 小時。</td>
+                                    <td><strong>火車 (Southern / Thameslink)：</strong> 約 £15-£20，需時 35-50 分鐘到市中心。</td>
+                                    <td><strong>Gatwick Express：</strong> 約 £22，30 分鐘到 Victoria。</td>
+                                </tr>
+                                <tr>
+                                    <td>曼徹斯特 (MAN)</td>
+                                    <td><strong>巴士 (Stagecoach)：</strong> 約 £2-£4，需時 1 小時到市中心。</td>
+                                    <td><strong>電車 (Metrolink)：</strong> 約 £4.60，需時 50 分鐘。</td>
+                                    <td><strong>火車 (Train)：</strong> 約 £5-£6，20 分鐘到 Piccadilly 站。</td>
+                                </tr>
+                            </table>
+                            <div class="tip-note">
+                                <strong>提示：</strong> 抵埗時行李眾多，乘搭公共交通可能非常狼狽。預約華人接機或使用 Uber/Bolt 可能是更舒適的選擇，費用約 £60-£100。
+                            </div>
+
+                            <div class="phase-subtitle">轉換香港駕駛執照 (Driving Licence Exchange)</div>
+                            <div class="phase-paragraph">
+                                關於駕駛的重要規定：
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>首12個月：</strong> 您可以使用您的香港駕駛執照（或國際車牌）在英國合法駕駛12個月。</li>
+                                <li><strong>換領駕照：</strong> 香港駕照屬於「指定國家/地區」。您**無需考試**，可在住滿185天後，直接申請將香港駕照轉換為英國駕照。</li>
+                                <li><strong>步驟：</strong>
+                                    <ol style="list-style-type: decimal; margin-left: 20px;">
+                                        <li>在郵局 (Post Office) 索取 D1 表格。</li>
+                                        <li>填妥表格，附上您的護照、BRP/Share Code、香港駕照正本。</li>
+                                        <li>支付 £43 費用，寄往 DVLA。</li>
+                                        <li>DVLA 會寄回您的英國駕照，並可能另行寄回您的證明文件。</li>
+                                    </ol>
+                                </li>
+                                <li><strong>汽車保險：</strong> 英國汽車保險非常昂貴，特別是新移民（無英國駕駛經驗 No Claim Bonus）。</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- 定居英國後 (Settlement) -->
+                        <div class="phase-content" data-phase="settlement">
+                            <div class="phase-title">單人人士 - 定居英國後</div>
+
+                            <div class="phase-subtitle">租屋方法和詳細程序 (Renting Process)</div>
+                            <div class="phase-paragraph">
+                                租屋是首要任務。常用網站：Rightmove, Zoopla, OpenRent。
+                            </div>
+                            <ol class="phase-list" style="list-style-type: decimal;">
+                                <li><strong>準備文件：</strong> 準備好您的 BNO 簽證 (Share Code)、護照、銀行月結單（顯示資金）。</li>
+                                <li><strong>睇樓 (Viewing)：</strong> 透過 Rightmove/Zoopla 聯絡地產經紀 (Estate Agent) 預約睇樓。</li>
+                                <li><strong>出價 (Make an Offer)：</strong> 填寫申請表，提供您的租金出價和起租日期。</li>
+                                <li><strong>信用審查 (Referencing)：</strong> 經紀會對您進行信用審查。
+                                    <div class="important-note">
+                                        <strong>新移民注意：</strong> 您幾乎必定會因為沒有英國信用記錄 (Credit History) 而「fail」。您需要提供「Guarantor」（擔保人），或者（更常見地）**預繳 6 至 12 個月的租金**。
+                                    </div>
+                                </li>
+                                <li><strong>簽署租約 (Tenancy Agreement)：</strong> 簽署 AST (Assured Shorthold Tenancy) 合約。</li>
+                                <li><strong>支付按金 (Deposit)：</strong> 支付上限為5星期的租金。業主**必須**將按金存放在受政府監管的按金保障計劃 (TDP)，並向您提供證明。</li>
+                                <li><strong>入住檢查 (Inventory Check-in)：</strong> 業主會安排第三方公司進行詳細的物業狀況檢查。您必須仔細核對報告並簽名，以免退租時產生糾紛。</li>
+                                <li><strong>合租 (House Share)：</strong> 單人人士可考慮在 SpareRoom 尋找合租，手續較簡單且成本較低。</li>
+                            </ol>
+
+                            <div class="phase-subtitle">買屋的方法和詳細程序 (Buying Process)</div>
+                            <ol class="phase-list" style="list-style-type: decimal;">
+                                <li><strong>獲取原則上同意 (AIP)：</strong> 向銀行或按揭經紀 (Mortgage Broker) 獲取 Agreement in Principle，了解您的貸款額度。</li>
+                                <li><strong>尋找物業 (Property Search)：</strong> 在 Rightmove/Zoopla 尋找物業並進行睇樓。</li>
+                                <li><strong>出價 (Make an Offer)：</strong> 透過經紀向賣方出價。</li>
+                                <li><strong>聘請律師 (Solicitor)：</strong> 聘請一名物業轉易律師 (Conveyancer/Solicitor) 處理法律文件。</li>
+                                <li><strong>正式申請按揭 (Mortgage Application)：</strong> 向銀行提交正式申請。</li>
+                                <li><strong>物業測量 (Survey)：</strong> 銀行會進行基本估價 (Valuation)，建議您自行聘請測量師進行更詳細的 HomeBuyer Report 或 Building Survey。</li>
+                                <li><strong>律師查冊 (Searches)：</strong> 您的律師會進行地方查冊 (Local Authority Searches) 等。</li>
+                                <li><strong>交換合同 (Exchange of Contracts)：</strong> 雙方簽署合同並支付 10% 訂金。此步具法律約束力，不可反悔。</li>
+                                <li><strong>完成交易 (Completion)：</strong> 您支付餘款和印花稅 (Stamp Duty)，律師完成交易，您取得鑰匙。</li>
+                                <div class="important-note">
+                                    <strong>印花稅注意：</strong> BNO 簽證持有者在住滿特定時間前（通常2年）會被視為海外買家，購買物業時需支付額外的 2% 非居民印花稅附加費。
+                                </div>
+                            </ol>
+
+                            <div class="phase-subtitle">購買汽車 (Buying a Car)</div>
+                            <div class="phase-paragraph">
+                                英國大部份地區（倫敦除外）都依賴汽車代步。
+                            </div>
+                            <div class="phase-subtitle"><h4>買車手續和注意事項 (Car Buying Process & Tips)</h4></div>
+                            <ol class="phase-list" style="list-style-type: decimal;">
+                                <li><strong>設定預算 (Set Budget)：</strong> 考慮車價、保險（新移民極高）、路稅 (VED) 和油費。</li>
+                                <li><strong>研究 (Research)：</strong> 使用 Auto Trader, Parkers, PistonHeads 網站研究車款和價格。</li>
+                                <li><strong>獲取保險報價 (Get Insurance Quotes)：</strong> 在 Compare the Market, GoCompare 等網站上，
+                                    <span class="important-note">在買車前</span>
+                                    先試算保險費用。
+                                </li>
+                                <li><strong>睇車及試駕 (Viewing & Test Drive)：</strong>
+                                    <div class="phase-list-zh">（二手車）檢查輪胎、引擎、車身，並確保試駕。</div>
+                                </li>
+                                <li><strong>HPI 檢查 (HPI Check)：</strong>
+                                    <span class="important-note">（二手車必須）</span>
+                                    付費進行 HPI 檢查，核實汽車有否未清還的貸款 (Outstanding Finance)、是否為失竊車輛 (Stolen) 或報廢車 (Written-off)。
+                                </li>
+                                <li><strong>檢查文件 (Check Documents)：</strong>
+                                    <div class="phase-list-zh">（二手車）檢查 V5C (Logbook) 登記文件、MOT（年檢）證書及維修保養紀錄 (Service History)。</div>
+                                </li>
+                                <li><strong>付款 (Payment)：</strong> 通常使用銀行轉帳 (Bank Transfer)。</li>
+                                <li><strong>取得文件 (Get Paperwork)：</strong> 賣方會將 V5C 上的 "New Keeper" 綠色單據 (Green Slip) 給您，並將其餘部分寄往 DVLA。</li>
+                                <li><strong>買保險及路稅 (Tax and Insure)：</strong> 在開車前，您**必須**立即上網購買路稅 (VED) 和保險 (Insurance)。沒有保險駕駛是嚴重罪行。</li>
+                            </ol>
+                            
+                            <div class="phase-subtitle"><h4>受歡迎及失竊車輛 (Popular & Stolen Cars)</h4></div>
+                            <table>
+                                <tr>
+                                    <th>類別 (Category)</th>
+                                    <th>品牌及型號 (Make & Model)</th>
+                                </tr>
+                                <tr>
+                                    <td>最受歡迎 (一手及二手)<br>(Most Popular)</td>
+                                    <td>Ford Fiesta (已停產但二手極多), Volkswagen Golf, Vauxhall Corsa, Nissan Qashqai, Toyota Yaris, Honda Jazz (可靠性高)</td>
+                                </tr>
+                                <tr>
+                                    <td>最常被盜（尤其無匙啟動）<br>(Most Stolen)</td>
+                                    <td>Ford Fiesta, Range Rover, Volkswagen Golf, Ford Focus, Mercedes-Benz C-Class, BMW 3 Series</td>
+                                </tr>
+                                <tr>
+                                    <td>大致價格（二手車）<br>(Approx. Used Price)</td>
+                                    <td><strong>5年車齡 (5-year-old)：</strong> 小型車 (e.g., Fiesta) 約 £8,000 - £12,000。家庭車 (e.g., Qashqai) 約 £13,000 - £18,000。</td>
+                                </tr>
+                                <tr>
+                                    <td>大致價格（新車）<br>(Approx. New Price)</td>
+                                    <td>小型車 (e.g., VW Polo) 約 £20,000 起。</td>
+                                </tr>
+                            </table>
+                            
+                            <div class="phase-subtitle">購買家品、傢俬和床褥 (Household Goods)</div>
+                            <table>
+                                <tr>
+                                    <th>類別 (Category)</th>
+                                    <th>物品清單 (Item List)</th>
+                                    <th>商店建議 (Store Recommendations)</th>
+                                </tr>
+                                <tr>
+                                    <td>基本家品 (Essentials)</td>
+                                    <td>水煲 (Kettle), 多士爐 (Toaster), 餐具, 鍋具, 砧板, 垃圾桶, 床上用品 (Duvet, Pillows), 毛巾 (Towels)</td>
+                                    <td><strong>平價：</strong> B&M, Home Bargains, Wilko (online), Poundland<br><strong>中價：</strong> IKEA, Dunelm, Argos, Amazon.co.uk</td>
+                                </tr>
+                                <tr>
+                                    <td>傢俬 (Furniture)</td>
+                                    <td>床架 (Bed Frame), 衣櫃 (Wardrobe), 沙發 (Sofa), 餐桌椅 (Dining Set), 書桌 (Desk)</td>
+                                    <td><strong>平價：</strong> IKEA, Argos, Wayfair (online)<br><strong>中價：</strong> Dunelm, John Lewis, Next Home<br><strong>二手：</strong> British Heart Foundation, Facebook Marketplace, Gumtree</td>
+                                </tr>
+                                <tr>
+                                    <td>床褥 (Mattress)</td>
+                                    <td>(單人/雙人床褥)</td>
+                                    <td><strong>專門店：</strong> Dreams, Bensons for Beds<br><strong>盒裝 (Online)：</strong> Emma, Simba, Otty<br><strong>中價：</strong> IKEA, John Lewis</td>
+                                </tr>
+                            </table>
+
+                            <div class="phase-subtitle">英國水電煤供應商 (Utilities)</div>
+                            <table>
+                                <tr>
+                                    <th>服務 (Service)</th>
+                                    <th>供應商 (Providers)</th>
+                                    <th>收費種類 (Tariff Types)</th>
+                                </tr>
+                                <tr>
+                                    <td>水 (Water)</td>
+                                    <td>地區性壟斷 (e.g., Thames Water, Severn Trent)。您無從選擇。</td>
+                                    <td><strong>Metered (水錶)：</strong> 按用量收費。<br><strong>Rateable Value (固定)：</strong> 按房屋價值估算（舊式）。</td>
+                                </tr>
+                                <tr>
+                                    <td>電力 (Electricity) & 煤氣 (Gas)</td>
+                                    <td>自由市場 (e.g., British Gas, E.ON, Octopus, OVO, EDF)</td>
+                                    <td><strong>Fixed Tariff (固定)：</strong> 一定時間內（如1-2年）電費率不變。<br><strong>Variable Tariff (浮動)：</strong> 隨市場價格（受 Ofgem Price Cap 限制）變動。</td>
+                                </tr>
+                            </table>
+                            <div class="tip-note">
+                                <strong>提示：</strong> 使用 Uswitch 或 Compare the Market 等比價網站，尋找最便宜的電煤供應商。
+                            </div>
+
+                            <div class="phase-subtitle">英國超市品牌分別 (Supermarkets)</div>
+                            <ul class="phase-list">
+                                <li><strong>高級 (High-end)：</strong> Waitrose, Marks & Spencer (M&S)。品質極佳，價格昂貴，M&S 的即食食品 (Ready Meals) 特別出色。</li>
+                                <li><strong>中高 (Mid-range)：</strong> Sainsbury's。品質較好，價格稍貴。</li>
+                                <li><strong>中價 (Mid-range)：</strong> Tesco。全英最大，分店最多 (Express, Metro, Extra)，價格和品質平衡。</li>
+                                <li><strong>中低 (Value)：</strong> Asda (被 Walmart 收購，價格便宜，份量大), Morrisons (有較多新鮮肉類和海鮮櫃檯)。</li>
+                                <li><strong>平價 (Discounters)：</strong> Aldi, Lidl。德國超市，價格最低，品質中上，但需自備購物袋及 £1 硬幣作手推車。</li>
+                                <li><strong>網上 (Online)：</strong> Ocado (主要售賣 M&S 產品)。</li>
+                                <li><strong>亞洲 (Asian)：</strong> 泗和 (SeeWoo), 永業 (Wing Yip)，及各大城市均有本地華人超市。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">簡易煮食建議 (Easy First Meals)</div>
+                            <ul class="phase-list">
+                                <li><strong>意粉 (Pasta)：</strong> 購買樽裝意粉醬 (Pasta Sauce) 和乾意粉 (Dry Pasta)，只需 15 分鐘即可完成。</li>
+                                <li><strong>焗薯 (Jacket Potato)：</strong> 英國的焗薯專用薯仔非常大。用微波爐「叮」8-10分鐘，再放入焗爐 15 分鐘（或只用微波爐），配上芝士 (Cheese)、吞拿魚 (Tuna) 或茄汁豆 (Baked Beans) 即可。</li>
+                                <li><strong>超市即食餐 (Ready Meals)：</strong> M&S, Sainsbury's 和 Tesco 均有高質素的微波爐即食餐。</li>
+                                <li><strong>急凍薄餅 (Frozen Pizza)：</strong> 放入焗爐 15-20 分鐘。</li>
+                                <li><strong>炒飯/炒麵 (Stir-fry)：</strong> 可在超市購買「Stir-fry kit」，包含已切好的蔬菜和醬料，非常方便。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">就業與求職 (Job Hunting)</div>
+                            <div class="phase-paragraph">
+                                BNO 簽證持有者有權在英國工作。
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>求職網站：</strong> LinkedIn, Indeed, Reed, CV-Library, Totaljobs。</li>
+                                <li><strong>修改履歷 (CV)：</strong> 英國 CV 格式與香港不同，通常為2頁 A4 紙，不附照片，強調技能和成就 (Achievements) 而非僅僅是職責 (Responsibilities)。</li>
+                                <li><strong>專業資格：</strong> 某些專業（如會計、工程、法律）可能需要考取英國本地牌照或進行資格認證 (UK ENIC)。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">長遠規劃 (5+1 永居與入籍) (Path to Settlement)</div>
+                            <div class="phase-paragraph">
+                                這是 BNO 簽證通往英國公民身份的標準路徑：
+                            </div>
+                            <ol class="phase-list" style="list-style-type: decimal;">
+                                <li><strong>第 1-5 年 (BNO Visa)：</strong> 持有 BNO 簽證在英國居住5年。</li>
+                                <li><strong>居住要求 (ILR)：</strong> 申請 ILR 前，必須滿足居住要求，即在任何12個月內離境不超過180天。</li>
+                                <li><strong>申請永居 (ILR)：</strong> 住滿5年後，通過「Life in the UK Test」（英國生活考試）和 B1 級別英語測試，可申請無限期居留 (ILR)。</li>
+                                <li><strong>第 6 年 (ILR)：</strong> 持有 ILR 身份再居住12個月。</li>
+                                <li><strong>申請入籍 (Citizenship)：</strong> 滿足居住要求（如過去5年離境不超過450天，最後一年不超過90天）後，可申請歸化為英國公民。</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- ================================= 
+                         2. 兩人夫妻家庭 (Couple)
+                        ================================== -->
+                    <div class="content-section" id="content-couple">
+                        
+                        <div class="timeline-container">
+                            <div class="timeline">
+                                <div class="timeline-phase active" data-phase="preparation">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">移民前準備<br>Pre-immigration</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="arrival">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">抵達英國時<br>Upon Arrival</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="settlement">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">定居英國後<br>After Settlement</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 移民前準備 (Preparation) -->
+                        <div class="phase-content active" data-phase="preparation">
+                            <div class="phase-title">兩人夫妻家庭 - 移民前準備</div>
+
+                            <div class="tip-note">
+                                <strong>夫妻家庭提示 (Couple's Tip)：</strong> 兩人的財務和文件準備需要更加仔細。確保所有聯名資產（如銀行戶口、物業）的證明文件清晰。您們需要為兩人的簽證申請和 IHS 支付雙倍的預算，亦要考慮兩人同時求職或一人先工作、一人先安頓的分工策略。
+                            </div>
+                            
+                            <div class="phase-subtitle">BNO 簽證申請 (BNO Visa Application)</div>
+                            <div class="phase-paragraph">
+                                簽證路徑與單人相同。一位是主申請人 (Main Applicant)，另一位是受養人 (Dependant)。
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>主申請人：</strong> 必須持有 BNO 身份。</li>
+                                <li><strong>受養人 (配偶/伴侶)：</strong> 包括配偶、民事伴侶、或已同居至少2年的未婚伴侶。需要提供關係證明，如結婚證書、聯名銀行戶口、聯名租約或帳單等。</li>
+                                <li><strong>申請方式：</strong> 兩人可以分開申請，但受養人必須在主申請人之後申請。</li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">相關費用 (Application Fees - 2 Adults)</div>
+                            <table>
+                                <tr>
+                                    <th>項目 (Item)</th>
+                                    <th>費用 (2位成人) (Cost for 2 Adults)</th>
+                                </tr>
+                                <tr>
+                                    <td>BNO簽證 (5年)</td>
+                                    <td>£250 x 2 = £500</td>
+                                </tr>
+                                <tr>
+                                    <td>移民健康附加費 (IHS) (5年)</td>
+                                    <td>(£1,035 x 5) x 2 = £10,350</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>總簽證費用 (Total)</strong></td>
+                                    <td><strong>£10,850</strong></td>
+                                </tr>
+                            </table>
+
+                            <div class="phase-subtitle">重要文件準備 (Document Preparation)</div>
+                            <ul class="phase-list">
+                                <li>(所有單人人士的文件 x 2)</li>
+                                <li><strong>關係證明 (Relationship Proof)：</strong> 結婚證書（如在香港註冊，需核證副本及英文翻譯）、顯示兩人關係持續的證明（如聯名戶口月結單、租約、水電煤單等）。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">財務與稅務 (Finance and Tax)</div>
+                            <ul class="phase-list">
+                                <li>(與單人人士相同，但需處理兩人的 MPF 及清稅)</li>
+                                <li><strong>聯名戶口 (Joint Accounts)：</strong> 確保香港的聯名戶口在離港後仍可運作，或已妥善處理。</li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">搬運家當安排 (Shipping)</div>
+                            <div class="phase-paragraph">
+                                (與單人人士相同，但兩人家庭可能更傾向於使用 20呎貨櫃 的部分空間或合箱。)
+                            </div>
+
+                            <div class="phase-subtitle">準備物品、行李及電器 (Packing & Appliances)</div>
+                            <div class="phase-paragraph">
+                                (基本原則與「單人人士」相同，但物品數量加倍。)
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>手提行李 (Hand Luggage)：</strong> 兩人必須各自攜帶自己的重要文件（護照、簽證信、TB 報告等）。</li>
+                                <li><strong>寄艙行李 (Checked-in Luggage)：</strong> 攜帶足夠兩人首兩週使用的衣物和必需品。</li>
+                                <li><strong>船運 (Sea-Shipping)：</strong> 兩人家庭的物品（如衣物、廚具、書籍）通常較多，可考慮船運。
+                                <li><strong>建議攜帶的電器 (Bring These)：</strong>
+                                    - **電飯煲 (Rice Cooker)：** 強烈建議。
+                                    - **中式廚具 (Chinese Kitchenware)：** 如中式鑊、菜刀、蒸架。
+                                </li>
+                                <li><strong>建議不要攜帶的物品 (Don't Bring)：** (與單人人士相同)。</li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">寵物移民 (Pet Relocation)</div>
+                            <div class="phase-paragraph">
+                                (與單人人士相同)
+                            </div>
+
+                            <div class="phase-subtitle">詳細預算規劃 (Detailed Budget - Couple)</div>
+                            <table>
+                                <tr>
+                                    <th>項目 (Item)</th>
+                                    <th>2人預算 (倫敦以外) (Outside London)</th>
+                                    <th>2人預算 (倫敦) (London)</th>
+                                </tr>
+                                <tr>
+                                    <td>簽證及IHS (5年)</td>
+                                    <td>~ £10,850</td>
+                                    <td>~ £10,850</td>
+                                </tr>
+                                <tr>
+                                    <td>機票 (單程)</td>
+                                    <td>~ £1,200</td>
+                                    <td>~ £1,200</td>
+                                </tr>
+                                <tr>
+                                    <td>初期住宿 (1個月 Airbnb)</td>
+                                    <td>~ £1,400</td>
+                                    <td>~ £2,500</td>
+                                </tr>
+                                <tr>
+                                    <td>租屋按金 (5週) 及首月租金 (1-2房)</td>
+                                    <td>~ £2,000</td>
+                                    <td>~ £3,500</td>
+                                </tr>
+                                <tr>
+                                    <td>生活開支 (首3個月)</td>
+                                    <td>~ £3,000</td>
+                                    <td>~ £4,500</td>
+                                </tr>
+                                <tr>
+                                    <td>應急資金 (Emergency Fund)</td>
+                                    <td>~ £4,000</td>
+                                    <td>~ £5,000</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>總計 (建議) (Total)</strong></td>
+                                    <td><strong>~ £22,450</strong></td>
+                                    <td><strong>~ £27,550</strong></td>
+                                </tr>
+                            </table>
+                            
+                            <div class="phase-subtitle">各事項的時間安排 (Timeline)</div>
+                            <div class="phase-paragraph">(與單人人士相同)</div>
+                        </div>
+                        
+                        <!-- 抵達英國時 (Arrival) -->
+                        <div class="phase-content" data-phase="arrival">
+                            <div class="phase-title">兩人夫妻家庭 - 抵達英國時</div>
+                            <div class="tip-note">
+                                <strong>夫妻家庭提示 (Couple's Tip)：</strong> 抵英後可盡快開設「聯名銀行戶口」(Joint Account)，這對將來申請租約或按揭時，證明兩人關係和共同收入非常有幫助。
+                            </div>
+                            <div class="phase-paragraph">(本節內容與「單人人士」基本相同，所有步驟（BRP/eVisa, 銀行, NI, GP, SIM卡, 駕駛, 交通）均適用於兩位成年人。請參考「單人人士 - 抵達英國時」的詳細列表。)</div>
+                        </div>
+                        
+                        <!-- 定居英國後 (Settlement) -->
+                        <div class="phase-content" data-phase="settlement">
+                            <div class="phase-title">兩人夫妻家庭 - 定居英國後</div>
+                            <div class="phase-paragraph">
+                                (本節內容與「單人人士」的租屋、買屋、家品、超市、煮食、就業、長遠規劃及**購買汽車**等步驟基本相同。請參考「單人人士 - 定居英國後」的詳細列表。)
+                            </div>
+                            <div class="tip-note">
+                                <strong>夫妻家庭提示 (Couple's Tip)：</strong>
+                                <ul class="phase-list">
+                                    <li><strong>租屋 (Renting)：</strong> 申請租約時，兩人會同時接受信用審查 (Credit Check)，並且兩人都需簽署租約。</li>
+                                    <li><strong>Council Tax (市政稅)：</strong> 兩人同住，不能享受單人25%的折扣。</li>
+                                    <li><strong>「太空人」注意 (Separation)：</strong> 如果其中一方（例如主申請人）在英國，另一方（受養人）留在香港，請注意：<strong>每一位</strong>希望申請 ILR 的成年人，都<strong>必須獨立</strong>滿足5年的居住要求（即每年離境不超過180天）。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ================================= 
+                         3. 有幼兒的家庭 (Family with Young Children)
+                        ================================== -->
+                    <div class="content-section" id="content-children">
+                        
+                        <div class="timeline-container">
+                            <div class="timeline">
+                                <div class="timeline-phase active" data-phase="preparation">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">移民前準備<br>Pre-immigration</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="arrival">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">抵達英國時<br>Upon Arrival</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="settlement">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">定居英國後<br>After Settlement</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 移民前準備 (Preparation) -->
+                        <div class="phase-content active" data-phase="preparation">
+                            <div class="phase-title">有幼兒的家庭 - 移民前準備</div>
+
+                            <div class="tip-note-purple">
+                                <strong>幼兒家庭提示 (Family Tip)：</strong> 您的首要任務是「選區」和「學校」。在香港時就應開始研究心儀地區的校網 (School Catchment) 和 Ofsted (教育標準局) 評級。
+                            </div>
+
+                            <div class="phase-subtitle">BNO 簽證申請 (BNO Visa Application)</div>
+                            <div class="phase-paragraph">
+                                (與夫妻家庭相同，但需加上子女作為受養人。)
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>受養人 (子女) (Dependant Children)：</strong> 18歲以下子女。需要提供子女的出生證明，以及（如果適用）證明父母對其管養權的文件。</li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">相關費用 (Application Fees - 2 Adults, 1 Child)</div>
+                            <table>
+                                <tr>
+                                    <th>項目 (Item)</th>
+                                    <th>費用 (2位成人, 1位18歲以下子女)</th>
+                                </tr>
+                                <tr>
+                                    <td>BNO簽證 (5年)</td>
+                                    <td>£250 x 3 = £750</td>
+                                </tr>
+                                <tr>
+                                    <td>IHS (5年) - 成人</td>
+                                    <td>(£1,035 x 5) x 2 = £10,350</td>
+                                </tr>
+                                <tr>
+                                    <td>IHS (5年) - 子女 (Under 18)</td>
+                                    <td>(£776 x 5) x 1 = £3,880</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>總簽證費用 (Total)</strong></td>
+                                    <td><strong>£14,980</strong></td>
+                                </tr>
+                            </table>
+
+                            <div class="phase-subtitle">重要文件準備 (Document Preparation)</div>
+                            <ul class="phase-list">
+                                <li>(所有夫妻家庭的文件)</li>
+                                <li><strong>子女文件 (Children's Docs)：</strong> 子女的出世紙（需核證副本及英文翻譯）、學校成績單、疫苗接種記錄（針卡, Vaccination Record）。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">研究學校 (School Research)</div>
+                            <div class="phase-paragraph">
+                                這是幼兒家庭在出發前最重要的功課：
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>Ofsted 評級：</strong> 英國教育標準局會為學校評級 (Outstanding, Good, Requires Improvement, Inadequate)，是家長的重要參考。</li>
+                                <li><strong>校網 (Catchment Area)：</strong> 英國公立學校學位主要根據住址與學校的距離分配。您必須住在該校的服務範圍內才有機會入讀。</li>
+                                <li><strong>申請方式：</strong> 在英國，您需要透過居住地的**地方議會 (Local Council)** 網站統一申請學位。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">準備物品、行李及電器 (Packing & Appliances)</div>
+                            <div class="phase-paragraph">
+                                (基本原則與「夫妻家庭」相同，但需額外為子女準備。)
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>手提行李 (Hand Luggage)：</strong>
+                                    <div class="phase-list-zh">（必須隨身攜帶）</div>
+                                    - 所有家長的護照、簽證信、TB 報告、結婚證書。
+                                    - **所有子女**的護照、簽證信、出世紙。
+                                    - 少量藥物（如退燒藥水）、奶粉（需符合機場規定）、子女安撫玩具。
+                                </li>
+                                <li><strong>寄艙行李 (Checked-in Luggage)：</strong>
+                                    <div class="phase-list-zh">（首一至兩週的必需品）</div>
+                                    - 子女的衣物、熟悉的睡袋、少量常用藥物。
+                                    - 少量香港購買的教科書或中文圖書。
+                                    - **電飯煲 (Rice Cooker)** 及 **中式廚具**。
+                                </li>
+                                <li><strong>船運 (Sea-Shipping)：</strong>
+                                    <div class="phase-list-zh">（非緊急但重要物品）</div>
+                                    - 子女的玩具、圖書（尤其是中文書）、單車。
+                                    - 家庭的冬季衣物、棉被。
+                                    - 傢俬（如兒童床、書桌）。
+                                </li>
+                                <li><strong>建議不要攜帶的物品 (Don't Bring)：** (與單人人士相同)。</li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">詳細預算規劃 (Detailed Budget - 2 Adults, 1 Child)</div>
+                            <div class="phase-paragraph">
+                                (請參考「兩人夫妻家庭」的預算，並在此基礎上增加子女的簽證/IHS費用 (£4,630)，以及更大的租屋預算 (2-3房)。總預算建議至少 £30,000 - £40,000。)
+                            </div>
+
+                            <div class="phase-subtitle">香港退學安排 (School Withdrawal in HK)</div>
+                            <div class="phase-paragraph">
+                                必須處理子女的退學手續：
+                            </div>
+                            <ul class="phase-list">
+                                <li>提前通知學校，索取「退學信」(Leaving Certificate)。</li>
+                                <li>索取最近2-3年的成績單 (School Reports / Transcripts)，並要求英文版本。</li>
+                                <li>索取「學生推薦信」(Student Reference Letter)，對在英國申請學校有幫助。</li>
+                                <li>帶同疫苗接種記錄（針卡, Vaccination Record）。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">各事項的時間安排 (Timeline)</div>
+                            <div class="phase-paragraph">(與單人人士相同，但需額外花時間研究校網)</div>
+                        </div>
+                        
+                        <!-- 抵達英國時 (Arrival) -->
+                        <div class="phase-content" data-phase="arrival">
+                            <div class="phase-title">有幼兒的家庭 - 抵達英國時</div>
+                            <div class="phase-paragraph">(本節內容與「單人人士」基本相同，所有步驟（BRP/eVisa, 銀行, NI, GP, SIM卡, 駕駛, 交通）均適用於兩位成年人。請參考「單人人士 - 抵達英國時」的詳細列表。)</div>
+                            
+                            <div class="tip-note-purple">
+                                <strong>幼兒家庭提示 (Family Tip)：</strong>
+                                <ul class="phase-list">
+                                    <li><strong>註冊 GP (GP Registration)：</strong> 抵英後應盡快為**所有家庭成員**（特別是幼兒）註冊 GP，以便他們能及時獲得醫療服務和安排疫苗接種。</li>
+                                    <li><strong>申請學位 (School Application)：</strong> 一旦您有了固定的住址（租約），請立即聯繫 Local Council 申請學位。這稱為「In-Year Admission」（中途插班）。</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 定居英國後 (Settlement) -->
+                        <div class="phase-content" data-phase="settlement">
+                            <div class="phase-title">有幼兒的家庭 - 定居英國後</div>
+                            <div class="phase-paragraph">
+                                (本節內容與「單人人士」的租屋、買屋、家品、超市、煮食、就業、長遠規劃及**購買汽車**等步驟基本相同。請參考「單人人士 - 定居英國後」的詳細列表。)
+                            </div>
+
+                            <div class="phase-subtitle">登記學校的詳細程序 (School Registration Process)</div>
+                            <div class="phase-paragraph">
+                                BNO 簽證持有者的子女有權免費入讀英國公立學校 (State Schools)。
+                            </div>
+                            <ol class="phase-list" style="list-style-type: decimal;">
+                                <li><strong>鎖定住址：</strong> 學校申請的唯一依據是您的**住址**。您必須先有租約 (Tenancy Agreement) 或 Council Tax 帳單。</li>
+                                <li><strong>聯絡議會 (Local Council)：</strong> 登入您居住地區的 Local Council 網站（例如 "Manchester City Council school admissions"）。</li>
+                                <li><strong>中途插班 (In-Year Admission)：</strong> 由於您不是在正常學年開始時入學，您需要填寫「In-Year Admission」表格。</li>
+                                <li><strong>填寫志願：</strong> 您通常需要填寫 3-5 個學校志願 (Preferences)。</li>
+                                <li><strong>提交證明：</strong> 提交您的地址證明、子女的護照和簽證。</li>
+                                <li><strong>等待派位 (Offer)：</strong> Council 會在 10-15 個工作天內通知您結果，並派發學位。如果心儀的學校滿額，他們會為您安排名單上最近而有空缺的學校。</li>
+                            </ol>
+                            <ul class="phase-list">
+                                <li><strong>私立學校 (Private Schools)：</strong> 您也可以選擇付費的私立學校，需自行聯絡學校申請。</li>
+                                <li><strong>文法學校 (Grammar Schools)：</strong> 在某些地區，有需要考試（11+ Exam）才能入讀的公立文法學校。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">學前托兒服務 (Pre-school Childcare)</div>
+                            <div class="phase-paragraph">
+                                英國的托兒服務非常昂貴，但有政府資助：
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>托兒所 (Nursery) / 保姆 (Childminder)：</strong> 0-2 歲的費用最高。</li>
+                                <li><strong>15 免費時數 (15 Free Hours)：</strong> 所有 3-4 歲的幼兒均可享有每週 15 小時的免費托兒（學期期間）。</li>
+                                <li><strong>30 免費時數 (30 Free Hours)：</strong> 如果父母雙方（或單親家庭的家長）均有工作（並滿足最低收入要求），3-4 歲幼兒可享有每週 30 小時的免費托兒。BNO 簽證持有者**只要有工作**，通常都符合資格。</li>
+                            </ul>
+
+                            <div class="important-note">
+                                <strong>福利注意 (Public Funds)：</strong> BNO 簽證的條件是「No Recourse to Public Funds (NRPF)」，即不能申請大部分社會福利，例如「Universal Credit」（綜合福利金）。
+                                <br><br>
+                                <strong>但請注意：</strong> 「Child Benefit」（兒童福利金）在某些情況下**可能**可以申請，但規則複雜。在未獲得 ILR 之前，**強烈建議不要申請**任何 Public Funds，以免影響將來的簽證續簽或永居申請。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ================================= 
+                         4. 單親家庭 (Single Parent Family)
+                        ================================== -->
+                    <div class="content-section" id="content-singleparent">
+                        
+                        <div class="timeline-container">
+                            <div class="timeline">
+                                <div class="timeline-phase active" data-phase="preparation">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">移民前準備<br>Pre-immigration</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="arrival">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">抵達英國時<br>Upon Arrival</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="settlement">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">定居英國後<br>After Settlement</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 移民前準備 (Preparation) -->
+                        <div class="phase-content active" data-phase="preparation">
+                            <div class="phase-title">單親家庭 - 移民前準備</div>
+                            <div class="tip-note-orange">
+                                <strong>單親家庭提示 (Single Parent Tip)：</strong> 您的準備工作將更具挑戰，但回報也大。財務規劃和法律文件是您的重中之重。
+                            </div>
+
+                            <div class="phase-subtitle">BNO 簽證申請 (BNO Visa Application)</div>
+                            <ul class="phase-list">
+                                <li>(與幼兒家庭類似)</li>
+                                <li><strong>管養權文件 (Custody Documents)：</strong> 這是最關鍵的一步。您必須提供法律文件（如法庭判令），證明您擁有子女的**單獨管養權 (Sole Custody)**，或證明另一方家長同意子女永久移居英國。</li>
+                                <li><strong>費用：</strong> 預算需包含 1位成人 和 相關子女的簽證及 IHS 費用。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">重要文件準備 (Document Preparation)</div>
+                            <ul class="phase-list">
+                                <li>(所有單人人士及子女的文件)</li>
+                                <li><strong>管養權法律文件 (英文) (Custody Papers)：</strong> 必須準備妥當，這是簽證申請的關鍵。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">財務與研究 (Finance and Research)</div>
+                            <ul class="phase-list">
+                                <li><strong>財務規劃 (Budgeting)：</strong> 由於只有單一收入來源，您的財務預算需要更保守，應急資金需要更充裕。</li>
+                                <li><strong>學校與托兒 (Childcare)：</strong> 提前研究英國的托兒服務 (Nursery/Childminder) 費用，這在英國非常昂貴。同時研究公立學校的 After-School Club。</li>
+                                <li><strong>支援網絡 (Support Network)：</strong> 提前在網上尋找當地的單親家庭支援團體或香港人社區。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">準備物品、行李及電器 (Packing & Appliances)</div>
+                            <div class="phase-paragraph">
+                                (基本原則與「有幼兒的家庭」相同，但需考慮到您可能只有一人處理所有行李。)
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>精簡行李 (Streamline)：</strong> 盡量精簡寄艙行李，只帶最重要的必需品。</li>
+                                <li><strong>手提行李 (Hand Luggage)：</strong> 所有家庭成員的法律文件（護照、簽證、出世紙、**管養權文件**）必須隨身攜帶，萬無一失。</li>
+                                <li><strong>船運 (Sea-Shipping)：</strong> 船運對您來說非常重要，可將非緊急物品（如冬季衣物、中文書、玩具）寄出，減輕您抵達時的負擔。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">香港退學安排 (School Withdrawal in HK)</div>
+                            <div class="phase-paragraph">
+                                必須處理子女的退學手續：
+                            </div>
+                            <ul class="phase-list">
+                                <li>提前通知學校，索取「退學信」(Leaving Certificate)。</li>
+                                <li>索取最近2-3年的成績單 (School Reports / Transcripts)，並要求英文版本。</li>
+                                <li>索取「學生推薦信」(Student Reference Letter)，對在英國申請學校有幫助。</li>
+                                <li>帶同疫苗接種記錄（針卡, Vaccination Record）。</li>
+                            </ul>
+                            
+                            <div class="phase-subtitle">各項準備</div>
+                            <div class="phase-paragraph">
+                                (關於海運、預算、清稅、時間安排，請參考「單人人士」部分的詳細資料。)
+                            </div>
+                        </div>
+                        
+                        <!-- 抵達英國時 (Arrival) -->
+                        <div class="phase-content" data-phase="arrival">
+                            <div class="phase-title">單親家庭 - 抵達英國時</div>
+                            <div class="phase-paragraph">(本節內容與「單人人士」基本相同。請參考「單人人士 - 抵達英國時」的詳細列表。)</div>
+                            <div class="tip-note-orange">
+                                <strong>單親家庭提示 (Single Parent Tip)：</strong> 抵英後，您的壓力會很大。請優先完成您和子女的 GP 註冊和學校申請。不要猶豫向當地的香港人社區或教會尋求幫助。
+                            </div>
+                        </div>
+                        
+                        <!-- 定居英國後 (Settlement) -->
+                        <div class="phase-content" data-phase="settlement">
+                            <div class="phase-title">單親家庭 - 定居英國後</div>
+                            <div class="phase-paragraph">(本節內容與「單人人士」的租屋、買屋、家品、超市、煮食、就業、長遠規劃及**購買汽車**等步驟基本相同。)</div>
+
+                            <div class="phase-subtitle">登記學校的詳細程序 (School Registration Process)</div>
+                            <div class="phase-paragraph">
+                                BNO 簽證持有者的子女有權免費入讀英國公立學校 (State Schools)。
+                            </div>
+                            <ol class="phase-list" style="list-style-type: decimal;">
+                                <li><strong>鎖定住址：</strong> 學校申請的唯一依據是您的**住址**。您必須先有租約 (Tenancy Agreement) 或 Council Tax 帳單。</li>
+                                <li><strong>聯絡議會 (Local Council)：</strong> 登入您居住地區的 Local Council 網站（例如 "Manchester City Council school admissions"）。</li>
+                                <li><strong>中途插班 (In-Year Admission)：</strong> 由於您不是在正常學年開始時入學，您需要填寫「In-Year Admission」表格。</li>
+                                <li><strong>填寫志願：</strong> 您通常需要填寫 3-5 個學校志願 (Preferences)。</li>
+                                <li><strong>提交證明：</strong> 提交您的地址證明、子女的護照和簽證。</li>
+                                <li><strong>等待派位 (Offer)：</strong> Council 會在 10-15 個工作天內通知您結果，並派發學位。如果心儀的學校滿額，他們會為您安排名單上最近而有空缺的學校。</li>
+                            </ol>
+
+                            <div class="phase-subtitle">學前托兒服務 (Pre-school Childcare)</div>
+                            <div class="phase-paragraph">(與「有幼兒的家庭」相同。3-4 歲幼兒可享有 15 或 30 小時的免費托兒。)</div>
+
+                            <div class="tip-note-orange">
+                                <strong>單親家庭提示 (Single Parent Tip)：</strong>
+                                <ul class="phase-list">
+                                    <li><strong>托兒服務 (Childcare)：</strong> 英國 3-4 歲的幼兒通常可享每週 15 或 30 小時的免費托兒時數，請向您的 Local Council 查詢。</li>
+                                    <li><strong>建立支援 (Build Support)：</strong> 積極參與學校活動 (PTA) 和社區中心，為自己和孩子建立新的社交支援網絡。</li>
+                                    <li><strong>Council Tax (市政稅)：</strong> 作為單一成年人與未成年子女同住，您**有權**申請 25% 的單人居住折扣 (Single Person Discount)。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ================================= 
+                         5. 有年老老人的家庭 (Family with Elderly)
+                        ================================== -->
+                    <div class="content-section" id="content-elderly">
+                        
+                        <div class="timeline-container">
+                            <div class="timeline">
+                                <div class="timeline-phase active" data-phase="preparation">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">移民前準備<br>Pre-immigration</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="arrival">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">抵達英國時<br>Upon Arrival</div>
+                                </div>
+                                <div class="timeline-phase" data-phase="settlement">
+                                    <div class="phase-dot"></div>
+                                    <div class="phase-label">定居英國後<br>After Settlement</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 移民前準備 (Preparation) -->
+                        <div class="phase-content active" data-phase="preparation">
+                            <div class="phase-title">有年老老人的家庭 - 移民前準備</div>
+                            <div class="tip-note-red">
+                                <strong>長者家庭提示 (Elderly Dependant Tip)：</strong> 您的主要考量是醫療。長者的 IHS 費用與成人相同，且需一次繳清。您需要為長者準備詳細的醫療記錄，並研究英國的醫療系統。
+                            </div>
+
+                            <div class="phase-subtitle">BNO 簽證申請 (BNO Visa Application)</div>
+                            <div class="phase-paragraph">
+                                根據 BNO 簽證政策，成年受養人（如父母）**只有在高度依賴 (High Dependency)** 主申請人的情況下才能申請。
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>高度依賴 (High Dependency)：</strong> 您必須證明長者因年齡、疾病或殘疾，需要您提供長期的個人護理，以完成日常事務（如煮食、個人衛生等），且在香港沒有其他近親可以照顧他們。</li>
+                                <li><strong>證明文件 (Proof)：</strong> 這通常需要香港醫生的詳細報告和家庭情況聲明，申請難度較高。</li>
+                                <li><strong>費用 (Cost)：</strong> 長者的簽證和 IHS 費用與一般成人完全相同（5年總計約 £5,425）。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">重要文件準備 (Document Preparation)</div>
+                            <ul class="phase-list">
+                                <li>(所有申請人的基本文件)</li>
+                                <li><strong>長者醫療記錄 (Medical Records)：</strong> 在香港的完整病歷、長期服藥清單（連同藥物通用名）及任何診斷報告，全部需要英文翻譯。</li>
+                                <li><strong>依賴證明 (Dependency Proof)：</strong> 如上所述的醫生報告。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">財務與研究 (Finance and Research)</div>
+                            <ul class="phase-list">
+                                <li><strong>財務規劃 (Budgeting)：</strong> 預算中必須包含所有成年人（包括長者）的全額 IHS 費用。</li>
+                                <li><strong>住宿研究 (Housing)：</strong> 需尋找無障礙 (Accessibility) 的住所，例如**平房 (Bungalow)** 或有**電梯的公寓 (Flat with Lift)**，或至少是出入方便的**地下 (Ground Floor)** 物業。</li>
+                            </ul>
+
+                            <div class="phase-subtitle">準備物品、行李及電器 (Packing & Appliances)</div>
+                            <div class="phase-paragraph">
+                                (基本原則與「夫妻家庭」相同。)
+                            </div>
+                            <ul class="phase-list">
+                                <li><strong>手提行李 (Hand Luggage)：</strong>
+                                    <div class="phase-list-zh">（必須隨身攜帶）</div>
+                                    - 所有家庭成員的法律文件（護照、簽證、出世紙等）。
+                                    - **長者的所有處方藥物**（必須有英文醫生紙）、病歷摘要。
+                                    - 任何小型醫療儀器（如血糖機）。
+                                </li>
+                                <li><strong>寄艙行李 (Checked-in Luggage)：</strong>
+                                    <div class="phase-list-zh">（首一至兩週的必需品）</div>
+                                    - 更多藥物、長者熟悉的衣物。
+                                    - 電飯煲、中式廚具。
+                                </li>
+                                <li><strong>船運 (Sea-Shipping)：</strong>
+                                    <div class="phase-list-zh">（非緊急但重要物品）</div>
+                                    - 長者熟悉的傢俬（如合適的椅子）、醫療輔助工具（如輪椅、助行器）。
+                                    - 熟悉的生活用品、冬季衣物。
+                                </li>
+                            </ul>
+
+                            <div class="phase-subtitle">各項準備</div>
+                            <div class="phase-paragraph">
+                                (關於海運、預算、清稅、時間安排，請參考「單人人士」部分的詳細資料。)
+                            </div>
+                        </div>
+                        
+                        <!-- 抵達英國時 (Arrival) -->
+                        <div class="phase-content" data-phase="arrival">
+                            <div class="phase-title">有年老老人的家庭 - 抵達英國時</div>
+                            <div class="phase-paragraph">(本節內容與「單人人士」基本相同。請參考「單人人士 - D抵達英國時」的詳細列表。)</div>
+                            <div class="tip-note-red">
+                                <strong>長者家庭提示 (Elderly Dependant Tip)：</strong> 抵英後的**第一要務**是為長者註冊 GP。
+                                <ul class="phase-list">
+                                    <li><strong>註冊 GP (GP Registration)：</strong> 註冊時，請立即提交長者的香港醫療記錄和藥物清單，以便 GP 了解情況並盡快安排「Repeat Prescription」（常規藥物處方）。</li>
+                                    <li><strong>交通 (Transport)：</strong> 可為長者申請「Senior Railcard」（火車折扣卡）或當地的「Bus Pass」（免費巴士證），各地的申請資格和時間不同。</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 定居英國後 (Settlement) -->
+                        <div class="phase-content" data-phase="settlement">
+                            <div class="phase-title">有年老老人的家庭 - 定居英國後</div>
+                            <div class="phase-paragraph">(本節內容與「單人人士」的租屋、買屋、家品、超市、煮食、就業、長遠規劃及**購買汽車**等步驟基本相同。)</div>
+                            
+                            <div class="phase-subtitle">醫療與社區 (Healthcare and Community)</div>
+                            <ul class="phase-list">
+                                <li><strong>NHS 服務 (NHS Service)：</strong> 註冊 GP 後，長者可享用 NHS 服務，包括專科轉介。</li>
+                                <li><strong>專科輪候 (Waiting Lists)：</strong> 請注意，英國的非緊急專科（如白內障、關節置換、物理治療）輪候時間可能**非常長**，動輒數月甚至一兩年。</li>
+                                <li><strong>社區中心 (Community Centre)：</strong> 許多地區有為長者服務的社區中心 (Day Centre) 或活動，如 Age UK，有助於長者建立社交網絡，減低孤獨感。</li>
+                                <li><strong>福利 (Public Funds)：</strong> 同樣受 NRPF 限制，長者不能申領 養老金補貼 (Pension Credit) 等福利。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> <!-- END of content-container -->
+            </div>
+        </main>
+        
+        <aside>
+            <div class="ad-box">
+                <h4>實用連結 (Useful Links)</h4>
+                <ul style="text-align: left; list-style: inside; margin-top: 10px;">
+                    <li><a href="https://www.gov.uk/british-national-overseas-bno-visa" target="_blank">GOV.UK - BNO 簽證</a></li>
+                    <li><a href="https://www.gov.uk/apply-national-insurance-number" target="_blank">GOV.UK - 申請 NI</a></li>
+                    <li><a href="https://www.nhs.uk/service-search/find-a-gp" target="_blank">NHS - 尋找 GP</a></li>
+                    <li><a href="https://rightmove.co.uk" target="_blank">Rightmove</a></li>
+                    <li><a href="https://zoopla.co.uk" target="_blank">Zoopla</a></li>
+                    <li><a href="https://www.autotrader.co.uk/" target="_blank">Auto Trader (買車)</a></li>
+                </ul>
+            </div>
+            
+            <div class="ad-box">
+                <h4>海運及搬運服務</h4>
+                <p>廣告商贊助</p>
+            </div>
+        </aside>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <p>&copy; 2025 The UK Hong Konger Times. All rights reserved.</p>
+                <p>本網站所有資料僅供參考，不構成任何法律或財務建議。一切資訊請以英國政府 (GOV.UK) 官方公佈為準。</p>
+            </div>
+            <div class="footer-right">
+                <p>關於我們 | 聯絡我們 | 廣告查詢</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- 處理日期顯示 ---
+            const dateElement = document.getElementById('dateNow');
+            if (dateElement) {
+                const now = new Date();
+                const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+                // 使用 'zh-Hant-HK' (香港繁體中文) 來顯示
+                dateElement.textContent = now.toLocaleDateString('zh-Hant-HK', options);
+            }
+            
+            // --- 處理頁籤切換 ---
+            
+            const familyTabs = document.querySelectorAll('.family-tab');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            // 獲取當前活躍的家庭類型
+            function getActiveFamily() {
+                const activeTab = document.querySelector('.family-tab.active');
+                return activeTab ? activeTab.getAttribute('data-family') : 'single';
+            }
+            
+            // 獲取當前活躍的時間階段
+            function getActivePhase(family) {
+                // 尋找特定 family content 內部 *當前* 活躍的 timeline-phase
+                const activePhase = document.querySelector(`#content-${family} .timeline-phase.active`);
+                return activePhase ? activePhase.getAttribute('data-phase') : 'preparation';
+            }
+
+            // 更新內容顯示
+            function updateContent(family, phase) {
+                // 1. 隱藏 *所有* .phase-content 元素 (跨家庭)
+                const allPhaseContents = document.querySelectorAll('.phase-content');
+                allPhaseContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // 2. 顯示 *目標* family 和 phase 的內容
+                const targetContent = document.querySelector(`#content-${family} .phase-content[data-phase="${phase}"]`);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            }
+            
+            // 處理家庭類型點擊
+            familyTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // 1. 更新家庭頁籤的 active 狀態
+                    familyTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const targetFamily = tab.getAttribute('data-family');
+                    
+                    // 2. 隱藏所有 content-section
+                    contentSections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // 3. 顯示目標 content-section
+                    const targetSection = document.getElementById(`content-${targetFamily}`);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                    
+                    // 4. 獲取這個 family 當前活躍的 phase，並更新內容
+                    //    (例如，如果 B 家庭上次看到 'settlement'，切換回來時仍應是 'settlement')
+                    const currentPhase = getActivePhase(targetFamily);
+                    updateContent(targetFamily, currentPhase);
+                });
+            });
+            
+            // 處理時間階段點擊 (為所有 timeline-phase 綁定事件)
+            // 修正：必須在 contentSections 內部尋找 timelinePhases，否則會互相干擾
+            contentSections.forEach(section => {
+                const timelinePhases = section.querySelectorAll('.timeline-phase');
+                timelinePhases.forEach(phase => {
+                    phase.addEventListener('click', () => {
+                        const targetPhase = phase.getAttribute('data-phase');
+                        const currentFamily = getActiveFamily(); // 獲取當前家庭
+                        
+                        // 1. 更新 *當前家庭* 的 timeline-phase active 狀態
+                        const phasesInCurrentFamily = document.querySelectorAll(`#content-${currentFamily} .timeline-phase`);
+                        phasesInCurrentFamily.forEach(p => {
+                            p.classList.remove('active');
+                            if (p.getAttribute('data-phase') === targetPhase) {
+                                p.classList.add('active');
+                            }
+                        });
+
+                        // 2. 更新內容顯示
+                        updateContent(currentFamily, targetPhase);
+                    });
+                });
+            });
+
+            // 初始化：確保頁面加載時顯示正確內容
+            // (預設顯示 single, preparation)
+            updateContent('single', 'preparation');
+        });
+    </script>
+</body>
+</html>

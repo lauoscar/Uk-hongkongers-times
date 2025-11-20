@@ -12,6 +12,109 @@
 <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
+<!-- 在 <header> 标签后面添加导航栏 -->
+<nav class="main-nav">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">UK Hong Konger Times</a>
+    <ul class="nav-menu">
+      <li><a href="index.html">首頁 Home</a></li>
+
+      <li><a href="weekly-news.html" target="_blank">本週重點新聞Weekly News</a></li>
+      <li><a href="uk-travel.html" target="_blank">旅遊頻道Travel</a></li>
+      <li><a href="uk-festivals.html" target="_blank">節日頻道Festivals</a></li>
+      <li><a href="uk-food.html"target="_blank" >美食頻道Food Digest</a></li>
+      <li><a href="uk-cities.html"target="_blank" >城市專題A Pulse of Nation</a></li>
+      <li><a href="uk-society.html" target="_blank">週刊專題Weekly Nexus</a></li>
+      <li><!-- 在新标签页打开 --><a href="lifeinuk.html" target="_blank">Life in the UK Test-Practice Quiz</a></li>
+                <li><a href="bnoguide.html" target="_blank">BNO移民指南</a></li>
+
+    </ul>
+  </div>
+</nav>
+
+<style>
+/* 导航栏样式 - 保持报纸风格 */
+.main-nav {
+  background: var(--paper);
+  border-bottom: 2px solid #000;
+  padding: 8px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: sticky;
+  top: calc(var(--tickerH) * 2);
+  z-index: 2000;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: 'UnifrakturCook', serif;
+  font-size: 24px;
+  color: #000;
+  text-decoration: none;
+  margin-right: 30px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nav-menu li {
+  margin: 0;
+}
+
+.nav-menu a {
+  color: var(--ink);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: rgba(0,0,0,0.02);
+}
+
+.nav-menu a:hover {
+  background: rgba(0,0,0,0.05);
+  border-color: var(--muted);
+  text-decoration: none;
+}
+
+/* 手机响应式 */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .nav-menu {
+    justify-content: center;
+  }
+  
+  .nav-menu a {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .main-nav {
+    top: calc(var(--tickerH) * 2);
+    position: relative;
+  }
+}
+</style>
+
 <style>
 :root{
   --bg:#f4efe6;
@@ -418,7 +521,7 @@ a:hover { text-decoration:underline; }
   right: 15px;
   font-size: 24px;
   cursor: pointer;
-  color: var(--muted);
+  color: var(--muted);2
 }
 
 .article-modal-title {
@@ -501,6 +604,24 @@ a:hover { text-decoration:underline; }
 
   <aside style="display:flex;flex-direction:column;gap:12px">
 
+    <div class="card" id="searchCard">
+      <div class="widget-head"><h3>Search UK Postcode</h3><div class="widget-sub">Enter postcode (e.g. SW1A 1AA)</div></div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="flex:1">
+          <div class="search-row">
+            <input id="postcodeInput" placeholder="SW1A 1AA" aria-label="Postcode input" />
+            <div><button id="searchBtn" class="btn">Search</button>
+            <button id="clearBtn" class="btn secondary">Clear</button></div>
+            <div id="searchSpinner" style="margin-left:8px"></div>
+          </div>
+          <div id="pcSummary" class="widget-sub" style="margin-top:8px">No postcode searched — showing UK overview.</div>
+        </div>
+      </div>
+      <button class="refresh-btn" data-widget="search" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    </div>
+
+
+
     <div class="card" id="sunCard">
       <div class="widget-head"><h3>Sunrise & Sunset (Today) — UK time</h3><div class="widget-sub">Times shown in Europe/London timezone</div></div>
       <div id="sunData" class="small">Loading…</div>
@@ -513,35 +634,121 @@ a:hover { text-decoration:underline; }
       <button class="refresh-btn" data-widget="regionalWeather" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
     </div>
 
-    <div class="card" id="festiveCard">
-      <div class="widget-head"><h3>The Art of British Festivity: <p>A Seasonal Guide</p></h3><div class="widget-sub">Upcoming Holiday</div></div>
-      <img id="festiveImg" class="culture-img" src="" alt="Festive image">
-      <div id="festiveTitle" style="font-weight:700">Loading…</div>
-      <div id="festiveDesc" class="small">Loading…</div>
-      <button class="refresh-btn" data-widget="festive" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
-    </div>
 
-    <div class="card" id="calendarCard">
-      <div class="widget-head"><h3>Calendar</h3><div class="widget-sub">Red = UK public holidays; list below the calendar</div></div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button id="calPrev" class="btn secondary">◀</button>
-        <div id="calMonth" style="font-weight:700"></div>
-        <button id="calNext" class="btn secondary">▶</button>
+    <div class="card">
+      <div class="ad-box" style="height:120px">
+        <strong>NordPass - Password Manager</strong><br>
+        <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" style=font-size:30px;color:#0066cc;text-decoration:none>Secure Your Passwords</a>
       </div>
-      <div class="calendar-grid" id="calendarGrid"></div>
-      <div id="calendarHolidaysList" style="margin-top:8px;font-size:13px;color:var(--muted)"></div>
+    </div>
+  </aside>
+
+  <section style="display:flex;flex-direction:column;gap:12px">
+
+
+
+    <div class="card" id="localWeatherCard">
+      <div class="widget-head"><h3>Local Weather</h3><div class="widget-sub">Postcode-specific 7-day forecast (animated icons)</div></div>
+      <div id="localWeatherNow" style="display:flex;gap:12px;align-items:center">
+        <div id="localWeatherIcon" class="weather-icon">—</div>
+        <div>
+          <div id="localTemp" style="font-weight:700;font-size:20px">— °C</div>
+          <div id="localDesc" class="widget-sub">—</div>
+          <div id="localHumidity" class="widget-sub">Humidity: —</div>
+          <div id="localPrecip" class="widget-sub">Precipitation: —</div>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <div id="localHighLow" class="widget-sub">H/L: — / —</div>
+          <div id="localUpdated" class="widget-sub">Updated —</div>
+        </div>
+      </div>
+      <div id="local7day" style="margin-top:12px"></div>
+      <button class="refresh-btn" data-widget="localWeather" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
     </div>
 
-    <div class="card" id="ukHolidaysCard">
-      <div class="widget-head"><h3>UK Public Holidays</h3><div class="widget-sub">From last month → next year Dec 31</div></div>
-      <div id="ukHolidays" class="holiday-list small">Loading…</div>
-      <button class="refresh-btn" data-widget="ukHolidays" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    <div class="card" id="mapCard">
+      <div class="widget-head"><h3>Map</h3><div class="widget-sub">OpenStreetMap (Leaflet)</div></div>
+      <div id="map"></div>
     </div>
 
-    <div class="card" id="hkHolidaysCard">
-      <div class="widget-head"><h3>Hong Kong Public Holidays</h3><div class="widget-sub">From last month → next year Dec 31</div></div>
-      <div id="hkHolidays" class="holiday-list small">Loading…</div>
-      <button class="refresh-btn" data-widget="hkHolidays" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    <div class="card" id="topNewsCard">
+      <div class="widget-head"><h3>Top News (UK)</h3><div class="widget-sub">BBC · Guardian · Sky · Reuters</div></div>
+      <div id="topNews" class="news-list small">Loading…</div>
+      <button class="refresh-btn" data-widget="topNews" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    </div>
+
+    <div class="card" id="categories">
+      <div class="widget-head"><h3>World · Business & Investment · Sports · Travel</h3><div class="widget-sub">Categorised headlines</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <strong>World</strong><div id="worldNews" class="news-list small"></div>
+          <hr/>
+          <strong>Business & Investment</strong><div id="bizNews" class="news-list small"></div>
+        </div>
+        <div>
+          <strong>Sports</strong><div id="sportsNews" class="news-list small"></div>
+          <hr/>
+
+          <strong>Travel</strong><div id="travelNews" class="news-list small"></div>
+        </div>
+      </div>
+      <button class="refresh-btn" data-widget="categories" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    </div>
+
+    <!-- 修改后的 Weekly Column 显示方式 -->
+    <div class="card" id="weeklyColumn">
+      <div class="widget-head"><h3>UK-HKer Times Weekly Nexus — UK Unlocked <p>港英時報週刊：探索英國</p></h3><div class="widget-sub">Click on article titles to read full content</div></div>
+      <div id="weeklyContent" class="small">
+        <div class="weekly-column-title" onclick="openArticleModal('episode1')">
+          <strong>Episode 1: First Glimpse of Great Britain <p>第一期：大不列顛初探</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>
+        <div class="weekly-column-title" onclick="openArticleModal('episode2')">
+          <strong>Episode 2: London - The World's Melting Pot on the Thames <p>第二期：倫敦——泰晤士河畔的世界熔爐</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>
+        <div class="weekly-column-title" onclick="openArticleModal('episode3')">
+          <strong>Episode 3: The Scottish Highlands - Heart of Wilderness and Ancient Soul <p>第三期：蘇格蘭高地——荒野之心與古老靈魂</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>
+        
+        <div class="weekly-column-title" onclick="openArticleModal('episode4')">
+          <strong>Episode 4: Wales - Land of Mountains, Song and the Dragon <p>第四期：威爾斯——山巒、歌謠與巨龍之地</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div> 
+        
+         <div class="weekly-column-title" onclick="openArticleModal('episode5')">
+          <strong>Episode 5: The Lake District - A Poet's Landscape <p>第五期：英格蘭湖區——詩人筆下的山水田園</p></strong>
+          <div class="widget-sub">Click to read</div>
+          
+          
+        </div>       
+        
+      </div>
+    </div>
+
+
+
+    <div class="card" id="monthlyFeature">
+      <div class="widget-head"><h3>A Taste of Tomorrow:<p>A Preview of Stories to Come</p></h3><div class="widget-sub">Monthly Picks; History, Culture & Events</div></div>
+      <div id="monthlyContent" class="small">Loading monthly highlights…</div>
+      <button class="refresh-btn" data-widget="monthly" title="Refresh Monthly"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    </div>
+
+    <div class="card" id="architectureCard">
+      <div class="widget-head"><h3>Architecture Wonders<p>The Landmarks That Shaped the Skyline</p></h3><div class="widget-sub">Famous building highlight</div></div>
+      <img id="architectureImg" class="culture-img" src="" alt="Architecture">
+      <div id="architectureTitle" style="font-weight:700">Loading…</div>
+      <div id="architectureDesc" class="small">Loading…</div>
+      <button class="refresh-btn" data-widget="architecture" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    </div>
+
+    <div class="card" id="cityCard">
+      <div class="widget-head"><h3>The Urban Edit<p>A Pulse of Nation</p></h3><div class="widget-sub">Featured City</div></div>
+      <img id="cityImg" class="culture-img" src="" alt="City">
+      <div id="cityTitle" style="font-weight:700">Loading…</div>
+      <div id="cityDesc" class="small">Loading…</div>
+      <button class="refresh-btn" data-widget="city" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
     </div>
 
     <div class="card" id="travelSpotCard">
@@ -586,79 +793,10 @@ a:hover { text-decoration:underline; }
       <button class="refresh-btn" data-widget="outdoor" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
     </div>
 
-    <div class="card">
-      <div class="ad-box" style="height:120px">
-        <strong>NordPass - Password Manager</strong><br>
-        <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" style=font-size:30px;color:#0066cc;text-decoration:none>Secure Your Passwords</a>
-      </div>
-    </div>
-  </aside>
-
-  <section style="display:flex;flex-direction:column;gap:12px">
-
-    <div class="card" id="searchCard">
-      <div class="widget-head"><h3>Search UK Postcode</h3><div class="widget-sub">Enter postcode (e.g. SW1A 1AA)</div></div>
-      <div style="display:flex;gap:12px;align-items:center">
-        <div style="flex:1">
-          <div class="search-row">
-            <input id="postcodeInput" placeholder="SW1A 1AA" aria-label="Postcode input" />
-            <button id="searchBtn" class="btn">Search</button>
-            <button id="clearBtn" class="btn secondary">Clear</button>
-            <div id="searchSpinner" style="margin-left:8px"></div>
-          </div>
-          <div id="pcSummary" class="widget-sub" style="margin-top:8px">No postcode searched — showing UK overview.</div>
-        </div>
-      </div>
-      <button class="refresh-btn" data-widget="search" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
-    </div>
-
-    <div class="card" id="localWeatherCard">
-      <div class="widget-head"><h3>Local Weather</h3><div class="widget-sub">Postcode-specific 7-day forecast (animated icons)</div></div>
-      <div id="localWeatherNow" style="display:flex;gap:12px;align-items:center">
-        <div id="localWeatherIcon" class="weather-icon">—</div>
-        <div>
-          <div id="localTemp" style="font-weight:700;font-size:20px">— °C</div>
-          <div id="localDesc" class="widget-sub">—</div>
-          <div id="localHumidity" class="widget-sub">Humidity: —</div>
-          <div id="localPrecip" class="widget-sub">Precipitation: —</div>
-        </div>
-        <div style="margin-left:auto;text-align:right">
-          <div id="localHighLow" class="widget-sub">H/L: — / —</div>
-          <div id="localUpdated" class="widget-sub">Updated —</div>
-        </div>
-      </div>
-      <div id="local7day" style="margin-top:12px"></div>
-      <button class="refresh-btn" data-widget="localWeather" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
-    </div>
-
-    <div class="card" id="mapCard">
-      <div class="widget-head"><h3>Map</h3><div class="widget-sub">OpenStreetMap (Leaflet)</div></div>
-      <div id="map"></div>
-    </div>
-
-    <div class="card" id="topNewsCard">
-      <div class="widget-head"><h3>Top News (UK)</h3><div class="widget-sub">BBC · Guardian · Sky · Reuters</div></div>
-      <div id="topNews" class="news-list small">Loading…</div>
-      <button class="refresh-btn" data-widget="topNews" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
-    </div>
-
-    <div class="card" id="categories">
-      <div class="widget-head"><h3>World · Business & Investment · Sports · Arts · Travel</h3><div class="widget-sub">Categorised headlines</div></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div>
-          <strong>World</strong><div id="worldNews" class="news-list small"></div>
-          <hr/>
-          <strong>Business & Investment</strong><div id="bizNews" class="news-list small"></div>
-        </div>
-        <div>
-          <strong>Sports</strong><div id="sportsNews" class="news-list small"></div>
-          <hr/>
-          <strong>Arts</strong><div id="artsNews" class="news-list small"></div>
-          <hr/>
-          <strong>Travel</strong><div id="travelNews" class="news-list small"></div>
-        </div>
-      </div>
-      <button class="refresh-btn" data-widget="categories" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    <div class="card" id="eventsCardRight">
+      <div class="widget-head"><h3>Events · Movies (UK Cinema)</h3><div class="widget-sub">Grouped & ordered by date — UK releases and cinema news</div></div>
+      <div id="eventsListRight" class="small">Loading events & movies…</div>
+      <button class="refresh-btn" data-widget="eventsRight" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
     </div>
 
     <div class="card" id="britFoodCenter">
@@ -667,50 +805,34 @@ a:hover { text-decoration:underline; }
       <button class="refresh-btn" data-widget="britFoodCenter" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
     </div>
 
-    <div class="card" id="monthlyFeature">
-      <div class="widget-head"><h3>A Taste of Tomorrow:<p>A Preview of Stories to Come</p></h3><div class="widget-sub">Monthly Picks; History, Culture & Events</div></div>
-      <div id="monthlyContent" class="small">Loading monthly highlights…</div>
-      <button class="refresh-btn" data-widget="monthly" title="Refresh Monthly"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
-    </div>
-
-    <div class="card" id="architectureCard">
-      <div class="widget-head"><h3>Architecture Wonders<p>The Landmarks That Shaped the Skyline</p></h3><div class="widget-sub">Famous building highlight</div></div>
-      <img id="architectureImg" class="culture-img" src="" alt="Architecture">
-      <div id="architectureTitle" style="font-weight:700">Loading…</div>
-      <div id="architectureDesc" class="small">Loading…</div>
-      <button class="refresh-btn" data-widget="architecture" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
-    </div>
-
-    <div class="card" id="cityCard">
-      <div class="widget-head"><h3>The Urban Edit<p>A Pulse of Nation</p></h3><div class="widget-sub">Featured City</div></div>
-      <img id="cityImg" class="culture-img" src="" alt="City">
-      <div id="cityTitle" style="font-weight:700">Loading…</div>
-      <div id="cityDesc" class="small">Loading…</div>
-      <button class="refresh-btn" data-widget="city" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
-    </div>
-
-    <!-- 修改后的 Weekly Column 显示方式 -->
-    <div class="card" id="weeklyColumn">
-      <div class="widget-head"><h3>UK-HKer Times Weekly Nexus — UK Unlocked <p>港英時報週刊：探索英國</p></h3><div class="widget-sub">Click on article titles to read full content</div></div>
-      <div id="weeklyContent" class="small">
-        <div class="weekly-column-title" onclick="openArticleModal('episode1')">
-          <strong>Episode 1: First Glimpse of Great Britain <p>第一期：大不列顛初探</p></strong>
-          <div class="widget-sub">Click to read</div>
-        </div>
-        <div class="weekly-column-title" onclick="openArticleModal('episode2')">
-          <strong>Episode 2: London - The World's Melting Pot on the Thames <p>第二期：倫敦——泰晤士河畔的世界熔爐</p></strong>
-          <div class="widget-sub">Click to read</div>
-        </div>
-        <div class="weekly-column-title" onclick="openArticleModal('episode3')">
-          <strong>Episode 3: The Scottish Highlands - Heart of Wilderness and Ancient Soul <p>第三期：蘇格蘭高地——荒野之心與古老靈魂</p></strong>
-          <div class="widget-sub">Click to read</div>
-        </div>
-      </div>
-    </div>
-
   </section>
 
   <aside style="display:flex;flex-direction:column;gap:12px">
+
+    <div class="card" id="calendarCard">
+      <div class="widget-head"><h3>Calendar</h3><div class="widget-sub">Red = UK public holidays; list below the calendar</div></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="calPrev" class="btn secondary">◀</button>
+        <div id="calMonth" style="font-weight:700"></div>
+        <button id="calNext" class="btn secondary">▶</button>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+      <div id="calendarHolidaysList" style="margin-top:8px;font-size:13px;color:var(--muted)"></div>
+    </div>
+    
+    <div class="card" id="festiveCard">
+      <div class="widget-head"><h3>The Art of British Festivity: <p>A Seasonal Guide</p></h3><div class="widget-sub">Upcoming Holiday</div></div>
+      <img id="festiveImg" class="culture-img" src="" alt="Festive image">
+      <div id="festiveTitle" style="font-weight:700">Loading…</div>
+      <div id="festiveDesc" class="small">Loading…</div>
+      <button class="refresh-btn" data-widget="festive" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    </div>
+
+    <div class="card" id="nearbyCard">
+      <div class="widget-head"><h3>Nearby Dining & Supermarkets</h3><div class="widget-sub">OpenStreetMap / Overpass</div></div>
+      <div id="nearbyList" class="small">Enter postcode to load nearby places.</div>
+      <button class="refresh-btn" data-widget="dining" title="Refresh nearby"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    </div>    
 
     <!-- 替换 Landscape Feature 为 Life in the UK Test Quiz Beginner -->
     <div class="card" id="quizBeginnerCard">
@@ -727,17 +849,9 @@ a:hover { text-decoration:underline; }
     <div class="ad-box"><div class="ad-container ad-container-top" style="height:120px">Visit Amazon for Great Deals</div>
     <a href="https://amzn.to/3L35nyP" target="_blank" class="amazon-ad-link" style=font-size:30px;color:#0066cc;text-decoration:none>Shop Amazon Today</a></div>
 
-    <div class="card" id="nearbyCard">
-      <div class="widget-head"><h3>Nearby Dining & Supermarkets</h3><div class="widget-sub">OpenStreetMap / Overpass</div></div>
-      <div id="nearbyList" class="small">Enter postcode to load nearby places.</div>
-      <button class="refresh-btn" data-widget="dining" title="Refresh nearby"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
-    </div>
 
-    <div class="card" id="eventsCardRight">
-      <div class="widget-head"><h3>Events · Movies (UK Cinema)</h3><div class="widget-sub">Grouped & ordered by date — UK releases and cinema news</div></div>
-      <div id="eventsListRight" class="small">Loading events & movies…</div>
-      <button class="refresh-btn" data-widget="eventsRight" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
-    </div>
+
+
 
     <div class="card" id="quizCard">
       <div class="widget-head"><h3>Life in the UK Test — Practice Quiz (Advance)</h3><div class="widget-sub">300 multiple-choice questions; select an answer to get instant feedback</div></div>
@@ -749,6 +863,24 @@ a:hover { text-decoration:underline; }
         <div id="quizFeedback" class="widget-sub" style="margin-left:auto"></div>
       </div>
     </div>
+
+
+
+
+    <div class="card" id="ukHolidaysCard">
+      <div class="widget-head"><h3>UK Public Holidays</h3><div class="widget-sub">From last month → next year Dec 31</div></div>
+      <div id="ukHolidays" class="holiday-list small">Loading…</div>
+      <button class="refresh-btn" data-widget="ukHolidays" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    </div>
+
+    <div class="card" id="hkHolidaysCard">
+      <div class="widget-head"><h3>Hong Kong Public Holidays</h3><div class="widget-sub">From last month → next year Dec 31</div></div>
+      <div id="hkHolidays" class="holiday-list small">Loading…</div>
+      <button class="refresh-btn" data-widget="hkHolidays" title="Refresh"><svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/></svg></button>
+    </div>
+
+
+
 
     <div class="ad-box"><div class="ad-container ad-container-top" style="height:120px">Visit Amazon for Great Deals</div>
     <a href="https://amzn.to/3L35nyP" target="_blank" class="amazon-ad-link" style=font-size:30px;color:#0066cc;text-decoration:none>Shop Amazon Today</a></div>
@@ -1076,7 +1208,153 @@ const ARTICLE_CONTENT = {
       <p>從高地的沈默雄偉中，我們接下來將前往一個擁有高聳山峰和動人合唱團的土地：威爾斯。我們將探索它古老的塞爾特心臟、工業歷史以及令人驚嘆的海岸小徑。敬請期待！</p>
     `,
     date: "by LocationPro November 9th, 2025"
-  }
+  },
+  
+                      episode4: {
+                        title: "UK Unlocked: A Journey Through Britain Episode 4: Wales - Land of Mountains, Song and the Dragon  第四期：威爾斯——山巒、歌謠與巨龍之地",
+                        content: `
+                            <p><strong>Wales: A Resilient Celtic Spirit</strong></p>
+                            <!-- 替换为您的 GitHub 图片链接 -->
+                            <img src="https://locationpro.org/episode4.jpg" alt="The Wales" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                            <p>Welcome back to UK Unlocked! This week, we venture into the western part of Great Britain, to a land where the Welsh language sings from the signs, castles crown the hills, and choirs fill the valleys: Wales. This small but mighty nation, with its own distinct culture and language, boasts some of the most dramatic and beautiful landscapes in the United Kingdom.</p>
+        
+                            <p><strong>A Mountainous Heart </strong></p>
+        
+                            <p>The geography of Wales is dominated by its highlands. The Snowdonia National Park in the north is the crown jewel, home to Mount Snowdon, the highest peak in Wales and England. Ancient, glaciated mountains here surround deep valleys and sparkling lakes, offering a paradise for hikers and climbers. Further south, the Brecon Beacons National Park offers rolling, whale-backed hills, expansive moorlands, and spectacular waterfalls, such as the famous Henrhyd Falls.</p>
+        
+                            <p><strong>A Coast of Legends and Industry</strong></p>
+        
+                            <p>Wales is a peninsula, and its coastline is a tale of two halves:</p>
+        
+                            <p>· The north and west coasts are wild and rugged, part of the Pembrokeshire Coast National Park—the only national park in the UK dedicated primarily to coastline. Its cliff-top paths offer breathtaking views of secluded coves, sea stacks, and abundant birdlife. </p>
+        
+                            <p>· To the south, the coastline tells a different story, shaped by its industrial past. The valleys here once powered the Industrial Revolution with their coal and iron, leaving a legacy that is now preserved and interpreted in sites like the Blaenavon Industrial Landscape, a UNESCO World Heritage Site.</p>
+        
+                            <p><strong>A Language and Culture Reborn</strong></p>
+        
+                            <p>Wales is a land of strong cultural identity. The Welsh language (Cymraeg) is a living tongue, spoken by a significant portion of the population and seen on every road sign. It is a direct link to the ancient Celtic Britons who once ruled this land. The tradition of choral singing, particularly in male voice choirs, is a powerful expression of community, born in the chapels and mining villages. And of course, the red dragon (Y Ddraig Goch) on the national flag symbolizes the fierce and proud spirit of the Welsh people.</p>
+                            
+                            <p><strong>Spotlight: The Welsh Castles</strong></p>
+                            <!-- 替换为您的 GitHub 图片链接 -->
+                            <img src="https://locationpro.org/walescastle.jpg" alt="The Wales Castle" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                            <p>The landscape of Wales is dotted with over 600 castles, a testament to its turbulent history of resistance against English rule. King Edward I built a formidable "Iron Ring" of castles in the 13th century to subdue the Welsh princes. Majestic fortresses like Conwy, Caernarfon, Harlech, and Beaumaris are not just ruins; they are masterpieces of medieval military architecture and stand as powerful, enduring symbols of Welsh history and resilience.</p>
+        
+                            <p><strong>Did You Know?</strong></p>
+        
+                            <p>Wales is home to the town with the longest place name in Europe: Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch. The name was invented in the 19th century to attract tourists, and it translates roughly as "St Mary's Church in the hollow of the white hazel near a rapid whirlpool and the Church of St Tysilio of the red cave."</p>
+        
+                            <p><strong>Next Issue Preview: England's Green and Pleasant Land - The Lake District</strong></p>
+        
+                            <p>Join us next time as we explore the landscape that inspired poets: the serene lakes, gentle fells, and picturesque villages of the Lake District in northwest England.</p>
+        
+                            <div style="border-top: 1px solid var(--soft-gray); margin-top: 20px; padding-top: 10px;">
+                                <p><strong>第四期：威爾斯——山巒、歌謠與巨龍之地</strong></p>
+                                <p><strong>威爾斯：不屈的塞爾特靈魂</strong></p>
+        
+                                <p>歡迎回到《UK Unlocked》！本週，我們前往大不列顛的西部，探索一個路標上吟唱著威爾斯語、城堡冠冕山丘、合唱之聲響徹谷地的土地：威爾斯。這個小而強大的民族國家，擁有獨特的文化和語言，以及聯合王國境內一些最為壯麗優美的地景。</p>
+        
+                                <p><strong>山脈構築的心臟</strong></p>
+        
+                                <p>威爾斯的地理由其高地主宰。北部的斯諾登尼亞國家公園是皇冠上的明珠，這裡是威爾斯及英格蘭最高峰——斯諾登山的所在地。古老的水川侵蝕山脈環繞著深邃的谷地和閃閃發光的湖泊，為徒步者和登山者提供了天堂。再往南，布雷肯比肯斯國家公園呈現出起伏的鯨背狀山丘、廣袤的荒原和壯觀的瀑布，例如著名的亨瑞斯瀑布。</p>
+        
+                                <p><strong>傳說與工業交織的海岸</strong></p>
+        
+                                <p>威爾斯是一個半島，其海岸線訴說著兩種故事：</p>
+        
+                                <p>· 北部和西部海岸狂野而崎嶇，是彭布羅克郡海岸國家公園的一部分——這也是英國唯一主要致力於保護海岸線的國家公園。其懸崖頂部的小徑，可俯瞰隱蔽海灣、海蝕柱和豐富鳥類生態的壯麗景色。</p>
+        
+                                <p>· 而在南部，海岸線則講述著被工業過往塑造的不同故事。這裡的谷地曾以煤炭和鐵礦推動了工業革命，留下的遺產如今在像布萊納文工業景觀這樣的地點（聯合國教科文組織世界遺產）得到保存和詮釋。</p>
+        
+                                <p><strong>語言與文化的復興</strong></p>
+        
+                                <p>威爾斯是一片擁有強烈文化認同的土地。威爾斯語是一種活生生的語言，相當比例的人口在使用它，並且在每個路標上都能看到。它是連接曾統治這片土地的古老塞爾特不列顛人的直接紐帶。合唱的傳統，尤其是男聲合唱，是社區精神的有力表達，誕生於教堂和礦村之中。當然，國旗上的紅龍象徵著威爾斯人民激烈而自豪的精神。</p>
+                                
+                                <p><strong>焦點地帶：威爾斯城堡</strong></p>
+        
+                                <p>威爾斯的地景點綴著600多座城堡，見證了其抵抗英格蘭統治的動盪歷史。愛德華一世在13世紀修建了一條堅固的「鐵環」城堡群，以征服威爾斯親王。像康威城堡、卡那封城堡、哈勒赫城堡和博馬里斯城堡這樣雄偉的堡壘，不僅僅是廢墟；它們是中世紀軍事建築的傑作，是威爾斯歷史與韌性的強有力且持久的象徵。</p>
+        
+                                <p><strong>你知道嗎？</strong></p>
+        
+                                <p>威爾斯擁有歐洲最長地名的小鎮：蘭韋爾普爾古因吉爾戈格里惠爾恩德羅布爾蘭蒂西利奧戈戈戈赫。這個名字是在19世紀為了吸引遊客而創造的，大致翻譯為「位於急流渦旋聖蒂西利奧紅色洞穴附近的白色榛樹山谷中的聖瑪利亞教堂」。</p>
+        
+                                <p><strong>下期預告：英格蘭的綠色宜人土地——湖區</strong></p>
+        
+                                <p>下一期，我們將探索激發詩人靈感的風景：位於英格蘭西北部，擁有寧靜湖泊、溫柔山丘和如畫村莊的湖區。</p>
+                            </div>
+                        `,
+                        date: "by LocationPro November 16th, 2025"
+                    },
+                    
+                                        episode5: {
+                title: "UK Unlocked: A Journey Through Britain Episode 5: The Lake District - A Poet's Landscape 第五期：英格蘭湖區——詩人筆下的山水田園",
+                content: `
+                    <p><strong>The Lake District: Where Nature Inspires Verse</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/episode5.jpg" alt="The Lake District" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>Hello again, and welcome to the fifth episode of UK Unlocked! This week, we immerse ourselves in a landscape that is as much a cultural icon as a natural one: England's Lake District. This compact region in the northwest of England, with its serene waters, gentle "fells," and stone-wall-divided valleys, has been a profound source of inspiration for poets, artists, and anyone seeking the solace of nature for over two centuries.</p>
+
+                    <p><strong>A Landscape Sculpted by Ice</strong></p>
+
+                    <p>The classic Lake District scenery is the work of ancient glaciers. During the last Ice Age, ice sheets carved out deep, U-shaped valleys. As the glaciers retreated, they left behind hollows that filled with water, creating the ribbon-like lakes that give the area its name—such as Windermere (the largest lake in England), Ullswater, and Derwentwater. The glaciers also sculpted the rugged, but not overly precipitous, mountains known locally as "fells," including the highest peak in England, Scafell Pike.</p>
+
+                    <p><strong>The Romantic Poets and the Birth of Tourism</strong></p>
+
+                    <p>In the late 18th and early 19th centuries, the Lake District became the heartland of the Romantic movement in Britain. The poets William Wordsworth, Samuel Taylor Coleridge, and Robert Southey (known as the "Lake Poets") lived and wrote here, rejecting industrialisation and celebrating the sublime power of nature. Wordsworth's guidebooks and his famous claim that the Lakes were "a sort of national property" helped transform the region from a remote corner of England into a popular destination, effectively giving birth to modern tourism.</p>
+
+                    <p><strong>A Working Landscape: Herdwick Sheep and Dry Stone Walls</strong></p>
+
+                    <p>The beauty of the Lake District is not untamed wilderness; it is a "working landscape" shaped by centuries of farming. The most iconic resident is the hardy Herdwick sheep, a breed native to the fells, known for their coarse wool and remarkable ability to thrive in the harsh upland climate. The intricate network of dry stone walls, built without mortar, crisscrosses the valleys and fellsides. These walls are both a testament to human labour and a crucial part of the distinctive character of the Lake District.</p>
+                    
+                    <p><strong>Spotlight: Windermere and the Central Lakes</strong></p>
+                    <!-- 替换为您的 GitHub 图片链接 -->
+                    <img src="https://locationpro.org/windermere.jpg" alt="Windermere" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                    <p>While the Lake District is full of quiet corners, the area around Windermere and Bowness-on-Windermere serves as the main hub. Windermere lake offers classic activities like steamboat cruises, providing stunning views of the surrounding fells. From here, visitors can easily explore the charming villages of Ambleside and Grasmere, where Wordsworth is buried. Grasmere is also famous for its delicious, spicy-sweet Grasmere Gingerbread.</p>
+
+                    <p><strong>Did You Know?</strong></p>
+
+                    <p>The Lake District was designated a UNESCO World Heritage Site in 2017. It was recognised not just for its breathtaking natural beauty, but also as a landscape of "outstanding universal value" that has been shaped by and inspired human interaction over centuries—a rare dual designation for both cultural and natural significance.</p>
+
+                    <p><strong>Next Issue Preview: The Rugged Shores of Cornwall</strong></p>
+
+                    <p>From the serene lakes, our next journey will take us to the far southwest, to the dramatic cliffs, Celtic heritage, and surfing beaches of Cornwall.</p>
+
+                    <div style="border-top: 1px solid var(--soft-gray); margin-top: 20px; padding-top: 10px;">
+                        <p><strong>第五期：英格蘭湖區——詩人筆下的山水田園</strong></p>
+                        <p><strong>湖區：激發詩歌的自然之境</strong></p>
+
+                        <p>歡迎來到《UK Unlocked》第五期！本週，我們將沉浸於一個既是自然景觀也是文化標誌的地方：英格蘭湖區。這個位於英格蘭西北部的精緻區域，擁有寧靜的水域、溫柔的「山丘」和石牆分隔的谷地，在過去兩個多世紀裡，一直是詩人、藝術家以及所有尋求自然慰藉人們的深刻靈感源泉。</p>
+
+                        <p><strong>冰川雕塑的地景</strong></p>
+
+                        <p>經典的湖區風光是由古代冰川塑造的。在上一個冰河時期，冰蓋刻劃出深邃的U形谷。隨著冰川退卻，它們留下了充滿水的凹地，形成了帶狀的湖泊，該地區也因此得名——例如溫德米爾湖（英格蘭最大的湖泊）、亞瑟湖和德文特湖。冰川也雕琢了粗獷但並不過於陡峭的山脈，當地人稱之為「山丘」，其中包括英格蘭最高峰斯科費爾峰。</p>
+
+                        <p><strong>浪漫主義詩人與旅遊業的誕生</strong></p>
+
+                        <p>在18世紀末和19世紀初，湖區成為英國浪漫主義運動的中心。詩人威廉·華茲華斯、塞繆爾·泰勒·柯勒律治和羅伯特·騷塞（被稱為「湖畔詩人」）在這裡生活寫作，抗拒工業化，歌頌自然的超凡力量。華茲華斯的旅遊指南以及他著名的宣稱——湖區是「某種形式的國家財產」——幫助該地區從英格蘭的偏遠角落轉變為熱門目的地，實際上催生了現代旅遊業。</p>
+
+                        <p><strong>勞作的地景：赫德威克羊與乾石牆</strong></p>
+
+                        <p>湖區的美並非未經馴服的荒野；它是一個被數百年農牧業塑造的「勞作地景」。最具標誌性的居民是強韌的赫德威克羊，這是一種原產於此地的羊，以其粗羊毛和在高地嚴酷氣候下茁壯成長的非凡能力而聞名。由錯綜複雜的乾石牆（不使用灰漿砌成）組成的網絡，縱橫交錯在谷地和山腰。這些牆壁既是人類勞動的證明，也是湖區獨特風貌的重要組成部分。</p>
+                        
+                        <p><strong>焦點地帶：溫德米爾與湖區中心</strong></p>
+
+                        <p>雖然湖區充滿了安靜的角落，但溫德米爾和波尼斯-溫德米爾周邊地區是主要樞紐。溫德米爾湖提供了像蒸汽船遊覽這樣的經典活動，可以欣賞周圍山丘的壯麗景色。從這裡，遊客可以輕鬆探索安布賽德和格拉斯米爾這些迷人的村莊，華茲華斯便安葬於格拉斯米爾。格拉斯米爾也以其美味、辛辣中帶甜的格拉斯米爾薑餅而聞名。</p>
+
+                        <p><strong>你知道嗎？</strong></p>
+
+                        <p>湖區於2017年被聯合國教科文組織列為世界遺產。它之所以得到認可，不僅是因為其令人驚嘆的自然美景，還因為它是一個在數個世紀中被人類活動塑造和激發靈感的「具突出普世價值」的地景——這是罕見的同時符合文化與自然遺產標準的雙重認定。</p>
+
+                        <p><strong>下期預告：康沃爾的崎嶇海岸</strong></p>
+
+                        <p>從寧靜的湖泊出發，我們的下一段旅程將前往遙遠的西南方，探索康沃爾戲劇性的懸崖、塞爾特傳統和衝浪海灘。</p>
+                    </div>
+                `,
+                date: "by LocationPro November 24th, 2025"
+                    },
+            
+  
+  
+  
 };
 
 // 文章弹窗功能
@@ -1226,7 +1504,7 @@ async function loadCategory(url,id){
   try{
     const txt = await fetchText(url);
     const doc = new DOMParser().parseFromString(txt,'application/xml');
-    const items = Array.from(doc.querySelectorAll('item')).slice(0,5);
+    const items = Array.from(doc.querySelectorAll('item')).slice(0,3);
     el.innerHTML = items.length? items.map(it=>`<a href="${it.querySelector('link')?.textContent}" target="_blank">${esc(it.querySelector('title')?.textContent)}</a>`).join('') : 'No items';
     // *** MODIFIED: Auto-retry on fail (if no items found) ***
     if (!items.length) {
@@ -1796,7 +2074,7 @@ document.addEventListener('click', async (e)=>{
       loadCategory('https://feeds.bbci.co.uk/news/world/rss.xml','worldNews');
       loadCategory('https://feeds.bbci.co.uk/news/business/rss.xml','bizNews');
       loadCategory('https://feeds.bbci.co.uk/sport/rss.xml','sportsNews');
-      loadCategory('https://www.theguardian.com/uk/culture/rss','artsNews');
+      
       loadCategory('https://www.bbc.com/travel/feed.rss','travelNews');
       break;
     case 'eventsRight': loadEventsAndMoviesRight(); break;
@@ -1910,7 +2188,7 @@ async function init(){
   loadCategory('https://feeds.bbci.co.uk/news/world/rss.xml','worldNews');
   loadCategory('https://feeds.bbci.co.uk/news/business/rss.xml','bizNews');
   loadCategory('https://feeds.bbci.co.uk/sport/rss.xml','sportsNews');
-  loadCategory('https://www.theguardian.com/uk/culture/rss','artsNews');
+  
   loadCategory('https://www.bbc.com/travel/feed.rss','travelNews');
   loadEventsAndMoviesRight();
   loadRegionalWeather();

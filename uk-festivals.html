@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英国节日频道 - UK Hong Konger Times</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #f4efe6;
+            --paper: #fffdf8;
+            --ink: #111;
+            --muted: #666;
+            --card-radius: 12px;
+            --pad: 14px;
+            --soft-gray: rgba(34,34,34,0.06);
+            --accent: #000;
+            --festive-red: #b30000;
+            --festive-green: #006600;
+            --festive-gold: #b38b00;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+            background-size: 10px 10px, 10px 10px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--paper);
+            border-bottom: 3px double #000;
+            padding: 8px 12px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            position: relative;
+            z-index: 2200;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        }
+        
+        .header-left {
+            flex: 1;
+            text-align: left;
+            min-width: 260px;
+        }
+        
+        .site-title {
+            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-size: 48px;
+            color: #000;
+            margin: 0;
+            text-align: center;
+            flex: 1;
+            letter-spacing: 1px;
+        }
+        
+        .site-subtitle {
+            font-family: 'serif';
+            font-size: 22px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: -8px;
+        }
+        
+        .header-right {
+            width: 300px;
+            text-align: right;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            background: var(--paper);
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-family: 'UnifrakturCook', serif;
+            font-size: 24px;
+            color: #000;
+            text-decoration: none;
+            margin-right: 30px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-menu li {
+            margin: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--ink);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(0,0,0,0.05);
+            border-color: var(--muted);
+            text-decoration: none;
+        }
+        
+        /* Main Content */
+        .main-wrap {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 18px;
+        }
+        
+        .card {
+            background: var(--paper);
+            padding: var(--pad);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--soft-gray);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+        
+        .widget-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .widget-head h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .widget-sub {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        /* Festival Section */
+        .festival-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+        
+        .festival-card {
+            background: var(--paper);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .festival-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .festival-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--soft-gray);
+        }
+        
+        .festival-content {
+            padding: 16px;
+        }
+        
+        .festival-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+        
+        .festival-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+        
+        .festival-date {
+            font-size: 12px;
+            color: var(--muted);
+            font-style: italic;
+        }
+        
+        .festival-tag {
+            display: inline-block;
+            background: var(--festive-red);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        /* Article Modal */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+        
+        .article-modal-content {
+            background-color: var(--paper);
+            margin: 40px auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 900px;
+            border-radius: var(--card-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .article-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--muted);
+        }
+        
+        .article-modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--ink);
+            border-bottom: 2px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .article-modal-body {
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .article-modal-body p {
+            margin-bottom: 16px;
+        }
+        
+        .article-modal-body strong {
+            font-weight: bold;
+        }
+        
+        .article-modal-body h4 {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--festive-red);
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 6px;
+        }
+        
+        .article-modal-body .chinese-section {
+            font-family: 'Noto Serif TC', serif;
+        }
+        
+        .article-modal-body .english-section {
+            margin-top: 30px;
+            border-top: 1px solid var(--soft-gray);
+            padding-top: 20px;
+        }
+        
+        .article-modal-date {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 20px;
+            border-top: 1px solid var(--soft-gray);
+            padding-top: 10px;
+        }
+        
+        /* Ad Boxes */
+        .ad-box {
+            background: #fafafa;
+            border: 1px dashed #ccc;
+            padding: 12px;
+            text-align: center;
+            color: #777;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .ad-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .ad-link {
+            display: block;
+            font-size: 20px;
+            color: #0066cc;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--paper);
+            border-top: 3px double #000;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .footer-left {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-wrap {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .site-title {
+                font-size: 32px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+            }
+            
+            .nav-menu a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .festival-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-right {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div id="dateNow">2025年1月15日 星期三</div>
+            <div id="headerQuote">"Celebrating the rich tapestry of British festivals and traditions."</div>
+        </div>
+        
+        <div>
+            <div class="site-title">The UK Hong Konger Times</div>
+            <div class="site-subtitle">UK Festivals Channel</div>
+        </div>
+        
+        <div class="header-right">
+            <div class="ad-box">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">UK Hong Konger Times</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">首頁 Home</a></li>
+       <li><a href="weekly-news.html" >本週重點新聞Weekly News</a></li>
+      <li><a href="uk-travel.html" >旅遊頻道Travel</a></li>
+      <li><a href="uk-festivals.html" class="active">節日頻道Festivals</a></li>
+      <li><a href="uk-food.html" >美食頻道Food Digest</a></li>
+      <li><a href="uk-cities.html" >城市專題A Pulse of Nation</a></li>
+      <li><a href="uk-society.html" >週刊專題Weekly Nexus</a></li>
+      <li><a href="lifeinuk.html" >Life in the UK Test-Practice Quiz</a></li>
+      <li><a href="bnoguide.html" >BNO移民指南</a></li>             
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main-wrap">
+        <main>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>英國節日頻道：12月至3月節日專題</h3>
+                    <div class="widget-sub">UK Festivals Channel: December to March Special Features</div>
+                </div>
+                <p>歡迎來到英國節日頻道！在這特別的季節裡，我們將帶您深入探索英國從十二月到三月的豐富節日文化。從溫馨的聖誕節到充滿希望的元旦，從浪漫的情人節到威爾斯的聖大衛節，每個節日都承載著獨特的歷史、傳統與文化意義。</p>
+                
+                <div class="festival-section">
+                    <div class="festival-card" onclick="openArticleModal('christmas')">
+                        <img src="https://locationpro.org/christmas.png" alt="聖誕節 Christmas" class="festival-image">
+                        <div class="festival-content">
+                            <div class="festival-title">聖誕節 Christmas</div>
+                            <div class="festival-subtitle">英國冬日最溫馨的節日慶典</div>
+                            <div class="festival-date">12月25日</div>
+                            <div class="festival-tag">十二月節日</div>
+                        </div>
+                    </div>
+                    
+                    <div class="festival-card" onclick="openArticleModal('newyear')">
+                        <img src="https://locationpro.org/newyearsday.png" alt="元旦 New Year's Day" class="festival-image">
+                        <div class="festival-content">
+                            <div class="festival-title">元旦 New Year's Day</div>
+                            <div class="festival-subtitle">迎接新年的第一道曙光</div>
+                            <div class="festival-date">1月1日</div>
+                            <div class="festival-tag">一月節日</div>
+                        </div>
+                    </div>
+                    
+                    <div class="festival-card" onclick="openArticleModal('valentine')">
+                        <img src="https://locationpro.org/valentinesday.png" alt="情人節 Valentine's Day" class="festival-image">
+                        <div class="festival-content">
+                            <div class="festival-title">情人節 Valentine's Day</div>
+                            <div class="festival-subtitle">愛與浪漫的甜蜜慶典</div>
+                            <div class="festival-date">2月14日</div>
+                            <div class="festival-tag">二月節日</div>
+                        </div>
+                    </div>
+                    
+                    <div class="festival-card" onclick="openArticleModal('stdavid')">
+                        <img src="https://locationpro.org/stdavidsday.png" alt="聖大衛節 St. David's Day" class="festival-image">
+                        <div class="festival-content">
+                            <div class="festival-title">聖大衛節 St. David's Day</div>
+                            <div class="festival-subtitle">威爾斯的文化與民族驕傲</div>
+                            <div class="festival-date">3月1日</div>
+                            <div class="festival-tag">三月節日</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>廣告贊助</h3>
+                </div>
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/47HvT9A" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+                
+                <div class="ad-box">
+                    <h4>NordPass - Password Manager</h4>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="ad-link">Secure Your Passwords</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="widget-head">
+                    <h3>關於本頻道</h3>
+                </div>
+                <p>英國節日頻道是UK Hong Konger Times的專題系列，致力於深入介紹英國豐富多彩的節日文化。從傳統節慶到現代活動，我們將帶您體驗英國節日的獨特魅力。</p>
+                <p>每個節日都承載著歷史、文化與社會意義，我們將透過詳細的文章與精美的圖片，為您呈現最完整的節日面貌。</p>
+            </div>
+            
+            <div class="card">
+                <div class="widget-head">
+                    <h3>即將到來的節日</h3>
+                </div>
+                <ul style="padding-left: 20px;">
+                    <li>聖誕節 - 12月25日</li>
+                    <li>元旦 - 1月1日</li>
+                    <li>情人節 - 2月14日</li>
+                    <li>聖大衛節 - 3月1日</li>
+                    <li>母親節 - 3月下旬</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <strong>The UK Hong Konger Times</strong><br>
+                <div style="margin-top: 8px;">
+                    <strong>About:</strong> The UK Hong Konger Times aggregates live public data to help Hongkongers in the UK.
+                </div>
+                <div style="font-size: 12px; margin-top: 8px;">
+                    <strong>Full Disclaimer:</strong> The content is for informational purposes only and does not constitute professional advice.
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/3L35nyP" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Article Modal -->
+    <div id="articleModal" class="article-modal">
+        <div class="article-modal-content">
+            <span class="article-modal-close" onclick="closeArticleModal()">&times;</span>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--soft-gray); padding-bottom: 10px;">
+                <div>
+                    <strong style="font-family: 'UnifrakturCook', serif; font-size: 20px;">UK Hong Konger Times</strong>
+                </div>
+                <div class="ad-box" style="padding: 8px; margin: 0;">
+                    <a href="https://amzn.to/47HvT9A" target="_blank" style="font-size: 16px; color: #0066cc; text-decoration: none;">Shop Amazon</a>
+                </div>
+            </div>
+            
+            <div id="articleModalTitle" class="article-modal-title"></div>
+            <div id="articleModalBody" class="article-modal-body"></div>
+            <div id="articleModalDate" class="article-modal-date"></div>
+            
+            <div class="ad-box" style="margin-top: 20px;">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 文章内容数据 - 使用 GitHub 图片链接
+        const ARTICLE_CONTENT = {
+            christmas: {
+                title: "聖誕節 Christmas：英國冬日最溫馨的節日慶典",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/christmas.png" alt="聖誕節 Christmas" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>節日由來與歷史</h4>
+                        <p>聖誕節在英國擁有悠久的歷史傳統，起源於基督教對耶穌基督誕生的慶祝。然而，許多現代的聖誕習俗實際上是維多利亞時代的產物，當時維多利亞女王與阿爾伯特親王將德國聖誕樹的傳統引入英國，從此改變了英國聖誕節的面貌。十九世紀查爾斯·狄更斯的小說《聖誕頌歌》進一步塑造了現代聖誕節的家庭溫馨與慈善精神，使這個節日從單純的宗教慶典轉變為全民共享的文化盛宴。</p>
+                        
+                        <h4>傳統活動</h4>
+                        <p>英國聖誕節的傳統活動豐富多彩，從平安夜的頌歌演唱到聖誕日的家庭聚餐，處處洋溢著溫馨喜悅的氣氛。最具代表性的活動包括在聖誕樹下交換禮物、懸掛聖誕襪等待聖誕老人來訪、以及觀看女王的聖誕文告。許多家庭還會參加午夜彌撒，或在聖誕節早晨前往教堂。節禮日（Boxing Day）則是親友相聚、享用剩餘聖誕大餐的日子，也是觀看足球比賽和參與狩獵活動的傳統時節。</p>
+                        
+                        <h4>節日美食</h4>
+                        <p>聖誕大餐是英國聖誕節的核心，傳統菜餚包括烤火雞配栗子餡料、烤豬肉配蘋果醬、以及各式蔬菜如抱子甘藍和烤馬鈴薯。聖誕布丁是不可或缺的甜點，通常會淋上白蘭地點燃，形成壯觀的藍色火焰。其他傳統美食還有百果餡餅、聖誕蛋糕和奶油甜酒。這些美食不僅滿足味蕾，更承載著家庭記憶與文化傳承，每一道菜餚都有其獨特的歷史淵源與製作儀式。</p>
+                        
+                        <h4>推薦旅遊城市</h4>
+                        <p>倫敦無疑是體驗英國聖誕節魅力的首選之地，海德公園的冬季仙境市集、牛津街與攝政街的璀璨燈飾、以及特拉法加廣場的巨型聖誕樹都令人難忘。愛丁堡的聖誕市集同樣迷人，古老的街道與現代燈光藝術完美融合。巴斯則以其喬治亞時期的建築背景提供了一個優雅古典的聖誕體驗，而約克的傳統聖誕活動則能讓人感受到最純正的英式節日氛圍。</p>
+                        
+                        <h4>節日現時活動</h4>
+                        <p>當代英國聖誕節的活動更加多元化，除了傳統的教堂禮拜和家庭聚會外，各種現代慶祝方式也日益流行。許多城鎮會舉辦聖誕燈飾點燈儀式，拉開節日季的序幕。冬季市集成為熱門去處，販售手工藝品、熱紅酒和傳統美食。冰上溜冰場在各大城市湧現，為節日增添動感樂趣。此外，觀賞聖誕主題戲劇表演，如《胡桃夾子》芭蕾舞劇，也是深受歡迎的節日傳統。</p>
+                        
+                        <h4>節日商品</h4>
+                        <p>聖誕節期間，英國商店充滿各式各樣的節日商品，從裝飾品到禮品應有盡有。傳統聖誕拉炮是必備物品，內含紙皇冠、小禮物和笑話紙條。手工製作的聖誕裝飾、精緻的聖誕卡片和包裝精美的禮物也是熱門商品。美食方面，豪華的聖誕禮籃、特製的聖誕茶葉和節日限定甜點深受消費者喜愛。近年來，環保和可持續的聖誕商品也越來越受歡迎，反映出現代人對節日消費的新思考。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Origins and History</h4>
+                        <p>Christmas in Britain boasts a long historical tradition, originating from the Christian celebration of the birth of Jesus Christ. However, many modern Christmas customs are actually products of the Victorian era, when Queen Victoria and Prince Albert introduced the German tradition of Christmas trees to Britain, forever changing the face of British Christmas. Charles Dickens' novel "A Christmas Carol" in the 19th century further shaped the modern Christmas spirit of family warmth and charity, transforming this holiday from a purely religious celebration into a cultural feast enjoyed by all.</p>
+                        
+                        <h4>Traditional Activities</h4>
+                        <p>British Christmas traditions are rich and varied, from carol singing on Christmas Eve to family gatherings on Christmas Day, everywhere filled with warm and joyful atmosphere. The most representative activities include exchanging gifts under the Christmas tree, hanging stockings for Santa Claus's visit, and watching the Queen's Christmas Message. Many families also attend midnight mass or go to church on Christmas morning. Boxing Day is a time for relatives and friends to gather, enjoy leftover Christmas dinner, and traditionally watch football matches and participate in hunting activities.</p>
+                        
+                        <h4>Festive Cuisine</h4>
+                        <p>The Christmas feast is the centerpiece of British Christmas, with traditional dishes including roast turkey with chestnut stuffing, roast pork with apple sauce, and various vegetables like Brussels sprouts and roast potatoes. Christmas pudding is an indispensable dessert, often doused with brandy and set alight to create a spectacular blue flame. Other traditional delicacies include mince pies, Christmas cake, and eggnog. These foods not only satisfy the palate but also carry family memories and cultural heritage, with each dish having its unique historical origins and preparation rituals.</p>
+                        
+                        <h4>Recommended Travel Cities</h4>
+                        <p>London is undoubtedly the premier destination to experience the charm of British Christmas, with Winter Wonderland in Hyde Park, the dazzling lights of Oxford Street and Regent Street, and the giant Christmas tree in Trafalgar Square all being unforgettable. Edinburgh's Christmas market is equally enchanting, with ancient streets perfectly blending with modern light art. Bath offers an elegant and classical Christmas experience against its Georgian architecture backdrop, while York's traditional Christmas activities allow visitors to feel the most authentic British festive atmosphere.</p>
+                        
+                        <h4>Contemporary Festive Activities</h4>
+                        <p>Contemporary British Christmas activities have become more diverse. Beyond traditional church services and family gatherings, various modern celebration methods are increasingly popular. Many towns hold Christmas light switch-on ceremonies to kick off the festive season. Winter markets become popular destinations, selling handicrafts, mulled wine, and traditional foods. Ice skating rinks appear in major cities, adding dynamic fun to the festivities. Additionally, watching Christmas-themed theatrical performances, such as the "Nutcracker" ballet, is also a deeply popular holiday tradition.</p>
+                        
+                        <h4>Festive Merchandise</h4>
+                        <p>During Christmas, British shops are filled with various festive goods, from decorations to gifts. Traditional Christmas crackers are essential items, containing paper crowns, small gifts, and joke slips. Handmade Christmas decorations, exquisite Christmas cards, and beautifully wrapped gifts are also popular items. In terms of food, luxurious Christmas gift baskets, specially blended Christmas teas, and limited-edition holiday desserts are highly sought after by consumers. In recent years, eco-friendly and sustainable Christmas products have become increasingly popular, reflecting modern people's new thinking about holiday consumption.</p>
+                    </div>
+                `,
+                date: "December 2025 | 十二月 2025"
+            },
+            newyear: {
+                title: "元旦 New Year's Day：迎接新年的第一道曙光",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/newyearsday.png" alt="元旦 New Year's Day" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>節日由來與歷史</h4>
+                        <p>元旦在英國的慶祝歷史可以追溯到古代不列顛時期，但現代元旦的慶祝方式主要形成於維多利亞時代。1752年之前，英國使用儒略曆，新年從3月25日開始。隨著格里曆的採用，1月1日正式成為新年伊始。蘇格蘭的除夕慶祝傳統「Hogmanay」對整個英國的元旦文化產生了深遠影響，特別是其中「First-Footing」的習俗——新年第一個跨過門檻的客人會帶來好運。</p>
+                        
+                        <h4>傳統活動</h4>
+                        <p>英國元旦的傳統活動充滿象徵意義與歡樂氣氛。最著名的莫過於倫敦泰晤士河畔的元旦大遊行，這項活動自1987年開始，現已成為歐洲規模最大的新年遊行。蘇格蘭的愛丁堡更是元旦慶祝的重鎮，其Hogmanay慶典持續數日，包括火炬遊行、街頭派對和傳統音樂表演。許多英國家庭會在新年第一天進行「新年第一次散步」，象徵著邁向新的開始，並制定新年願望，期待未來一年的美好。</p>
+                        
+                        <h4>節日美食</h4>
+                        <p>元旦美食在英國各地有所不同，但都蘊含著吉祥如意的美好祝願。蘇格蘭傳統的「黑麵包」（Black Bun）是一種富含乾果的糕點，象徵著豐饒與富足。英格蘭許多地區有食用「新年蛋糕」的習俗，通常是一種含有硬幣的特別蛋糕，吃到硬幣的人被認為會在新年獲得財運。傳統的元旦晚餐通常包括烤牛肉或火腿，配以冬季蔬菜，象徵著新一年的豐衣足食與家庭團圓。</p>
+                        
+                        <h4>推薦旅遊城市</h4>
+                        <p>倫敦無疑是體驗英國元旦慶典的最佳去處，可以親眼目睹壯觀的元旦大遊行，並在泰晤士河畔欣賞絢麗的煙火表演。愛丁堡的Hogmanay慶典更是世界聞名，為遊客提供獨一無二的蘇格蘭式新年體驗。巴斯的新年慶祝活動則更加典雅，在喬治亞風格的建築背景下，參加傳統的舞會和音樂會。利物浦作為文化之城，其元旦慶祝融合了音樂表演與現代藝術，為新年注入創意與活力。</p>
+                        
+                        <h4>節日現時活動</h4>
+                        <p>當代英國元旦慶祝活動更加多樣化與國際化。除了傳統的遊行和煙火表演外，許多城市會舉辦「新年第一天游泳」活動，勇敢的人們跳入冰冷的海水或湖泊中，以這種特殊的方式迎接新年。各種音樂會、舞蹈派對和藝術展覽也在元旦期間舉行，為不同年齡和興趣的人們提供豐富的娛樂選擇。近年來，環保主題的元旦活動日益流行，如「綠色遊行」和可持續發展主題的慶祝活動，反映了現代人對新年的新期望。</p>
+                        
+                        <h4>節日商品</h4>
+                        <p>元旦期間，英國商店充滿各式迎新商品，從裝飾品到禮品都洋溢著節日氣氛。新年賀卡是最受歡迎的商品之一，人們通過寄送賀卡向親友表達新年祝福。派對用品如氣球、彩帶和慶祝橫幅也是熱銷商品。許多商店會推出特別的新年禮盒，包含香檳、巧克力和節日零食，成為送禮首選。元旦特賣活動更是購物者的盛宴，各大百貨公司和品牌都會推出折扣商品，吸引人們在新年伊始更新衣櫥和家居。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Origins and History</h4>
+                        <p>The celebration of New Year's Day in Britain dates back to ancient British times, but modern New Year's celebrations mainly formed during the Victorian era. Before 1752, Britain used the Julian calendar, with the new year beginning on March 25th. With the adoption of the Gregorian calendar, January 1st officially became the start of the new year. Scotland's New Year's Eve celebration tradition "Hogmanay" has had a profound influence on the New Year culture throughout Britain, particularly the custom of "First-Footing" - where the first guest to cross the threshold in the new year brings good luck.</p>
+                        
+                        <h4>Traditional Activities</h4>
+                        <p>British New Year's Day traditions are full of symbolic meaning and joyful atmosphere. The most famous is undoubtedly the New Year's Day Parade along the Thames in London, which started in 1987 and has now become Europe's largest New Year parade. Edinburgh in Scotland is particularly important for New Year celebrations, with its Hogmanay festival lasting several days, including torchlight processions, street parties, and traditional music performances. Many British families take their "first walk of the new year" on New Year's Day, symbolizing stepping into a new beginning, and make New Year's resolutions, looking forward to a wonderful year ahead.</p>
+                        
+                        <h4>Festive Cuisine</h4>
+                        <p>New Year's foods vary across Britain, but all contain wishes for good fortune and happiness. The traditional Scottish "Black Bun" is a fruit-rich pastry symbolizing abundance and prosperity. Many regions in England have the custom of eating "New Year's Cake," typically a special cake containing a coin, with the person finding the coin believed to receive financial luck in the new year. The traditional New Year's dinner usually includes roast beef or ham with winter vegetables, symbolizing ample food and clothing and family reunion in the new year.</p>
+                        
+                        <h4>Recommended Travel Cities</h4>
+                        <p>London is undoubtedly the best place to experience British New Year celebrations, where you can witness the spectacular New Year's Day Parade and enjoy brilliant fireworks displays along the Thames. Edinburgh's Hogmanay festival is world-famous, offering visitors a unique Scottish New Year experience. Bath's New Year celebrations are more elegant, with traditional balls and concerts against the backdrop of Georgian architecture. Liverpool, as a city of culture, blends musical performances with modern art in its New Year celebrations, injecting creativity and vitality into the new year.</p>
+                        
+                        <h4>Contemporary Festive Activities</h4>
+                        <p>Contemporary British New Year celebrations have become more diverse and international. Beyond traditional parades and fireworks displays, many cities host "New Year's Day swim" events where brave participants jump into icy seawater or lakes to welcome the new year in this special way. Various concerts, dance parties, and art exhibitions are also held during New Year, providing rich entertainment options for people of different ages and interests. In recent years, environmentally themed New Year activities have become increasingly popular, such as "green parades" and sustainability-themed celebrations, reflecting modern people's new expectations for the new year.</p>
+                        
+                        <h4>Festive Merchandise</h4>
+                        <p>During New Year, British shops are filled with various welcoming goods, from decorations to gifts, all brimming with festive atmosphere. New Year cards are among the most popular items, with people sending cards to express New Year wishes to friends and relatives. Party supplies like balloons, streamers, and celebration banners are also best-selling items. Many stores launch special New Year gift boxes containing champagne, chocolates, and holiday snacks, becoming the first choice for gifts. New Year sales are a feast for shoppers, with major department stores and brands offering discounted products, attracting people to refresh their wardrobes and homes at the start of the new year.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            valentine: {
+                title: "情人節 Valentine's Day：愛與浪漫的甜蜜慶典",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/valentinesday.png" alt="情人節 Valentine's Day" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>節日由來與歷史</h4>
+                        <p>情人節在英國的歷史可以追溯到中世紀時期，與古羅馬的牧神節和基督教聖瓦倫丁的傳說密切相關。據傳，第三世紀的羅馬教士聖瓦倫丁因秘密為戀人主持婚禮而被處決，臨死前他給獄卒的女兒寫了一封署名「你的瓦倫丁」的信件，這被認為是第一封情人節卡片。在英國，情人節的流行始於維多利亞時代，當時印刷技術的進步使得大量生產裝飾精美的情人節卡片成為可能，從而將這一節日推廣至社會各階層。</p>
+                        
+                        <h4>傳統活動</h4>
+                        <p>英國情人節的傳統活動充滿浪漫情調與甜蜜驚喜。贈送情人節卡片是最核心的傳統，人們通常匿名寄送卡片給心儀的對象，增添神秘與期待感。互贈禮物也是重要環節，傳統禮物包括巧克力、鮮花和珠寶，象徵著愛情的甜蜜、美麗與永恆。浪漫晚餐是情人節的高潮，許多餐廳會推出特別的情人節菜單，營造難忘的用餐體驗。在英格蘭的一些古老村莊，還保留著抽籤選擇情人的傳統遊戲，為節日增添趣味與驚喜。</p>
+                        
+                        <h4>節日美食</h4>
+                        <p>情人節美食在英國以甜蜜浪漫為主題，巧克力無疑是節日的象徵。手工製作的精緻巧克力禮盒，特別是心形巧克力，是最受歡迎的禮物。傳統的英式情人節糕點包括覆盆子餡餅和草莓奶油蛋糕，這些紅色系甜點象徵著熱烈的愛情。許多餐廳會推出特別的情人節套餐，通常包括生蠔、龍蝦等被認為具有催情效果的美食，以及香檳或葡萄酒，為浪漫晚餐增添奢華氣息。自製情人節晚餐也日益流行，情侶們共同準備美食，創造專屬於兩人的甜蜜回憶。</p>
+                        
+                        <h4>推薦旅遊城市</h4>
+                        <p>倫敦是體驗英國情人節浪漫氛圍的理想之地，可以在倫敦眼上欣賞城市夜景，或在泰晤士河遊船上享受燭光晚餐。巴斯作為英國最浪漫的城市之一，其古羅馬浴場和喬治亞建築為情人節提供了絕佳背景。約克的古城牆和中世紀街道充滿歷史韻味，非常適合情侶漫步。愛丁堡的卡爾頓山是觀賞日落和城市全景的浪漫地點，而科茨沃爾德的鄉村旅館則為追求寧靜與私密的情侶提供完美避世之所。</p>
+                        
+                        <h4>節日現時活動</h4>
+                        <p>當代英國情人節的慶祝方式更加多元化與個性化。除了傳統的浪漫晚餐和禮物交換外，許多情侶選擇共同體驗特別活動，如情侶水療、烹飪課程或舞蹈工作坊。各種主題派對和單身社交活動也在情人節期間舉行，為不同感情狀態的人們提供慶祝機會。近年來，環保和可持續的情人節慶祝方式日益流行，如選擇本地生產的有機花束或公平貿易巧克力，以及體驗性的禮物取代物質禮品，反映了現代人對愛情與消費的新思考。</p>
+                        
+                        <h4>節日商品</h4>
+                        <p>情人節期間，英國商店充滿各式浪漫商品，從傳統禮品到創意驚喜應有盡有。情人節卡片依然是最受歡迎的商品，設計從經典優雅到幽默俏皮各具特色。鮮花是永恆的情人節禮物，紅玫瑰象徵熱烈的愛情，而其他顏色的玫瑰則表達不同的情感。個性化禮品日益流行，如刻有名字的珠寶、定制的情侶相冊或手寫的情書套裝。體驗式禮物也越來越受歡迎，如浪漫旅行、水療套餐或特別活動的門票，為情侶創造共同的美好回憶。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Origins and History</h4>
+                        <p>The history of Valentine's Day in Britain dates back to the medieval period, closely related to the ancient Roman Lupercalia festival and the legend of Christian Saint Valentine. According to tradition, the third-century Roman priest Saint Valentine was executed for secretly performing weddings for lovers, and before his death, he wrote a letter to the jailer's daughter signed "from your Valentine," which is considered the first Valentine's card. In Britain, the popularity of Valentine's Day began in the Victorian era, when advances in printing technology made mass production of ornately decorated Valentine's cards possible, thus promoting the holiday across all social classes.</p>
+                        
+                        <h4>Traditional Activities</h4>
+                        <p>British Valentine's Day traditions are full of romantic sentiment and sweet surprises. Giving Valentine's cards is the core tradition, with people often sending cards anonymously to their crushes, adding mystery and anticipation. Exchanging gifts is also an important part, with traditional gifts including chocolates, flowers, and jewelry, symbolizing the sweetness, beauty, and eternity of love. Romantic dinners are the climax of Valentine's Day, with many restaurants offering special Valentine's menus to create unforgettable dining experiences. In some ancient villages in England, traditional games of drawing lots to choose valentines are still preserved, adding fun and surprise to the holiday.</p>
+                        
+                        <h4>Festive Cuisine</h4>
+                        <p>Valentine's cuisine in Britain revolves around sweet and romantic themes, with chocolate undoubtedly being the symbol of the holiday. Exquisitely crafted handmade chocolate boxes, particularly heart-shaped chocolates, are the most popular gifts. Traditional English Valentine pastries include raspberry tarts and strawberry cream cakes, with these red-themed desserts symbolizing passionate love. Many restaurants offer special Valentine's menus, typically including oysters, lobster, and other foods considered aphrodisiacs, along with champagne or wine, adding a touch of luxury to romantic dinners. Homemade Valentine's dinners are increasingly popular, with couples preparing meals together to create sweet memories unique to them.</p>
+                        
+                        <h4>Recommended Travel Cities</h4>
+                        <p>London is an ideal place to experience the romantic atmosphere of British Valentine's Day, whether admiring the city's nightscape from the London Eye or enjoying a candlelit dinner on a Thames river cruise. Bath, as one of Britain's most romantic cities, provides an excellent backdrop for Valentine's Day with its Roman Baths and Georgian architecture. York's ancient walls and medieval streets are full of historical charm, perfect for couples to stroll through. Edinburgh's Calton Hill is a romantic spot for watching sunsets and panoramic city views, while the Cotswolds' country inns offer the perfect escape for couples seeking tranquility and privacy.</p>
+                        
+                        <h4>Contemporary Festive Activities</h4>
+                        <p>Contemporary British Valentine's Day celebrations have become more diverse and personalized. Beyond traditional romantic dinners and gift exchanges, many couples choose to experience special activities together, such as couple's spa treatments, cooking classes, or dance workshops. Various themed parties and singles social events are also held during Valentine's Day, providing celebration opportunities for people in different relationship statuses. In recent years, environmentally friendly and sustainable Valentine's celebrations have become increasingly popular, such as choosing locally produced organic bouquets or fair trade chocolates, and experiential gifts replacing material presents, reflecting modern people's new thinking about love and consumption.</p>
+                        
+                        <h4>Festive Merchandise</h4>
+                        <p>During Valentine's Day, British shops are filled with various romantic goods, from traditional gifts to creative surprises. Valentine's cards remain the most popular item, with designs ranging from classic elegance to humorous playfulness. Flowers are eternal Valentine's gifts, with red roses symbolizing passionate love, while roses of other colors express different emotions. Personalized gifts are increasingly popular, such as jewelry engraved with names, custom couple's photo albums, or handwritten love letter sets. Experiential gifts are also becoming more favored, like romantic trips, spa packages, or tickets to special events, creating beautiful shared memories for couples.</p>
+                    </div>
+                `,
+                date: "February 2025 | 二月 2025"
+            },
+            stdavid: {
+                title: "聖大衛節 St. David's Day：威爾斯的文化與民族驕傲",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/stdavidsday.png" alt="聖大衛節 St. David's Day" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>節日由來與歷史</h4>
+                        <p>聖大衛節是威爾斯的國慶日，紀念威爾斯的守護聖人聖大衛。聖大衛生活在公元六世紀，是一位深受尊敬的修道院院長和主教，以其簡樸的生活方式和虔誠的信仰聞名。據傳他建立了多所修道院，並在威爾斯各地傳播基督教。聖大衛節的慶祝歷史可以追溯到中世紀，但直到十八世紀才被正式確立為威爾斯的國慶日。這個節日不僅是對聖人的紀念，更是威爾斯文化、語言和民族認同的重要象徵。</p>
+                        
+                        <h4>傳統活動</h4>
+                        <p>聖大衛節的傳統活動充滿威爾斯民族特色與文化自豪感。最引人注目的是各地的遊行活動，參與者穿著傳統威爾斯服飾，佩戴水仙花和韭蔥——這兩種植物是聖大衛節的象徵。學校和社區會舉辦音樂會和詩歌朗誦會，展示威爾斯悠久的詩歌傳統。傳統的威爾斯舞蹈表演也是節日的重要組成部分，特別是充滿活力的民間舞蹈。許多威爾斯人會在這一天參加教堂禮拜，紀念聖大衛的生平與教誨，並重溫他的名言「做善事，保持信念」。</p>
+                        
+                        <h4>節日美食</h4>
+                        <p>聖大衛節的美食充分展現了威爾斯的烹飪傳統與地方特色。最具代表性的節日食品是威爾斯蛋糕，一種用葡萄乾和香料製成的甜點，通常在特製的烤盤上烹製。傳統的威爾斯 rarebit（一種奶酪吐司）和羊肉湯也是節日的常見美食。韭蔥作為節日象徵，經常出現在各種菜餚中，如韭蔥餡餅和韭蔥湯。為了向聖大衛的威爾斯血統致敬，許多餐廳和家庭會準備全套的威爾斯傳統菜餚，並佐以當地的啤酒或蘋果酒，共同慶祝威爾斯的飲食文化遺產。</p>
+                        
+                        <h4>推薦旅遊城市</h4>
+                        <p>卡地夫作為威爾斯首府，是體驗聖大衛節慶祝活動的最佳地點，其盛大的遊行和豐富的文化活動令人難忘。聖大衛市是聖大衛的出生地和安息之地，這裡的教堂和修道院遺址為節日增添了神聖氣息。斯旺西的海濱慶祝活動別具一格，可以同時享受海景與文化盛宴。康威的中世紀城堡和城牆為聖大衛節提供了歷史感十足的背景，而布雷肯比肯斯國家公園的鄉村慶祝活動則讓人感受到威爾斯純樸的自然之美。</p>
+                        
+                        <h4>節日現時活動</h4>
+                        <p>當代聖大衛節的慶祝活動更加多元化與包容性。除了傳統的遊行和音樂會外，許多城市會舉辦威爾斯語言和文化工作坊，推廣威爾斯的語言遺產。各種藝術展覽和手工藝市集展示當代威爾斯藝術家的作品，體現文化的創新與活力。美食節和烹飪示範活動讓遊客有機會品嚐和學習製作傳統威爾斯美食。近年來，環保主題的慶祝活動也日益流行，如植樹活動和清潔威爾斯自然景觀的志願者行動，將對威爾斯的熱愛與對環境的關懷結合起來。</p>
+                        
+                        <h4>節日商品</h4>
+                        <p>聖大衛節期間，威爾斯的商店充滿各式民族特色商品，從傳統工藝品到現代紀念品應有盡有。威爾斯紅龍標誌的各種商品最受歡迎，包括旗幟、別針和服裝。傳統的威爾斯愛情湯匙是極具特色的禮物，每把手工雕刻的湯匙都有其獨特的象徵意義。威爾斯羊毛製品，如毯子和毛衣，既實用又具有文化價值。節日期間，各種威爾斯食品和飲料也會特別推出，包括威爾斯蛋糕製作套裝、當地奶酪和手工巧克力，讓遊客可以將威爾斯的味道帶回家。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Origins and History</h4>
+                        <p>St. David's Day is Wales' national day, commemorating the patron saint of Wales, Saint David. Saint David lived in the 6th century AD and was a highly respected abbot and bishop, known for his simple lifestyle and devout faith. It is said that he established several monasteries and spread Christianity throughout Wales. The celebration of St. David's Day dates back to the Middle Ages, but it wasn't officially established as Wales' national day until the 18th century. This holiday is not only a commemoration of the saint but also an important symbol of Welsh culture, language, and national identity.</p>
+                        
+                        <h4>Traditional Activities</h4>
+                        <p>St. David's Day traditions are full of Welsh national characteristics and cultural pride. The most eye-catching are the parades held throughout Wales, with participants wearing traditional Welsh costumes and sporting daffodils and leeks - these two plants being symbols of St. David's Day. Schools and communities hold concerts and poetry recitals, showcasing Wales' long poetic tradition. Traditional Welsh dance performances are also an important part of the festivities, particularly lively folk dances. Many Welsh people attend church services on this day to commemorate St. David's life and teachings, and revisit his famous saying "Do the little things, keep the faith."</p>
+                        
+                        <h4>Festive Cuisine</h4>
+                        <p>St. David's Day cuisine fully demonstrates Welsh cooking traditions and local characteristics. The most representative festive food is Welsh cakes, a sweet treat made with raisins and spices, typically cooked on a special griddle. Traditional Welsh rarebit (a type of cheese toast) and lamb broth are also common holiday foods. Leeks, as a holiday symbol, frequently appear in various dishes such as leek pies and leek soup. To honor St. David's Welsh heritage, many restaurants and families prepare full sets of traditional Welsh dishes, accompanied by local beer or cider, collectively celebrating Wales' culinary cultural heritage.</p>
+                        
+                        <h4>Recommended Travel Cities</h4>
+                        <p>Cardiff, as the capital of Wales, is the best place to experience St. David's Day celebrations, with its grand parade and rich cultural activities being unforgettable. St. Davids is the birthplace and resting place of Saint David, where the cathedral and monastery ruins add a sacred atmosphere to the holiday. Swansea's waterfront celebrations are unique, allowing visitors to enjoy both sea views and cultural feasts. Conwy's medieval castle and walls provide a historically rich backdrop for St. David's Day, while the rural celebrations in Brecon Beacons National Park allow visitors to experience Wales' pristine natural beauty.</p>
+                        
+                        <h4>Contemporary Festive Activities</h4>
+                        <p>Contemporary St. David's Day celebrations have become more diverse and inclusive. Beyond traditional parades and concerts, many cities host Welsh language and culture workshops to promote Wales' linguistic heritage. Various art exhibitions and craft markets showcase works by contemporary Welsh artists, reflecting cultural innovation and vitality. Food festivals and cooking demonstrations give visitors opportunities to taste and learn how to make traditional Welsh cuisine. In recent years, environmentally themed celebrations have also become increasingly popular, such as tree planting activities and volunteer actions to clean up Wales' natural landscapes, combining love for Wales with care for the environment.</p>
+                        
+                        <h4>Festive Merchandise</h4>
+                        <p>During St. David's Day, Welsh shops are filled with various ethnic specialty goods, from traditional crafts to modern souvenirs. Various products featuring the Welsh red dragon emblem are the most popular, including flags, pins, and clothing. Traditional Welsh love spoons are highly distinctive gifts, with each hand-carved spoon having its unique symbolic meaning. Welsh wool products, such as blankets and sweaters, are both practical and culturally valuable. During the holiday, various Welsh foods and beverages are specially launched, including Welsh cake making kits, local cheeses, and handmade chocolates, allowing visitors to take the taste of Wales home with them.</p>
+                    </div>
+                `,
+                date: "March 2025 | 三月 2025"
+            }
+        };
+
+        // 文章弹窗功能
+        function openArticleModal(festival) {
+            const article = ARTICLE_CONTENT[festival];
+            if (article) {
+                document.getElementById('articleModalTitle').innerHTML = article.title;
+                document.getElementById('articleModalBody').innerHTML = article.content;
+                document.getElementById('articleModalDate').innerHTML = article.date;
+                document.getElementById('articleModal').style.display = 'block';
+            }
+        }
+
+        function closeArticleModal() {
+            document.getElementById('articleModal').style.display = 'none';
+        }
+
+        // 点击弹窗外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('articleModal');
+            if (event.target == modal) {
+                closeArticleModal();
+            }
+        }
+
+        // 更新日期
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dateNow').innerText = now.toLocaleDateString('zh-HK', options);
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDate();
+        });
+    </script>
+</body>
+</html>

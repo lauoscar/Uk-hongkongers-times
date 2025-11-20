@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每週重點新聞頻道 - UK Hong Konger Times</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #f4efe6;
+            --paper: #fffdf8;
+            --ink: #111;
+            --muted: #666;
+            --card-radius: 12px;
+            --pad: 14px;
+            --soft-gray: rgba(34,34,34,0.06);
+            --accent: #000;
+            /* 新增/調整新聞相關顏色 */
+            --news-blue: #004d99; 
+            --news-gray: #333333;
+            --news-border: #99aab5;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+            background-size: 10px 10px, 10px 10px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--paper);
+            border-bottom: 3px double #000;
+            padding: 8px 12px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            position: relative;
+            z-index: 2200;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        }
+        
+        .header-left {
+            flex: 1;
+            text-align: left;
+            min-width: 260px;
+        }
+        
+        .site-title {
+            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-size: 48px;
+            color: #000;
+            margin: 0;
+            text-align: center;
+            flex: 1;
+            letter-spacing: 1px;
+        }
+        
+        .site-subtitle {
+            font-family: 'serif';
+            font-size: 22px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: -8px;
+        }
+        
+        .header-right {
+            width: 300px;
+            text-align: right;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            background: var(--paper);
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-family: 'UnifrakturCook', serif;
+            font-size: 24px;
+            color: #000;
+            text-decoration: none;
+            margin-right: 30px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-menu li {
+            margin: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--ink);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(0,0,0,0.05);
+            border-color: var(--muted);
+            text-decoration: none;
+        }
+        
+        .nav-menu a.active {
+            background: rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-wrap {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 18px;
+        }
+        
+        .card {
+            background: var(--paper);
+            padding: var(--pad);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--soft-gray);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+        
+        .widget-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .widget-head h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .widget-sub {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        /* News Section (Similar to Food Section but themed) */
+        .news-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+        
+        .news-card {
+            background: var(--paper);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border-top: 4px solid var(--news-blue); /* 新增特色邊框 */
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--soft-gray);
+        }
+        
+        .news-content {
+            padding: 16px;
+        }
+        
+        .news-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--news-gray);
+        }
+        
+        .news-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+        
+        .news-origin {
+            font-size: 12px;
+            color: var(--muted);
+            font-style: italic;
+        }
+        
+        .news-tag {
+            display: inline-block;
+            background: var(--news-blue);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        /* Article Modal */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+        
+        .article-modal-content {
+            background-color: var(--paper);
+            margin: 40px auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 900px;
+            border-radius: var(--card-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .article-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--muted);
+        }
+        
+        .article-modal-title {
+            font-size: 28px; /* 標題加大 */
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--ink);
+            border-bottom: 3px solid var(--news-border); /* 調整線條 */
+            padding-bottom: 10px;
+        }
+
+        .article-modal-subtitle {
+            font-size: 18px;
+            color: var(--news-blue);
+            margin-bottom: 15px;
+        }
+        
+        .article-modal-body {
+            line-height: 1.7; /* 行距加大 */
+            font-size: 16px;
+        }
+        
+        .article-modal-body p {
+            margin-bottom: 18px;
+            text-indent: 2em; /* 首行縮排 */
+        }
+        
+        .article-modal-body strong {
+            font-weight: bold;
+        }
+        
+        .article-modal-body h4 {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--news-gray); /* 調整子標題顏色 */
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 6px;
+        }
+        
+        .article-modal-body .chinese-section {
+            font-family: 'Noto Serif TC', serif;
+        }
+        
+        .article-modal-body .english-section {
+            margin-top: 35px; /* 加大中英分隔 */
+            border-top: 2px dashed var(--news-blue); /* 虛線分隔 */
+            padding-top: 25px;
+        }
+
+        .article-modal-body .english-section p {
+            text-indent: 0; /* 英文段落不縮排 */
+            font-style: italic; /* 英文斜體 */
+            line-height: 1.6;
+        }
+        
+        .article-modal-date {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 20px;
+            border-top: 1px solid var(--soft-gray);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .article-modal-author {
+            font-weight: bold;
+            color: var(--news-blue);
+        }
+        
+        /* Ad Boxes */
+        .ad-box {
+            background: #fafafa;
+            border: 1px dashed #ccc;
+            padding: 12px;
+            text-align: center;
+            color: #777;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .ad-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .ad-link {
+            display: block;
+            font-size: 20px;
+            color: #0066cc;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--paper);
+            border-top: 3px double #000;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .footer-left {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-wrap {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .site-title {
+                font-size: 32px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+            }
+            
+            .nav-menu a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .news-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-right {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div id="dateNow">2025年11月18日 星期二</div>
+            <div id="headerQuote">"The pursuit of truth is a constant journey, not a destination."</div>
+        </div>
+        
+        <div>
+            <div class="site-title">The UK Hong Konger Times</div>
+            <div class="site-subtitle">Weekly News Channel</div>
+        </div>
+        
+        <div class="header-right">
+            <div class="ad-box">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">UK Hong Konger Times</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">首頁 Home</a></li>
+      <li><a href="weekly-news.html" class="active">本週重點新聞Weekly News</a></li>
+      <li><a href="uk-travel.html" >旅遊頻道Travel</a></li>
+      <li><a href="uk-festivals.html" >節日頻道Festivals</a></li>
+      <li><a href="uk-food.html">美食頻道Food Digest</a></li>
+      <li><a href="uk-cities.html" >城市專題A Pulse of Nation</a></li>
+      <li><a href="uk-society.html" >週刊專題Weekly Nexus</a></li>
+      <li><a href="lifeinuk.html" >Life in the UK Test-Practice Quiz</a></li>
+                <li><a href="bnoguide.html" >BNO移民指南</a></li>    
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main-wrap">
+        <main>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>本週英國重點新聞精選</h3>
+                    <div class="widget-sub">Selected Key UK News this Week - Impartial Reporting</div>
+                </div>
+                <p>歡迎來到每週重點新聞頻道。本頻道旨在綜合各大新聞媒體的報導，為您提供本週最重要、最具影響力的英國新聞事件的客觀、中立、詳細的報導。我們承諾所有新聞稿均為獨立重新撰寫，不含評論或個人意見。</p>
+                
+                <div class="news-section">
+                    <div class="news-card" onclick="openArticleModal('housing_bill')">
+                        <img src="https://locationpro.org/housing.jpg" alt="英國房屋照片" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">政府推進《住房法案》改革租賃市場</div>
+                            <div class="news-subtitle">旨在提供租戶更多保障，平衡業主權益</div>
+                            <div class="news-origin">政治 | 經濟 | 社會</div>
+                            <div class="news-tag">本週重點</div>
+                            2025年11月18日
+                        </div>
+                    </div>
+                    
+                    <div class="news-card" onclick="openArticleModal('economic_forecast')">
+                        <img src="https://locationpro.org/figure.jpg" alt="英國經濟圖表" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">中央銀行維持利率不變 經濟預測面臨挑戰</div>
+                            <div class="news-subtitle">通脹與增長數據持續引發市場關注</div>
+                            <div class="news-origin">經濟 | 財政</div>
+                            <div class="news-tag">數據分析</div>
+                            2025年11月18日
+                        </div>
+                    </div>
+                    
+                    <div class="news-card" onclick="openArticleModal('nhs_strike')">
+                        <img src="https://locationpro.org/nhs.jpg" alt="醫護人員在醫院" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">NHS醫護人員薪酬談判仍在進行</div>
+                            <div class="news-subtitle">工會呼籲政府提供更具吸引力的方案</div>
+                            <div class="news-origin">社會 | 醫療</div>
+                            <div class="news-tag">全國關注</div>
+                            2025年11月18日
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </main>
+        
+        <aside>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>廣告贊助</h3>
+                </div>
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/47HvT9A" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+                
+                <div class="ad-box">
+                    <h4>NordPass - Password Manager</h4>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="ad-link">Secure Your Passwords</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="widget-head">
+                    <h3>關於本頻道</h3>
+                </div>
+                <p>每週重點新聞頻道是UK Hong Konger Times的專題系列，致力於為讀者提供英國各地重大新聞事件的客觀、中肯、詳盡的綜合報導。</p>
+                <p>我們旨在協助香港讀者迅速掌握英國社會、政治、經濟及文化動向。</p>
+            </div>
+            
+            <div class="card">
+                <div class="widget-head">
+                    <h3>新聞來源參考</h3>
+                </div>
+                <ul style="padding-left: 20px;">
+                    <li>BBC News</li>
+                    <li>The Guardian</li>
+                    <li>The Times</li>
+                    <li>Financial Times</li>
+                    <li>Reuters</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <strong>The UK Hong Konger Times</strong><br>
+                <div style="margin-top: 8px;">
+                    <strong>About:</strong> The UK Hong Konger Times aggregates live public data to help Hongkongers in the UK.
+                </div>
+                <div style="font-size: 12px; margin-top: 8px;">
+                    <strong>Full Disclaimer:</strong> The content is for informational purposes only and does not constitute professional advice.
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/3L35nyP" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="articleModal" class="article-modal">
+        <div class="article-modal-content">
+            <span class="article-modal-close" onclick="closeArticleModal()">&times;</span>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--soft-gray); padding-bottom: 10px;">
+                <div>
+                    <strong style="font-family: 'UnifrakturCook', serif; font-size: 20px;">UK Hong Konger Times</strong>
+                </div>
+                <div class="ad-box" style="padding: 8px; margin: 0;">
+                    <a href="https://amzn.to/47HvT9A" target="_blank" style="font-size: 16px; color: #0066cc; text-decoration: none;">Shop Amazon</a>
+                </div>
+            </div>
+            
+            <div id="articleModalTitle" class="article-modal-title"></div>
+            <div id="articleModalSubtitle" class="article-modal-subtitle"></div>
+            <div id="articleModalBody" class="article-modal-body"></div>
+            <div id="articleModalDate" class="article-modal-date">
+                <div class="article-modal-author">撰寫人: The UK Hong Konger Times - LocationPro.org</div>
+                <div id="articleDateText"></div>
+            </div>
+            
+            <div class="ad-box" style="margin-top: 20px;">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 文章内容数据 - 僅一則重點新聞
+        const ARTICLE_CONTENT = {
+            housing_bill: {
+                title: "英國政府推出新《住房法案》：租賃市場將迎來重大變革",
+                subtitle: "英國房屋租賃市場的法律框架面臨自1988年以來的最大規模改革，旨在解決租賃市場長期存在的結構性問題。",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/housing.jpg" alt="英國房屋照片" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>法案概述與目標</h4>
+                        <p>英國政府本週正式向國會提交了全新的《住房法案》（The Renters (Reform) Bill），這項立法被視為政府解決租賃市場危機、提高租戶保障的核心措施。該法案主要目標是廢除現行的「無理由驅逐」（No-Fault Evictions，即Section 21）條款，並建立一個更公平、更具安全感的租賃環境。政府聲明，此舉旨在平衡租戶與業主的權益，同時提高租賃物業的標準。</p>
+                        
+                        <h4>廢除 Section 21 的影響</h4>
+                        <p>廢除《1988年住房法》中的 Section 21 驅逐程序是法案的關鍵組成部分。Section 21 允許業主在租約固定期限結束後或在定期租賃期間，無需提供理由即可驅逐租戶，只需提前兩個月通知。新法案將以 Section 8 驅逐程序為基礎，要求業主必須提供合法的驅逐理由。合法的理由範疇將會擴大，包括業主出售物業、業主或其直系親屬搬入物業、以及租戶嚴重違約等情況，但這些理由的使用將受到更嚴格的監管。</p>
+                        
+                        <h4>新的租賃模式與規定</h4>
+                        <p>《住房法案》提出了一個新的租賃模式，將所有定期租賃（Fixed-term tenancies）轉變為單一的**定期開放式租賃（Periodic tenancies）**。這意味著租賃期限不再有固定結束日期，租戶只需提前兩個月通知即可隨時搬離，從而增加了租戶的靈活性。此外，法案還將設立一個新的私人租賃業主資料庫（Landlord Register）和一個新的私人租賃監察員（Private Renters' Ombudsman）。該監察員將為租戶提供一個獨立、中立的平臺，以解決與業主之間的爭議，無需透過冗長的法院程序。</p>
+
+                        <h4>反對與支持的聲音</h4>
+                        <p>支持者，包括眾多租戶權益組織，對廢除 Section 21 表示歡迎，認為這將是保障數百萬租戶居住安全的重要一步。他們指出，租戶將不再因向業主報告維修問題或要求改善房屋狀況而面臨被驅逐的風險。然而，代表業主的組織對法案表達了擔憂。他們認為，在沒有 Section 21 作為後盾的情況下，新的 Section 8 理由必須高效且有效，以確保他們能迅速處理反社會行為或嚴重拖欠租金的租戶。一些業主組織警告，過度嚴格的監管可能導致部分業主選擇退出租賃市場，從而進一步加劇住房供應短缺。</p>
+
+                        <h4>後續審議與實施時間表</h4>
+                        <p>該法案在國會進入審議程序後，預計將面臨多輪辯論和修訂。政府已表明決心通過該法案，但在實施時間表上仍存在不確定性。立法生效後，將有一個過渡期，讓業主、租戶和相關機構有時間適應新的法律框架。政府強調，新法案旨在建立一個「更安全、更公平、更優質」的私人租賃部門，以應對不斷變化的英國住房需求。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>UK Government Introduces New Housing Bill: Major Changes for the Rental Market</h4>
+                        <p>The legal framework for the UK housing rental market is facing its most significant reform since 1988 with the introduction of the new Renters (Reform) Bill, which aims to address long-standing structural issues within the sector.</p>
+                        
+                        <h4>Overview and Objectives of the Bill</h4>
+                        <p>The UK Government formally submitted the comprehensive Renters (Reform) Bill to Parliament this week, positioning the legislation as a central measure to address the rental market crisis and enhance tenant protection. The main objective of the Bill is the abolition of "No-Fault Evictions" (Section 21) and the establishment of a fairer rental environment with greater security for tenants. The government states that this move is intended to balance the rights of tenants and landlords while improving the standard of rental properties.</p>
+                        
+                        <h4>Impact of Abolishing Section 21</h4>
+                        <p>The repeal of the Section 21 eviction procedure under the Housing Act 1988 is a key component of the Bill. Section 21 currently allows landlords to evict tenants without providing a reason, after the fixed term ends or during a periodic tenancy, merely by giving two months' notice. The new Bill will rely on the reformed Section 8 eviction grounds, requiring landlords to provide a valid, specified reason for eviction. The scope of valid reasons will be broadened to include the landlord's intention to sell the property, the landlord or their close family moving in, and serious tenant breaches, but the use of these grounds will be subject to stricter oversight.</p>
+                        
+                        <h4>New Tenancy Model and Regulations</h4>
+                        <p>The Housing Bill proposes a new tenancy structure, converting all fixed-term tenancies into a single **periodic tenancy** model. This means tenancies will not have a fixed end date, and tenants will be able to leave at any point by providing two months' notice, thereby increasing tenant flexibility. Additionally, the Bill mandates the establishment of a new **Landlord Register** and a new **Private Renters' Ombudsman**. The Ombudsman will provide an independent, neutral platform for tenants to resolve disputes with landlords without resorting to lengthy court proceedings.</p>
+                        
+                        <h4>Opposition and Support</h4>
+                        <p>Supporters, including numerous tenant rights organizations, welcome the abolition of Section 21, viewing it as a vital step towards securing housing stability for millions of renters. They argue that tenants will no longer face the risk of eviction for reporting necessary repairs or requesting property improvements. However, organizations representing landlords have voiced concerns. They stress that the new Section 8 grounds must be efficient and effective to ensure they can swiftly deal with tenants exhibiting anti-social behaviour or severe rent arrears without the safety net of Section 21. Some landlord groups caution that excessively stringent regulations might lead some property owners to exit the rental market, potentially exacerbating the current housing supply shortage.</p>
+                        
+                        <h4>Next Steps and Implementation Timeline</h4>
+                        <p>The Bill is expected to undergo several rounds of debate and amendment as it proceeds through Parliament. The government has expressed its determination to pass the legislation, though uncertainties regarding the implementation timeline remain. Once the legislation comes into force, a transition period will allow landlords, tenants, and relevant bodies to adapt to the new legal framework. The government emphasizes that the new Bill aims to create a "safer, fairer, and higher quality" private rented sector to meet the evolving housing needs of the United Kingdom.</p>
+                    </div>
+                `,
+                date: "2025年11月18日"
+            },
+            economic_forecast: {
+                title: "中央銀行維持利率不變 英國經濟預測面臨挑戰",
+                subtitle: "持續的高通脹和疲軟的增長數據使英國的經濟前景充滿不確定性。",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/figure.jpg" alt="英國經濟圖表" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        <h4>決策背景與市場反應</h4>
+                        <p>本週，英格蘭銀行貨幣政策委員會（MPC）投票決定將官方銀行利率維持在目前的水平，此舉符合大多數市場分析師的預期。儘管通脹率已從峰值回落，但仍遠高於2%的目標，且核心通脹壓力持續存在，成為維持利率不變的主要考量。市場對此反應謹慎，英鎊匯率波動不大，投資者正密切關注下一季度的通脹報告。</p>
+                        
+                        <h4>通脹與工資增長數據</h4>
+                        <p>最新的官方數據顯示，消費者物價指數（CPI）年增長率輕微下降，但服務業通脹依然頑固。此外，英國的平均工資增長率雖然有所放緩，但仍保持在歷史高位，這被視為對價格壓力造成持續影響的因素之一。MPC在聲明中指出，他們需要看到更明確的證據，證明潛在的通脹壓力正在持續且穩健地消退，才會考慮調整利率。</p>
+
+                        <h4>增長前景與衰退風險</h4>
+                        <p>中央銀行同時發布了最新的經濟增長預測，指出儘管英國避免了技術性衰退，但未來一年的增長前景仍然疲弱。高利率環境對家庭借貸成本和企業投資造成壓力，影響了整體經濟活動。財政大臣已公開表示，政府的首要任務是將通脹降至目標水平，並承諾在接下來的財政報告中推出支持增長和提高生產力的措施。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>Bank of England Holds Rates Steady Amid Challenging Economic Forecast</h4>
+                        <p>The economic outlook for the UK remains uncertain, with persistently high inflation and sluggish growth data continuing to capture market attention.</p>
+                        
+                        <h4>Decision Context and Market Response</h4>
+                        <p>This week, the Bank of England's Monetary Policy Committee (MPC) voted to hold the official bank rate at its current level, a move that aligned with the expectations of most market analysts. The primary rationale for maintaining the rate was that while inflation has fallen from its peak, it remains significantly above the 2% target, with persistent core inflationary pressures. The market reaction was cautious, with minimal movement in the Sterling exchange rate, as investors eagerly await the next quarterly inflation report.</p>
+                        
+                        <h4>Inflation and Wage Growth Data</h4>
+                        <p>Latest official data indicated a slight decrease in the annual Consumer Price Index (CPI) growth rate; however, services inflation remains sticky. Furthermore, while the UK's average wage growth has begun to moderate, it is still at historically high levels, which the MPC sees as a factor contributing to continued price pressures. In its statement, the MPC emphasized the need for clearer evidence of a sustained and robust easing of underlying inflationary pressures before considering any rate adjustments.</p>
+                        
+                        <h4>Growth Outlook and Recession Risks</h4>
+                        <p>The central bank also released its updated economic growth projections, noting that despite the UK avoiding a technical recession, the growth outlook for the coming year remains subdued. The high-interest-rate environment is placing pressure on household borrowing costs and business investment, impacting overall economic activity. The Chancellor of the Exchequer reiterated the government's priority to bring inflation down to target and pledged to introduce measures aimed at supporting growth and boosting productivity in the forthcoming fiscal statement.</p>
+                    </div>
+                `,
+                date: "2025年11月18日"
+            },
+            nhs_strike: {
+                title: "國民保健服務（NHS）醫護人員薪酬談判僵局",
+                subtitle: "工會與政府之間的薪酬爭議持續，可能影響冬季的醫療服務提供。",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/nhs.jpg" alt="醫護人員在醫院" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        <h4>最新談判進展</h4>
+                        <p>代表國民保健服務（NHS）數十萬醫護人員的工會與英國政府本週進行了新一輪的薪酬談判。主要的爭議點集中在未來一年的薪酬增幅，以及追溯性補償的問題。工會方面堅持，薪酬增幅必須顯著高於當前的通脹率，以彌補過去數年實際工資的下降，並解決護士、初級醫生和其他專業人員的大規模離職問題。</p>
+                        
+                        <h4>服務影響與冬季預警</h4>
+                        <p>由於談判陷入僵局，部分工會已發出進一步罷工行動的威脅。醫療界領袖對此表示擔憂，警告任何額外的罷工行動都可能對已經不堪重負的NHS服務造成嚴重影響，特別是隨著冬季流感和呼吸道疾病高峰期的臨近。政府方面則強調，已向 NHS 提供了「公平和負責任」的薪酬方案，並呼籲工會回到談判桌，尋求一個對納稅人可持續的解決方案。</p>
+
+                        <h4>政府與工會的立場差異</h4>
+                        <p>政府的立場集中在維持公共財政紀律，並遵循獨立薪酬審查機構的建議。而工會則強調，提高薪酬不僅是對醫護人員的價值認可，更是保障未來NHS服務質量和人員保留的關鍵。工會引用數據指出，由於低薪和工作量大，NHS的職位空缺率持續高企，已對病患護理構成威脅。談判結果將直接影響未來數月英國公共服務的穩定性。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>NHS Staff Pay Dispute Continues Amid Stalled Negotiations</h4>
+                        <p>The pay dispute between unions representing healthcare workers and the UK Government persists, raising concerns about the potential impact on service delivery during the winter months.</p>
+                        
+                        <h4>Latest Negotiation Update</h4>
+                        <p>The unions representing hundreds of thousands of National Health Service (NHS) staff engaged in a fresh round of pay negotiations with the UK Government this week. Key sticking points revolve around the scale of the pay increase for the coming year and the issue of retrospective compensation. Unions maintain that any increase must be substantially above the current inflation rate to compensate for years of real-terms pay cuts and address the mass exodus of nurses, junior doctors, and other professionals.</p>
+                        
+                        <h4>Service Impact and Winter Warning</h4>
+                        <p>With negotiations reaching an impasse, some unions have issued threats of further industrial action. Medical leaders have expressed concern, warning that any additional strikes could severely impact the already strained NHS services, especially with the approaching winter peak for flu and respiratory illnesses. The Government, conversely, asserts that it has offered a "fair and responsible" pay package to the NHS and urges unions to return to the negotiating table to find a fiscally sustainable solution for taxpayers.</p>
+                        
+                        <h4>Divergence in Stances</h4>
+                        <p>The Government's position focuses on maintaining public finance discipline and adhering to the recommendations of independent pay review bodies. Unions, however, argue that improving pay is not only recognition of healthcare workers' value but also crucial for securing the future quality of NHS services and staff retention. Unions cite data indicating that high vacancy rates in the NHS, driven by low pay and excessive workload, continue to pose a threat to patient care. The outcome of these negotiations will directly influence the stability of UK public services in the coming months.</p>
+                    </div>
+                `,
+                date: "2025年11月18日"
+            },
+        };
+
+        // 文章彈窗功能
+        function openArticleModal(newsId) {
+            const article = ARTICLE_CONTENT[newsId];
+            if (article) {
+                document.getElementById('articleModalTitle').innerHTML = article.title;
+                document.getElementById('articleModalSubtitle').innerHTML = article.subtitle;
+                document.getElementById('articleModalBody').innerHTML = article.content;
+                document.getElementById('articleDateText').innerHTML = article.date;
+                document.getElementById('articleModal').style.display = 'block';
+            }
+        }
+
+        function closeArticleModal() {
+            document.getElementById('articleModal').style.display = 'none';
+        }
+
+        // 點擊彈窗外部關閉
+        window.onclick = function(event) {
+            const modal = document.getElementById('articleModal');
+            if (event.target == modal) {
+                closeArticleModal();
+            }
+        }
+
+        // 更新日期
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            // 使用英國本地時間，但轉換為香港繁體格式
+            document.getElementById('dateNow').innerText = now.toLocaleDateString('zh-HK', options).replace(/ /g, '');
+        }
+
+        // 頁面加載完成後執行
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDate();
+        });
+    </script>
+</body>
+</html>

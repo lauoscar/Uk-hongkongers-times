@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英国城市专题 - UK Hong Konger Times</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #f4efe6;
+            --paper: #fffdf8;
+            --ink: #111;
+            --muted: #666;
+            --card-radius: 12px;
+            --pad: 14px;
+            --soft-gray: rgba(34,34,34,0.06);
+            --accent: #000;
+            --city-blue: #003366;
+            --city-green: #006633;
+            --city-gold: #b38b00;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+            background-size: 10px 10px, 10px 10px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--paper);
+            border-bottom: 3px double #000;
+            padding: 8px 12px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            position: relative;
+            z-index: 2200;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        }
+        
+        .header-left {
+            flex: 1;
+            text-align: left;
+            min-width: 260px;
+        }
+        
+        .site-title {
+            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-size: 48px;
+            color: #000;
+            margin: 0;
+            text-align: center;
+            flex: 1;
+            letter-spacing: 1px;
+        }
+        
+        .site-subtitle {
+            font-family: 'serif';
+            font-size: 22px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: -8px;
+        }
+        
+        .header-right {
+            width: 300px;
+            text-align: right;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            background: var(--paper);
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-family: 'UnifrakturCook', serif;
+            font-size: 24px;
+            color: #000;
+            text-decoration: none;
+            margin-right: 30px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-menu li {
+            margin: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--ink);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(0,0,0,0.05);
+            border-color: var(--muted);
+            text-decoration: none;
+        }
+        
+        .nav-menu a.active {
+            background: rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-wrap {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 18px;
+        }
+        
+        .card {
+            background: var(--paper);
+            padding: var(--pad);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--soft-gray);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+        
+        .widget-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .widget-head h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .widget-sub {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        /* City Section */
+        .city-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+        
+        .city-card {
+            background: var(--paper);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .city-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .city-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--soft-gray);
+        }
+        
+        .city-content {
+            padding: 16px;
+        }
+        
+        .city-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+        
+        .city-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+        
+        .city-region {
+            font-size: 12px;
+            color: var(--muted);
+            font-style: italic;
+        }
+        
+        .city-tag {
+            display: inline-block;
+            background: var(--city-blue);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        /* Article Modal */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+        
+        .article-modal-content {
+            background-color: var(--paper);
+            margin: 40px auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 900px;
+            border-radius: var(--card-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .article-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--muted);
+        }
+        
+        .article-modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--ink);
+            border-bottom: 2px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+        
+        .article-modal-body {
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .article-modal-body p {
+            margin-bottom: 16px;
+        }
+        
+        .article-modal-body strong {
+            font-weight: bold;
+        }
+        
+        .article-modal-body h4 {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--city-blue);
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 6px;
+        }
+        
+        .article-modal-body .chinese-section {
+            font-family: 'Noto Serif TC', serif;
+        }
+        
+        .article-modal-body .english-section {
+            margin-top: 30px;
+            border-top: 1px solid var(--soft-gray);
+            padding-top: 20px;
+        }
+        
+        .article-modal-date {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 20px;
+            border-top: 1px solid var(--soft-gray);
+            padding-top: 10px;
+        }
+        
+        /* Ad Boxes */
+        .ad-box {
+            background: #fafafa;
+            border: 1px dashed #ccc;
+            padding: 12px;
+            text-align: center;
+            color: #777;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .ad-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .ad-link {
+            display: block;
+            font-size: 20px;
+            color: #0066cc;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--paper);
+            border-top: 3px double #000;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .footer-left {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-wrap {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .site-title {
+                font-size: 32px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+            }
+            
+            .nav-menu a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .city-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-right {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div id="dateNow">2025年1月15日 星期三</div>
+            <div id="headerQuote">"Exploring the rich history and vibrant culture of British cities."</div>
+        </div>
+        
+        <div>
+            <div class="site-title">The UK Hong Konger Times</div>
+            <div class="site-subtitle">UK Cities Channel</div>
+        </div>
+        
+        <div class="header-right">
+            <div class="ad-box">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">UK Hong Konger Times</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">首頁 Home</a></li>
+       <li><a href="weekly-news.html" >本週重點新聞Weekly News</a></li>
+      <li><a href="uk-travel.html" >旅遊頻道Travel</a></li>
+      <li><a href="uk-festivals.html" >節日頻道Festivals</a></li>
+      <li><a href="uk-food.html" >美食頻道Food Digest</a></li>
+      <li><a href="uk-cities.html" class="active">城市專題A Pulse of Nation</a></li>
+      <li><a href="uk-society.html" >週刊專題Weekly Nexus</a></li>
+      <li><!-- 在新标签页打开 --><a href="lifeinuk.html" >Life in the UK Test-Practice Quiz</a></li>
+                <li><a href="bnoguide.html" >BNO移民指南</a></li>       
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main-wrap">
+        <main>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>英國城市專題：探索不列顛的城市魅力</h3>
+                    <div class="widget-sub">UK Cities Channel: Exploring the Charm of British Cities</div>
+                </div>
+                <p>歡迎來到英國城市專題！在這專題中，我們將帶您深入探索英國各大城市的獨特魅力。從歷史悠久的倫敦到文化薈萃的愛丁堡，從工業革命的搖籃曼徹斯特到學術殿堂牛津與劍橋，每個城市都承載著豐富的歷史、文化與現代活力。讓我們一起漫步在這些城市的街道上，感受它們獨特的氣息與故事。</p>
+                
+                <div class="city-section">
+                    <div class="city-card" onclick="openArticleModal('london')">
+                        <img src="https://locationpro.org/londonnight.jpg" alt="倫敦 London" class="city-image">
+                        <div class="city-content">
+                            <div class="city-title">倫敦 London</div>
+                            <div class="city-subtitle">英國的首都與世界級大都會</div>
+                            <div class="city-region">英格蘭</div>
+                            <div class="city-tag">首都</div>
+                        </div>
+                    </div>
+                    
+                    <div class="city-card" onclick="openArticleModal('edinburgh')">
+                        <img src="https://locationpro.org/edinburgh.jpg" alt="愛丁堡 Edinburgh" class="city-image">
+                        <div class="city-content">
+                            <div class="city-title">愛丁堡 Edinburgh</div>
+                            <div class="city-subtitle">蘇格蘭的歷史與文化之都</div>
+                            <div class="city-region">蘇格蘭</div>
+                            <div class="city-tag">文化之都</div>
+                        </div>
+                    </div>
+                    
+                    <div class="city-card" onclick="openArticleModal('manchester')">
+                        <img src="https://locationpro.org/manchester.jpg" alt="曼徹斯特 Manchester" class="city-image">
+                        <div class="city-content">
+                            <div class="city-title">曼徹斯特 Manchester</div>
+                            <div class="city-subtitle">工業革命的搖籃與現代創意中心</div>
+                            <div class="city-region">英格蘭西北部</div>
+                            <div class="city-tag">工業城市</div>
+                        </div>
+                    </div>
+                    
+                    <div class="city-card" onclick="openArticleModal('bath')">
+                        <img src="https://locationpro.org/bath.jpg" alt="巴斯 Bath" class="city-image">
+                        <div class="city-content">
+                            <div class="city-title">巴斯 Bath</div>
+                            <div class="city-subtitle">喬治亞時期的典雅與古羅馬遺產</div>
+                            <div class="city-region">英格蘭西南部</div>
+                            <div class="city-tag">世界遺產</div>
+                        </div>
+                    </div>
+                    
+                    <div class="city-card" onclick="openArticleModal('york')">
+                        <img src="https://locationpro.org/york.jpg" alt="約克 York" class="city-image">
+                        <div class="city-content">
+                            <div class="city-title">約克 York</div>
+                            <div class="city-subtitle">中世紀風情與維京歷史的交匯點</div>
+                            <div class="city-region">英格蘭約克郡</div>
+                            <div class="city-tag">歷史古城</div>
+                        </div>
+                    </div>
+                    
+                    <div class="city-card" onclick="openArticleModal('liverpool')">
+                        <img src="https://locationpro.org/liverpool.jpg" alt="利物浦 Liverpool" class="city-image">
+                        <div class="city-content">
+                            <div class="city-title">利物浦 Liverpool</div>
+                            <div class="city-subtitle">披頭四的故鄉與海事遺產</div>
+                            <div class="city-region">英格蘭西北部</div>
+                            <div class="city-tag">音樂之城</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>廣告贊助</h3>
+                </div>
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/47HvT9A" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+                
+                <div class="ad-box">
+                    <h4>NordPass - Password Manager</h4>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="ad-link">Secure Your Passwords</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="widget-head">
+                    <h3>關於本頻道</h3>
+                </div>
+                <p>英國城市專題是UK Hong Konger Times的專題系列，致力於深入介紹英國豐富多彩的城市文化。從歷史古城到現代都市，我們將帶您探索英國城市的獨特魅力。</p>
+                <p>每個城市都承載著獨特的歷史、文化與社會意義，我們將透過詳細的文章與精美的圖片，為您呈現最完整的城市面貌。</p>
+            </div>
+            
+            <div class="card">
+                <div class="widget-head">
+                    <h3>熱門城市</h3>
+                </div>
+                <ul style="padding-left: 20px;">
+                    <li>倫敦 - 英國首都</li>
+                    <li>愛丁堡 - 蘇格蘭之都</li>
+                    <li>曼徹斯特 - 工業革命搖籃</li>
+                    <li>巴斯 - 世界遺產城市</li>
+                    <li>約克 - 中世紀古城</li>
+                    <li>利物浦 - 披頭四故鄉</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <strong>The UK Hong Konger Times</strong><br>
+                <div style="margin-top: 8px;">
+                    <strong>About:</strong> The UK Hong Konger Times aggregates live public data to help Hongkongers in the UK.
+                </div>
+                <div style="font-size: 12px; margin-top: 8px;">
+                    <strong>Full Disclaimer:</strong> The content is for informational purposes only and does not constitute professional advice.
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/3L35nyP" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Article Modal -->
+    <div id="articleModal" class="article-modal">
+        <div class="article-modal-content">
+            <span class="article-modal-close" onclick="closeArticleModal()">&times;</span>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--soft-gray); padding-bottom: 10px;">
+                <div>
+                    <strong style="font-family: 'UnifrakturCook', serif; font-size: 20px;">UK Hong Konger Times</strong>
+                </div>
+                <div class="ad-box" style="padding: 8px; margin: 0;">
+                    <a href="https://amzn.to/47HvT9A" target="_blank" style="font-size: 16px; color: #0066cc; text-decoration: none;">Shop Amazon</a>
+                </div>
+            </div>
+            
+            <div id="articleModalTitle" class="article-modal-title"></div>
+            <div id="articleModalBody" class="article-modal-body"></div>
+            <div id="articleModalDate" class="article-modal-date"></div>
+            
+            <div class="ad-box" style="margin-top: 20px;">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 文章内容数据 - 使用 GitHub 图片链接
+        const ARTICLE_CONTENT = {
+            london: {
+                title: "倫敦 London：英國的首都與世界級大都會",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/londonnight.jpg" alt="倫敦 London" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>城市歷史</h4>
+                        <p>倫敦的歷史可以追溯到近兩千年前，由羅馬人於公元43年建立，當時名為倫迪尼姆。中世紀時期，倫敦逐漸發展成為英格蘭的政治與經濟中心，西敏寺的建立更鞏固了其作為王國首都的地位。1666年的倫敦大火摧毀了大部分中世紀城市，但也為現代倫敦的建設鋪平了道路。維多利亞時代，倫敦成為大英帝國的心臟，其影響力遍及全球。二戰期間的轟炸雖然造成巨大破壞，但戰後的重建讓倫敦煥發新生，成為今日我們所見的多元文化國際大都會。</p>
+                        
+                        <h4>文化特色</h4>
+                        <p>倫敦是文化的大熔爐，擁有世界級的博物館、美術館和表演藝術場地。大英博物館收藏著來自全球的珍貴文物，國家美術館則展示著歐洲繪畫的瑰寶。西區劇院是英語世界戲劇表演的中心，每年吸引數百萬觀眾。倫敦的音樂場景同樣豐富多彩，從皇家阿爾伯特音樂廳的古典音樂會到布里克斯頓學院的搖滾演出，應有盡有。這座城市還以其多元文化社區聞名，從印度咖哩屋到中國城，從加勒比嘉年華到諾丁山狂歡節，展現了真正的國際化風貌。</p>
+                        
+                        <h4>著名景點</h4>
+                        <p>倫敦的著名景點數不勝數，從歷史古蹟到現代建築，無不令人驚嘆。倫敦塔見證了英國千年歷史，塔橋則是城市的象徵。白金漢宮的衛兵換崗儀式是遊客必看的傳統表演。西敏寺不僅是王室加冕之地，更是英國文學巨匠的最後安息之所。倫敦眼提供了俯瞰城市的獨特視角，而碎片大廈則代表了現代倫敦的天際線。大英博物館、自然歷史博物館和維多利亞與阿爾伯特博物館等文化機構免費向公眾開放，讓知識與藝術觸手可及。</p>
+                        
+                        <h4>美食與購物</h4>
+                        <p>倫敦的美食場景極其多元，從米其林星級餐廳到街頭小吃攤，滿足各種口味和預算。傳統的英式下午茶是不可錯過的體驗，而博羅市場則展示了倫敦最好的農產品和街頭美食。購物方面，牛津街和攝政街是時尚愛好者的天堂，哈羅德百貨和塞爾福里奇百貨公司提供奢華購物體驗。科文特花園的獨特精品店和卡納比街的潮流服飾則為追求個性化的購物者提供了豐富選擇。倫敦的市集文化也十分興盛，波特貝羅路市集的古董和卡姆登市集的另類風格都極具特色。</p>
+                        
+                        <h4>交通與住宿</h4>
+                        <p>倫敦擁有世界上最古老的地鐵系統，俗稱"管子"，是遊覽城市最便捷的方式。標誌性的紅色雙層巴士和黑色出租車也是城市風景的一部分。對於住宿，倫敦提供從豪華酒店到經濟型旅舍的各種選擇。梅費爾和騎士橋地區集中了頂級酒店，而國王十字和肖爾迪奇等新興區域則有更多設計師酒店和精品住宿。無論預算如何，遊客都能找到適合的住宿地點，方便探索這座迷人城市的各個角落。</p>
+                        
+                        <h4>生活與工作</h4>
+                        <p>作為全球金融中心之一，倫敦提供了豐富的就業機會，特別是在金融、科技、創意產業和法律領域。城市分為多個特色鮮明的區域，每個區域都有其獨特的生活方式。肯辛頓和切爾西優雅寧靜，肖爾迪奇和霍克斯頓充滿創意活力，諾丁山和漢普斯特德則融合了波西米亞風格與鄉村魅力。儘管生活成本較高，但倫敦的文化多樣性、職業機會和豐富的社交生活使其成為許多人嚮往的居住地。城市的公園和綠地，如海德公園和攝政公園，為都市生活提供了寶貴的喘息空間。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>City History</h4>
+                        <p>London's history dates back nearly two thousand years, founded by the Romans in 43 AD as Londinium. During the medieval period, London gradually developed into England's political and economic center, with the establishment of Westminster Abbey further consolidating its status as the kingdom's capital. The Great Fire of London in 1666 destroyed much of the medieval city but paved the way for the construction of modern London. In the Victorian era, London became the heart of the British Empire, with its influence extending worldwide. Although WWII bombing caused massive destruction, post-war reconstruction revitalized London into the multicultural international metropolis we see today.</p>
+                        
+                        <h4>Cultural Features</h4>
+                        <p>London is a cultural melting pot with world-class museums, art galleries, and performing arts venues. The British Museum houses precious artifacts from around the world, while the National Gallery displays treasures of European painting. The West End theatre district is the center of English-language dramatic performance, attracting millions of audience members annually. London's music scene is equally diverse, ranging from classical concerts at the Royal Albert Hall to rock performances at the Brixton Academy. The city is also famous for its multicultural communities, from Indian curry houses to Chinatown, from the Caribbean Carnival to the Notting Hill Carnival, showcasing a truly international character.</p>
+                        
+                        <h4>Famous Attractions</h4>
+                        <p>London's famous attractions are countless, from historical monuments to modern architecture, all equally astonishing. The Tower of London witnesses a thousand years of British history, while Tower Bridge is the city's symbol. The Changing of the Guard ceremony at Buckingham Palace is a must-see traditional performance for visitors. Westminster Abbey is not only the site of royal coronations but also the final resting place of British literary giants. The London Eye provides a unique perspective overlooking the city, while The Shard represents modern London's skyline. Cultural institutions like the British Museum, Natural History Museum, and Victoria and Albert Museum offer free admission to the public, making knowledge and art accessible to all.</p>
+                        
+                        <h4>Food and Shopping</h4>
+                        <p>London's food scene is extremely diverse, from Michelin-starred restaurants to street food stalls, catering to all tastes and budgets. Traditional English afternoon tea is an experience not to be missed, while Borough Market showcases London's best produce and street food. For shopping, Oxford Street and Regent Street are paradises for fashion enthusiasts, with Harrods and Selfridges offering luxury shopping experiences. Covent Garden's unique boutiques and Carnaby Street's trendy clothing provide ample choices for those seeking personalized shopping. London's market culture is also thriving, with Portobello Road Market's antiques and Camden Market's alternative styles both being highly distinctive.</p>
+                        
+                        <h4>Transportation and Accommodation</h4>
+                        <p>London has the world's oldest underground system, colloquially known as the "Tube," which is the most convenient way to explore the city. The iconic red double-decker buses and black cabs are also part of the city's scenery. For accommodation, London offers various options from luxury hotels to budget hostels. The Mayfair and Knightsbridge areas concentrate top-tier hotels, while emerging districts like King's Cross and Shoreditch have more designer hotels and boutique accommodations. Regardless of budget, visitors can find suitable lodging locations convenient for exploring every corner of this fascinating city.</p>
+                        
+                        <h4>Living and Working</h4>
+                        <p>As one of the global financial centers, London provides abundant employment opportunities, particularly in finance, technology, creative industries, and law. The city is divided into many distinctive areas, each with its unique lifestyle. Kensington and Chelsea are elegant and tranquil, Shoreditch and Hoxton are full of creative energy, while Notting Hill and Hampstead blend bohemian style with village charm. Although the cost of living is high, London's cultural diversity, career opportunities, and rich social life make it a desirable place to live for many. The city's parks and green spaces, such as Hyde Park and Regent's Park, provide valuable breathing space for urban life.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            edinburgh: {
+                title: "愛丁堡 Edinburgh：蘇格蘭的歷史與文化之都",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/edinburgh.jpg" alt="愛丁堡 Edinburgh" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>城市歷史</h4>
+                        <p>愛丁堡的歷史可以追溯到羅馬時代之前，但其真正的發展始於中世紀。愛丁堡城堡所在的火山岩是城市的發源地，這座城堡自12世紀以來一直是蘇格蘭王室的重要據點。15世紀，愛丁堡正式成為蘇格蘭的首都，並在詹姆斯四世統治期間發展成為重要的文化中心。18世紀的蘇格蘭啟蒙運動使愛丁堡贏得了"北方雅典"的美譽，當時的知識分子如大衛·休謨和亞當·斯密在此推動了思想與科學的革命。新城的建設始於18世紀後期，為這座城市增添了喬治亞時期的優雅風貌。今日的愛丁堡不僅是蘇格蘭的政治中心，更是世界著名的文化節慶之都。</p>
+                        
+                        <h4>文化特色</h4>
+                        <p>愛丁堡以其豐富的文化生活聞名於世，尤其是每年八月舉行的愛丁堡國際藝術節和邊緣藝術節。這些節慶活動吸引了來自全球的藝術家和觀眾，使城市充滿創意與活力。愛丁堡也是文學之城，誕生了《哈利波特》系列等著名作品，並擁有悠久的出版傳統。蘇格蘭國家博物館和蘇格蘭國家畫廊展示了蘇格蘭的歷史與藝術成就。城市的傳統與現代並存，從風笛演奏到當代藝術，從蘇格蘭裙到設計師時裝，愛丁堡完美融合了古老傳統與現代創意。</p>
+                        
+                        <h4>著名景點</h4>
+                        <p>愛丁堡的景點集中體現了其悠久的歷史與壯麗的自然風光。愛丁堡城堡屹立在城堡岩上，俯瞰全城，是蘇格蘭最受歡迎的旅遊景點。皇家一英里連接城堡與荷里路德宮，沿途充滿歷史建築、禮品店和傳統酒吧。亞瑟王座是座死火山，提供了俯瞰城市和福斯灣的絕佳視角。蘇格蘭國家博物館全面展示了蘇格蘭的自然史、考古發現和科技發展。卡爾頓山上的國家紀念碑雖然未完成，但已成為愛丁堡天際線的標誌性部分，其古典風格的廢墟令人聯想起雅典的帕特農神廟。</p>
+                        
+                        <h4>美食與購物</h4>
+                        <p>愛丁堡的美食場景融合了傳統蘇格蘭風味與國際影響。傳統菜餚如哈吉斯、煙熏三文魚和蘇格蘭早餐值得一試，而現代蘇格蘭料理則強調本地食材與創新烹飪技術。這座城市擁有眾多優秀餐廳，包括幾家米其林星級餐廳。購物方面，王子街是主要的商業街，提供各種高街品牌和百貨公司。喬治街和Multrees Walk則集中了奢侈品牌。對於尋找獨特紀念品的遊客，皇家一英里的蘇格蘭羊毛製品、威士忌和格子呢製品是不錯的選擇。 Grassmarket和Stockbridge的獨立精品店則提供了更加個性化的購物體驗。</p>
+                        
+                        <h4>交通與住宿</h4>
+                        <p>愛丁堡國際機場連接了城市與英國及歐洲的主要目的地。市內的公共交通系統包括巴士和有軌電車，方便遊客前往各景點。愛丁堡威弗利車站是英國第二繁忙的火車站，提供前往倫敦及其他英國城市的鐵路服務。對於住宿，愛丁堡提供從豪華酒店到經濟型旅舍的各種選擇。舊城的酒店充滿歷史魅力，而新城的住宿則更加現代舒適。節日期間，住宿需求旺盛，建議提前預訂。無論選擇何處，遊客都能體驗到蘇格蘭著名的熱情好客。</p>
+                        
+                        <h4>生活與工作</h4>
+                        <p>愛丁堡是蘇格蘭的政治中心和重要的金融樞紐，擁有活躍的商業環境。這座城市是許多金融機構、保險公司和投資管理公司的所在地，被稱為"北方之城"。愛丁堡大學和赫瑞瓦特大學等高等教育機構為城市帶來了年輕活力與學術氛圍。創意產業，特別是出版、電影和遊戲開發，也在愛丁堡蓬勃發展。生活質量高是愛丁堡的主要吸引力之一，城市規模適中，既有大都市的文化設施，又保持著社區感。儘管生活成本高於蘇格蘭其他地區，但相比倫敦仍然較為合理，加上美麗的自然環境和豐富的文化生活，使愛丁堡成為極具吸引力的居住和工作地點。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>City History</h4>
+                        <p>Edinburgh's history dates back to before Roman times, but its true development began in the Middle Ages. The volcanic rock where Edinburgh Castle stands is the city's birthplace, and this castle has been an important stronghold of the Scottish monarchy since the 12th century. In the 15th century, Edinburgh officially became the capital of Scotland and developed into an important cultural center during the reign of James IV. The Scottish Enlightenment in the 18th century earned Edinburgh the reputation of "the Athens of the North," when intellectuals like David Hume and Adam Smith promoted revolutions in thought and science here. Construction of the New Town began in the late 18th century, adding Georgian elegance to the city. Today, Edinburgh is not only Scotland's political center but also a world-renowned capital of cultural festivals.</p>
+                        
+                        <h4>Cultural Features</h4>
+                        <p>Edinburgh is famous worldwide for its rich cultural life, particularly the Edinburgh International Festival and the Fringe Festival held every August. These festival events attract artists and audiences from around the globe, filling the city with creativity and vitality. Edinburgh is also a City of Literature, having given birth to famous works like the Harry Potter series and possessing a long publishing tradition. The National Museum of Scotland and the Scottish National Gallery showcase Scotland's history and artistic achievements. The city coexists with tradition and modernity, from bagpipe performances to contemporary art, from kilts to designer fashion, Edinburgh perfectly blends ancient traditions with modern creativity.</p>
+                        
+                        <h4>Famous Attractions</h4>
+                        <p>Edinburgh's attractions集中體現了其悠久的歷史與壯麗的自然風光。Edinburgh Castle stands atop Castle Rock, overlooking the entire city, and is Scotland's most popular tourist attraction. The Royal Mile connects the castle with the Palace of Holyroodhouse, filled with historic buildings, gift shops, and traditional pubs along the way. Arthur's Seat is an extinct volcano that provides excellent views over the city and the Firth of Forth. The National Museum of Scotland comprehensively displays Scotland's natural history, archaeological discoveries, and technological development. The National Monument on Calton Hill, though unfinished, has become an iconic part of Edinburgh's skyline, with its classical-style ruins reminiscent of Athens' Parthenon.</p>
+                        
+                        <h4>Food and Shopping</h4>
+                        <p>Edinburgh's food scene blends traditional Scottish flavors with international influences. Traditional dishes like haggis, smoked salmon, and Scottish breakfast are worth trying, while modern Scottish cuisine emphasizes local ingredients and innovative cooking techniques. The city has many excellent restaurants, including several Michelin-starred establishments. For shopping, Princes Street is the main commercial street, offering various high-street brands and department stores. George Street and Multrees Walk concentrate luxury brands. For visitors seeking unique souvenirs, Scottish wool products, whisky, and tartan items on the Royal Mile are good choices. The independent boutiques in Grassmarket and Stockbridge provide more personalized shopping experiences.</p>
+                        
+                        <h4>Transportation and Accommodation</h4>
+                        <p>Edinburgh International Airport connects the city with major destinations in the UK and Europe. The city's public transportation system includes buses and trams, making it convenient for visitors to reach various attractions. Edinburgh Waverley Station is the second busiest railway station in Britain, providing rail services to London and other UK cities. For accommodation, Edinburgh offers various options from luxury hotels to budget hostels. Hotels in the Old Town are full of historical charm, while accommodations in the New Town are more modern and comfortable. During festival periods, accommodation demand is high, so advance booking is recommended. Regardless of choice, visitors can experience Scotland's famous hospitality.</p>
+                        
+                        <h4>Living and Working</h4>
+                        <p>Edinburgh is Scotland's political center and an important financial hub with an active business environment. The city is home to many financial institutions, insurance companies, and investment management firms, earning it the nickname "the Athens of the North." Higher education institutions like the University of Edinburgh and Heriot-Watt University bring youthful energy and academic atmosphere to the city. Creative industries, particularly publishing, film, and game development, are also thriving in Edinburgh. High quality of life is one of Edinburgh's main attractions - the city has an appropriate scale, offering both metropolitan cultural facilities and a sense of community. Although the cost of living is higher than in other parts of Scotland, it remains more reasonable compared to London. Combined with beautiful natural surroundings and rich cultural life, this makes Edinburgh an extremely attractive place to live and work.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            manchester: {
+                title: "曼徹斯特 Manchester：工業革命的搖籃與現代創意中心",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/manchester.jpg" alt="曼徹斯特 Manchester" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>城市歷史</h4>
+                        <p>曼徹斯特的歷史與工業革命密不可分。這座城市最初是羅馬人的定居點，但在18世紀末和19世紀初，它成為工業革命的中心，特別是在紡織業方面。世界上第一座工業化城市曼徹斯特見證了棉花產業的蓬勃發展，贏得了"棉花之都"的稱號。工業化帶來了財富，也帶來了社會變革——曼徹斯特成為工人運動和合作社運動的溫床。19世紀，曼徹斯特運河的開通使這座內陸城市直接與海洋相連，進一步鞏固了其作為工業和商業中心的地位。二戰期間的轟炸和戰後工業衰退帶來了挑戰，但曼徹斯特成功轉型，如今已成為充滿活力的現代大都市，以其音樂場景、足球文化和創意產業聞名。</p>
+                        
+                        <h4>文化特色</h4>
+                        <p>曼徹斯特的文化場景充滿活力且多元化。這座城市以其音樂遺產而聞名，是許多著名樂隊的發源地，包括史密斯樂隊、快樂星期一和綠洲樂隊。今天的音樂場景依然活躍，擁有眾多現場音樂場所和俱樂部。曼徹斯特也是英國足球的重鎮，擁有兩支世界著名的足球隊——曼聯和曼城。城市的文化機構包括曼徹斯特美術館、惠特沃斯美術館和人民歷史博物館，後者專門展示英國工人階級的歷史。曼徹斯特的創意產業也十分發達，特別是在數字媒體和設計領域。城市的同志村是歐洲最大的LGBTQ+社區之一，展示了曼徹斯特對多元文化的包容性。</p>
+                        
+                        <h4>著名景點</h4>
+                        <p>曼徹斯特的景點反映了其工業遺產和現代轉型。科學與工業博物館位於世界上最古老的客運火車站內，展示了曼徹斯特的工業和科學成就。曼徹斯特市政廳是維多利亞新哥特式建築的傑出範例。老特拉福德球場和伊蒂哈德球場是足球愛好者的聖地。曼徹斯特運河畔的索爾福德碼頭經過改造，現在是洛里藝術中心和帝國戰爭博物館北館的所在地。北區以其獨立商店、街頭藝術和熱鬧的夜生活而聞名。約翰·瑞蘭茲圖書館擁有珍貴的中世紀手稿和早期印刷書籍，是新哥特式建築的瑰寶。</p>
+                        
+                        <h4>美食與購物</h4>
+                        <p>曼徹斯特的美食場景反映了其多元文化的人口。這座城市以其中國城聞名，是英國最大的中國城之一，提供正宗的中國和東亞美食。曼徹斯特還擁有繁榮的咖啡文化，擁有眾多獨立咖啡館。傳統的英國酒吧與時尚的雞尾酒吧並存，滿足不同的社交需求。購物方面，曼徹斯特提供從高街品牌到設計師商品的各種選擇。阿恩代爾中心是英國最大的市內購物中心之一，而King Street和Spinningfields則集中了奢侈品牌。北區的獨立精品店和Afflecks Palace內的個性化商店提供了獨特的購物體驗。曼徹斯特的市集，如曼徹斯特聖誕市場和Altrincham市場，也是尋找獨特商品和當地美食的好去處。</p>
+                        
+                        <h4>交通與住宿</h4>
+                        <p>曼徹斯特國際機場是英國第三繁忙的機場，提供全球目的地連接。市內的Metrolink有軌電車系統是英國最大的輕軌網絡，方便遊客和居民出行。曼徹斯特的中央車站和皮卡迪利車站提供前往英國各地的鐵路服務。對於住宿，曼徹斯特提供多樣化的選擇，從位於市中心的豪華酒店到北區和卡斯爾菲爾德的時尚精品酒店。這座城市還擁有眾多服務式公寓，適合長期停留。無論預算如何，遊客都能找到適合的住宿，方便探索這座充滿活力的城市。</p>
+                        
+                        <h4>生活與工作</h4>
+                        <p>曼徹斯特是英國重要的經濟中心，特別是在金融、法律和專業服務領域。這座城市是英國媒體行業的重要樞紐，英國廣播公司(BBC)和獨立電視台(ITV)在此設有主要基地。曼徹斯特大學和曼徹斯特都會大學等高等教育機構為城市帶來了學術活力和研究創新。創意和數字產業在曼徹斯特蓬勃發展，吸引了眾多初創企業和科技公司。與倫敦相比，曼徹斯特的生活成本較低，但提供了豐富的文化生活和職業機會。城市的社區各具特色，從時尚的北區到綠樹成蔭的迪茲伯里，從歷史悠久的卡斯爾菲爾德到多元文化的拉什爾姆，為居民提供了多樣化的生活選擇。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>City History</h4>
+                        <p>Manchester's history is inextricably linked with the Industrial Revolution. The city began as a Roman settlement but became the center of the Industrial Revolution in the late 18th and early 19th centuries, particularly in textiles. As the world's first industrialized city, Manchester witnessed the booming cotton industry, earning it the nickname "Cottonopolis." Industrialization brought wealth but also social change - Manchester became a hotbed for the labor movement and cooperative movement. In the 19th century, the opening of the Manchester Ship Canal connected this inland city directly to the sea, further consolidating its position as an industrial and commercial center. WWII bombing and post-industrial decline brought challenges, but Manchester successfully transformed and is now a vibrant modern metropolis famous for its music scene, football culture, and creative industries.</p>
+                        
+                        <h4>Cultural Features</h4>
+                        <p>Manchester's cultural scene is vibrant and diverse. The city is famous for its musical heritage, being the birthplace of many famous bands including The Smiths, Happy Mondays, and Oasis. Today's music scene remains active with numerous live music venues and clubs. Manchester is also a stronghold of English football, home to two world-famous football teams - Manchester United and Manchester City. The city's cultural institutions include Manchester Art Gallery, Whitworth Art Gallery, and the People's History Museum, the latter specializing in the history of the British working class. Manchester's creative industries are also well-developed, particularly in digital media and design. The city's Gay Village is one of Europe's largest LGBTQ+ communities, showcasing Manchester's inclusivity towards multiculturalism.</p>
+                        
+                        <h4>Famous Attractions</h4>
+                        <p>Manchester's attractions reflect its industrial heritage and modern transformation. The Science and Industry Museum, located in the world's oldest passenger railway station, showcases Manchester's industrial and scientific achievements. Manchester Town Hall is an outstanding example of Victorian neo-Gothic architecture. Old Trafford and Etihad Stadium are holy sites for football enthusiasts. Salford Quays by the Manchester Ship Canal has been redeveloped and is now home to The Lowry arts centre and the Imperial War Museum North. The Northern Quarter is famous for its independent shops, street art, and vibrant nightlife. John Rylands Library houses precious medieval manuscripts and early printed books, a gem of neo-Gothic architecture.</p>
+                        
+                        <h4>Food and Shopping</h4>
+                        <p>Manchester's food scene reflects its multicultural population. The city is famous for its Chinatown, one of the largest in Britain, offering authentic Chinese and East Asian cuisine. Manchester also has a thriving coffee culture with numerous independent cafes. Traditional British pubs coexist with stylish cocktail bars, catering to different social needs. For shopping, Manchester offers everything from high-street brands to designer goods. The Arndale Centre is one of the UK's largest indoor shopping centers, while King Street and Spinningfields concentrate luxury brands. The independent boutiques in the Northern Quarter and personalized shops within Afflecks Palace provide unique shopping experiences. Manchester's markets, such as the Manchester Christmas Markets and Altrincham Market, are also great places to find unique goods and local food.</p>
+                        
+                        <h4>Transportation and Accommodation</h4>
+                        <p>Manchester International Airport is the UK's third busiest airport, providing global connections. The city's Metrolink tram system is Britain's largest light rail network, convenient for visitors and residents. Manchester's Central Station and Piccadilly Station provide rail services to destinations across Britain. For accommodation, Manchester offers diverse options, from luxury hotels in the city center to stylish boutique hotels in the Northern Quarter and Castlefield. The city also has numerous serviced apartments suitable for extended stays. Regardless of budget, visitors can find suitable accommodation convenient for exploring this vibrant city.</p>
+                        
+                        <h4>Living and Working</h4>
+                        <p>Manchester is an important economic center in Britain, particularly in finance, law, and professional services. The city is a significant hub for the UK media industry, with the BBC and ITV having major bases here. Higher education institutions like the University of Manchester and Manchester Metropolitan University bring academic vitality and research innovation to the city. Creative and digital industries are thriving in Manchester, attracting numerous startups and technology companies. Compared to London, Manchester has a lower cost of living but offers rich cultural life and career opportunities. The city's communities each have distinct characteristics, from the fashionable Northern Quarter to the tree-lined Didsbury, from historic Castlefield to multicultural Rusholme, providing residents with diverse living options.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            bath: {
+                title: "巴斯 Bath：喬治亞時期的典雅與古羅馬遺產",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/bath.jpg" alt="巴斯 Bath" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>城市歷史</h4>
+                        <p>巴斯的歷史可以追溯到古羅馬時期，當時羅馬人在此發現了溫泉，並建立了名為"Aquae Sulis"的溫泉小鎮，意為"蘇利絲之水"。這裡的溫泉是英國唯一的天然溫泉，水溫常年保持在46°C。中世紀時期，巴斯成為重要的羊毛貿易中心，並建立了巴斯修道院。然而，巴斯真正的輝煌時期是在18世紀的喬治亞時代，當時它發展成為英國最時尚的溫泉度假勝地，吸引了包括簡·奧斯汀在內的許多社會名流。建築師約翰·伍德父子設計了這座城市許多標誌性建築，包括圓形廣場和皇家新月樓，使巴斯成為英國喬治亞建築的典範。1987年，巴斯被聯合國教科文組織列為世界遺產，以表彰其獨特的歷史和文化價值。</p>
+                        
+                        <h4>文化特色</h4>
+                        <p>巴斯的文化特色融合了古羅馬遺產與喬治亞時期的優雅。這座城市是英國唯一擁有天然溫泉的地方，溫泉文化深深植根於其身份認同中。巴斯文學節是英國最負盛名的文學活動之一，吸引了世界各地的作家和讀者。這座城市與作家簡·奧斯汀有著密切的聯繫，她曾在巴斯居住，並以這座城市為背景創作了《諾桑覺寺》和《勸導》。巴斯音樂節和巴斯國際音樂節展示了高水平的古典音樂表演。城市的博物館，如時尚博物館和霍爾本博物館，展示了巴斯豐富的藝術和設計傳統。巴斯還以其當代藝術場景而聞名，擁有眾多畫廊和藝術空間。</p>
+                        
+                        <h4>著名景點</h4>
+                        <p>巴斯的景點集中體現了其悠久的歷史和建築之美。羅馬浴場是英國最著名的羅馬遺址之一，包括大浴池、神廟和博物館，展示了古羅馬時期的生活。巴斯修道院是一座宏偉的哥特式教堂，擁有令人驚嘆的扇形拱頂和彩色玻璃窗。普爾特尼橋是世界上最著名的橋樑之一，橋上建有商店，類似於佛羅倫斯的舊橋。圓形廣場和皇家新月樓是喬治亞建築的傑出範例，後者被譽為英國最偉大的喬治亞建築之一。時尚博物館位於巴斯集會廳內，展示了從16世紀至今的時裝歷史。Thermae Bath Spa讓遊客有機會在屋頂溫泉池中體驗巴斯的溫泉水，同時欣賞城市全景。</p>
+                        
+                        <h4>美食與購物</h4>
+                        <p>巴斯的美食場景精緻而多樣，強調當地食材和傳統烹飪技術。薩莉露餐廳是巴斯最古老的餐廳，以其傳統的巴斯圓麵包聞名。這座城市擁有眾多優秀餐廳，提供從現代英國菜到國際美食的各種選擇。巴斯還以其下午茶文化聞名，許多酒店和茶室提供經典的英式下午茶體驗。購物方面，巴斯提供獨特的零售體驗，從高街品牌到獨立精品店應有盡有。米爾森街是主要的購物街，而巴特林步道則是一個歷史悠久的購物廊，建於19世紀。對於尋找獨特紀念品的遊客，巴斯的本地產品如手工肥皂、香水和小批量生產的杜松子酒是不錯的選擇。</p>
+                        
+                        <h4>交通與住宿</h4>
+                        <p>巴斯交通便利，距離倫敦約90分鐘火車車程，距離布里斯托僅15分鐘。巴斯溫泉火車站提供前往英國各地的鐵路服務。市內的公共交通系統包括巴士，方便遊客前往各景點。對於住宿，巴斯提供多種選擇，從豪華酒店到舒適的旅館。許多住宿地點位於歷史建築內，為遊客提供獨特的體驗。皇家新月酒店和巴斯溫泉酒店等歷史酒店提供豪華住宿，而眾多精品酒店和賓館則提供更加親密的體驗。無論選擇何種住宿，遊客都能感受到巴斯著名的優雅與寧靜。</p>
+                        
+                        <h4>生活與工作</h4>
+                        <p>巴斯是英國生活質量最高的城市之一，以其美麗的環境、豐富的文化生活和相對較小的城市規模而受到讚譽。這座城市擁有活躍的商業社區，特別是在創意產業、旅遊和高等教育領域。巴斯大學是英國領先的研究型大學之一，為城市帶來了學術活力和國際學生社區。創意產業，特別是設計、電影和數字媒體，在巴斯蓬勃發展。與英國其他主要城市相比，巴斯的生活成本較高，但許多居民認為其高質量生活值得這一成本。城市的社區各具特色，從歷史中心的喬治亞聯排別墅到周邊鄉村的寧靜村莊，為居民提供了多樣化的生活選擇。巴斯還擁有出色的教育機構和醫療設施，使其成為家庭生活的理想地點。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>City History</h4>
+                        <p>Bath's history dates back to Roman times when the Romans discovered hot springs here and established a spa town called "Aquae Sulis," meaning "the waters of Sulis." The hot springs here are Britain's only natural thermal springs, with water temperature consistently maintained at 46°C. During the medieval period, Bath became an important wool trading center and built Bath Abbey. However, Bath's true golden age was during the 18th-century Georgian era when it developed into Britain's most fashionable spa resort, attracting many social elites including Jane Austen. Architects John Wood the Elder and John Wood the Younger designed many of the city's iconic buildings, including The Circus and Royal Crescent, making Bath a model of Georgian architecture in Britain. In 1987, Bath was designated a UNESCO World Heritage Site in recognition of its unique historical and cultural value.</p>
+                        
+                        <h4>Cultural Features</h4>
+                        <p>Bath's cultural characteristics blend Roman heritage with Georgian elegance. The city is the only place in Britain with natural hot springs, and spa culture is deeply rooted in its identity. The Bath Literature Festival is one of Britain's most prestigious literary events, attracting writers and readers from around the world. The city has close connections with author Jane Austen, who lived in Bath and used the city as a setting for "Northanger Abbey" and "Persuasion." The Bath Festival and Bath International Music Festival showcase high-level classical music performances. The city's museums, such as the Fashion Museum and Holburne Museum, display Bath's rich artistic and design traditions. Bath is also known for its contemporary art scene, with numerous galleries and art spaces.</p>
+                        
+                        <h4>Famous Attractions</h4>
+                        <p>Bath's attractions集中體現了其悠久的歷史和建築之美。The Roman Baths are one of Britain's most famous Roman sites, including the Great Bath, temple, and museum, showcasing life during Roman times. Bath Abbey is a magnificent Gothic church with stunning fan-vaulted ceilings and stained glass windows. Pulteney Bridge is one of the world's most famous bridges, with shops built into it, similar to Florence's Ponte Vecchio. The Circus and Royal Crescent are outstanding examples of Georgian architecture, with the latter regarded as one of Britain's greatest Georgian buildings. The Fashion Museum, located in the Bath Assembly Rooms, displays fashion history from the 16th century to the present. Thermae Bath Spa allows visitors to experience Bath's thermal waters in a rooftop pool while enjoying panoramic city views.</p>
+                        
+                        <h4>Food and Shopping</h4>
+                        <p>Bath's food scene is refined and diverse, emphasizing local ingredients and traditional cooking techniques. Sally Lunn's Historic Eating House is Bath's oldest restaurant, famous for its traditional Bath buns. The city has many excellent restaurants offering everything from modern British cuisine to international dishes. Bath is also known for its afternoon tea culture, with many hotels and tea rooms providing classic English afternoon tea experiences. For shopping, Bath offers unique retail experiences, from high-street brands to independent boutiques. Milsom Street is the main shopping street, while The Corridor is a historic shopping arcade built in the 19th century. For visitors seeking unique souvenirs, Bath's local products like handmade soaps, perfumes, and small-batch gins are good choices.</p>
+                        
+                        <h4>Transportation and Accommodation</h4>
+                        <p>Bath is easily accessible, approximately 90 minutes by train from London and just 15 minutes from Bristol. Bath Spa railway station provides rail services to destinations across Britain. The city's public transportation system includes buses, making it convenient for visitors to reach various attractions. For accommodation, Bath offers various options from luxury hotels to comfortable guesthouses. Many accommodations are located within historic buildings, providing visitors with unique experiences. Historic hotels like The Royal Crescent Hotel & Spa and The Gainsborough Bath Spa offer luxurious stays, while numerous boutique hotels and B&Bs provide more intimate experiences. Regardless of choice, visitors can experience Bath's famous elegance and tranquility.</p>
+                        
+                        <h4>Living and Working</h4>
+                        <p>Bath is one of Britain's highest quality of life cities, praised for its beautiful environment, rich cultural life, and relatively small city size. The city has an active business community, particularly in creative industries, tourism, and higher education. The University of Bath is one of Britain's leading research universities, bringing academic vitality and an international student community to the city. Creative industries, especially design, film, and digital media, are thriving in Bath. Compared to other major UK cities, Bath has a higher cost of living, but many residents consider its high quality of life worth the cost. The city's communities each have distinct characteristics, from Georgian townhouses in the historic center to tranquil villages in the surrounding countryside, providing residents with diverse living options. Bath also has excellent educational institutions and medical facilities, making it an ideal location for family life.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            york: {
+                title: "約克 York：中世紀風情與維京歷史的交匯點",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://locationpro.org/york.jpg" alt="約克 York" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>城市歷史</h4>
+                        <p>約克的歷史豐富而多層次，始於羅馬人建立的軍事要塞埃布拉坎。隨著羅馬帝國衰落，盎格魯-撒克遜人接管並將城市改名為埃弗羅克。然而，約克真正的黃金時代是在維京時期，當時它成為重要的貿易中心，名為約維克。中世紀時期，約克發展成為英格蘭北部最重要的城市，是羊毛貿易的中心和宗教權力的所在地。約克大教堂的建設始於13世紀，歷時250多年才完成，成為北歐最大的哥特式教堂。約克的歷史城牆是英格蘭最完整的城牆系統，見證了城市的防禦歷史。工業革命時期，約克成為鐵路中心，國家鐵路博物館現在就位於此。今天，約克以其保存完好的中世紀街道和建築而聞名，特別是肉鋪街，據說啟發了《哈利波特》中的斜角巷。</p>
+                        
+                        <h4>文化特色</h4>
+                        <p>約克的文化特色深深植根於其豐富的歷史遺產中。這座城市是英國最受歡迎的旅遊目的地之一，以其迷人的中世紀氛圍而聞名。約維克維京中心讓遊客有機會體驗維京時期的約克，而約克城堡博物館則重現了維多利亞時期的街道。約克大教堂不僅是宗教場所，也是重要的文化地標，擁有英國最大的中世紀彩色玻璃窗收藏。約克早期音樂節是英國領先的古典音樂節之一，專注於中世紀、文藝復興和巴洛克音樂。這座城市還以其鬼故事而聞名，有眾多鬼魂步行遊和據稱鬧鬼的地點，包括約克地牢。約克的巧克力歷史也十分著名，曾是英國巧克力製造的中心，現在有約克巧克力故事博物館紀念這一傳統。</p>
+                        
+                        <h4>著名景點</h4>
+                        <p>約克的景點展示了其多元的歷史層次。約克大教堂是城市最著名的地標，擁有令人驚嘆的建築和歷史。中世紀城牆環繞著歷史中心，提供了獨特的散步路線和城市景觀。肉鋪街是一條保存完好的中世紀街道，兩旁是懸垂的木結構建築，現在容納了眾多獨特商店。約維克維京中心重建了維京時期的街道和房屋，讓遊客體驗10世紀的約克。約克城堡博物館通過重建的維多利亞街道和展覽展示了英格蘭的社會歷史。克利福德塔是約克城堡僅存的遺跡，提供了城市全景。國家鐵路博物館擁有世界上最壯觀的鐵路收藏，包括皇家列車和歷史悠久的機車。</p>
+                        
+                        <h4>美食與購物</h4>
+                        <p>約克的美食場景融合了傳統英國菜與現代創新。這座城市以其下午茶而聞名，貝蒂茶室是英國最著名的傳統茶室之一。約克郡布丁是當地的標誌性食品，通常與週日烤肉一起食用。約克還擁有繁榮的咖啡文化，擁有眾多獨立咖啡館。購物方面，約克提供獨特的零售體驗，從高街品牌到獨立精品店應有盡有。肉鋪街是尋找獨特禮品和紀念品的理想地點，而國王廣場則集中了主要零售商。約克市場是一個歷史悠久的室內市場，提供新鮮農產品、手工藝品和街頭美食。對於巧克力愛好者，約克的巧克力店提供手工製作的巧克力，延續了城市的巧克力製造傳統。</p>
+                        
+                        <h4>交通與住宿</h4>
+                        <p>約克交通便利，位於英國東海岸主線上，距離倫敦約兩小時火車車程，距離愛丁堡約兩個半小時。約克火車站提供前往英國各地的鐵路服務。市內的公共交通系統包括巴士，方便遊客前往各景點。對於住宿，約克提供多種選擇，從豪華酒店到舒適的旅館。許多住宿地點位於歷史建築內，為遊客提供獨特的體驗。市中心有眾多酒店和賓館，而周邊鄉村則提供寧靜的住宿選擇。無論選擇何種住宿，遊客都能感受到約克著名的歷史氛圍和約克郡的熱情好客。</p>
+                        
+                        <h4>生活與工作</h4>
+                        <p>約克是英國生活質量最高的城市之一，以其豐富的歷史、文化設施和相對較小的城市規模而受到讚譽。這座城市擁有活躍的商業社區，特別是在旅遊、教育和創意產業領域。約克大學和約克聖約翰大學是重要的高等教育機構，為城市帶來了學術活力和國際學生社區。約克的數字和創意產業正在增長，吸引了眾多科技公司和初創企業。與英國其他主要城市相比，約克的生活成本較為合理，同時提供了高質量的生活。城市的社區各具特色，從歷史中心的中世紀街道到周邊的維多利亞郊區，為居民提供了多樣化的生活選擇。約克還擁有出色的學校和醫療設施，使其成為家庭生活的理想地點。城市的緊湊規模意味著許多景點都可以步行到達，減少了對汽車的依賴。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>City History</h4>
+                        <p>York's history is rich and multi-layered, beginning with the Roman military fortress of Eboracum. As the Roman Empire declined, Anglo-Saxons took over and renamed the city Eoforwic. However, York's true golden age was during the Viking period when it became an important trading center named Jorvik. In medieval times, York developed into northern England's most important city, a center for wool trade and a seat of religious power. Construction of York Minster began in the 13th century, taking over 250 years to complete, becoming Northern Europe's largest Gothic cathedral. York's historic walls are England's most complete city wall system, witnessing the city's defensive history. During the Industrial Revolution, York became a railway hub, now home to the National Railway Museum. Today, York is famous for its well-preserved medieval streets and buildings, particularly The Shambles, said to have inspired Diagon Alley in Harry Potter.</p>
+                        
+                        <h4>Cultural Features</h4>
+                        <p>York's cultural characteristics are deeply rooted in its rich historical heritage. The city is one of Britain's most popular tourist destinations, famous for its charming medieval atmosphere. The Jorvik Viking Centre allows visitors to experience Viking-age York, while York Castle Museum recreates Victorian streets. York Minster is not only a religious site but also an important cultural landmark with Britain's largest collection of medieval stained glass. The York Early Music Festival is one of Britain's leading classical music festivals, focusing on medieval, Renaissance, and Baroque music. The city is also famous for its ghost stories, with numerous ghost walks and allegedly haunted locations including York Dungeon. York's chocolate history is also notable, having been a center of British chocolate manufacturing, now commemorated at York's Chocolate Story.</p>
+                        
+                        <h4>Famous Attractions</h4>
+                        <p>York's attractions showcase its diverse historical layers. York Minster is the city's most famous landmark with stunning architecture and history. The medieval walls surround the historic center, providing unique walking routes and city views. The Shambles is a well-preserved medieval street with overhanging timber-framed buildings now housing numerous unique shops. The Jorvik Viking Centre reconstructs Viking-age streets and houses, allowing visitors to experience 10th-century York. York Castle Museum displays England's social history through recreated Victorian streets and exhibitions. Clifford's Tower is the remaining part of York Castle, offering panoramic city views. The National Railway Museum has the world's most spectacular railway collection, including royal trains and historic locomotives.</p>
+                        
+                        <h4>Food and Shopping</h4>
+                        <p>York's food scene blends traditional British dishes with modern innovation. The city is famous for its afternoon tea, with Betty's Tea Rooms being one of Britain's most famous traditional tea rooms. Yorkshire pudding is a local signature dish, typically served with Sunday roast. York also has a thriving coffee culture with numerous independent cafes. For shopping, York offers unique retail experiences, from high-street brands to independent boutiques. The Shambles is ideal for finding unique gifts and souvenirs, while Parliament Street concentrates major retailers. York Market is a historic indoor market offering fresh produce, crafts, and street food. For chocolate lovers, York's chocolate shops provide handmade chocolates continuing the city's chocolate-making tradition.</p>
+                        
+                        <h4>Transportation and Accommodation</h4>
+                        <p>York is easily accessible, located on Britain's East Coast Main Line, approximately two hours by train from London and about two and a half hours from Edinburgh. York railway station provides rail services to destinations across Britain. The city's public transportation system includes buses, making it convenient for visitors to reach various attractions. For accommodation, York offers various options from luxury hotels to comfortable guesthouses. Many accommodations are located within historic buildings, providing visitors with unique experiences. The city center has numerous hotels and guesthouses, while the surrounding countryside offers tranquil accommodation choices. Regardless of choice, visitors can experience York's famous historical atmosphere and Yorkshire hospitality.</p>
+                        
+                        <h4>Living and Working</h4>
+                        <p>York is one of Britain's highest quality of life cities, praised for its rich history, cultural facilities, and relatively small city size. The city has an active business community, particularly in tourism, education, and creative industries. The University of York and York St John University are important higher education institutions, bringing academic vitality and an international student community to the city. York's digital and creative industries are growing, attracting numerous technology companies and startups. Compared to other major UK cities, York has a more reasonable cost of living while offering high-quality life. The city's communities each have distinct characteristics, from medieval streets in the historic center to Victorian suburbs in the surrounding areas, providing residents with diverse living options. York also has excellent schools and medical facilities, making it an ideal location for family life. The city's compact size means many attractions are within walking distance, reducing dependence on cars.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            },
+            liverpool: {
+                title: "利物浦 Liverpool：披頭四的故鄉與海事遺產",
+                content: `
+                    <div class="chinese-section">
+                        <img src="https://https://locationpro.org/liverpool.jpg" alt="利物浦 Liverpool" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                        
+                        <h4>城市歷史</h4>
+                        <p>利物浦的歷史與海洋密不可分。這座城市最初是一個小漁村，但在18世紀和19世紀，它發展成為大英帝國最重要的港口之一。利物浦在跨大西洋奴隸貿易中扮演了關鍵角色，同時也是數百萬愛爾蘭和歐洲移民前往美洲的出發點。19世紀，利物浦成為世界貿易的中心，其財富體現在宏偉的公共建築和倉庫中。20世紀初，利物浦是英國最重要的港口，但二戰期間遭受了嚴重轟炸。戰後，集裝箱化的興起和傳統工業的衰退導致了經濟困難。然而，利物浦在20世紀末和21世紀初經歷了文化復興，2004年被指定為歐洲文化之都，2008年被聯合國教科文組織指定為世界遺產海事商城。利物浦最著名的文化輸出無疑是披頭四樂隊，他們在20世紀60年代從這裡走向世界。</p>
+                        
+                        <h4>文化特色</h4>
+                        <p>利物浦的文化特色充滿活力和多樣性，以其音樂遺產、足球文化和海事歷史而聞名。這座城市是披頭四的故鄉，擁有眾多與樂隊相關的景點，包括披頭四故事博物館和洞穴俱樂部。利物浦的音樂場景依然活躍，擁有眾多現場音樂場所和年度音樂節。這座城市是兩支英超足球隊——利物浦和埃弗頓的所在地，足球是當地文化的重要組成部分。利物浦擁有眾多博物館和畫廊，包括泰特利物浦美術館、沃克美術館和世界博物館。阿爾伯特碼頭是文化活動的中心，擁有眾多博物館、畫廊和餐廳。利物浦還以其建築而聞名，特別是其三個地標性建築——皇家利物浦大廈、丘納德大廈和利物浦港務局大廈，被統稱為"三女神"。</p>
+                        
+                        <h4>著名景點</h4>
+                        <p>利物浦的景點反映了其豐富的歷史和文化多樣性。阿爾伯特碼頭是英國最受歡迎的旅遊景點之一，擁有泰特利物浦美術館、披頭四故事博物館和默西賽德海事博物館。利物浦大教堂是英國最大的主教座堂，擁有世界最高的哥特式拱門和最大的管風琴。利物浦的"三女神"是城市天際線的標誌性建築，代表了利物浦的海事輝煌。洞穴俱樂部是披頭四早期演出的場所，現在仍然是活躍的音樂場所。安菲爾德球場和古迪遜公園球場是足球愛好者的聖地。聖喬治大廳是新古典主義建築的傑出範例，被譽為世界上最好的希臘復興式建築之一。利物浦的兩個大教堂——英國國教的大教堂和羅馬天主教的大都會大教堂，展示了不同的建築風格和宗教傳統。</p>
+                        
+                        <h4>美食與購物</h4>
+                        <p>利物浦的美食場景反映了其港口城市的歷史和多元文化的人口。這座城市以其"Scouse"而聞名，這是一種燉肉菜，也是利物浦人綽號的來源。利物浦擁有繁榮的餐飲業，從傳統酒吧到高級餐廳應有盡有。博爾頓街是美食愛好者的熱門目的地，擁有眾多獨立餐廳和食品攤位。利物浦一中華城是歐洲最古老的中華城之一，提供正宗的中國和亞洲美食。購物方面，利物浦一提供從高街品牌到設計師商品的各種選擇。教堂街和利物浦一是主要的購物區，而波德街和時尚區則集中了獨立精品店和設計師商店。利物浦的市集，如聖約翰市場和巴爾蒂克市場，也是尋找獨特商品和當地美食的好去處。</p>
+                        
+                        <h4>交通與住宿</h4>
+                        <p>利物浦交通便利，擁有自己的國際機場和良好的鐵路連接。利物浦萊姆街車站是城市的主要火車站，提供前往英國各地的服務。市內的公共交通系統包括巴士和默西鐵路，後者是世界上歷史最悠久的電氣化鐵路系統。對於住宿，利物浦提供多種選擇，從豪華酒店到經濟型旅舍。阿爾伯特碼頭和周邊地區有眾多酒店，許多提供海濱景觀。市中心有各種住宿選擇，從國際連鎖酒店到獨特的精品酒店。利物浦還擁有眾多服務式公寓，適合長期停留。無論預算如何，遊客都能找到適合的住宿，方便探索這座充滿活力的城市。</p>
+                        
+                        <h4>生活與工作</h4>
+                        <p>利物浦是英國西北部重要的經濟和文化中心。這座城市經歷了顯著的復興，特別是在創意產業、數字技術和旅遊領域。利物浦是英國媒體行業的重要樞紐，英國廣播公司(BBC)和獨立電視台(ITV)在此設有重要基地。利物浦大學和利物浦約翰摩爾斯大學是重要的高等教育機構，為城市帶來了學術活力和研究創新。創意和數字產業在利物浦蓬勃發展，吸引了眾多初創企業和科技公司。與英國其他主要城市相比，利物浦的生活成本較低，但提供了豐富的文化生活和職業機會。城市的社區各具特色，從時尚的波德街區到歷史悠久的碼頭區，從充滿學生活力的史密斯敦路到綠樹成蔭的塞夫頓公園地區，為居民提供了多樣化的生活選擇。利物浦還擁有出色的交通連接、學校和醫療設施，使其成為生活和工作的理想地點。</p>
+                    </div>
+                    
+                    <div class="english-section">
+                        <h4>City History</h4>
+                        <p>Liverpool's history is inextricably linked with the sea. The city began as a small fishing village but developed into one of the British Empire's most important ports during the 18th and 19th centuries. Liverpool played a key role in the transatlantic slave trade while also being the departure point for millions of Irish and European emigrants to the Americas. In the 19th century, Liverpool became a center of world trade, its wealth reflected in magnificent public buildings and warehouses. In the early 20th century, Liverpool was Britain's most important port but suffered severe bombing during WWII. Post-war, the rise of containerization and decline of traditional industries led to economic difficulties. However, Liverpool experienced a cultural renaissance in the late 20th and early 21st centuries, designated European Capital of Culture in 2004 and a UNESCO World Heritage Maritime Mercantile City in 2008. Liverpool's most famous cultural export is undoubtedly The Beatles, who launched their international career from here in the 1960s.</p>
+                        
+                        <h4>Cultural Features</h4>
+                        <p>Liverpool's cultural characteristics are vibrant and diverse, famous for its musical heritage, football culture, and maritime history. The city is the birthplace of The Beatles, with numerous band-related attractions including The Beatles Story and The Cavern Club. Liverpool's music scene remains active with numerous live music venues and annual music festivals. The city is home to two Premier League football teams - Liverpool and Everton, with football being an important part of local culture. Liverpool has numerous museums and galleries, including Tate Liverpool, Walker Art Gallery, and World Museum. Albert Dock is a center of cultural activity with multiple museums, galleries, and restaurants. Liverpool is also known for its architecture, particularly its three landmark buildings - Royal Liver Building, Cunard Building, and Port of Liverpool Building, collectively known as the "Three Graces."</p>
+                        
+                        <h4>Famous Attractions</h4>
+                        <p>Liverpool's attractions reflect its rich history and cultural diversity. Albert Dock is one of Britain's most popular tourist attractions, housing Tate Liverpool, The Beatles Story, and Merseyside Maritime Museum. Liverpool Cathedral is Britain's largest cathedral with the world's highest Gothic arches and largest organ. Liverpool's "Three Graces" are iconic buildings on the city's skyline, representing Liverpool's maritime glory. The Cavern Club is where The Beatles performed early in their career and remains an active music venue. Anfield and Goodison Park are holy sites for football enthusiasts. St George's Hall is an outstanding example of neoclassical architecture, regarded as one of the world's finest Greek Revival buildings. Liverpool's two cathedrals - the Anglican Cathedral and Roman Catholic Metropolitan Cathedral, showcase different architectural styles and religious traditions.</p>
+                        
+                        <h4>Food and Shopping</h4>
+                        <p>Liverpool's food scene reflects its port city history and multicultural population. The city is famous for its "Scouse," a meat stew that also gives Liverpool residents their nickname. Liverpool has a thriving hospitality industry, from traditional pubs to fine dining restaurants. Bold Street is a popular destination for food lovers with numerous independent restaurants and food stalls. Liverpool Chinatown is one of Europe's oldest Chinatowns, offering authentic Chinese and Asian cuisine. For shopping, Liverpool ONE offers everything from high-street brands to designer goods. Church Street and Liverpool ONE are the main shopping areas, while Bold Street and the Fashion District concentrate independent boutiques and designer stores. Liverpool's markets, such as St John's Market and Baltic Market, are also great places to find unique goods and local food.</p>
+                        
+                        <h4>Transportation and Accommodation</h4>
+                        <p>Liverpool is easily accessible with its own international airport and good rail connections. Liverpool Lime Street station is the city's main railway station, providing services to destinations across Britain. The city's public transportation system includes buses and the Merseyrail, the latter being the world's oldest electrified railway system. For accommodation, Liverpool offers various options from luxury hotels to budget hostels. Albert Dock and surrounding areas have numerous hotels, many offering waterfront views. The city center has various accommodation choices from international chain hotels to unique boutique hotels. Liverpool also has numerous serviced apartments suitable for extended stays. Regardless of budget, visitors can find suitable accommodation convenient for exploring this vibrant city.</p>
+                        
+                        <h4>Living and Working</h4>
+                        <p>Liverpool is an important economic and cultural center in Northwest England. The city has experienced significant regeneration, particularly in creative industries, digital technology, and tourism. Liverpool is a significant hub for the UK media industry, with the BBC and ITV having important bases here. The University of Liverpool and Liverpool John Moores University are important higher education institutions, bringing academic vitality and research innovation to the city. Creative and digital industries are thriving in Liverpool, attracting numerous startups and technology companies. Compared to other major UK cities, Liverpool has a lower cost of living but offers rich cultural life and career opportunities. The city's communities each have distinct characteristics, from the fashionable Baltic Triangle to the historic docklands, from the student-vibrant Smithdown Road to the tree-lined Sefton Park area, providing residents with diverse living options. Liverpool also has excellent transport connections, schools, and medical facilities, making it an ideal place to live and work.</p>
+                    </div>
+                `,
+                date: "January 2025 | 一月 2025"
+            }
+        };
+
+        // 文章弹窗功能
+        function openArticleModal(city) {
+            const article = ARTICLE_CONTENT[city];
+            if (article) {
+                document.getElementById('articleModalTitle').innerHTML = article.title;
+                document.getElementById('articleModalBody').innerHTML = article.content;
+                document.getElementById('articleModalDate').innerHTML = article.date;
+                document.getElementById('articleModal').style.display = 'block';
+            }
+        }
+
+        function closeArticleModal() {
+            document.getElementById('articleModal').style.display = 'none';
+        }
+
+        // 点击弹窗外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('articleModal');
+            if (event.target == modal) {
+                closeArticleModal();
+            }
+        }
+
+        // 更新日期
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dateNow').innerText = now.toLocaleDateString('zh-HK', options);
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDate();
+        });
+    </script>
+</body>
+</html>
