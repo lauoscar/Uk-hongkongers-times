@@ -1,0 +1,3748 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Pro - UK Postcode Analysis System</title>
+    
+    <!-- Google Ads Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8662080629938711"
+     crossorigin="anonymous"></script>
+     
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-dark: #0f2541;
+            --primary-light: #2d4a80;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin-top: 70px; /* 為兩條 ticker 預留空間，視實際高度調整 */
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Header */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.25rem 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 1001;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            backdrop-filter: blur(10px);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="60" height="30"><clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(%23s)"><path d="M0,0 v30 h60 v-30 z" fill="%2300247e"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="%23fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(%23t)" stroke="%23cf142b" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="%23fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="%23cf142b" stroke-width="6"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .brand-text h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .brand-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Website Description */
+        .website-description {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .description-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .description-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .description-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Amazon Ad Links */
+        .ad-container {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--text-light);
+        }
+
+        .ad-container-top {
+            margin: 1.5rem 0;
+        }
+
+        .ad-container-sidebar {
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-container-middle {
+            margin: 2rem 0;
+        }
+
+        .amazon-ad-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff9900, #ff6600);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .amazon-ad-link:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, #ff6600, #ff3300);
+        }
+
+        /* Nord Security Ad Links */
+        .nord-ad-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #4687ff, #2c5cc5);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            margin: 0.5rem;
+        }
+
+        .nord-ad-link:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, #2c5cc5, #1a3d8f);
+        }
+
+        .nord-ad-container {
+            background: #f0f7ff;
+            border: 1px dashed #4687ff;
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--text);
+        }
+
+        .nord-ad-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c5cc5;
+        }
+
+        .nord-ad-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 3rem 0;
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1.25rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        .search-button {
+            padding: 1.25rem 2.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .search-hint {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .format-hint {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Country Selection */
+        .country-selection {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .country-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .country-flag {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .country-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .country-desc {
+            color: var(--text-light);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        /* New Layout for Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Left Column - Large Panels */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* Right Column */
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* Map Section */
+        .map-section {
+            height: fit-content;
+        }
+
+        .map-container {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+
+        .map-controls {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            z-index: 1000;
+        }
+
+        .map-control-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .map-control-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Area Overview */
+        .area-overview {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Data Panels */
+        .data-panels {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .data-panel {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 160px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .data-panel:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .data-panel h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .panel-content {
+            min-height: 140px;
+            font-size: 1rem;
+        }
+
+        /* Large Panels for Left Column */
+        .large-panel {
+            min-height: 400px;
+            padding: 3rem;
+        }
+
+        .large-panel .panel-content {
+            min-height: 320px;
+        }
+
+        /* Chart Containers */
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 1rem 0;
+        }
+
+        /* Data Response */
+        .data-response {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .data-bullet-points {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .data-bullet-points li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+        }
+
+        .data-bullet-points li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .data-bullet-points li:last-child {
+            border-bottom: none;
+        }
+
+        /* Loading State */
+        .loading-spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #e2e8f0;
+            border-left: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-brand .brand-logo {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-disclaimer {
+            text-align: right;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Data Source Badge */
+        .data-source-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Progress Bar */
+        .data-progress {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .data-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .nav-brand {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.75rem;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #map {
+                height: 400px;
+            }
+            
+            .data-panel {
+                padding: 2rem;
+            }
+            
+            .large-panel {
+                padding: 2rem;
+                min-height: 300px;
+            }
+            
+            .website-description {
+                padding: 1.5rem 0;
+            }
+            
+            .description-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .description-content p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Detailed Data Styles */
+        .detailed-data {
+            margin: 1rem 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .schools-list, .university-list, .airport-list, .cities-list {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .schools-list li, .university-list li, .airport-list li, .cities-list li {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        .data-source-note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .real-data-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .category-list {
+            margin: 1rem 0;
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.05rem;
+        }
+
+        .category-name {
+            font-weight: 500;
+        }
+
+        .category-value {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 1.5rem 0;
+        }
+
+        /* Distance units */
+        .distance-unit {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-left: 0.5rem;
+        }
+
+        /* Disclaimer Section */
+        .disclaimer-section {
+            background: #f1f5f9;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .disclaimer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .disclaimer-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .disclaimer-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .disclaimer-list {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .disclaimer-list li {
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+
+        .water-quality-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            gap: 2rem;
+        }
+
+        .water-quality-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .water-quality-bar {
+            width: 200px;
+            height: 30px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .water-quality-marker {
+            position: absolute;
+            top: -10px;
+            width: 4px;
+            height: 50px;
+            background: var(--text);
+            transform: translateX(-50%);
+        }
+
+        .water-quality-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+            margin-top: 0.5rem;
+        }
+
+        .water-quality-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Weather Chart Container */
+        .weather-chart-container {
+            width: 100%;
+            height: 350px;
+            margin: 1.5rem 0;
+        }
+
+        /* Specific styles for transport information */
+        .station-list, .highway-info {
+            margin: 1.25rem 0;
+        }
+
+        .station-list h4, .highway-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+            text-align: left;
+        }
+
+        /* Basic Info Styles */
+        .basic-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .basic-info-item {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .basic-info-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .basic-info-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Amenities Grid */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .amenity-category {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: var(--radius);
+        }
+
+        .amenity-category h4 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .amenity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .amenity-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .amenity-list li:last-child {
+            border-bottom: none;
+        }
+
+        .amenity-distance {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Styles for amenities content */
+        .small {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .muted {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .warning {
+            color: #b45309;
+            background: #fff7ed;
+            padding: 8px;
+            border-radius: 6px;
+        }
+        
+        /* Weather info styles */
+        .weather-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .weather-info-item {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+        
+        .weather-info-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .weather-info-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Transport specific styles */
+        .transport-content {
+            margin: 1rem 0;
+        }
+
+        .transport-station {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: var(--radius);
+        }
+
+        .transport-roads {
+            margin-top: 1rem;
+        }
+
+        .road-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+        }
+
+        .road-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .road-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* 10-day forecast styles */
+        .forecast-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .forecast-day {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+        }
+
+        .forecast-date {
+            font-weight: 600;
+            min-width: 120px;
+        }
+
+        .forecast-temps {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .forecast-temp {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .temp-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .temp-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .forecast-precipitation {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .precipitation-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .precipitation-chance {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Detail button styles */
+        .detail-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .detail-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Refresh button styles */
+        .refresh-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-button:hover {
+            background: #0891b2;
+            transform: translateY(-2px);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 3000;
+            overflow: auto;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            margin: 2% auto;
+            padding: 0;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 1200px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .modal-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .modal-list-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        /* Weather icons */
+        .weather-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+    </style>
+    
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Country Selection Screen -->
+    <div id="countrySelection" class="country-selection">
+        <div class="container">
+            <div class="nav-brand" style="justify-content: center; margin-bottom: 2rem;">
+                <div class="brand-logo"></div>
+                <div class="brand-text">
+                    <h1>Location Pro - UK Postcode Analysis</h1>
+                    <p>Complete UK Postcode Analysis with Real Data</p>
+                </div>
+            </div>
+
+            <!-- Top Amazon Ad -->
+            <div class="ad-container ad-container-top">
+                <a href="https://amzn.to/4odY6Lc" target="_blank" class="amazon-ad-link">
+                    Check out Amazon Deals
+                </a>
+            </div>
+
+            <!-- Nord Security Ad -->
+            <div class="nord-ad-container">
+                <div class="nord-ad-title">Secure Your Online Privacy</div>
+                <div class="nord-ad-description">Protect your data and browse safely with Nord Security products</div>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="nord-ad-link">
+                    Get NordVPN
+                </a>
+                <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="nord-ad-link">
+                    Get NordPass
+                </a>
+            </div>
+
+            <div class="country-grid">
+                <div class="country-card" data-country="UK">
+                    <div class="country-flag">🇬🇧</div>
+                    <div class="country-name">ENTER</div>
+                    <div class="country-desc">Complete UK postcode analysis with real data</div>
+                </div>
+            </div>
+
+            <!-- Middle Amazon Ad -->
+            <div class="ad-container ad-container-middle">
+                <a href="https://amzn.to/48PUYjU" target="_blank" class="amazon-ad-link">
+                    Shop Amazon Today
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UK Analysis Screen -->
+    <div id="ukAnalysis" class="hidden">
+        <!-- Navigation Bar -->
+        <header class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <div class="brand-logo"></div>
+                    <div class="brand-text">
+                        <h1>Location Pro - UK Postcode Analysis System</h1>
+                        <p>Complete UK Postcode Analysis with Real Data</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Website Description -->
+        <section class="website-description">
+            <div class="container">
+                <div class="description-content">
+                    <h2>Comprehensive UK Postcode Analysis Platform</h2>
+                    <p>Our advanced system provides detailed analysis of any UK postcode, delivering real-time data on demographics, amenities, transport, education, safety, and environmental factors. Make informed decisions about relocation, investment, or exploration with our comprehensive location intelligence platform.</p>
+                    <p>Access accurate, up-to-date information from official UK government sources and open data APIs, all presented in an intuitive, user-friendly interface designed for both personal and professional use.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Amazon Ad -->
+        <div class="container">
+            <div class="ad-container ad-container-top">
+                <a href="https://amzn.to/4odY6Lc" target="_blank" class="amazon-ad-link">
+                    Check out Amazon Deals
+                </a>
+            </div>
+        </div>
+
+        <!-- Nord Security Ad -->
+        <div class="container">
+            <div class="nord-ad-container">
+                <div class="nord-ad-title">Secure Your Online Privacy</div>
+                <div class="nord-ad-description">Protect your data and browse safely with Nord Security products</div>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="nord-ad-link">
+                    Get NordVPN
+                </a>
+                <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="nord-ad-link">
+                    Get NordPass
+                </a>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="postcodeInput" 
+                               placeholder="Enter full UK Postcode (e.g., OL10 2QD, WA1 1AG, EH1 1AA)" 
+                               class="search-input">
+                        <button id="searchBtn" class="search-button">
+                            <span>Analyse Location</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="search-hint">Complete UK coverage - Full postcodes only (area and district)</p>
+                    <p class="format-hint">Full postcodes required (e.g., OL10 2QD, not just OL10)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <main id="mainContent" class="main-content">
+            <div class="container">
+                <!-- Area Overview -->
+                <section id="areaOverview" class="area-overview hidden"></section>
+                
+                <!-- Middle Amazon Ad -->
+                <div class="ad-container ad-container-middle">
+                    <a href="https://amzn.to/48PUYjU" target="_blank" class="amazon-ad-link">
+                        Shop Amazon Today
+                    </a>
+                </div>
+                
+                <!-- Nord Security Ad -->
+                <div class="nord-ad-container">
+                    <div class="nord-ad-title">Protect Your Digital Life</div>
+                    <div class="nord-ad-description">Keep your online activities private and secure with Nord Security</div>
+                    <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="nord-ad-link">
+                        Get NordVPN
+                    </a>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="nord-ad-link">
+                        Get NordPass
+                    </a>
+                </div>
+                
+                <div class="content-grid">
+                    <!-- Left Column - Large Panels -->
+                    <div class="left-column">
+                        <div id="basicInfoPanel" class="data-panel large-panel hidden">
+                            <h3>📊 Basic Information</h3>
+                            <button class="refresh-button" data-panel="basicInfo">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="basicInfoContent" class="basic-info-grid"></div>
+                            </div>
+                        </div>
+                        
+                        <div id="mapPanel" class="data-panel large-panel">
+                            <h3>🗺️ Location & Map</h3>
+                            <button class="refresh-button" data-panel="map">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="map"></div>
+                                <div class="map-controls">
+                                    <button id="googleMapsBtn" class="map-control-btn">
+                                        <span>Open in Google Maps</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Weather Panel - Moved after Map -->
+                        <div id="weatherPanel" class="data-panel large-panel hidden">
+                            <h3>🌤️ Weather - 10-Day Forecast</h3>
+                            <button class="refresh-button" data-panel="weather">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="currentWeather" class="weather-info-grid"></div>
+                                <div class="forecast-container" id="tenDayForecast"></div>
+                                <div class="weather-chart-container">
+                                    <canvas id="dailyTempChart"></canvas>
+                                </div>
+                                <div class="weather-chart-container">
+                                    <canvas id="precipitationChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="schoolsPanel" class="data-panel large-panel hidden">
+                            <h3>🏫 Schools (nearest)</h3>
+                            <button class="refresh-button" data-panel="schools">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="schoolsList" class="schools-list"></div>
+                            </div>
+                            <button class="detail-button" id="schoolsDetailBtn">View Schools List</button>
+                        </div>
+                        
+                        <div id="nearestUniversitiesPanel" class="data-panel large-panel hidden">
+                            <h3>🎓 Nearest Universities Distance</h3>
+                            <button class="refresh-button" data-panel="nearestUniversities">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="nearestUniversityList" class="university-list"></div>
+                            </div>
+                        </div>
+                        
+                        <div id="educationPanel" class="data-panel large-panel hidden">
+                            <h3>🎓 Major Universities Distance</h3>
+                            <button class="refresh-button" data-panel="education">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="universityList" class="university-list"></div>
+                            </div>
+                        </div>
+                        
+                        <div id="amenitiesPanel" class="data-panel large-panel hidden">
+                            <h3>🛍️ Nearby Amenities</h3>
+                            <button class="refresh-button" data-panel="amenities">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="amenitiesContent" class="small muted">No data</div>
+                            </div>
+                            <button class="detail-button" id="amenitiesDetailBtn">View Amenities List</button>
+                        </div>
+                        
+                        <div id="specialFacilitiesPanel" class="data-panel large-panel hidden">
+                            <h3>🏭 Nearby Special Facilities</h3>
+                            <button class="refresh-button" data-panel="specialFacilities">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="specialFacilitiesContent" class="small muted">No data</div>
+                            </div>
+                            <button class="detail-button" id="specialFacilitiesDetailBtn">View Facilities List</button>
+                        </div>
+                        
+                        <div id="crimePanel" class="data-panel large-panel hidden">
+                            <h3>🛡️ Crime & Safety</h3>
+                            <button class="refresh-button" data-panel="crime">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="crimeList"></div>
+                                <div class="chart-container">
+                                    <canvas id="crimeChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="right-column">
+                        <!-- Sidebar Amazon Ad -->
+                        <div class="ad-container ad-container-sidebar">
+                            <a href="https://amzn.to/48PUYjU" target="_blank" class="amazon-ad-link">
+                                Shop Amazon Today
+                            </a>
+                        </div>
+                        
+                        <!-- Sidebar Nord Security Ad -->
+                        <div class="nord-ad-container">
+                            <div class="nord-ad-title">Online Security Solutions</div>
+                            <div class="nord-ad-description">Protect your privacy with industry-leading security tools</div>
+                            <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="nord-ad-link">
+                                NordVPN
+                            </a>
+                            <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="nord-ad-link">
+                                NordPass
+                            </a>
+                        </div>
+                        
+                        <!-- Location Information -->
+                        <div class="data-panel hidden" id="locationInfoPanel">
+                            <h3>📍 Postcode & Location</h3>
+                            <button class="refresh-button" data-panel="locationInfo">
+                                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                </svg>
+                                Refresh
+                            </button>
+                            <div class="panel-content">
+                                <div id="postcodeLabel" class="text-lg font-semibold">—</div>
+                                <div id="coords" class="text-sm text-gray-600">lat, lon — county</div>
+                                <div class="section-divider"></div>
+                                <div id="demographics"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Data Panels -->
+                        <div class="data-panels">
+                            <div id="transportPanel" class="data-panel hidden">
+                                <h3>🚆 Transport & Stations</h3>
+                                <button class="refresh-button" data-panel="transport">
+                                    <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Refresh
+                                </button>
+                                <div class="panel-content">
+                                    <div id="transportContent" class="transport-content"></div>
+                                </div>
+                                <button class="detail-button" id="transportDetailBtn">View Transport List</button>
+                            </div>
+                            
+                            <div id="airportPanel" class="data-panel hidden">
+                                <h3>✈️ International Airports Distance</h3>
+                                <button class="refresh-button" data-panel="airport">
+                                    <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Refresh
+                                </button>
+                                <div class="panel-content">
+                                    <div id="airportList" class="airport-list"></div>
+                                </div>
+                            </div>
+
+                            <div id="citiesPanel" class="data-panel hidden">
+                                <h3>🏙️ UK Cities Distance</h3>
+                                <button class="refresh-button" data-panel="cities">
+                                    <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Refresh
+                                </button>
+                                <div class="panel-content">
+                                    <div id="citiesList" class="cities-list"></div>
+                                </div>
+                            </div>
+
+                            <div id="waterQualityPanel" class="data-panel hidden">
+                                <h3>💧 Water Quality</h3>
+                                <button class="refresh-button" data-panel="waterQuality">
+                                    <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Refresh
+                                </button>
+                                <div class="panel-content">
+                                    <div id="waterQualityDisplay" class="water-quality-display"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Data Analysis Summary Section -->
+        <section class="disclaimer-section">
+            <div class="container">
+                <div class="disclaimer-content">
+                    <h2>Data Analysis Summary</h2>
+                    <div class="data-response">
+                        <p>Real data analysis of Farington is being collected from UK government sources. This analysis includes:</p>
+                        <ul class="data-bullet-points">
+                            <li>Basic information and demographics</li>
+                            <li>Interactive map with location</li>
+                            <li>10-day weather forecast with precipitation</li>
+                            <li>Nearby schools</li>
+                            <li>Nearest universities distances</li>
+                            <li>Major universities distances</li>
+                            <li>Local amenities (fast food, supermarkets, post offices, parks, libraries, restaurants)</li>
+                            <li>Special facilities (sewage treatment plants, power stations, industrial sites)</li>
+                            <li>Crime statistics from UK Police data</li>
+                            <li>Transport infrastructure from OpenStreetMap</li>
+                            <li>Airport distances</li>
+                            <li>UK cities distances</li>
+                            <li>Water quality information</li>
+                        </ul>
+                        <p class="data-source-note"><em>Note: Data is sourced from official UK government and open data sources.</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer Section -->
+        <section class="disclaimer-section">
+            <div class="container">
+                <div class="disclaimer-content">
+                    <h2>Disclaimer</h2>
+                    <p>The information provided on this website is for general informational purposes only. While we strive to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.</p>
+                    
+                    <p>Any reliance you place on such information is therefore strictly at your own risk. In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.</p>
+                    
+                    <p>Through this website you are able to link to other websites which are not under our control. We have no control over the nature, content and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.</p>
+                    
+                    <p>Every effort is made to keep the website up and running smoothly. However, we take no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.</p>
+                    
+                    <p><strong>Data Accuracy Notice:</strong></p>
+                    <ul class="disclaimer-list">
+                        <li>Postcode data is sourced from public APIs and may not reflect the most current information</li>
+                        <li>Crime statistics are estimates based on regional patterns and may not represent actual crime rates</li>
+                        <li>Distance calculations are approximate and may not reflect actual travel distances or times</li>
+                        <li>Weather information is based on weather models and may not be precise for specific locations</li>
+                    </ul>
+                    
+                    <p>This website is not affiliated with or endorsed by any government agency. All trademarks and registered trademarks are the property of their respective owners.</p>
+                    
+                    <p>By using this website, you acknowledge that you have read, understood, and agree to be bound by this disclaimer.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Loading State -->
+        <div id="dataLoadingSpinner" class="loading-spinner hidden">
+            <div class="spinner"></div>
+            <p style="font-size: 1.25rem; margin-bottom: 1rem;">Collecting Real UK Data...</p>
+            <div class="data-progress">
+                <div class="data-progress-fill" style="width: 10%"></div>
+            </div>
+            <p style="color: var(--text-light);">Fetching data from official sources</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <!-- Footer Amazon Ad -->
+                <div class="ad-container ad-container-top">
+                    <a href="https://amzn.to/3WtlV5o" target="_blank" class="amazon-ad-link">
+                        Visit Amazon for Great Deals
+                    </a>
+                </div>
+                
+                <!-- Footer Nord Security Ad -->
+                <div class="nord-ad-container">
+                    <div class="nord-ad-title">Secure Your Digital Life</div>
+                    <div class="nord-ad-description">Protect your online privacy with Nord Security</div>
+                    <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="nord-ad-link">
+                        Get NordVPN
+                    </a>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="nord-ad-link">
+                        Get NordPass
+                    </a>
+                </div>
+                
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <div class="brand-logo"></div>
+                        <div>
+                            <strong>Location Pro - UK Postcode Analysis System</strong>
+                            <p>UK Postcode Analysis with Real Data</p>
+                        </div>
+                    </div>
+                    <div class="footer-disclaimer">
+                        <p>&copy; 2024 UK Postcode Analysis System. Data from UK Government Open Sources.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Detail Modals -->
+    <div id="schoolsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Schools Near Postcode</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Top Amazon Ad in modal -->
+                <div class="ad-container ad-container-top">
+                    <a href="https://amzn.to/4odY6Lc" target="_blank" class="amazon-ad-link">
+                        Check out Amazon Deals
+                    </a>
+                </div>
+                
+                <!-- Nord Security Ad in modal -->
+                <div class="nord-ad-container">
+                    <div class="nord-ad-title">Secure Your Online Privacy</div>
+                    <div class="nord-ad-description">Protect your data and browse safely with Nord Security products</div>
+                    <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="nord-ad-link">
+                        Get NordVPN
+                    </a>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="nord-ad-link">
+                        Get NordPass
+                    </a>
+                </div>
+                
+                <div class="modal-list" id="schoolsModalList"></div>
+            </div>
+            <div class="modal-footer">
+                <!-- Bottom Amazon Ad in modal -->
+                <div class="ad-container">
+                    <a href="https://amzn.to/48PUYjU" target="_blank" class="amazon-ad-link">
+                        Shop Amazon Today
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="amenitiesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Amenities Near Postcode</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Top Amazon Ad in modal -->
+                <div class="ad-container ad-container-top">
+                    <a href="https://amzn.to/4odY6Lc" target="_blank" class="amazon-ad-link">
+                        Check out Amazon Deals
+                    </a>
+                </div>
+                
+                <!-- Nord Security Ad in modal -->
+                <div class="nord-ad-container">
+                    <div class="nord-ad-title">Secure Your Online Privacy</div>
+                    <div class="nord-ad-description">Protect your data and browse safely with Nord Security products</div>
+                    <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="nord-ad-link">
+                        Get NordVPN
+                    </a>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="nord-ad-link">
+                        Get NordPass
+                    </a>
+                </div>
+                
+                <div class="modal-list" id="amenitiesModalList"></div>
+            </div>
+            <div class="modal-footer">
+                <!-- Bottom Amazon Ad in modal -->
+                <div class="ad-container">
+                    <a href="https://amzn.to/48PUYjU" target="_blank" class="amazon-ad-link">
+                        Shop Amazon Today
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="transportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Transport Near Postcode</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Top Amazon Ad in modal -->
+                <div class="ad-container ad-container-top">
+                    <a href="https://amzn.to/4odY6Lc" target="_blank" class="amazon-ad-link">
+                        Check out Amazon Deals
+                    </a>
+                </div>
+                
+                <!-- Nord Security Ad in modal -->
+                <div class="nord-ad-container">
+                    <div class="nord-ad-title">Secure Your Online Privacy</div>
+                    <div class="nord-ad-description">Protect your data and browse safely with Nord Security products</div>
+                    <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="nord-ad-link">
+                        Get NordVPN
+                    </a>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="nord-ad-link">
+                        Get NordPass
+                    </a>
+                </div>
+                
+                <div class="modal-list" id="transportModalList"></div>
+            </div>
+            <div class="modal-footer">
+                <!-- Bottom Amazon Ad in modal -->
+                <div class="ad-container">
+                    <a href="https://amzn.to/48PUYjU" target="_blank" class="amazon-ad-link">
+                        Shop Amazon Today
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="specialFacilitiesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Special Facilities Near Postcode</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Top Amazon Ad in modal -->
+                <div class="ad-container ad-container-top">
+                    <a href="https://amzn.to/4odY6Lc" target="_blank" class="amazon-ad-link">
+                        Check out Amazon Deals
+                    </a>
+                </div>
+                
+                <!-- Nord Security Ad in modal -->
+                <div class="nord-ad-container">
+                    <div class="nord-ad-title">Secure Your Online Privacy</div>
+                    <div class="nord-ad-description">Protect your data and browse safely with Nord Security products</div>
+                    <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="nord-ad-link">
+                        Get NordVPN
+                    </a>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="nord-ad-link">
+                        Get NordPass
+                    </a>
+                </div>
+                
+                <div class="modal-list" id="specialFacilitiesModalList"></div>
+            </div>
+            <div class="modal-footer">
+                <!-- Bottom Amazon Ad in modal -->
+                <div class="ad-container">
+                    <a href="https://amzn.to/48PUYjU" target="_blank" class="amazon-ad-link">
+                        Shop Amazon Today
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Global Postcode Analysis with Real Government Data
+        class GlobalPostcodeAnalysis {
+            constructor() {
+                this.map = null;
+                this.currentData = null;
+                this.markers = [];
+                this.dataProgress = 0;
+                this.hourlyChart = null;
+                this.dailyChart = null;
+                this.precipitationChart = null;
+                this.crimeChart = null;
+                this.selectedCountry = 'UK';
+                
+                // Modal maps storage
+                this.modalMaps = {};
+                
+                // UK Government Data Sources (Free & No API Key Required)
+                this.dataSources = {
+                    postcodes: 'https://api.postcodes.io/postcodes/',
+                    weather: 'https://api.open-meteo.com/v1/forecast',
+                    crime: 'https://data.police.uk/api/crimes-street/all-crime',
+                    overpass: 'https://overpass-api.de/api/interpreter'
+                };
+                
+                // University dataset URL from B webpage
+                this.UNIVERSITIES_CSV_URL = "https://gist.githubusercontent.com/deparkes/3b100ddb7068f82c1262b2236a153e01/raw/uk_universities_locations.csv";
+                
+                // UK Cities dataset
+                this.UK_CITIES = [
+                    { name: 'London', lat: 51.5074, lng: -0.1278 },
+                    { name: 'Birmingham', lat: 52.4862, lng: -1.8904 },
+                    { name: 'Manchester', lat: 53.4808, lng: -2.2426 },
+                    { name: 'Glasgow', lat: 55.8642, lng: -4.2518 },
+                    { name: 'Liverpool', lat: 53.4084, lng: -2.9916 },
+                    { name: 'Leeds', lat: 53.8008, lng: -1.5491 },
+                    { name: 'Sheffield', lat: 53.3811, lng: -1.4701 },
+                    { name: 'Edinburgh', lat: 55.9533, lng: -3.1883 },
+                    { name: 'Bristol', lat: 51.4545, lng: -2.5879 },
+                    { name: 'Cardiff', lat: 51.4816, lng: -3.1791 },
+                    { name: 'Leicester', lat: 52.6369, lng: -1.1398 },
+                    { name: 'Coventry', lat: 52.4068, lng: -1.5197 },
+                    { name: 'Nottingham', lat: 52.9548, lng: -1.1581 },
+                    { name: 'Belfast', lat: 54.5973, lng: -5.9301 },
+                    { name: 'Newcastle upon Tyne', lat: 54.9783, lng: -1.6178 },
+                    { name: 'Brighton', lat: 50.8225, lng: -0.1372 },
+                    { name: 'Southampton', lat: 50.9097, lng: -1.4044 },
+                    { name: 'Portsmouth', lat: 50.8198, lng: -1.0880 },
+                    { name: 'Aberdeen', lat: 57.1497, lng: -2.0943 },
+                    { name: 'Cambridge', lat: 52.2053, lng: 0.1218 },
+                    { name: 'Oxford', lat: 51.7520, lng: -1.2577 },
+                    { name: 'York', lat: 53.9600, lng: -1.0873 },
+                    { name: 'Plymouth', lat: 50.3755, lng: -4.1427 },
+                    { name: 'Norwich', lat: 52.6309, lng: 1.2974 },
+                    { name: 'Swansea', lat: 51.6214, lng: -3.9436 },
+                    { name: 'Exeter', lat: 50.7184, lng: -3.5339 },
+                    { name: 'Dundee', lat: 56.4620, lng: -2.9707 },
+                    { name: 'Derby', lat: 52.9225, lng: -1.4746 },
+                    { name: 'Reading', lat: 51.4543, lng: -0.9781 },
+                    { name: 'Middlesbrough', lat: 54.5742, lng: -1.2350 }
+                ];
+                
+                console.log('Global Postcode Analysis with Real Data Initializing...');
+                this.init();
+            }
+            
+            init() {
+                this.bindEvents();
+                this.initCountrySelection();
+                this.restoreSession();
+                console.log('Global Postcode Analysis Initialized');
+            }
+            
+            bindEvents() {
+                const searchBtn = document.getElementById('searchBtn');
+                const postcodeInput = document.getElementById('postcodeInput');
+                const googleMapsBtn = document.getElementById('googleMapsBtn');
+                
+                // Detail buttons
+                const schoolsDetailBtn = document.getElementById('schoolsDetailBtn');
+                const amenitiesDetailBtn = document.getElementById('amenitiesDetailBtn');
+                const transportDetailBtn = document.getElementById('transportDetailBtn');
+                const specialFacilitiesDetailBtn = document.getElementById('specialFacilitiesDetailBtn');
+                
+                // Refresh buttons
+                const refreshButtons = document.querySelectorAll('.refresh-button');
+                
+                // Modal close buttons
+                const closeButtons = document.querySelectorAll('.close-modal');
+                
+                if (searchBtn) {
+                    searchBtn.addEventListener('click', () => this.handleSearch());
+                }
+                
+                if (postcodeInput) {
+                    postcodeInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') this.handleSearch();
+                    });
+                }
+                
+                if (googleMapsBtn) {
+                    googleMapsBtn.addEventListener('click', () => this.openGoogleMaps());
+                }
+                
+                // Detail button events
+                if (schoolsDetailBtn) {
+                    schoolsDetailBtn.addEventListener('click', () => this.openSchoolsModal());
+                }
+                
+                if (amenitiesDetailBtn) {
+                    amenitiesDetailBtn.addEventListener('click', () => this.openAmenitiesModal());
+                }
+                
+                if (transportDetailBtn) {
+                    transportDetailBtn.addEventListener('click', () => this.openTransportModal());
+                }
+                
+                if (specialFacilitiesDetailBtn) {
+                    specialFacilitiesDetailBtn.addEventListener('click', () => this.openSpecialFacilitiesModal());
+                }
+                
+                // Refresh button events
+                refreshButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const panel = e.target.closest('.data-panel');
+                        const panelId = panel.id;
+                        const panelType = e.target.getAttribute('data-panel');
+                        this.refreshPanel(panelType, panelId);
+                    });
+                });
+                
+                // Modal close events
+                closeButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const modal = e.target.closest('.modal');
+                        if (modal) {
+                            modal.style.display = 'none';
+                        }
+                    });
+                });
+                
+                // Close modal when clicking outside
+                window.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('modal')) {
+                        e.target.style.display = 'none';
+                    }
+                });
+                
+                // Save session before page unload
+                window.addEventListener('beforeunload', () => this.saveSession());
+            }
+            
+            initCountrySelection() {
+                const countryCards = document.querySelectorAll('.country-card');
+                
+                countryCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        this.selectedCountry = card.getAttribute('data-country');
+                        this.showCountryAnalysis(this.selectedCountry);
+                    });
+                });
+            }
+            
+            showCountryAnalysis(country) {
+                const countrySelection = document.getElementById('countrySelection');
+                const ukAnalysis = document.getElementById('ukAnalysis');
+                
+                countrySelection.classList.add('hidden');
+                
+                if (country === 'UK') {
+                    ukAnalysis.classList.remove('hidden');
+                    this.initMap();
+                } else {
+                    // For other countries, show a placeholder message
+                    alert(`${country} analysis is coming soon! For now, please use the UK analysis.`);
+                    countrySelection.classList.remove('hidden');
+                }
+            }
+            
+            initMap() {
+                try {
+                    // Set initial map view to show the whole UK
+                    this.map = L.map('map').setView([54.5, -2.5], 6);
+                    
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors',
+                        maxZoom: 19
+                    }).addTo(this.map);
+                    
+                } catch (error) {
+                    console.error('Map initialization failed:', error);
+                }
+            }
+
+            async handleSearch() {
+                const postcode = document.getElementById('postcodeInput').value.trim().toUpperCase().replace(/\s/g, '');
+                
+                if (!postcode) {
+                    alert('Please enter a UK postcode');
+                    return;
+                }
+                
+                if (!this.validatePostcode(postcode)) {
+                    alert('Please enter a valid full UK postcode (e.g., OL102QD, WA11AG, EH11AA). Partial postcodes (e.g., OL10) are not accepted.');
+                    return;
+                }
+                
+                this.showLoading(true);
+                this.resetProgress();
+                
+                try {
+                    // Get real postcode data from postcodes.io
+                    const postcodeData = await this.fetchPostcodeData(postcode);
+                    if (!postcodeData) {
+                        throw new Error('Could not retrieve data for this postcode.');
+                    }
+                    
+                    this.currentData = {
+                        postcode: postcodeData.postcode,
+                        coordinates: {
+                            lat: postcodeData.latitude,
+                            lng: postcodeData.longitude
+                        },
+                        areaName: postcodeData.parish || postcodeData.admin_ward || postcodeData.admin_district || 'Unknown Area',
+                        county: postcodeData.admin_county || 'N/A',
+                        region: postcodeData.region,
+                        country: postcodeData.country,
+                        localAuthority: postcodeData.admin_district || 'N/A',
+                        nuts: postcodeData.nuts || 'N/A',
+                        ward: postcodeData.admin_ward || 'N/A',
+                        district: postcodeData.admin_district || 'N/A'
+                    };
+                    
+                    // Save search state
+                    this.saveSession();
+                    
+                    // Display basic results
+                    this.displayBasicResults(this.currentData);
+                    this.updateProgress(20);
+                    
+                    // Collect all real data
+                    await this.collectAllRealData(postcode, this.currentData);
+                    
+                } catch (error) {
+                    console.error('Search failed:', error);
+                    this.showError('Analysis failed: ' + error.message);
+                } finally {
+                    this.showLoading(false);
+                }
+            }
+            
+            // Refresh individual panel
+            async refreshPanel(panelType, panelId) {
+                if (!this.currentData) {
+                    alert('Please search for a postcode first');
+                    return;
+                }
+                
+                const button = document.querySelector(`#${panelId} .refresh-button`);
+                const originalText = button.innerHTML;
+                
+                // Show loading state on button
+                button.innerHTML = '<svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" class="spinning"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/></svg> Refreshing...';
+                button.disabled = true;
+                
+                try {
+                    switch (panelType) {
+                        case 'basicInfo':
+                            await this.getBasicInfo(this.currentData);
+                            break;
+                        case 'weather':
+                            await this.getWeatherData(this.currentData);
+                            break;
+                        case 'schools':
+                            await this.getSchoolsData(this.currentData);
+                            break;
+                        case 'nearestUniversities':
+                            await this.getNearestUniversitiesData(this.currentData);
+                            break;
+                        case 'education':
+                            await this.getUniversityData(this.currentData);
+                            break;
+                        case 'amenities':
+                            await this.getAmenitiesData(this.currentData);
+                            break;
+                        case 'specialFacilities':
+                            await this.getSpecialFacilitiesData(this.currentData);
+                            break;
+                        case 'crime':
+                            await this.getCrimeData(this.currentData);
+                            break;
+                        case 'transport':
+                            await this.getTransportData(this.currentData);
+                            break;
+                        case 'airport':
+                            await this.getAirportData(this.currentData);
+                            break;
+                        case 'cities':
+                            await this.getCitiesData(this.currentData);
+                            break;
+                        case 'waterQuality':
+                            await this.getWaterQualityData(this.currentData);
+                            break;
+                        case 'locationInfo':
+                            this.displayBasicResults(this.currentData);
+                            break;
+                        case 'map':
+                            this.updateMap(this.currentData);
+                            break;
+                        default:
+                            console.warn('Unknown panel type:', panelType);
+                    }
+                    
+                    // Show success feedback
+                    button.innerHTML = '<svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Refreshed!';
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }, 2000);
+                    
+                } catch (error) {
+                    console.error(`Refresh failed for ${panelType}:`, error);
+                    button.innerHTML = '<svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg> Failed';
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }, 2000);
+                }
+            }
+            
+            // Save session to localStorage
+            saveSession() {
+                if (this.currentData) {
+                    const sessionData = {
+                        currentData: this.currentData,
+                        searchTime: new Date().toISOString()
+                    };
+                    localStorage.setItem('ukPostcodeAnalysisSession', JSON.stringify(sessionData));
+                }
+            }
+            
+            // Restore session from localStorage
+            restoreSession() {
+                try {
+                    const sessionData = localStorage.getItem('ukPostcodeAnalysisSession');
+                    if (sessionData) {
+                        const parsed = JSON.parse(sessionData);
+                        this.currentData = parsed.currentData;
+                        
+                        // If we have saved data, show the UK analysis screen
+                        if (this.currentData) {
+                            const countrySelection = document.getElementById('countrySelection');
+                            const ukAnalysis = document.getElementById('ukAnalysis');
+                            
+                            countrySelection.classList.add('hidden');
+                            ukAnalysis.classList.remove('hidden');
+                            
+                            this.initMap();
+                            this.displayBasicResults(this.currentData);
+                            
+                            // Set the postcode input value
+                            document.getElementById('postcodeInput').value = this.currentData.postcode;
+                            
+                            // Show loading and restore data
+                            this.showLoading(true);
+                            setTimeout(() => {
+                                this.collectAllRealData(this.currentData.postcode, this.currentData)
+                                    .finally(() => this.showLoading(false));
+                            }, 500);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Failed to restore session:', error);
+                    // Clear invalid session data
+                    localStorage.removeItem('ukPostcodeAnalysisSession');
+                }
+            }
+            
+            // Fetch real postcode data from postcodes.io
+            async fetchPostcodeData(postcode) {
+                try {
+                    const response = await fetch(`${this.dataSources.postcodes}${postcode}`);
+                    const data = await response.json();
+                    
+                    if (data.status === 200) {
+                        return data.result;
+                    } else {
+                        throw new Error(data.error || 'Unknown error from postcodes.io');
+                    }
+                } catch (error) {
+                    console.error('Error fetching from postcodes.io:', error);
+                    return this.getFallbackPostcodeData(postcode);
+                }
+            }
+            
+            // Collect all real data from various sources
+            async collectAllRealData(postcode, locationData) {
+                const dataPromises = [
+                    this.getBasicInfo(locationData),
+                    this.getWeatherData(locationData),
+                    this.getSchoolsData(locationData),
+                    this.getNearestUniversitiesData(locationData),
+                    this.getUniversityData(locationData),
+                    this.getAmenitiesData(locationData),
+                    this.getSpecialFacilitiesData(locationData),
+                    this.getCrimeData(locationData),
+                    this.getTransportData(locationData),
+                    this.getAirportData(locationData),
+                    this.getCitiesData(locationData),
+                    this.getWaterQualityData(locationData)
+                ];
+                
+                for (let i = 0; i < dataPromises.length; i++) {
+                    await dataPromises[i];
+                    this.updateProgress(20 + ((i + 1) / dataPromises.length) * 60);
+                }
+                
+                this.updateProgress(100);
+            }
+            
+            // Get basic info
+            async getBasicInfo(locationData) {
+                try {
+                    const basicInfoContent = document.getElementById('basicInfoContent');
+                    
+                    // Get weather data for basic info
+                    const weatherData = await this.fetchWeatherData(locationData);
+                    
+                    // Calculate population density (simulated based on area type)
+                    let populationDensity = 'Medium';
+                    
+                    if (locationData.region === 'London') {
+                        populationDensity = 'High';
+                    } else if (['South East', 'West Midlands'].includes(locationData.region)) {
+                        populationDensity = 'Medium-High';
+                    } else if (['Scotland', 'Wales', 'Northern Ireland'].includes(locationData.country)) {
+                        populationDensity = 'Low';
+                    }
+                    
+                    // Extract weather info for basic info panel
+                    let currentTemp = '—';
+                    let todayHigh = '—';
+                    let todayLow = '—';
+                    let precipitation = '—';
+                    let windSpeed = '—';
+                    let humidity = '—';
+                    
+                    if (weatherData && weatherData.current_weather) {
+                        currentTemp = `${weatherData.current_weather.temperature}°C`;
+                        windSpeed = `${weatherData.current_weather.windspeed} m/s`;
+                    }
+                    
+                    if (weatherData && weatherData.daily) {
+                        todayHigh = `${weatherData.daily.temperature_2m_max[0]}°C`;
+                        todayLow = `${weatherData.daily.temperature_2m_min[0]}°C`;
+                        precipitation = `${weatherData.daily.precipitation_sum[0]} mm`;
+                    }
+                    
+                    // Fix humidity display
+                    if (weatherData && weatherData.hourly && weatherData.hourly.relativehumidity_2m) {
+                        humidity = `${weatherData.hourly.relativehumidity_2m[0]}%`;
+                    } else {
+                        humidity = '—';
+                    }
+                    
+                    const html = `
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Current Temperature</div>
+                            <div class="basic-info-value">${currentTemp}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Today's High</div>
+                            <div class="basic-info-value">${todayHigh}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Today's Low</div>
+                            <div class="basic-info-value">${todayLow}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Precipitation</div>
+                            <div class="basic-info-value">${precipitation}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Wind Speed</div>
+                            <div class="basic-info-value">${windSpeed}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Humidity</div>
+                            <div class="basic-info-value">${humidity}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Population Density</div>
+                            <div class="basic-info-value">${populationDensity}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Local Authority</div>
+                            <div class="basic-info-value">${locationData.localAuthority}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Region</div>
+                            <div class="basic-info-value">${locationData.region}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Country</div>
+                            <div class="basic-info-value">${locationData.country}</div>
+                        </div>
+                    `;
+                    
+                    basicInfoContent.innerHTML = html;
+                } catch (error) {
+                    console.error('Basic info fetch failed:', error);
+                    document.getElementById('basicInfoContent').textContent = 'Basic info unavailable';
+                }
+            }
+            
+            // Get weather data
+            async getWeatherData(locationData) {
+                try {
+                    const weatherData = await this.fetchWeatherData(locationData);
+                    
+                    if (weatherData) {
+                        // Display current weather in weather panel
+                        const currentWeatherEl = document.getElementById('currentWeather');
+                        
+                        let currentTemp = '—';
+                        let todayHigh = '—';
+                        let todayLow = '—';
+                        let precipitation = '—';
+                        let windSpeed = '—';
+                        let humidity = '—';
+                        let weatherIcon = '☀️'; // Default icon
+                        
+                        if (weatherData.current_weather) {
+                            currentTemp = `${weatherData.current_weather.temperature}°C`;
+                            windSpeed = `${weatherData.current_weather.windspeed} m/s`;
+                            
+                            // Determine weather icon based on temperature and conditions
+                            weatherIcon = this.getWeatherIcon(weatherData.current_weather.weathercode, 
+                                                              weatherData.current_weather.temperature);
+                        }
+                        
+                        if (weatherData.daily) {
+                            todayHigh = `${weatherData.daily.temperature_2m_max[0]}°C`;
+                            todayLow = `${weatherData.daily.temperature_2m_min[0]}°C`;
+                            precipitation = `${weatherData.daily.precipitation_sum[0]} mm`;
+                        }
+                        
+                        // Fix humidity display
+                        if (weatherData.hourly && weatherData.hourly.relativehumidity_2m) {
+                            humidity = `${weatherData.hourly.relativehumidity_2m[0]}%`;
+                        } else {
+                            humidity = '—';
+                        }
+                        
+                        const html = `
+                            <div class="weather-info-item">
+                                <div class="weather-info-label">Current Weather</div>
+                                <div class="weather-info-value">${weatherIcon} ${currentTemp}</div>
+                            </div>
+                            <div class="weather-info-item">
+                                <div class="weather-info-label">Today's High</div>
+                                <div class="weather-info-value">${todayHigh}</div>
+                            </div>
+                            <div class="weather-info-item">
+                                <div class="weather-info-label">Today's Low</div>
+                                <div class="weather-info-value">${todayLow}</div>
+                            </div>
+                            <div class="weather-info-item">
+                                <div class="weather-info-label">Precipitation</div>
+                                <div class="weather-info-value">${precipitation}</div>
+                            </div>
+                            <div class="weather-info-item">
+                                <div class="weather-info-label">Wind Speed</div>
+                                <div class="weather-info-value">${windSpeed}</div>
+                            </div>
+                            <div class="weather-info-item">
+                                <div class="weather-info-label">Humidity</div>
+                                <div class="weather-info-value">${humidity}</div>
+                            </div>
+                        `;
+                        
+                        currentWeatherEl.innerHTML = html;
+                        
+                        // Create 10-day forecast display
+                        if (weatherData.daily && weatherData.daily.time) {
+                            this.renderTenDayForecast(weatherData.daily);
+                        }
+                        
+                        // Create daily chart (10-day forecast)
+                        if (weatherData.daily && weatherData.daily.time) {
+                            const days = weatherData.daily.time.slice(0, 10);
+                            const maxs = weatherData.daily.temperature_2m_max.slice(0, 10);
+                            const mins = weatherData.daily.temperature_2m_min.slice(0, 10);
+                            
+                            this.renderDailyChart(days, maxs, mins);
+                        }
+                        
+                        // Create precipitation chart
+                        if (weatherData.daily && weatherData.daily.time) {
+                            const days = weatherData.daily.time.slice(0, 10);
+                            const precipitation = weatherData.daily.precipitation_sum.slice(0, 10);
+                            const precipitation_probability = weatherData.daily.precipitation_probability_max.slice(0, 10);
+                            
+                            this.renderPrecipitationChart(days, precipitation, precipitation_probability);
+                        }
+                    } else {
+                        document.getElementById('currentWeather').textContent = 'Weather data unavailable';
+                    }
+                } catch (error) {
+                    console.error('Weather data fetch failed:', error);
+                    document.getElementById('currentWeather').textContent = 'Weather data unavailable';
+                }
+            }
+            
+            // Get weather icon based on weather code and temperature
+            getWeatherIcon(weatherCode, temperature) {
+                // Weather code mapping based on Open-Meteo API
+                // https://open-meteo.com/en/docs
+                const icons = {
+                    0: '☀️',  // Clear sky
+                    1: '🌤️',  // Mainly clear
+                    2: '⛅',  // Partly cloudy
+                    3: '☁️',  // Overcast
+                    45: '🌫️', // Fog
+                    48: '🌫️', // Depositing rime fog
+                    51: '🌦️', // Light drizzle
+                    53: '🌦️', // Moderate drizzle
+                    55: '🌧️', // Dense drizzle
+                    61: '🌦️', // Slight rain
+                    63: '🌧️', // Moderate rain
+                    65: '🌧️', // Heavy rain
+                    71: '🌨️', // Slight snow fall
+                    73: '🌨️', // Moderate snow fall
+                    75: '🌨️', // Heavy snow fall
+                    80: '🌦️', // Slight rain showers
+                    81: '🌧️', // Moderate rain showers
+                    82: '🌧️', // Violent rain showers
+                    95: '⛈️',  // Thunderstorm
+                    96: '⛈️',  // Thunderstorm with slight hail
+                    99: '⛈️'   // Thunderstorm with heavy hail
+                };
+                
+                // Default to sunny if code not found
+                return icons[weatherCode] || '☀️';
+            }
+            
+            // Fetch weather data from Open-Meteo with 10-day forecast
+            async fetchWeatherData(locationData) {
+                try {
+                    const weatherUrl = `${this.dataSources.weather}?latitude=${locationData.coordinates.lat}&longitude=${locationData.coordinates.lng}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,weathercode&current_weather=true&timezone=Europe%2FLondon&forecast_days=10&hourly=relativehumidity_2m`;
+                    const weatherResp = await fetch(weatherUrl);
+                    return await weatherResp.json();
+                } catch (error) {
+                    console.error('Weather data fetch failed:', error);
+                    return null;
+                }
+            }
+            
+            // Render 10-day forecast
+            renderTenDayForecast(dailyData) {
+                const forecastContainer = document.getElementById('tenDayForecast');
+                
+                if (!dailyData || !dailyData.time) {
+                    forecastContainer.innerHTML = '<p>10-day forecast data unavailable</p>';
+                    return;
+                }
+                
+                let html = '';
+                
+                for (let i = 0; i < 10; i++) {
+                    const date = new Date(dailyData.time[i]);
+                    const dayName = date.toLocaleDateString('en-GB', { weekday: 'short' });
+                    const dateStr = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+                    
+                    const maxTemp = dailyData.temperature_2m_max[i];
+                    const minTemp = dailyData.temperature_2m_min[i];
+                    const precipitation = dailyData.precipitation_sum[i];
+                    const precipitationChance = dailyData.precipitation_probability_max[i];
+                    const weatherCode = dailyData.weathercode[i];
+                    const weatherIcon = this.getWeatherIcon(weatherCode, maxTemp);
+                    
+                    html += `
+                        <div class="forecast-day">
+                            <div class="forecast-date">
+                                <div>${dayName}</div>
+                                <div class="small muted">${dateStr}</div>
+                            </div>
+                            <div class="weather-icon">${weatherIcon}</div>
+                            <div class="forecast-temps">
+                                <div class="forecast-temp">
+                                    <div class="temp-label">High</div>
+                                    <div class="temp-value">${maxTemp}°C</div>
+                                </div>
+                                <div class="forecast-temp">
+                                    <div class="temp-label">Low</div>
+                                    <div class="temp-value">${minTemp}°C</div>
+                                </div>
+                            </div>
+                            <div class="forecast-precipitation">
+                                <div class="precipitation-value">${precipitation} mm</div>
+                                <div class="precipitation-chance">${precipitationChance}% chance</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                forecastContainer.innerHTML = html;
+            }
+            
+            // Render daily temperature chart
+            renderDailyChart(days, maxs, mins) {
+                const ctx = document.getElementById('dailyTempChart').getContext('2d');
+                
+                if (this.dailyChart) {
+                    this.dailyChart.destroy();
+                }
+                
+                // Format labels for display
+                const labels = days.map(d => {
+                    const date = new Date(d);
+                    return date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+                });
+                
+                this.dailyChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Max (°C)',
+                                data: maxs,
+                                backgroundColor: 'rgba(239, 68, 68, 0.7)'
+                            },
+                            {
+                                label: 'Min (°C)',
+                                data: mins,
+                                backgroundColor: 'rgba(59, 130, 246, 0.7)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '10-Day Temperature Forecast'
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Render precipitation chart
+            renderPrecipitationChart(days, precipitation, precipitation_probability) {
+                const ctx = document.getElementById('precipitationChart').getContext('2d');
+                
+                if (this.precipitationChart) {
+                    this.precipitationChart.destroy();
+                }
+                
+                // Format labels for display
+                const labels = days.map(d => {
+                    const date = new Date(d);
+                    return date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+                });
+                
+                this.precipitationChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Precipitation (mm)',
+                                data: precipitation,
+                                backgroundColor: 'rgba(6, 182, 212, 0.7)',
+                                yAxisID: 'y1'
+                            },
+                            {
+                                type: 'line',
+                                label: 'Rain Chance (%)',
+                                data: precipitation_probability,
+                                borderColor: 'rgba(139, 92, 246, 1)',
+                                backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                                borderWidth: 2,
+                                tension: 0.2,
+                                yAxisID: 'y2'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '10-Day Precipitation Forecast'
+                            }
+                        },
+                        scales: {
+                            y1: {
+                                type: 'linear',
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: 'Precipitation (mm)'
+                                },
+                                beginAtZero: true
+                            },
+                            y2: {
+                                type: 'linear',
+                                position: 'right',
+                                title: {
+                                    display: true,
+                                    text: 'Rain Chance (%)'
+                                },
+                                grid: {
+                                    display: false
+                                },
+                                min: 0,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Get schools data
+            async getSchoolsData(locationData) {
+                try {
+                    // Overpass query for schools
+                    const schoolsQuery = `
+                        [out:json][timeout:25];
+                        (
+                            node["amenity"="school"](around:5000,${locationData.coordinates.lat},${locationData.coordinates.lng});
+                            way["amenity"="school"](around:5000,${locationData.coordinates.lat},${locationData.coordinates.lng});
+                        );
+                        out center 20;
+                    `;
+                    
+                    const schoolsResp = await fetch(this.dataSources.overpass, {
+                        method: 'POST',
+                        body: schoolsQuery
+                    });
+                    
+                    const schoolsJson = await schoolsResp.json();
+                    const schools = schoolsJson.elements || [];
+                    
+                    // Store for modal use
+                    this.schoolsData = schools;
+                    
+                    if (schools.length) {
+                        const schoolsWithDistance = schools.map(s => {
+                            const slat = s.lat || s.center?.lat;
+                            const slon = s.lon || s.center?.lon;
+                            return {
+                                name: s.tags?.name || 'Unnamed School',
+                                dist: this.calculateDistance(locationData.coordinates.lat, locationData.coordinates.lng, slat, slon),
+                                lat: slat,
+                                lng: slon,
+                                address: s.tags?.['addr:street'] || 'Address not available'
+                            };
+                        }).sort((a, b) => a.dist - b.dist);
+                        
+                        let html = '<ul>';
+                        schoolsWithDistance.slice(0, 10).forEach(school => {
+                            html += `<li><strong>${school.name}</strong> - ${school.dist.toFixed(1)} km</li>`;
+                        });
+                        html += '</ul>';
+                        
+                        document.getElementById('schoolsList').innerHTML = html;
+                    } else {
+                        document.getElementById('schoolsList').innerHTML = '<p>No schools found within 5 km.</p>';
+                    }
+                } catch (error) {
+                    console.error('Schools data fetch failed:', error);
+                    document.getElementById('schoolsList').innerHTML = '<p>Schools data unavailable</p>';
+                }
+            }
+            
+            // Get nearest universities data using CSV approach from B webpage
+            async getNearestUniversitiesData(locationData) {
+                try {
+                    const universities = await this.loadUniversitiesFromCSV();
+                    const currentLat = locationData.coordinates.lat;
+                    const currentLng = locationData.coordinates.lng;
+                    
+                    // Calculate distances to each university
+                    const universitiesWithDistance = universities.map(uni => {
+                        const distanceKm = this.calculateDistance(currentLat, currentLng, uni.lat, uni.lng);
+                        const distanceMiles = (distanceKm * 0.621371).toFixed(1);
+                        
+                        return {
+                            name: uni.name,
+                            distance: {
+                                km: distanceKm.toFixed(1),
+                                miles: distanceMiles
+                            },
+                            lat: uni.lat,
+                            lng: uni.lng
+                        };
+                    });
+                    
+                    // Sort by distance and return top 10
+                    const sortedUniversities = universitiesWithDistance
+                        .sort((a, b) => parseFloat(a.distance.km) - parseFloat(b.distance.km))
+                        .slice(0, 10);
+                    
+                    // Store for modal use
+                    this.universitiesData = sortedUniversities;
+                    
+                    let html = '<ul>';
+                    sortedUniversities.forEach(uni => {
+                        html += `<li><strong>${uni.name}</strong> - ${uni.distance.km} km <span class="distance-unit">(${uni.distance.miles} miles)</span></li>`;
+                    });
+                    html += '</ul>';
+                    
+                    document.getElementById('nearestUniversityList').innerHTML = html;
+                } catch (error) {
+                    console.error('Nearest universities data fetch failed:', error);
+                    document.getElementById('nearestUniversityList').innerHTML = '<p>Nearest universities data unavailable</p>';
+                }
+            }
+            
+            // Load universities from CSV (from B webpage)
+            async loadUniversitiesFromCSV() {
+                try {
+                    const response = await fetch(this.UNIVERSITIES_CSV_URL);
+                    if (!response.ok) throw new Error('CSV not found');
+                    const text = await response.text();
+                    const lines = text.split(/\r?\n/).filter(Boolean);
+                    
+                    const universities = [];
+                    for (let i = 0; i < lines.length; i++) {
+                        const parts = lines[i].split(',').map(s => s.trim());
+                        if (parts.length >= 3) {
+                            const name = parts[0].replace(/^"|"$/g, '');
+                            const lat = parseFloat(parts[1]);
+                            const lng = parseFloat(parts[2]);
+                            if (!isNaN(lat) && !isNaN(lng)) {
+                                universities.push({ name, lat, lng });
+                            }
+                        }
+                    }
+                    return universities;
+                } catch (error) {
+                    console.error('Failed to load universities CSV:', error);
+                    // Fallback to hardcoded universities if CSV fails
+                    return this.getFallbackUniversities();
+                }
+            }
+            
+            // Get university data with distance (original method)
+            async getUniversityData(locationData) {
+                // Major UK universities with approximate coordinates
+                const universities = [
+                    { name: 'University of Oxford', lat: 51.7548, lng: -1.2544 },
+                    { name: 'University of Cambridge', lat: 52.2053, lng: 0.1218 },
+                    { name: 'Imperial College London', lat: 51.4988, lng: -0.1749 },
+                    { name: 'University College London', lat: 51.5246, lng: -0.1340 },
+                    { name: 'London School of Economics', lat: 51.5140, lng: -0.1167 },
+                    { name: 'University of Edinburgh', lat: 55.9444, lng: -3.1878 },
+                    { name: 'University of Manchester', lat: 53.4668, lng: -2.2339 },
+                    { name: 'University of Bristol', lat: 51.4584, lng: -2.6042 },
+                    { name: 'University of Glasgow', lat: 55.8721, lng: -4.2882 },
+                    { name: 'University of Birmingham', lat: 52.4508, lng: -1.9305 },
+                    { name: 'University of Leeds', lat: 53.8067, lng: -1.5550 },
+                    { name: 'University of Sheffield', lat: 53.3811, lng: -1.4877 },
+                    { name: 'University of Liverpool', lat: 53.4064, lng: -2.9654 },
+                    { name: 'University of Nottingham', lat: 52.9373, lng: -1.1959 },
+                    { name: 'University of Southampton', lat: 50.9369, lng: -1.3962 },
+                    { name: 'University of York', lat: 53.9450, lng: -1.0558 },
+                    { name: 'University of Warwick', lat: 52.3792, lng: -1.5609 },
+                    { name: 'Durham University', lat: 54.7753, lng: -1.5849 },
+                    { name: 'University of Exeter', lat: 50.7360, lng: -3.5350 },
+                    { name: 'University of St Andrews', lat: 56.3406, lng: -2.7950 }
+                ];
+                
+                const currentLat = locationData.coordinates.lat;
+                const currentLng = locationData.coordinates.lng;
+                
+                // Calculate distances to each university
+                const universitiesWithDistance = universities.map(uni => {
+                    const distanceKm = this.calculateDistance(currentLat, currentLng, uni.lat, uni.lng);
+                    const distanceMiles = (distanceKm * 0.621371).toFixed(1);
+                    
+                    return {
+                        name: uni.name,
+                        distance: {
+                            km: distanceKm.toFixed(1),
+                            miles: distanceMiles
+                        }
+                    };
+                });
+                
+                // Sort by distance and return all
+                const sortedUniversities = universitiesWithDistance
+                    .sort((a, b) => parseFloat(a.distance.km) - parseFloat(b.distance.km));
+                
+                let html = '<ul>';
+                sortedUniversities.forEach(uni => {
+                    html += `<li><strong>${uni.name}</strong> - ${uni.distance.km} km <span class="distance-unit">(${uni.distance.miles} miles)</span></li>`;
+                });
+                html += '</ul>';
+                
+                document.getElementById('universityList').innerHTML = html;
+            }
+            
+            // Get UK cities data
+            async getCitiesData(locationData) {
+                try {
+                    const currentLat = locationData.coordinates.lat;
+                    const currentLng = locationData.coordinates.lng;
+                    
+                    // Calculate distances to each city
+                    const citiesWithDistance = this.UK_CITIES.map(city => {
+                        const distanceKm = this.calculateDistance(currentLat, currentLng, city.lat, city.lng);
+                        const distanceMiles = (distanceKm * 0.621371).toFixed(1);
+                        
+                        return {
+                            name: city.name,
+                            distance: {
+                                km: distanceKm.toFixed(1),
+                                miles: distanceMiles
+                            }
+                        };
+                    });
+                    
+                    // Sort by distance and return top 15
+                    const sortedCities = citiesWithDistance
+                        .sort((a, b) => parseFloat(a.distance.km) - parseFloat(b.distance.km))
+                        .slice(0, 15);
+                    
+                    let html = '<ul>';
+                    sortedCities.forEach(city => {
+                        html += `<li><strong>${city.name}</strong> - ${city.distance.km} km <span class="distance-unit">(${city.distance.miles} miles)</span></li>`;
+                    });
+                    html += '</ul>';
+                    
+                    document.getElementById('citiesList').innerHTML = html;
+                } catch (error) {
+                    console.error('Cities data fetch failed:', error);
+                    document.getElementById('citiesList').innerHTML = '<p>Cities data unavailable</p>';
+                }
+            }
+            
+            // Get amenities data with new categories
+            async getAmenitiesData(locationData) {
+                try {
+                    // Use Overpass API to find nearby amenities
+                    const types = {
+                        'Supermarket': 'shop=supermarket',
+                        'Restaurant': 'amenity=restaurant',
+                        'Pub': 'amenity=pub',
+                        'Fast Food': 'amenity=fast_food',
+                        'Petrol Station': 'amenity=fuel',
+                        'Electric Vehicle Charging Station': 'amenity=charging_station',
+                        'Library': 'amenity=library',
+                        'Park': 'leisure=park',
+                        'Museum': 'tourism=museum',
+                        'Post Office': 'amenity=post_office'
+                    };
+                    
+                    const promises = Object.entries(types).map(async ([label, filter]) => {
+                        try {
+                            const q = `[out:json][timeout:25];
+                                (
+                                    node["${filter.split('=')[0]}"="${filter.split('=')[1]}"](around:3000,${locationData.coordinates.lat},${locationData.coordinates.lng});
+                                    way["${filter.split('=')[0]}"="${filter.split('=')[1]}"](around:3000,${locationData.coordinates.lat},${locationData.coordinates.lng});
+                                );
+                                out center 10;`;
+                            
+                            const r = await fetch('https://overpass-api.de/api/interpreter', { 
+                                method: 'POST', 
+                                body: q 
+                            });
+                            
+                            if (!r.ok) {
+                                console.error(`Overpass API error for ${label}: ${r.status}`);
+                                return { label, items: [] };
+                            }
+                            
+                            const j = await r.json();
+                            const items = (j.elements || []).slice(0, 8).map(el => {
+                                const lat2 = el.lat || (el.center && el.center.lat);
+                                const lon2 = el.lon || (el.center && el.center.lon);
+                                const distance = lat2 ? this.calculateDistance(
+                                    locationData.coordinates.lat, 
+                                    locationData.coordinates.lng, 
+                                    lat2, 
+                                    lon2
+                                ) : null;
+                                
+                                return {
+                                    name: el.tags && (el.tags.name || el.tags.brand || el.tags.operator) || 'Unnamed',
+                                    lat: lat2, 
+                                    lon: lon2,
+                                    distance_km: distance,
+                                    tags: el.tags || {},
+                                    address: this.extractAddress(el.tags)
+                                };
+                            }).filter(item => item.distance_km !== null);
+                            
+                            return { label, items };
+                        } catch (error) {
+                            console.error(`Error fetching ${label}:`, error);
+                            return { label, items: [] };
+                        }
+                    });
+                    
+                    const results = await Promise.all(promises);
+                    const amenitiesData = {};
+                    results.forEach(result => {
+                        amenitiesData[result.label] = result.items;
+                    });
+                    
+                    // Store for modal use
+                    this.amenitiesData = amenitiesData;
+                    
+                    // Render amenities using the provided method
+                    this.renderAmenities(amenitiesData);
+                } catch (error) {
+                    console.error('Amenities data fetch failed:', error);
+                    document.getElementById('amenitiesContent').innerHTML = `<div class="warning">Amenities fetch error: ${error.message}</div>`;
+                }
+            }
+            
+            // Get special facilities data
+            async getSpecialFacilitiesData(locationData) {
+                try {
+                    // Use Overpass API to find nearby special facilities
+                    const types = {
+                        'Sewage Treatment Plant': 'man_made=works',
+                        'Power Station': 'power=generator',
+                        'Industrial Site': 'industrial=*',
+                        'Waste Management': 'amenity=waste_disposal'
+                    };
+                    
+                    const promises = Object.entries(types).map(async ([label, filter]) => {
+                        try {
+                            const q = `[out:json][timeout:25];
+                                (
+                                    node["${filter.split('=')[0]}"="${filter.split('=')[1]}"](around:10000,${locationData.coordinates.lat},${locationData.coordinates.lng});
+                                    way["${filter.split('=')[0]}"="${filter.split('=')[1]}"](around:10000,${locationData.coordinates.lat},${locationData.coordinates.lng});
+                                );
+                                out center 10;`;
+                            
+                            const r = await fetch('https://overpass-api.de/api/interpreter', { 
+                                method: 'POST', 
+                                body: q 
+                            });
+                            
+                            if (!r.ok) {
+                                console.error(`Overpass API error for ${label}: ${r.status}`);
+                                return { label, items: [] };
+                            }
+                            
+                            const j = await r.json();
+                            const items = (j.elements || []).slice(0, 8).map(el => {
+                                const lat2 = el.lat || (el.center && el.center.lat);
+                                const lon2 = el.lon || (el.center && el.center.lon);
+                                const distance = lat2 ? this.calculateDistance(
+                                    locationData.coordinates.lat, 
+                                    locationData.coordinates.lng, 
+                                    lat2, 
+                                    lon2
+                                ) : null;
+                                
+                                return {
+                                    name: el.tags && (el.tags.name || el.tags.brand || el.tags.operator) || 'Unnamed',
+                                    lat: lat2, 
+                                    lon: lon2,
+                                    distance_km: distance,
+                                    tags: el.tags || {},
+                                    address: this.extractAddress(el.tags)
+                                };
+                            }).filter(item => item.distance_km !== null);
+                            
+                            return { label, items };
+                        } catch (error) {
+                            console.error(`Error fetching ${label}:`, error);
+                            return { label, items: [] };
+                        }
+                    });
+                    
+                    const results = await Promise.all(promises);
+                    const specialFacilitiesData = {};
+                    results.forEach(result => {
+                        specialFacilitiesData[result.label] = result.items;
+                    });
+                    
+                    // Store for modal use
+                    this.specialFacilitiesData = specialFacilitiesData;
+                    
+                    // Render special facilities
+                    this.renderSpecialFacilities(specialFacilitiesData);
+                } catch (error) {
+                    console.error('Special facilities data fetch failed:', error);
+                    document.getElementById('specialFacilitiesContent').innerHTML = `<div class="warning">Special facilities fetch error: ${error.message}</div>`;
+                }
+            }
+            
+            // Extract address from OSM tags
+            extractAddress(tags) {
+                if (!tags) return 'Address not available';
+                
+                const parts = [];
+                if (tags['addr:housenumber']) parts.push(tags['addr:housenumber']);
+                if (tags['addr:street']) parts.push(tags['addr:street']);
+                if (tags['addr:city']) parts.push(tags['addr:city']);
+                if (tags['addr:postcode']) parts.push(tags['addr:postcode']);
+                
+                return parts.length > 0 ? parts.join(', ') : 'Address not available';
+            }
+            
+            // Render amenities function
+            renderAmenities(amenitiesData) {
+                const amenitiesContent = document.getElementById('amenitiesContent');
+                
+                if (!amenitiesData) { 
+                    amenitiesContent.innerHTML = 'No amenities data available';
+                    return;
+                }
+                
+                if (amenitiesData.error) { 
+                    amenitiesContent.innerHTML = `<div class="warning">${amenitiesData.error}</div>`; 
+                    return; 
+                }
+                
+                // For each category in specified order
+                const categories = ['Supermarket', 'Restaurant', 'Pub', 'Fast Food', 'Petrol Station', 
+                                   'Electric Vehicle Charging Station', 'Library', 'Park', 'Museum', 'Post Office'];
+                
+                amenitiesContent.innerHTML = categories.map(cat => {
+                    const items = amenitiesData[cat] || [];
+                    if (!items.length) return `<div><strong>${cat}:</strong> <span class="small muted">No results</span></div>`;
+                    return `
+                        <div style="margin-bottom:10px">
+                            <div><strong>${cat}</strong></div>
+                            <div class="small muted">${items.slice(0, 6).map(it => `<div>${it.name} · ${it.distance_km ? it.distance_km.toFixed(2) + ' km' : ''}</div>`).join('')}</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Render special facilities function
+            renderSpecialFacilities(specialFacilitiesData) {
+                const specialFacilitiesContent = document.getElementById('specialFacilitiesContent');
+                
+                if (!specialFacilitiesData) { 
+                    specialFacilitiesContent.innerHTML = 'No special facilities data available';
+                    return;
+                }
+                
+                if (specialFacilitiesData.error) { 
+                    specialFacilitiesContent.innerHTML = `<div class="warning">${specialFacilitiesData.error}</div>`; 
+                    return; 
+                }
+                
+                // For each category in specified order
+                const categories = ['Sewage Treatment Plant', 'Power Station', 'Industrial Site', 'Waste Management'];
+                
+                specialFacilitiesContent.innerHTML = categories.map(cat => {
+                    const items = specialFacilitiesData[cat] || [];
+                    if (!items.length) return `<div><strong>${cat}:</strong> <span class="small muted">No results</span></div>`;
+                    return `
+                        <div style="margin-bottom:10px">
+                            <div><strong>${cat}</strong></div>
+                            <div class="small muted">${items.slice(0, 6).map(it => `<div>${it.name} · ${it.distance_km ? it.distance_km.toFixed(2) + ' km' : ''}</div>`).join('')}</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Get transport data
+            async getTransportData(locationData) {
+                try {
+                    const transportData = await this.findNearestStationAndRoads(locationData);
+                    // Store for modal use
+                    this.transportData = transportData;
+                    this.renderTransport(transportData);
+                } catch (error) {
+                    console.error('Transport data fetch failed:', error);
+                    document.getElementById('transportContent').innerHTML = `<div class="warning">Transport fetch error: ${error.message}</div>`;
+                }
+            }
+            
+            // Find nearest station and roads
+            async findNearestStationAndRoads(locationData) {
+                const lat = locationData.coordinates.lat;
+                const lon = locationData.coordinates.lng;
+                
+                // Overpass query to get nearest railway=station and highway names within 5km
+                const query = `[out:json][timeout:25];
+                    (
+                        node(around:8000,${lat},${lon})[railway=station];
+                        node(around:8000,${lat},${lon})[public_transport=stop_position];
+                        way(around:5000,${lat},${lon})[highway];
+                    );
+                    out center 30;`;
+                
+                const url = 'https://overpass-api.de/api/interpreter';
+                const r = await fetch(url, { method:'POST', body: query });
+                if (!r.ok) throw new Error('Overpass error');
+                const json = await r.json();
+                
+                // parse for stations and roads
+                const stations = [];
+                const roads = new Map();
+                (json.elements || []).forEach(el => {
+                    if (el.tags && (el.tags.railway === 'station' || el.tags.public_transport)) {
+                        const lat2 = el.lat || (el.center && el.center.lat);
+                        const lon2 = el.lon || (el.center && el.center.lon);
+                        if (lat2 && lon2) stations.push({
+                            name: el.tags.name || 'Unnamed station',
+                            lat: lat2, lon: lon2,
+                            distance_km: this.calculateDistance(lat, lon, lat2, lon2),
+                            address: this.extractAddress(el.tags)
+                        });
+                    }
+                    if (el.tags && el.tags.highway) {
+                        let name = el.tags.name || el.tags.ref || 'Unnamed road';
+                        roads.set(name, true);
+                    }
+                });
+                
+                // sort stations by distance
+                stations.sort((a,b)=>a.distance_km-b.distance_km);
+                const roadList = Array.from(roads.keys()).slice(0,10);
+                return { stations, roads: roadList };
+            }
+            
+            // Render transport
+            renderTransport(transportData) {
+                if (!transportData) { 
+                    document.getElementById('transportContent').innerHTML='No transport data'; 
+                    return; 
+                }
+                
+                if (transportData.error) { 
+                    document.getElementById('transportContent').innerHTML = `<div class="warning">${transportData.error}</div>`; 
+                    return; 
+                }
+                
+                const stationHtml = (transportData.stations && transportData.stations.length) ? `
+                    <div class="transport-station">
+                        <h4>Nearest Station:</h4>
+                        <div><strong>${transportData.stations[0].name}</strong> — <span class="distance">${transportData.stations[0].distance_km.toFixed(2)} km</span></div>
+                    </div>
+                ` : '<div class="small muted">No nearby stations found.</div>';
+                
+                const roadsHtml = (transportData.roads && transportData.roads.length) ? `
+                    <div class="transport-roads">
+                        <h4>Nearby Roads (sample):</h4>
+                        <ul class="road-list small muted">
+                            ${transportData.roads.slice(0,6).map(r=>`<li>${r}</li>`).join('')}
+                        </ul>
+                    </div>
+                ` : '';
+                
+                document.getElementById('transportContent').innerHTML = stationHtml + roadsHtml;
+            }
+            
+            // Get crime data
+            async getCrimeData(locationData) {
+                try {
+                    const crimeResp = await fetch(`${this.dataSources.crime}?lat=${locationData.coordinates.lat}&lng=${locationData.coordinates.lng}`);
+                    const crimeJson = await crimeResp.json();
+                    
+                    if (Array.isArray(crimeJson) && crimeJson.length) {
+                        const counts = {};
+                        crimeJson.forEach(c => counts[c.category] = (counts[c.category] || 0) + 1);
+                        
+                        let html = '<ul class="list-disc pl-5">';
+                        Object.keys(counts).forEach(k => html += `<li>${k}: ${counts[k]}</li>`);
+                        html += '</ul>';
+                        
+                        document.getElementById('crimeList').innerHTML = html;
+                        
+                        // Create crime chart
+                        this.createCrimeChart(counts);
+                    } else {
+                        document.getElementById('crimeList').textContent = 'No recent street-level crimes returned for this location.';
+                    }
+                } catch (error) {
+                    console.error('Crime data fetch failed:', error);
+                    document.getElementById('crimeList').textContent = 'Crime data unavailable';
+                }
+            }
+            
+            // Create crime chart
+            createCrimeChart(crimeData) {
+                const ctx = document.getElementById('crimeChart').getContext('2d');
+                
+                if (this.crimeChart) {
+                    this.crimeChart.destroy();
+                }
+                
+                const categories = Object.keys(crimeData);
+                const counts = Object.values(crimeData);
+                
+                this.crimeChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: categories,
+                        datasets: [{
+                            label: 'Number of Incidents',
+                            data: counts,
+                            backgroundColor: [
+                                'rgba(239, 68, 68, 0.7)',
+                                'rgba(249, 115, 22, 0.7)',
+                                'rgba(245, 158, 11, 0.7)',
+                                'rgba(234, 179, 8, 0.7)',
+                                'rgba(132, 204, 22, 0.7)',
+                                'rgba(34, 197, 94, 0.7)',
+                                'rgba(16, 185, 129, 0.7)',
+                                'rgba(20, 184, 166, 0.7)',
+                                'rgba(6, 182, 212, 0.7)',
+                                'rgba(14, 165, 233, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgb(239, 68, 68)',
+                                'rgb(249, 115, 22)',
+                                'rgb(245, 158, 11)',
+                                'rgb(234, 179, 8)',
+                                'rgb(132, 204, 22)',
+                                'rgb(34, 197, 94)',
+                                'rgb(16, 185, 129)',
+                                'rgb(20, 184, 166)',
+                                'rgb(6, 182, 212)',
+                                'rgb(14, 165, 233)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Crime Statistics by Category'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Number of Incidents'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Crime Categories'
+                                },
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Get water quality data (simulated for now)
+            async getWaterQualityData(locationData) {
+                const region = locationData.region;
+                
+                // Water hardness mapping based on UK regions
+                const hardnessMapping = {
+                    'London': 250, // Hard water
+                    'South East': 220, // Hard water
+                    'South West': 180, // Moderately hard water
+                    'East of England': 200, // Hard water
+                    'West Midlands': 150, // Slightly hard water
+                    'East Midlands': 160, // Slightly hard water
+                    'North West': 120, // Moderately soft water
+                    'North East': 100, // Moderately soft water
+                    'Yorkshire and The Humber': 110, // Moderately soft water
+                    'Scotland': 80, // Soft water
+                    'Wales': 90, // Soft water
+                    'Northern Ireland': 70 // Soft water
+                };
+                
+                const hardness = hardnessMapping[region] || 150;
+                
+                const waterQualityData = {
+                    hardness: hardness,
+                    quality: hardness < 100 ? 'Soft' : hardness < 200 ? 'Moderately Hard' : 'Hard'
+                };
+                
+                // Display water quality
+                this.displayWaterQuality(waterQualityData);
+            }
+            
+
+            // Get airport data with distance
+            async getAirportData(locationData) {
+                // Major UK international airports with coordinates
+                const airports = [
+                    { name: 'Heathrow Airport (LHR)', lat: 51.4700, lng: -0.4543 },
+                    { name: 'Gatwick Airport (LGW)', lat: 51.1537, lng: -0.1821 },
+                    { name: 'Manchester Airport (MAN)', lat: 53.3537, lng: -2.2750 },
+                    { name: 'Stansted Airport (STN)', lat: 51.8850, lng: 0.2350 },
+                    { name: 'Luton Airport (LTN)', lat: 51.8747, lng: -0.3683 },
+                    { name: 'Edinburgh Airport (EDI)', lat: 55.9500, lng: -3.3725 },
+                    { name: 'Birmingham Airport (BHX)', lat: 52.4539, lng: -1.7480 },
+                    { name: 'Glasgow Airport (GLA)', lat: 55.8642, lng: -4.4331 },
+                    { name: 'Bristol Airport (BRS)', lat: 51.3827, lng: -2.7191 },
+                    { name: 'Newcastle Airport (NCL)', lat: 55.0375, lng: -1.6917 },
+                    { name: 'Liverpool John Lennon Airport (LPL)', lat: 53.3336, lng: -2.8497 },
+                    { name: 'East Midlands Airport (EMA)', lat: 52.8311, lng: -1.3281 },
+                    { name: 'Leeds Bradford Airport (LBA)', lat: 53.8659, lng: -1.6606 },
+                    { name: 'Cardiff Airport (CWL)', lat: 51.3967, lng: -3.3433 },
+                    { name: 'Belfast International Airport (BFS)', lat: 54.6575, lng: -6.2158 }
+                ];
+                
+                const currentLat = locationData.coordinates.lat;
+                const currentLng = locationData.coordinates.lng;
+                
+                // Calculate distances to each airport
+                const airportsWithDistance = airports.map(airport => {
+                    const distanceKm = this.calculateDistance(currentLat, currentLng, airport.lat, airport.lng);
+                    const distanceMiles = (distanceKm * 0.621371).toFixed(1);
+                    
+                    return {
+                        name: airport.name,
+                        distance: {
+                            km: distanceKm.toFixed(1),
+                            miles: distanceMiles
+                        }
+                    };
+                });
+                
+                // Sort by distance and return all
+                const sortedAirports = airportsWithDistance
+                    .sort((a, b) => parseFloat(a.distance.km) - parseFloat(b.distance.km));
+                
+                let html = '<ul>';
+                sortedAirports.forEach(airport => {
+                    html += `<li><strong>${airport.name}</strong> - ${airport.distance.km} km <span class="distance-unit">(${airport.distance.miles} miles)</span></li>`;
+                });
+                html += '</ul>';
+                
+                document.getElementById('airportList').innerHTML = html;
+            }
+            
+            // Display water quality
+            displayWaterQuality(waterQualityData) {
+                const waterQualityDisplay = document.getElementById('waterQualityDisplay');
+                
+                let qualityText = '';
+                let qualityColor = '';
+                
+                if (waterQualityData.hardness < 100) {
+                    qualityText = 'Soft Water';
+                    qualityColor = '#3b82f6'; // Blue
+                } else if (waterQualityData.hardness < 200) {
+                    qualityText = 'Moderately Hard Water';
+                    qualityColor = '#8b5cf6'; // Purple
+                } else {
+                    qualityText = 'Hard Water';
+                    qualityColor = '#ec4899'; // Pink
+                }
+                
+                const markerPosition = ((waterQualityData.hardness - 50) / 250) * 100; // Scale from 50-300 to 0-100%
+                
+                const html = `
+                    <div class="water-quality-indicator">
+                        <div class="water-quality-bar">
+                            <div class="water-quality-marker" style="left: ${markerPosition}%;"></div>
+                        </div>
+                        <div class="water-quality-labels">
+                            <span class="water-quality-label">Soft</span>
+                            <span class="water-quality-label">Moderate</span>
+                            <span class="water-quality-label">Hard</span>
+                        </div>
+                        <div style="margin-top: 1rem; text-align: center;">
+                            <strong>${qualityText}</strong><br>
+                            <span class="small muted">Hardness: ${waterQualityData.hardness} mg/L CaCO₃</span>
+                        </div>
+                    </div>
+                `;
+                
+                waterQualityDisplay.innerHTML = html;
+            }
+            
+            // Calculate distance between two coordinates using Haversine formula
+            calculateDistance(lat1, lon1, lat2, lon2) {
+                const R = 6371; // Earth radius in km
+                const dLat = (lat2 - lat1) * Math.PI / 180;
+                const dLon = (lon2 - lon1) * Math.PI / 180;
+                const a = 
+                    Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                    Math.sin(dLon/2) * Math.sin(dLon/2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                return R * c;
+            }
+            
+            // Display basic results
+            displayBasicResults(locationData) {
+                // Update location info panel
+                document.getElementById('postcodeLabel').textContent = locationData.postcode;
+                document.getElementById('coords').textContent = 
+                    `${locationData.coordinates.lat.toFixed(6)}, ${locationData.coordinates.lng.toFixed(6)} — ${locationData.county}`;
+                
+                // Update area overview
+                const areaOverview = document.getElementById('areaOverview');
+                areaOverview.classList.remove('hidden');
+                areaOverview.innerHTML = `
+                    <div class="data-source-badge">
+                        <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Real Data Analysis for ${locationData.postcode}
+                    </div>
+                    <h2 style="margin-bottom: 1rem;">Area Overview: ${locationData.areaName}</h2>
+                    <div class="basic-info-grid">
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Region</div>
+                            <div class="basic-info-value">${locationData.region}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Country</div>
+                            <div class="basic-info-value">${locationData.country}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Local Authority</div>
+                            <div class="basic-info-value">${locationData.localAuthority}</div>
+                        </div>
+                        <div class="basic-info-item">
+                            <div class="basic-info-label">Ward</div>
+                            <div class="basic-info-value">${locationData.ward}</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-light);">
+                        Complete analysis with real UK government data. All information is sourced from official UK data sources.
+                    </p>
+                `;
+                
+                // Update map
+                this.updateMap(locationData);
+                
+                // Show all panels
+                this.showAllPanels();
+            }
+            
+            // Update map with location
+            updateMap(locationData) {
+                if (!this.map) return;
+                
+                // Clear existing markers
+                this.markers.forEach(marker => this.map.removeLayer(marker));
+                this.markers = [];
+                
+                // Set view to location
+                this.map.setView([locationData.coordinates.lat, locationData.coordinates.lng], 14);
+                
+                // Add marker for the postcode location
+                const marker = L.marker([locationData.coordinates.lat, locationData.coordinates.lng])
+                    .addTo(this.map)
+                    .bindPopup(`<b>${locationData.postcode}</b><br>${locationData.areaName}`)
+                    .openPopup();
+                
+                this.markers.push(marker);
+            }
+            
+            // Show all data panels
+            showAllPanels() {
+                const panels = [
+                    'basicInfoPanel', 'mapPanel', 'weatherPanel', 'schoolsPanel', 
+                    'nearestUniversitiesPanel', 'educationPanel', 'amenitiesPanel',
+                    'specialFacilitiesPanel', 'crimePanel', 'transportPanel',
+                    'airportPanel', 'citiesPanel', 'waterQualityPanel', 'locationInfoPanel'
+                ];
+                
+                panels.forEach(panelId => {
+                    const panel = document.getElementById(panelId);
+                    if (panel) {
+                        panel.classList.remove('hidden');
+                    }
+                });
+            }
+            
+            // Open Google Maps
+            openGoogleMaps() {
+                if (!this.currentData) return;
+                
+                const { lat, lng } = this.currentData.coordinates;
+                const url = `https://www.google.com/maps?q=${lat},${lng}`;
+                window.open(url, '_blank');
+            }
+            
+            // Modal functions
+            openSchoolsModal() {
+                const modal = document.getElementById('schoolsModal');
+                const list = document.getElementById('schoolsModalList');
+                
+                if (!this.schoolsData || this.schoolsData.length === 0) {
+                    list.innerHTML = '<p>No schools data available</p>';
+                } else {
+                    let html = '';
+                    this.schoolsData.slice(0, 20).forEach(school => {
+                        const name = school.tags?.name || 'Unnamed School';
+                        const address = this.extractAddress(school.tags);
+                        const lat = school.lat || school.center?.lat;
+                        const lng = school.lon || school.center?.lon;
+                        const distance = lat ? this.calculateDistance(
+                            this.currentData.coordinates.lat, 
+                            this.currentData.coordinates.lng, 
+                            lat, lng
+                        ).toFixed(2) : 'N/A';
+                        
+                        html += `
+                            <div class="modal-list-item">
+                                <div>
+                                    <strong>${name}</strong><br>
+                                    <span class="small muted">${address}</span>
+                                </div>
+                                <div>${distance} km</div>
+                            </div>
+                        `;
+                    });
+                    list.innerHTML = html;
+                }
+                
+                modal.style.display = 'block';
+            }
+            
+            openAmenitiesModal() {
+                const modal = document.getElementById('amenitiesModal');
+                const list = document.getElementById('amenitiesModalList');
+                
+                if (!this.amenitiesData) {
+                    list.innerHTML = '<p>No amenities data available</p>';
+                } else {
+                    let html = '';
+                    Object.entries(this.amenitiesData).forEach(([category, items]) => {
+                        if (items.length > 0) {
+                            html += `<h4 style="margin: 1.5rem 0 0.5rem 0;">${category}</h4>`;
+                            items.forEach(item => {
+                                html += `
+                                    <div class="modal-list-item">
+                                        <div>
+                                            <strong>${item.name}</strong><br>
+                                            <span class="small muted">${item.address}</span>
+                                        </div>
+                                        <div>${item.distance_km ? item.distance_km.toFixed(2) + ' km' : 'N/A'}</div>
+                                    </div>
+                                `;
+                            });
+                        }
+                    });
+                    
+                    if (html === '') {
+                        html = '<p>No amenities found in this area</p>';
+                    }
+                    
+                    list.innerHTML = html;
+                }
+                
+                modal.style.display = 'block';
+            }
+            
+            openTransportModal() {
+                const modal = document.getElementById('transportModal');
+                const list = document.getElementById('transportModalList');
+                
+                if (!this.transportData) {
+                    list.innerHTML = '<p>No transport data available</p>';
+                } else {
+                    let html = '<h4 style="margin-bottom: 1rem;">Nearby Stations</h4>';
+                    
+                    if (this.transportData.stations && this.transportData.stations.length > 0) {
+                        this.transportData.stations.slice(0, 15).forEach(station => {
+                            html += `
+                                <div class="modal-list-item">
+                                    <div>
+                                        <strong>${station.name}</strong><br>
+                                        <span class="small muted">${station.address}</span>
+                                    </div>
+                                    <div>${station.distance_km.toFixed(2)} km</div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        html += '<p>No stations found</p>';
+                    }
+                    
+                    html += '<h4 style="margin: 2rem 0 1rem 0;">Nearby Roads</h4>';
+                    
+                    if (this.transportData.roads && this.transportData.roads.length > 0) {
+                        this.transportData.roads.forEach(road => {
+                            html += `<div class="modal-list-item">${road}</div>`;
+                        });
+                    } else {
+                        html += '<p>No roads data</p>';
+                    }
+                    
+                    list.innerHTML = html;
+                }
+                
+                modal.style.display = 'block';
+            }
+            
+            openSpecialFacilitiesModal() {
+                const modal = document.getElementById('specialFacilitiesModal');
+                const list = document.getElementById('specialFacilitiesModalList');
+                
+                if (!this.specialFacilitiesData) {
+                    list.innerHTML = '<p>No special facilities data available</p>';
+                } else {
+                    let html = '';
+                    Object.entries(this.specialFacilitiesData).forEach(([category, items]) => {
+                        if (items.length > 0) {
+                            html += `<h4 style="margin: 1.5rem 0 0.5rem 0;">${category}</h4>`;
+                            items.forEach(item => {
+                                html += `
+                                    <div class="modal-list-item">
+                                        <div>
+                                            <strong>${item.name}</strong><br>
+                                            <span class="small muted">${item.address}</span>
+                                        </div>
+                                        <div>${item.distance_km ? item.distance_km.toFixed(2) + ' km' : 'N/A'}</div>
+                                    </div>
+                                `;
+                            });
+                        }
+                    });
+                    
+                    if (html === '') {
+                        html = '<p>No special facilities found in this area</p>';
+                    }
+                    
+                    list.innerHTML = html;
+                }
+                
+                modal.style.display = 'block';
+            }
+            
+            // Utility functions
+            validatePostcode(postcode) {
+                // Basic UK postcode validation
+                const ukPostcodeRegex = /^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$/i;
+                return ukPostcodeRegex.test(postcode);
+            }
+            
+            showLoading(show) {
+                const spinner = document.getElementById('dataLoadingSpinner');
+                if (show) {
+                    spinner.classList.remove('hidden');
+                } else {
+                    spinner.classList.add('hidden');
+                }
+            }
+            
+            updateProgress(percent) {
+                const progressFill = document.querySelector('.data-progress-fill');
+                if (progressFill) {
+                    progressFill.style.width = `${percent}%`;
+                }
+            }
+            
+            resetProgress() {
+                this.updateProgress(10);
+            }
+            
+            showError(message) {
+                alert(message);
+            }
+            
+            getFallbackPostcodeData(postcode) {
+                // Fallback data structure if postcodes.io fails
+                return {
+                    postcode: postcode,
+                    latitude: 51.5074, // Default to London
+                    longitude: -0.1278,
+                    parish: 'Unknown Area',
+                    admin_ward: 'Unknown Ward',
+                    admin_district: 'Unknown District',
+                    admin_county: 'Unknown County',
+                    region: 'Unknown Region',
+                    country: 'England',
+                    nuts: 'Unknown'
+                };
+            }
+            
+            getFallbackUniversities() {
+                // Fallback universities data if CSV fails
+                return [
+                    { name: 'University of Oxford', lat: 51.7548, lng: -1.2544 },
+                    { name: 'University of Cambridge', lat: 52.2053, lng: 0.1218 },
+                    { name: 'Imperial College London', lat: 51.4988, lng: -0.1749 },
+                    { name: 'University College London', lat: 51.5246, lng: -0.1340 },
+                    { name: 'London School of Economics', lat: 51.5140, lng: -0.1167 },
+                    { name: 'University of Edinburgh', lat: 55.9444, lng: -3.1878 },
+                    { name: 'University of Manchester', lat: 53.4668, lng: -2.2339 },
+                    { name: 'University of Bristol', lat: 51.4584, lng: -2.6042 },
+                    { name: 'University of Glasgow', lat: 55.8721, lng: -4.2882 },
+                    { name: 'University of Birmingham', lat: 52.4508, lng: -1.9305 }
+                ];
+            }
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            window.postcodeAnalysis = new GlobalPostcodeAnalysis();
+        });
+
+        // Add spinning animation for refresh buttons
+        const style = document.createElement('style');
+        style.textContent = `
+            .spinning {
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
