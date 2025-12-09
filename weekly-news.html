@@ -654,6 +654,18 @@
                 <p>歡迎來到每週重點新聞頻道。本頻道旨在綜合各大新聞媒體的報導，為您提供本週最重要、最具影響力的英國新聞事件的客觀、中立、詳細的報導。我們承諾所有新聞稿均為獨立重新撰寫，不含評論或個人意見。</p>
                 
 <div class="news-section">
+    <div class="news-card" onclick="openArticleModal('uk_flu_crisis_2025')"> 
+        <img src="https://locationpro.org/uk_flu_crisis_2025.jpg" alt="流感高峰" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🚨 英格蘭面臨「史無前例」流感高峰，住院人數創歷史新高</div>
+            <div class="news-subtitle">英國衛生安全局警告，甲型 H3N2 病毒導致實驗室陽性率激增至 17.1%，NHS 急診壓力空前。</div>
+            <div class="news-origin">醫療 | 公共衛生 | NHS</div>
+            <div class="news-tag">疫情警報</div>
+            2025年12月9日  
+        </div>
+</div>
+ 
+ 
     <div class="news-card" onclick="openArticleModal('f1_championship_win')"> 
         <img src="https://locationpro.org/f1_championship_win.jpg" alt="倫敦塔外警方拉起封鎖線" class="news-image">
         <div class="news-content">
@@ -1159,6 +1171,57 @@
             // --- 新增的 7 則新聞 ---
 
 
+    uk_flu_crisis_2025: {
+        title: "英格蘭面臨「史無前例」流感高峰，住院人數創歷史新高",
+        subtitle: "英國衛生安全局警告，甲型 H3N2 病毒導致實驗室陽性率激增至 17.1%，NHS 急診壓力空前。",
+        content: `
+            <div class="chinese-section">
+                <img src="https://locationpro.org/uk_flu_crisis_2025.jpg" alt="Lando Norris 高舉世界冠軍獎盃"" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                
+                <h4>疫情爆發與病毒類型</h4>
+                <p>英國衛生安全局（UKHSA）今日發出嚴峻警告，確認英格蘭正在經歷一次「史無前例」（Unprecedented）的季節性流感大爆發。本次疫情的主要推動者是 **甲型 H3N2 流感病毒**，該毒株在老年人和慢性病患者中會引發更為嚴重的併發症。數據顯示，在短短一週內，流感實驗室檢測的陽性率從 11.6% 飆升至 **17.1%**，表明病毒在社區中的傳播速度極快。</p>
+                
+                <h4>醫療系統承受的壓力</h4>
+                <p>流感住院數據是衡量疫情嚴重程度的關鍵指標。根據國家醫療服務（NHS）的最新報告：</p>
+                <ul>
+                    <li><strong>住院人數創紀錄：</strong> 上週，英格蘭每天平均有 **1,717 名流感住院患者**，打破了 2017-18 年冬季的歷史紀錄。</li>
+                    <li><strong>兒科壓力：</strong> 雖然老年群體是高風險人群，但今年兒科加護病房因流感相關的呼吸系統疾病入住的比例亦顯著上升。</li>
+                    <li><strong>急診排隊時間延長：</strong> 許多地區的醫院已宣布進入「重大事件」狀態，非緊急手術被推遲，急診（A&E）候診時間平均超過 6 小時，尤其是在倫敦和西米德蘭茲地區。</li>
+                </ul>
+                
+                <h4>官方呼籲與應對措施</h4>
+                <p>UKHSA 首席醫療顧問史密斯教授（Prof. Smith）呼籲公眾立即採取行動，以保護 NHS：</p>
+                <blockquote>
+                "我們正處於疫情高峰期之前。請所有合資格人士，特別是 65 歲及以上長者、孕婦、以及患有哮喘或心臟病等慢性病者，務必立即接種免費流感疫苗。流感疫苗對 H3N2 毒株仍有良好保護力，是減輕醫療負擔的最有效手段。"
+                </blockquote>
+                <p>政府已緊急撥款 5,000 萬英鎊，用於資助額外的社區護理床位，以便盡快將康復中的流感患者從醫院轉移出來，釋放急症資源。</p>
+            </div>
+            
+            <div class="english-section">
+                <h4>England Faces 'Unprecedented' Flu Peak: Hospital Admissions Hit Record High</h4>
+                <p>The UK Health Security Agency warns that the H3N2 virus has driven the lab positivity rate to 17.1%, putting unprecedented strain on NHS emergency services.</p>
+                
+                <h4>Outbreak Details and Virus Strain</h4>
+                <p>The UK Health Security Agency (UKHSA) issued a severe alert today, confirming that England is experiencing an "unprecedented" seasonal influenza surge. The primary driver of this wave is the **Influenza A H3N2 strain**, known to cause more severe complications, particularly in the elderly and those with chronic conditions. Data shows that the flu positivity rate in lab tests surged from 11.6% to **17.1%** in a single week, indicating extremely rapid community transmission.</p>
+                
+                <h4>Strain on the Healthcare System</h4>
+                <p>Flu hospitalization figures are the critical measure of the outbreak's severity. According to the latest NHS reports:</p>
+                <ul>
+                    <li><strong>Record Admissions:</strong> Last week, England saw an average of **1,717 flu patients admitted** to hospitals daily, surpassing the previous record set during the 2017-18 winter season.</li>
+                    <li><strong>Paediatric Pressure:</strong> While the elderly are high-risk, there has also been a noticeable increase in paediatric intensive care unit admissions due to flu-related respiratory illnesses this year.</li>
+                    <li><strong>A&E Delays:</strong> Hospitals in many areas have declared "critical incidents," leading to the postponement of non-urgent surgeries and pushing Accident & Emergency (A&E) waiting times to an average of over 6 hours, particularly in London and the West Midlands.</li>
+                </ul>
+                
+                <h4>Official Appeal and Response Measures</h4>
+                <p>Professor Smith, Chief Medical Advisor at UKHSA, urged the public to act immediately to protect the NHS:</p>
+                <blockquote>
+                "We are still ahead of the predicted peak. It is imperative that all eligible individuals, especially those aged 65 and over, pregnant women, and those with chronic conditions like asthma or heart disease, get the free flu vaccine now. The current vaccine formulation retains good efficacy against the H3N2 strain and is the most effective tool we have to mitigate the burden on healthcare."
+                </blockquote>
+                <p>The government has fast-tracked £50 million in funding to secure extra community care beds, aiming to quickly transfer recovering flu patients out of hospitals and free up crucial acute resources.</p>
+            </div>
+        `,
+        date: "2025年12月9日"
+    },
 
     f1_championship_win: {
         title: "F1 煞科戰震撼彈：Lando Norris 逆轉奪得世界冠軍",
