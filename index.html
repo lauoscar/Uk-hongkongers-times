@@ -1452,7 +1452,7 @@ async function loadTopTicker(){
 
 async function loadSecondTicker(){
   const el = $id('secondTicker'); if(!el) return;
-  const feeds = ['https://feeds.bbci.co.uk/news/world/rss.xml','https://news.google.com/rss/search?q=site%3Areuters.com&hl=en-US&gl=US&ceid=US%3Aen','https://feeds.bbci.co.uk/sport/rss.xml'];
+  const feeds = ['https://feeds.bbci.co.uk/news/world/rss.xml','https://news.google.com/rss/search?q=site%3Areuters.com&hl=en-US&gl=US&ceid=US%3Aen','https://feeds.bbci.co.uk/sport/rss.xml','https://www.bloomberg.com/politics/feeds/site.xml','https://feeds.marketwatch.com/marketwatch/bulletins'];
   const items=[];
   for(const f of feeds){
     try{
@@ -2084,7 +2084,7 @@ document.addEventListener('click', async (e)=>{
   switch(widget){
     case 'topNews': loadTopNewsBox(); break;
     case 'categories':
-      loadCategory('https://feeds.bbci.co.uk/news/world/rss.xml','https://news.google.com/rss/search?q=site%3Areuters.com&hl=en-US&gl=US&ceid=US%3Aen','worldNews');
+      loadCategory('https://feeds.bbci.co.uk/news/world/rss.xml','https://www.bloomberg.com/politics/feeds/site.xml','https://feeds.marketwatch.com/marketwatch/bulletins','https://news.google.com/rss/search?q=site%3Areuters.com&hl=en-US&gl=US&ceid=US%3Aen','worldNews');
       loadCategory('https://feeds.bbci.co.uk/news/business/rss.xml','bizNews');
       loadCategory('https://feeds.bbci.co.uk/sport/rss.xml','sportsNews');
       
