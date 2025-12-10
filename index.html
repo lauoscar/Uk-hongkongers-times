@@ -730,7 +730,7 @@ a:hover { text-decoration:underline; }
       <div class="widget-head"><h3>World · Business & Investment · Sports · Travel</h3><div class="widget-sub">Categorised headlines</div></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div>
-          <strong>World</strong><div id="worldNews" class="news-list small"></div>
+          <strong>Bulletins</strong><div id="worldNews" class="news-list small"></div>
           <hr/>
           <strong>Business & Investment</strong><div id="bizNews" class="news-list small"></div>
         </div>
@@ -2198,7 +2198,7 @@ async function init(){
 
   await Promise.allSettled([loadTopTicker(), loadSecondTicker(), loadFinanceBar()]);
   loadTopNewsBox();
-  loadCategory('https://feeds.bbci.co.uk/news/world/rss.xml','worldNews');
+  loadCategory('https://feeds.marketwatch.com/marketwatch/bulletins','worldNews');
   loadCategory('https://feeds.bbci.co.uk/news/business/rss.xml','bizNews');
   loadCategory('https://feeds.bbci.co.uk/sport/rss.xml','sportsNews');
   
