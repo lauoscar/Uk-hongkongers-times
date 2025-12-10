@@ -1452,7 +1452,7 @@ async function loadTopTicker(){
 
 async function loadSecondTicker(){
   const el = $id('secondTicker'); if(!el) return;
-  const feeds = ['https://feeds.bbci.co.uk/news/world/rss.xml','https://www.reuters.com/world/rss'];
+  const feeds = ['https://feeds.bbci.co.uk/news/world/rss.xml','https://news.google.com/rss/search?q=site%3Areuters.com&hl=en-US&gl=US&ceid=US%3Aen','https://feeds.bbci.co.uk/sport/rss.xml'];
   const items=[];
   for(const f of feeds){
     try{
@@ -1472,7 +1472,7 @@ async function loadSecondTicker(){
 
 async function loadFinanceBar(){
   const el = $id('financeInner'); if(!el) return;
-  const sources=['https://www.ft.com/?format=rss','https://www.reuters.com/rssFeed/mostRead','https://www.bloomberg.com/feed/podcast/etf-report.xml'];
+  const sources=['https://www.ft.com/?format=rss','https://news.google.com/rss/search?q=site%3Areuters.com&hl=en-US&gl=US&ceid=US%3Aen','https://www.bloomberg.com/feed/podcast/etf-report.xml'];
   const items=[];
   for(const s of sources){
     try{
