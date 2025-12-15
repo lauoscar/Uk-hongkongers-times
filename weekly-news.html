@@ -652,8 +652,19 @@
                     <div class="widget-sub">Selected Key UK News this Week - Impartial Reporting</div>
                 </div>
                 <p>歡迎來到每週重點新聞頻道。本頻道旨在綜合各大新聞媒體的報導，為您提供本週最重要、最具影響力的英國新聞事件的客觀、中立、詳細的報導。我們承諾所有新聞稿均為獨立重新撰寫，不含評論或個人意見。</p>
-                
+       
 <div class="news-section">
+      <div class="news-card" onclick="openArticleModal('uk_latest_news_week_no_hk')"> 
+        <img src="https://locationpro.org/uk_latest_news_week_no_hk.jpg" alt="本週英國最新重點新聞：經濟、醫療、國安與民生全覽" class="news-image">
+        <div class="news-content">
+            <div class="news-title">本週英國最新重點新聞：經濟、醫療、國安與民生全覽（2025 年 12 月 9 日 – 15 日）</div>
+            <div class="news-subtitle">利率走向、NHS 冬季危機、能源政策與國防安全成焦點/div>
+            <div class="news-tag">本週英國最新重點新聞</div>
+            2025年12月15日  
+        </div>
+</div>         
+       </div>         
+                
       <div class="news-card" onclick="openArticleModal('uk_supermarket_christmas_price_compare_with_chart_2025')"> 
         <img src="https://locationpro.org/uk_supermarket_christmas_price_compare_with_chart_2025.jpg" alt="聖誕晚餐格價" class="news-image">
         <div class="news-content">
@@ -1195,6 +1206,111 @@
         // 文章内容数据 - 新增與原有文章合併
         const ARTICLE_CONTENT = {
             // --- 新增的 7 則新聞 ---
+
+
+
+    uk_latest_news_week_no_hk: {
+        title: "本週英國最新重點新聞：經濟、醫療、國安與民生全覽",
+        subtitle: "利率走向、NHS 冬季危機、能源政策與國防安全成焦點",
+        content: `
+            <div class="chinese-section">
+                <img src="https://locationpro.org/uk_latest_news_week_no_hk.jpg" alt="英國本週新聞重點" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+
+                <h4>🇬🇧 本週英國最新重點新聞（12 月中旬）</h4>
+
+                <h5>💷 英倫銀行利率前景轉向：2026 年或正式啟動降息周期</h5>
+                <p>
+                    市場普遍預期英倫銀行（Bank of England）將在未來數月內開始降息。最新經濟數據顯示，
+                    英國通脹率已連續數月放緩，工資增幅亦開始回落。
+                    多名經濟學家指出，若冬季能源價格保持穩定，
+                    英國最快於 2026 年初進入實質寬鬆貨幣政策階段。
+                </p>
+                <p>
+                    消費者信心輕微回升，房貸利率有望逐步下降，
+                    對首次置業人士及中小企業構成正面因素。
+                </p>
+
+                <h5>🏥 NHS 冬季壓力升至警戒級別：流感與急症需求齊升</h5>
+                <p>
+                    英國國民保健署（NHS）正面對近年最嚴峻的冬季挑戰之一。
+                    流感個案急增，加上長者跌倒、呼吸系統疾病及急症入院需求同步上升，
+                    多地醫院宣佈進入「重大事故應對狀態」。
+                </p>
+                <p>
+                    政府已要求地方醫療信託啟動緊急應變計劃，
+                    並再次呼籲市民接種流感與新冠疫苗，以減輕醫療系統負擔。
+                </p>
+
+                <h5>⚡ 英國能源政策再調整：家庭能源帳單壓力未完全解除</h5>
+                <p>
+                    政府確認將於明年調整能源價格支援機制，
+                    逐步減少直接補貼，轉而以「目標性支援」協助低收入及長者家庭。
+                    能源監管機構 Ofgem 表示，雖然批發能源價格已回落，
+                    但家庭帳單短期內仍難以回到疫情前水平。
+                </p>
+
+                <h5>🛡️ 國防與安全：英國加強北約東翼部署</h5>
+                <p>
+                    國防部宣布，英國將增加對北約東歐成員國的軍事支援，
+                    包括部隊輪調、空中巡防及情報共享。
+                    政府強調，此舉屬防禦性質，旨在確保歐洲地區長期安全穩定。
+                </p>
+
+                <h5>🛒 生活成本最新走勢：食品價格回落但服務通脹仍高</h5>
+                <p>
+                    最新零售數據顯示，超市食品價格通脹明顯放緩，
+                    蔬菜、肉類及乳製品價格較去年同期下降。
+                    然而，餐飲、交通及保險等服務類價格仍維持高位，
+                    令整體生活成本壓力尚未完全消散。
+                </p>
+            </div>
+
+            <div class="english-section">
+                <h4>🇬🇧 UK Weekly News Highlights (Mid-December)</h4>
+
+                <h5>💷 Bank of England Signals Potential Rate Cuts in 2026</h5>
+                <p>
+                    Financial markets increasingly expect the Bank of England to begin cutting interest rates in early 2026,
+                    as inflation continues to cool and wage growth moderates.
+                    Analysts suggest that stable winter energy prices could accelerate the shift toward looser monetary policy.
+                </p>
+
+                <h5>🏥 NHS Under Severe Winter Pressure</h5>
+                <p>
+                    The NHS is facing one of its toughest winters in recent years,
+                    with flu cases, emergency admissions, and respiratory illnesses rising sharply.
+                    Several hospitals have declared critical pressure levels,
+                    prompting renewed calls for vaccinations and emergency planning.
+                </p>
+
+                <h5>⚡ Energy Bills Remain a Concern Despite Policy Adjustments</h5>
+                <p>
+                    The UK government confirmed changes to energy support schemes,
+                    moving away from broad subsidies toward targeted assistance.
+                    Regulator Ofgem warned that while wholesale prices have fallen,
+                    household bills are unlikely to return to pre-pandemic levels soon.
+                </p>
+
+                <h5>🛡️ UK Strengthens NATO Eastern Deployments</h5>
+                <p>
+                    The Ministry of Defence announced increased UK military contributions to NATO’s eastern flank,
+                    including troop rotations and enhanced air patrols.
+                    Officials stressed the move is defensive and aimed at maintaining long-term regional stability.
+                </p>
+
+                <h5>🛒 Cost of Living Update: Food Prices Ease, Services Stay Costly</h5>
+                <p>
+                    Retail data shows food inflation continuing to slow,
+                    particularly for fresh produce and staple items.
+                    However, services such as transport, dining, and insurance remain expensive,
+                    keeping pressure on household budgets.
+                </p>
+            </div>
+        `,
+        date: "2025年12月15日"
+    },
+
+
 
 uk_supermarket_christmas_price_compare_with_chart_2025: {
     title: "英國超市聖誕大餐格價全解析：誰最便宜？🔥 食材詳比",
