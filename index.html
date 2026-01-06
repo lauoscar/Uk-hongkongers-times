@@ -750,6 +750,23 @@ a:hover { text-decoration:underline; }
       <div id="weeklyContent" class="small">
         
         
+                <div class="weekly-column-title" onclick="openArticleModal('uk_school_rankings_2026')">
+          <strong> 🎓 2026 英國公立學校最新排名發佈：倫敦及曼城學區競爭白熱化<p>小學申請 1 月 15 日截止，家長需留意 Ofsted 最新「卓越」評級變動</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>                
+        
+          <div class="weekly-column-title" onclick="openArticleModal('london_congestion_charge_2026')">
+          <strong>🚗 倫敦擁堵費正式調升至 £18，電動車首次納入收費範圍<p>TfL 新規今日生效：EV 優惠取消，旨在應對市中心交通流量回升</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>               
+        
+         <div class="weekly-column-title" onclick="openArticleModal('manchester_bee_network_freeze')">
+          <strong> 🐝 曼徹斯特宣布 2026 全年巴士票價凍結，繼續推行「2鎊上限」<p>市長 Andy Burnham 承諾取消 9:30am 限制，減輕長者及通勤者負擔</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>               
+        
+        
+        
         <div class="weekly-column-title" onclick="openArticleModal('uk_flu_surge_detailed_regional')">
           <strong> UK Weekly News Highlights (Mid-December)<p>英國 2025 冬季流感全面解析：疫情走勢、社會影響與應對關鍵</p></strong>
           <div class="widget-sub">Click to read</div>
@@ -1095,6 +1112,109 @@ const MONTHLY_DATA = {
 // 文章内容数据
 const ARTICLE_CONTENT = {
  
+
+    council_tax_hike_2026: {
+        title: "📊 2026/27 地方稅 (Council Tax) 預測調升：全英多地議會擬加至 5% 漲幅上限",
+        subtitle: "隨著 4 月新財政年度臨近，多個地方議會已發出調薪預警，以填補社會關懷與公共服務的資金缺口。",
+        content: `
+            <div class="chinese-section">
+                <h4>調升趨勢分析</h4>
+                <p>根據地方政府協會 (LGA) 的初步調查，預計全英超過 75% 的議會將在 2026 年 4 月將地方稅上調至 <strong>4.99%</strong> 的法定上限（含社會關懷附加費）。這意味著 Band D 級別房屋的平均年度稅單將增加約 £100 至 £120。</p>
+                <h4>各重點城市概況</h4>
+                <ul>
+                    <li><strong>倫敦 (London)：</strong> 大部分行政區擬加滿 5%，加上 TfL 附加費的上調，居民負擔進一步加重。</li>
+                    <li><strong>伯明翰 (Birmingham)：</strong> 因之前的財政危機，議會已獲政府特別批准，漲幅可能維持在 10% 左右（待最終表決）。</li>
+                    <li><strong>曼徹斯特 (Manchester)：</strong> 預計維持 4.99% 漲幅，資金將重點投入城市清潔與青少年服務。</li>
+                </ul>
+                <h4>減免申請提醒</h4>
+                <p>我們建議符合資格的住戶（如單身居住者的 25% 折扣、低收入家庭或學生住戶）應在 3 月前核實減免資格，以應對即將到來的支出增長。</p>
+            </div>
+            <div class="english-section">
+                <h4>National Trend</h4>
+                <p>Over 75% of UK councils are expected to raise Council Tax by the maximum 4.99% threshold starting April 2026. This translates to an average increase of over £100 for Band D properties.</p>
+                <h4>Regional Impact</h4>
+                <p>Birmingham remains an outlier with potential double-digit increases due to its recovery plan, while London boroughs face additional pressures from the Mayoral precept increases.</p>
+            </div>
+        `,
+        date: "2026年1月5日"
+    },
+
+    // --- 學校排名與申請新聞 ---
+    uk_school_rankings_2026: {
+        title: "🎓 2026 英國公立學校最新排名發佈：倫敦及曼城學區競爭白熱化",
+        subtitle: "基於最新 GCSE 與 A-Level 成績分析，2026 年熱門學區出現位移，家長需在申請截止前作最後衝刺。",
+        content: `
+            <div class="chinese-section">
+                <img src="https://locationpro.org/uk_classroom.jpg" alt="英國學校排名" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>2026 最新學區排名看點</h4>
+                <p>根據《泰晤士報》與《衛報》的年度分析，倫敦北部的 <strong>Barnet</strong>、西南部的 <strong>Kingston</strong> 以及曼徹斯特南部的 <strong>Altrincham</strong> 依然佔據公立中學排名的領先地位。然而，伯明翰部分新晉評級為「Outstanding」的公立小學吸引了大量移民家庭移入，導致 Catchment Area（學區範圍）顯著縮小。</p>
+                <h4>關鍵截止日期</h4>
+                <p><strong>2026 年 1 月 15 日</strong> 是全英小學（Primary School）入學申請的最後截止日。家長應確保在地方議會 (Local Authority) 官網完成報名，並列出至少三至六個志願（視地區而定）。</p>
+                <h4>Ofsted 評級制度變更</h4>
+                <p>注意：政府於 2025 年底取消了單一詞彙評級（如單純的 Outstanding）。現在的報告更強調「教學質量」與「學生安全」多維度評分。家長在閱讀報告時應查看細項，而非僅尋找標籤。</p>
+                <h4>港人家庭建議</h4>
+                <p>對於剛抵英的 BNO 家庭，若居住地附近的熱門學校名額已滿，可考慮申請「In-year Admission」或利用 Appeal（申訴）程序，但成功率視乎學校是否有餘位。</p>
+            </div>
+            <div class="english-section">
+                <h4>2026 Ranking Highlights</h4>
+                <p>Traditional hotspots like Barnet and Altrincham continue to dominate GCSE leaderboards. However, the "Catchment Area" for top-rated schools is shrinking due to high demand from relocating families.</p>
+                <h4>Deadlines and Ofsted Changes</h4>
+                <p>Primary school applications close on January 15, 2026. Parents should note that Ofsted has transitioned away from single-word judgments to more nuanced report cards focusing on quality of education.</p>
+            </div>
+        `,
+        date: "2026年1月4日"
+    },
+
+
+
+
+    // --- 倫敦新聞 ---
+    london_congestion_charge_2026: {
+        title: "🚗 倫敦擁堵費正式調升至 £18，電動車首次納入收費範圍",
+        subtitle: "倫敦交通局 (TfL) 更新擁堵收費標準，電動車 (EV) 免費時代告終。",
+        content: `
+            <div class="chinese-section">
+                <h4>收費調整詳情</h4>
+                <p>自 2026 年 1 月 2 日起，倫敦中心區的擁堵費 (Congestion Charge) 已從每日 £15 上調至 <strong>£18</strong>。這是自 2020 年以來的首次價格變動。若未在當日繳納，延遲付款費用將增至 £21。</p>
+                <h4>電動車 (EV) 政策轉向</h4>
+                <p>最令車主關注的是，原有的「清潔車輛折扣」(Cleaner Vehicle Discount) 已正式取消。現在，所有純電動車進入收費區均須繳費。不過，若車主註冊了「自動繳費」(Auto Pay)，電動私家車可享有 25% 折扣（即每日 £13.50），而電動貨車則可享有 50% 折扣。</p>
+                <h4>官方回應</h4>
+                <p>倫敦市長 Sadiq Khan 表示，此舉是為了抑制市中心日益嚴重的交通擠塞，並將所得收入用於支持倫敦交通網絡的數位化升級與公共巴士服務。不少環保組織對此表示理解，但商業界擔心這會增加物流成本。</p>
+            </div>
+            <div class="english-section">
+                <h4>Fare Adjustment Details</h4>
+                <p>As of January 2, 2026, the daily Congestion Charge for central London has risen from £15 to <strong>£18</strong>. This marks the first major increase since 2020. Failure to pay on the day of travel will see the late fee rise to £21.</p>
+                <h4>EV Policy Shift</h4>
+                <p>Crucially, the 100% Cleaner Vehicle Discount for EVs has ended. All electric vehicles are now liable for the charge, though those registered for Auto Pay will receive a 25% discount (£13.50/day) for cars and 50% for vans.</p>
+            </div>
+        `,
+        date: "2026年1月5日"
+    },
+
+    // --- 曼徹斯特新聞 ---
+    manchester_bee_network_freeze: {
+        title: "🐝 曼徹斯特宣布 2026 全年巴士票價凍結，繼續推行「2鎊上限」",
+        subtitle: "大曼徹斯特市長 Andy Burnham 確認，為應對生活成本危機，公共交通補貼將延續。",
+        content: `
+            <div class="chinese-section">
+                <h4>票價凍結詳情</h4>
+                <p>曼徹斯特市長 Andy Burnham 本週宣佈，大曼徹斯特「小蜂網絡」(Bee Network) 的所有巴士票價將在 2026 年全年凍結。單程票價將維持在 <strong>£2 上限</strong>，而兒童單程票則維持在 £1。</p>
+                <h4>取消 9:30am 限制</h4>
+                <p>此外，從 2026 年 3 月起，領取長者或殘疾人士巴士證的居民，將不再受「早上 9:30 後才可免費乘搭」的限制影響，這意味著他們可以在清晨時段免費使用公共交通前往就醫或購物。</p>
+                <h4>鐵路整合進度</h4>
+                <p>市長亦透露，小蜂網絡的 App 將於 3 月進行大升級，屆時將整合全大曼地區的火車實時資訊，為 2026 年 12 月首批火車線路納入統一收費系統做準備。</p>
+            </div>
+            <div class="english-section">
+                <h4>Fare Freeze and Caps</h4>
+                <p>Mayor Andy Burnham confirmed that Bee Network bus fares will remain frozen at the <strong>£2 cap</strong> throughout 2026 to support residents during the cost-of-living struggle.</p>
+                <h4>Removing the 9:30am Rule</h4>
+                <p>From March 2026, the restrictive 9:30am rule for concessionary pass holders will be scrapped, allowing older and disabled residents unlimited free travel at any time of day.</p>
+            </div>
+        `,
+        date: "2026年1月4日"
+    },
+
+
      
     uk_flu_surge_detailed_regional: {
         title: "英國 2025 冬季流感疫情深入報導：真實數據、區域差異與社會影響",
