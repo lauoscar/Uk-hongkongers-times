@@ -749,6 +749,21 @@ a:hover { text-decoration:underline; }
       <div class="widget-head"><h3>每週重點新聞頻道<p>港英時報 - The UK Hong Konger Times </p></h3><div class="widget-sub">Click on article titles to read full content</div></div>
       <div id="weeklyContent" class="small">
         
+  
+                  <div class="weekly-column-title" onclick="openArticleModal('renters_reform_2026')">
+          <strong> 🏠 租務改革法案全面執行：2026 年起禁止所有「無過錯驅逐」</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>                
+  
+            <div class="weekly-column-title" onclick="openArticleModal('minimum_wage_2026')">
+          <strong>💰 2026 年最低工資調升方案公佈，時薪預計突破 £13 大關<p>政府宣佈 4 月份新財政年度的薪酬調整方案，旨在減輕低收入家庭的通脹壓力。</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>               
+  
+              <div class="weekly-column-title" onclick="openArticleModal('autonomous_driving_2026')">
+          <strong>🚗 英國首批自動駕駛汽車正式合法上路，啟動高速公路運行<p>英國正式進入自動駕駛時代，成為全球首批允許高度自動化駕駛車輛商業運行的國家之一。</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>             
         
                 <div class="weekly-column-title" onclick="openArticleModal('uk_school_rankings_2026')">
           <strong> 🎓 2026 英國公立學校最新排名發佈：倫敦及曼城學區競爭白熱化<p>小學申請 1 月 15 日截止，家長需留意 Ofsted 最新「卓越」評級變動</p></strong>
@@ -1111,6 +1126,71 @@ const MONTHLY_DATA = {
 
 // 文章内容数据
 const ARTICLE_CONTENT = {
+ 
+ renters_reform_2026: {
+        title: "🏠 租務改革法案全面執行：2026 年起禁止所有「無過錯驅逐」",
+        subtitle: "Section 21 正式走入歷史，這項被譽為「一代人以來最大」的租務改革將徹底改變英國租屋市場。",
+        content: `
+            <div class="chinese-section">
+                                                    <img src="https://locationpro.org/uk_housing_keys.jpg" alt="租務改革法案" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+            
+                <h4>改革核心內容</h4>
+                <p>自 2026 年 1 月起，《租客改革法案》(Renters' Reform Act) 的最後階段正式生效。最引人注目的變動是全面廢除「Section 21」無過錯驅逐條款。現在，房東若要收回物業，必須提供法定的正當理由（如欠租、違法行為或房東需自住）。</p>
+                <h4>對租客的保障</h4>
+                <p>新規還包括：禁止房東拒絕有小孩或領取福利的租客、賦予租客養寵物的法定權利（房東可要求租客購買寵物保險）。這對於依賴租屋居住的 BNO 家庭來說，提供了極大的居住穩定性。</p>
+            </div>
+            <div class="english-section">
+                <h4>Core Reforms</h4>
+                <p>Starting January 2026, the final phase of the Renters' Reform Act is now in effect. The most significant change is the total abolition of 'Section 21' no-fault evictions. Landlords must now provide a valid legal reason to end a tenancy.</p>
+                <h4>Tenant Protections</h4>
+                <p>The new rules also ban discrimination against families with children or those on benefits, and grant tenants a legal right to request pets, enhancing long-term stability for renters.</p>
+            </div>
+        `,
+        date: "2026年1月7日"
+    },
+    
+    minimum_wage_2026: {
+        title: "💰 2026 年最低工資調升方案公佈，時薪預計突破 £13 大關",
+        subtitle: "政府宣佈 4 月份新財政年度的薪酬調整方案，旨在減輕低收入家庭的通脹壓力。",
+        content: `
+            <div class="chinese-section">
+                                        <img src="https://locationpro.org/uk_payslip_check.jpg" alt="最低工資調升方案公佈" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+            
+                <h4>薪酬調升細節</h4>
+                <p>財政部本週確認，從 2026 年 4 月起，21 歲及以上勞工的全國生活工資 (National Living Wage) 將從目前的 £12.21 調升至 <strong>£13.05</strong>。這是為了確保低薪勞工的收入增長能跟上租金與日常開支的升幅。</p>
+                <h4>中小企的挑戰</h4>
+                <p>雖然這對基層員工是利好消息，但餐飲業與零售業的中小企業表示，工資成本的急劇增加可能導致物價進一步上調。預計 2026 年外食與個人護理服務的價格將出現微升。</p>
+            </div>
+            <div class="english-section">
+                <h4>Wage Adjustment Details</h4>
+                <p>The Treasury confirmed that from April 2026, the National Living Wage for those aged 21 and over will rise to <strong>£13.05</strong> per hour, up from £12.21, to help workers cope with rising living costs.</p>
+                <h4>Impact on Businesses</h4>
+                <p>While a win for workers, SMEs in the hospitality and retail sectors warn that the sharp increase in labor costs may lead to further price hikes for consumers in 2026.</p>
+            </div>
+        `,
+        date: "2026年1月6日"
+    },
+    autonomous_driving_2026: {
+        title: "🚗 英國首批自動駕駛汽車正式合法上路，啟動高速公路運行",
+        subtitle: "英國正式進入自動駕駛時代，成為全球首批允許高度自動化駕駛車輛商業運行的國家之一。",
+        content: `
+            <div class="chinese-section">
+                            <img src="https://locationpro.org/uk_car_insurance.jpg" alt="英國首批自動駕駛汽車" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+            
+                <h4>法律框架生效</h4>
+                <p>隨著 2026 年《自動駕駛車輛法案》配套法規的通過，符合安全標準的車輛現獲准在特定高速公路（Motorways）上啟動「全自動模式」。在該模式下，法律認定車輛製造商而非司機應對行車安全負責。</p>
+                <h4>安全守則與限制</h4>
+                <p>目前此項授權僅限於天氣良好且交通流量受控的路段。政府已在倫敦至曼徹斯特的 M6 路段設置了專屬測試與運行區。這項技術的商業化預計將顯著提升長途物流效率並降低交通事故率。</p>
+            </div>
+            <div class="english-section">
+                <h4>Legal Framework</h4>
+                <p>With the 2026 Autonomous Vehicles Act regulations now in force, certified vehicles are permitted to operate in 'full-auto mode' on specific motorways. Legally, manufacturers will be held liable for safety while in this mode.</p>
+                <h4>Restrictions</h4>
+                <p>Initial authorization is limited to fair weather conditions on controlled motorway sections, such as the M6 corridor. This marks a major step in the UK's ambition to lead in transport tech.</p>
+            </div>
+        `,
+        date: "2026年1月5日"
+    },
  
 
     council_tax_hike_2026: {
