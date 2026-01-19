@@ -1542,15 +1542,15 @@ function calculateTax() {
     
     <script>
         // 文章内容数据 - 新增與原有文章合併
-        
+        const ARTICLE_CONTENT = {
+            // --- 新增的 7 則新聞 ---
 
-const ARTICLE_CONTENT_EXTENDED = {
     top_used_ev_2026: {
         title: "2026 英國二手電車選購清單：CP 值最高的 5 款車",
         subtitle: "電車折舊率高，這對二手買家來說是絕佳的撿漏機會。",
         content: `
             <div class="chinese-section">
-                                                                                                                             <img src="https://locationpro.org/top_used_ev_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                                                                                                                                                                 <img src="https://locationpro.org/top_used_ev_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
             
                 <h4>1. Tesla Model 3 (2020-2022)</h4>
                 <p><strong>優點：</strong> 超強的 Supercharger 充電網絡和卓越的續航力。2026 年市場上有大量租賃期滿的車輛，價格極具競爭力。</p>
@@ -1566,13 +1566,13 @@ const ARTICLE_CONTENT_EXTENDED = {
         `,
         date: "2026年1月18日"
     },
+    
     low_insurance_cars_2026: {
         title: "新手司機必看：英國保費第 1-5 組（Group 1-5）車款推薦",
         subtitle: "英國保險分 1-50 組，數字越低保費越便宜。以下是新手最愛的低保費選擇：",
         content: `
             <div class="chinese-section">
-                                                                                                                                         <img src="https://locationpro.org/low_insurance_cars_20262.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
-            
+                                                                                                                                                                 <img src="https://locationpro.org/low_insurance_cars_20262.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
                 <h4>1. Hyundai i10 (Group 1-2)</h4>
                 <p>這幾乎是英國保費最便宜的車款。它雖小，但安全評分高，維修成本低，是 17-25 歲新手的首選。</p>
                 <h4>2. Kia Picanto (Group 3-4)</h4>
@@ -1595,8 +1595,7 @@ const ARTICLE_CONTENT_EXTENDED = {
         subtitle: "英國車保持續高企，掌握這些細節能幫你在 2026 年保費大減。",
         content: `
             <div class="chinese-section">
-                                                                                                                 <img src="https://locationpro.org/save_car_insurance_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
-            
+                                                                                                                                                     <img src="https://locationpro.org/save_car_insurance_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
             
                 <h4>1. 提前 21-27 天續保</h4>
                 <p>數據顯示，在保單到期前約 3 週續保是最便宜的。最後一刻才購買會讓保險公司認為你「缺乏計劃」或是高風險者，保費可能貴上一倍。</p>
@@ -1654,12 +1653,13 @@ const ARTICLE_CONTENT_EXTENDED = {
         `,
         date: "2026年1月18日"
     },
+    
     used_car_tips_2026: {
         title: "二手車買賣避坑指南：從 HPI 檢查到議價實戰",
         subtitle: "無論是通過 AutoTrader 還是 Facebook Marketplace，這些原則始終適用。",
         content: `
             <div class="chinese-section">
-                                                                                                     <img src="https://locationpro.org/used_car_tips_20262.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                                                                                                                                         <img src="https://locationpro.org/used_car_tips_20262.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
             
                 <h4>【買家篇】檢查清單</h4>
                 <ul>
@@ -1699,8 +1699,7 @@ const ARTICLE_CONTENT_EXTENDED = {
         subtitle: "受惠於理賠改革，英國司機目前平均年度保費回落至 £726。",
         content: `
             <div class="chinese-section">
-                                                                                         <img src="https://locationpro.org/car_insurance_dip_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
-            
+                                                                                                                             <img src="https://locationpro.org/car_insurance_dip_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
                 <h4>保費趨勢分析</h4>
                 <p>根據 2026 年 1 月發布的最新數據，英國私家車綜合保險費用在過去一年出現了顯著下調，平均降幅達 13%（約 111 英鎊）。這是繼多年連續上漲後的首次大幅回落。其中，17 歲的年輕司機獲益最深，平均保費由原本超過 £2,500 降至約 £1,900。</p>
                 <h4>為何價格下調？</h4>
@@ -1720,7 +1719,7 @@ const ARTICLE_CONTENT_EXTENDED = {
         subtitle: "政府結束前任政府的延後計劃，確保英國邁向零排放轉型目標。",
         content: `
             <div class="chinese-section">
-                                                                                         <img src="https://locationpro.org/fuel_car_ban_2030.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                                                                                                                 <img src="https://locationpro.org/fuel_car_ban_2030.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
             
                 <h4>政策正式回歸</h4>
                 <p>英國政府於 2026 年初再次確認，將恢復原定於 2030 年禁止銷售全新汽油及柴油私家車的禁令。此前，前任保守黨政府曾將期限推遲至 2035 年，但現任勞工政府認為恢復 2030 目標能為汽車製造商提供更大的投資確定性。</p>
@@ -1736,13 +1735,13 @@ const ARTICLE_CONTENT_EXTENDED = {
         `,
         date: "2026年1月18日"
     },
+    
     used_ev_market_2026: {
         title: "二手電車市場預計飆升 47%：買家撿便宜最佳時機？",
         subtitle: "首批大批量租賃電車進入二手市場，令售價更具競爭力。",
         content: `
             <div class="chinese-section">
-                                                                                         <img src="https://locationpro.org/used_ev_market_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
-            
+                                                                                                     <img src="https://locationpro.org/used_ev_market_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
                 <h4>二手市場大變天</h4>
                 <p>2026 年將是二手電動車（Used EV）的「爆發年」。隨著 2022-2023 年間大型車隊和租賃合約到期，大批特斯拉（Tesla）、現代（Hyundai）和福士（VW）電車湧入二手市場。市場預測交易量將增長 47%，供應量的激增意味著買家能以更實惠的價格購買到高規格的二手電車。</p>
                 <h4>專家建議</h4>
@@ -1763,7 +1762,6 @@ const ARTICLE_CONTENT_EXTENDED = {
         content: `
             <div class="chinese-section">
                                                                                          <img src="https://locationpro.org/driving_test_reform_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
-            
                 <h4>考試內容變更</h4>
                 <p>從 2026 年起，英國駕駛理論試（Theory Test）將加入關於心肺復甦（CPR）及道路事故急救的基本知識題目。此舉旨在提升司機在事故現場的應急能力。</p>
                 <h4>打擊代訂考位</h4>
@@ -1858,6 +1856,7 @@ const ARTICLE_CONTENT_EXTENDED = {
         `,
         date: "2026年1月18日"
     },
+    
     mortgage_trends_2026: {
         title: "抵押貸款利率持續走低，各大銀行紛紛調低利息爭奪買家",
         subtitle: "市場預期英倫銀行將在春季再次減息，目前房貸產品選擇為近 20 年來最多。",
@@ -1899,6 +1898,7 @@ uk_economy_jan_2026: {
         `,
         date: "2026年1月17日"
     },
+    
     energy_price_cap_update: {
         title: "Ofgem 宣布下季度能源價格上限，平均家庭支出將略降",
         subtitle: "雖然價格下降，但專家警告地緣政治仍可能推升未來成本。",
