@@ -654,6 +654,29 @@
                 <p>歡迎來到每週重點新聞頻道。本頻道旨在綜合各大新聞媒體的報導，為您提供本週最重要、最具影響力的英國新聞事件的客觀、中立、詳細的報導。我們承諾所有新聞稿均為獨立重新撰寫，不含評論或個人意見。</p>
        
 <div class="news-section">
+    <div class="news-card" onclick="openArticleModal('top_used_ev_2026')">
+        <img src="https://locationpro.org/top_used_ev_2026.jpg" alt="電動車充電" class="news-image">
+        <div class="news-content">
+            <div class="news-title">⚡ 2026 英國二手電車選購清單：CP 值最高的 5 款車</div>
+            <div class="news-subtitle">避開電池損耗坑！從 Tesla Model 3 到 Kia Niro EV 的深度對比</div>
+            <div class="news-origin">科技 | 環保 | 汽車</div>
+            <div class="news-tag">熱門推薦</div>
+            2026年1月18日
+        </div>
+    </div>
+
+    <div class="news-card" onclick="openArticleModal('low_insurance_cars_2026')">
+        <img src="https://locationpro.org/low_insurance_cars_20262.jpg" alt="小型都市車" class="news-image">
+        <div class="news-content">
+            <div class="news-title">💰 新手司機必看：英國保費第 1-5 組（Group 1-5）車款推薦</div>
+            <div class="news-subtitle">買車前先看保費等級，這幾款車每年能幫你省下 £500 以上</div>
+            <div class="news-origin">預算 | 新手 | 攻略</div>
+            <div class="news-tag">省錢必讀</div>
+            2026年1月18日
+        </div>
+    </div>
+  
+  
     <div class="news-card" onclick="openArticleModal('save_car_insurance_2026')">
         <img src="https://locationpro.org/save_car_insurance_2026.jpg" alt="車險理財圖表" class="news-image">
         <div class="news-content">
@@ -1521,7 +1544,52 @@ function calculateTax() {
         // 文章内容数据 - 新增與原有文章合併
         
 
-const ARTICLE_CONTENT = {
+const ARTICLE_CONTENT_EXTENDED = {
+    top_used_ev_2026: {
+        title: "2026 英國二手電車選購清單：CP 值最高的 5 款車",
+        subtitle: "電車折舊率高，這對二手買家來說是絕佳的撿漏機會。",
+        content: `
+            <div class="chinese-section">
+                                                                                                                             <img src="https://locationpro.org/top_used_ev_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+            
+                <h4>1. Tesla Model 3 (2020-2022)</h4>
+                <p><strong>優點：</strong> 超強的 Supercharger 充電網絡和卓越的續航力。2026 年市場上有大量租賃期滿的車輛，價格極具競爭力。</p>
+                <h4>2. Kia Niro EV / e-Niro</h4>
+                <p><strong>優點：</strong> 被譽為「全能選手」。空間實用且續航穩定（約 250+ 英里），且 Kia 的 7 年保養在二手市場仍具備極高價值。</p>
+                <h4>3. BMW i3 (Late Models)</h4>
+                <p><strong>優點：</strong> 雖然已停產，但碳纖維車身和前衛內飾在 2026 年依然不退流行。適合都市代步，操控靈活。</p>
+                <h4>4. Nissan Leaf (62kWh 版本)</h4>
+                <p><strong>優點：</strong> 預算友善的首選。雖然快充規格較舊，但作為家庭第二台車或買菜車非常稱職。</p>
+                <h4>5. Volkswagen ID.3</h4>
+                <p><strong>優點：</strong> 2026 年軟體問題已基本修復，二手價格跌至甜蜜點，是高質感的純電掀背選擇。</p>
+            </div>
+        `,
+        date: "2026年1月18日"
+    },
+    low_insurance_cars_2026: {
+        title: "新手司機必看：英國保費第 1-5 組（Group 1-5）車款推薦",
+        subtitle: "英國保險分 1-50 組，數字越低保費越便宜。以下是新手最愛的低保費選擇：",
+        content: `
+            <div class="chinese-section">
+                                                                                                                                         <img src="https://locationpro.org/low_insurance_cars_20262.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+            
+                <h4>1. Hyundai i10 (Group 1-2)</h4>
+                <p>這幾乎是英國保費最便宜的車款。它雖小，但安全評分高，維修成本低，是 17-25 歲新手的首選。</p>
+                <h4>2. Kia Picanto (Group 3-4)</h4>
+                <p>與 i10 同平台，但外觀更動感。7 年保養讓你在購買二手車時更安心。</p>
+                <h4>3. Volkswagen Up! (Group 1-3)</h4>
+                <p>雖然福斯已停止生產新車，但二手 Up! 依然是都市駕駛的神車，保質且保費極低。</p>
+                <h4>4. Toyota Aygo X (Group 5)</h4>
+                <p>如果你想要一點 SUV 的感覺，Aygo X 是少數能保持在低保費組別的跨界小車，省油且可靠。</p>
+                <h4>5. Skoda Fabia (Entry Level - Group 2-5)</h4>
+                <p>需要更大一點的空間？Fabia 的入門版引擎通常落在前 5 組，比同規格的 VW Polo 便宜不少。</p>
+                <p><strong>💡 專家提醒：</strong> 同型號不同馬力（例如 1.0 vs 1.2）會導致保費組別跨度很大，買車前務必在網上用車牌查詢確切組別。</p>
+            </div>
+        `,
+        date: "2026年1月18日"
+    },
+
+
     save_car_insurance_2026: {
         title: "2026 英國車保省錢全攻略：10 個不為人知的減費技巧",
         subtitle: "英國車保持續高企，掌握這些細節能幫你在 2026 年保費大減。",
