@@ -654,6 +654,51 @@
                 <p>歡迎來到每週重點新聞頻道。本頻道旨在綜合各大新聞媒體的報導，為您提供本週最重要、最具影響力的英國新聞事件的客觀、中立、詳細的報導。我們承諾所有新聞稿均為獨立重新撰寫，不含評論或個人意見。</p>
        
 <div class="news-section">
+    <div class="news-card" onclick="openArticleModal('nhs_ai_cancer_pilot')">
+        <img src="https://locationpro.org/nhs_ai_cancer_pilot.jpg" alt="NHS AI 醫療科技" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🔬 NHS 啟動全球首個「AI 與機器人」肺癌早期篩查計劃</div>
+            <div class="news-subtitle">利用人工智慧識別微小病灶，結合機器人探針進行精準活檢</div>
+            <div class="news-origin">醫療 | 科技 | NHS</div>
+            <div class="news-tag">科研突破</div>
+            2026年1月27日
+        </div>
+    </div>
+
+    <div class="news-card" onclick="openArticleModal('cambridge_ai_supercomputer')">
+        <img src="https://locationpro.org/cambridge_ai_supercomputer.jpg" alt="劍橋超級電腦中心" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🚀 英國政府斥資擴展劍橋超級電腦 AI 運算力大幅提升六倍</div>
+            <div class="news-subtitle">支持癌症疫苗研發與氣候模擬，鞏固英國全球 AI 領導地位</div>
+            <div class="news-origin">科技 | 創新 | 政府</div>
+            <div class="news-tag">科技前瞻</div>
+            2026年1月26日
+        </div>
+    </div>
+    
+    <div class="news-card" onclick="openArticleModal('ground_rent_cap')">
+        <img src="https://locationpro.org/ground_rent_cap.jpg" alt="英國住宅物業" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🏠 首相宣布地稅「封頂」計劃：每年上限為 £250</div>
+            <div class="news-subtitle">解決租賃產權歷史遺留問題，減輕數百萬家庭生活成本壓力</div>
+            <div class="news-origin">社會 | 房屋 | 政策</div>
+            <div class="news-tag">民生改革</div>
+            2026年1月27日
+        </div>
+    </div>
+
+    <div class="news-card" onclick="openArticleModal('safer_digital_childhood')">
+        <img src="https://locationpro.org/safer_digital_childhood.jpg" alt="青少年使用手機情況" class="news-image">
+        <div class="news-content">
+            <div class="news-title">📱 內政部發布《安全數位童年》指南 擬收緊校內手機限制</div>
+            <div class="news-subtitle">推動全國範圍內的「無手機校園」指引，應對社媒成癮問題</div>
+            <div class="news-origin">教育 | 社會 | 科技</div>
+            <div class="news-tag">社會議題</div>
+            2026年1月24日
+        </div>
+    </div>
+  
+  
     <div class="news-card" onclick="openArticleModal('top_used_ev_2026')">
         <img src="https://locationpro.org/top_used_ev_2026.jpg" alt="電動車充電" class="news-image">
         <div class="news-content">
@@ -1544,6 +1589,86 @@ function calculateTax() {
         // 文章内容数据 - 新增與原有文章合併
         const ARTICLE_CONTENT = {
             // --- 新增的 7 則新聞 ---
+
+    nhs_ai_cancer_pilot: {
+        title: "NHS 啟動全球首個「AI 與機器人」肺癌早期篩查計劃",
+        subtitle: "英國醫療系統邁向新紀元，利用頂尖 AI 技術與微型機器人提升癌症生存率。",
+        content: `
+            <div class="chinese-section">
+<img src="https://locationpro.org/nhs_ai_cancer_pilot.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>技術突破</h4>
+                <p>NHS England 於 2026 年 1 月 27 日宣布，在倫敦蓋伊和聖托馬斯（Guy's and St Thomas'）醫院啟動一項開創性的試點計劃。該計劃結合了高性能 AI 影像掃描軟件與可進入肺部深處的機器人探針。</p>
+                <p><strong>運作方式：</strong>AI 會自動掃描 CT 影像，標註出醫生肉眼難以察覺的微小病灶；隨後，醫生操作具備極高精準度的機器人探針，經氣管進入肺部邊緣進行活檢，大幅減少了傳統入侵性手術的需求。</p>
+                <h4>臨床意義</h4>
+                <p>早期肺癌的篩查一直是醫學難點。此技術有望將早期診斷率提升至 75% 以上，並縮短患者等待確診的時間，被譽為「癌症檢測的未來」。</p>
+            </div>
+            <div class="english-section">
+                <h4>Medical Innovation</h4>
+                <p>On January 27, 2026, NHS England launched a trailblazing pilot program combining AI software and robotic technology to spot lung cancer sooner. The project at Guy’s and St Thomas’ NHS Foundation Trust utilizes AI to rapidly analyze lung scans, flagging tiny nodules that are high-risk. A robotic camera then guides biopsy tools through the airways with unprecedented precision, reaching cancers that were previously hard to detect without invasive surgery.</p>
+            </div>
+        `,
+        date: "2026年1月27日"
+    },
+    cambridge_ai_supercomputer: {
+        title: "英國政府斥資擴展劍橋超級電腦 AI 運算力大幅提升六倍",
+        subtitle: "英國科技部（DSIT）注資升級「DAWN」超算資源，助力國家戰略科研項目。",
+        content: `
+            <div class="chinese-section">
+<img src="https://locationpro.org/cambridge_ai_supercomputer.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>算力升級</h4>
+                <p>英國政府於本週一宣布撥款 3,600 萬英鎊，用於升級位於劍橋的「AI 研究資源」（AIRR）。到 2026 年春季，該系統的運算能力將比目前提升六倍，並向英國的研究人員和初創企業免費開放。</p>
+                <h4>關鍵應用領域</h4>
+                <ul>
+                    <li><strong>個性化癌症疫苗：</strong> 協助科學家識別腫瘤中免疫系統需攻擊的特定部位，加速疫苗研發。</li>
+                    <li><strong>氣候模擬：</strong> 提供更高解析度的模型，協助社區應對極端天氣。</li>
+                    <li><strong>公共服務：</strong> 優化 NHS 候診隊列管理與數位政府自動化。</li>
+                </ul>
+            </div>
+            <div class="english-section">
+                <h4>Technological Advancement</h4>
+                <p>The UK government has announced a major investment to increase the AI Research Resource (AIRR) supercomputing capacity at Cambridge sixfold by Spring 2026. Home to the "DAWN" supercomputer, this expansion will provide British scientists and start-ups with cutting-edge computing power to accelerate breakthroughs in personalized cancer vaccines, fusion energy, and sophisticated climate modeling.</p>
+            </div>
+        `,
+        date: "2026年1月26日"
+    },
+    ground_rent_cap: {
+        title: "首相宣布地稅（Ground Rent）封頂計劃：每年上限為 £250",
+        subtitle: "解決長期困擾租賃產權持有人的「地稅陷阱」，落實房屋法案改革。",
+        content: `
+            <div class="chinese-section">
+<img src="https://locationpro.org/ground_rent_cap.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>政策背景</h4>
+                <p>2026 年 1 月 27 日，首相與房屋大臣共同宣布，政府將正式對現有租賃產權（Leasehold）物業的地稅實施封頂措施，每年最高不得超過 £250。</p>
+                <h4>受惠群體</h4>
+                <p>此舉旨在解決所謂的「地稅翻倍」條款，該條款曾導致許多業主面臨巨額開支且難以出售物業。政府表示，這項歷史性的改革將幫助數百萬家庭減輕財政負擔，並作為推動廢除舊有租賃產權制度的第一步。</p>
+            </div>
+            <div class="english-section">
+                <h4>Social Development & Housing</h4>
+                <p>Prime Minister Keir Starmer announced on January 27 that the government will cap ground rents at £250 a year in a major shake-up of the leasehold system. This move aims to protect families from "ground rent traps" where charges could double periodically, making homes unsellable. The reform is a central part of the government’s plan to support homeowners with the cost of living and modernize the housing market.</p>
+            </div>
+        `,
+        date: "2026年1月27日"
+    },
+    safer_digital_childhood: {
+        title: "內政部發布《安全數位童年》指南 擬收緊校內手機限制",
+        subtitle: "政府啟動全國大討論，旨在改善青少年與社交媒體的關係。",
+        content: `
+            <div class="chinese-section">
+<img src="https://locationpro.org/safer_digital_childhood.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+            
+                <h4>教育新動向</h4>
+                <p>教育部與內政部於本週發布了最新的《安全數位童年》指導文件。政府正考慮推出更嚴格的指引，建議全國學校應維持「無手機校園」環境，包括在課間、午膳及轉堂期間禁止使用個人流動裝置。</p>
+                <h4>配套措施</h4>
+                <p>除了限制手機外，政府還將發布針對 5-16 歲家長的「屏幕使用時間」科學指南，並修訂課程綱要，加強學生的數位素養教育，以應對社交媒體帶來的心理健康挑戰。</p>
+            </div>
+            <div class="english-section">
+                <h4>Social & Educational Reform</h4>
+                <p>On January 19, 2026, the government launched the "Safer Digital Childhood" initiative. The proposals include tougher guidance for schools to become phone-free environments throughout the school day. Additionally, evidence-based screen time guidance for parents of children aged 5 to 16 will be published to help families manage digital risks and improve young people's mental health.</p>
+            </div>
+        `,
+        date: "2026年1月24日"
+    },
+
 
     top_used_ev_2026: {
         title: "2026 英國二手電車選購清單：CP 值最高的 5 款車",
