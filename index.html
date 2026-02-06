@@ -749,6 +749,11 @@ a:hover { text-decoration:underline; }
       <div class="widget-head"><h3>每週重點新聞頻道<p>港英時報 - The UK Hong Konger Times </p></h3><div class="widget-sub">Click on article titles to read full content</div></div>
       <div id="weeklyContent" class="small">
         
+                    <div class="weekly-column-title" onclick="openArticleModal('rental_market_crisis_london')">
+          <strong> 🏠 倫敦平均租金再創新高 租客權益團體呼籲加強管制</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>                
+  
   
                   <div class="weekly-column-title" onclick="openArticleModal('renters_reform_2026')">
           <strong> 🏠 租務改革法案全面執行：2026 年起禁止所有「無過錯驅逐」</p></strong>
@@ -1126,6 +1131,27 @@ const MONTHLY_DATA = {
 
 // 文章内容数据
 const ARTICLE_CONTENT = {
+ 
+ rental_market_crisis_london: {
+        title: "倫敦平均租金再創新高 租客權益團體呼籲加強管制",
+        subtitle: "單月租金升幅超通脹，政府面臨落實《住房改革法案》壓力",
+        content: `
+            <div class="chinese-section">
+                                                                <img src="https://locationpro.org/rental_market_crisis_london.jpg" alt="租務改革法案" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>租金危機持續</h4>
+                <p>最新房地產數據顯示，倫敦平均月租已突破歷史水平，部分熱門區域（如 Canary Wharf 和 Stratford）的租金較去年同期增長 15%。租客組織批評市場「已失控」，許多年輕專業人士被迫遷往更遠的郊區。</p>
+                <h4>政策回應</h4>
+                <p>副首相兼住房部大臣表示，政府將加快落實《住房改革法案》，其中包括廢除「無過錯驅逐」（Section 21 evictions）以及加強對物業質量的監管。然而，房東協會警告，過度的租金限制可能導致更多小業主退出市場，反而加劇供應短缺。</p>
+            </div>
+            <div class="english-section">
+                <h4>London Rents Reach New Heights Amid Housing Crisis</h4>
+                <p>New data reveals that average monthly rents in London have shattered previous records, with some areas seeing a 15% annual increase. Tenant advocacy groups describe the market as "out of control," forcing many to relocate further from the city center.</p>
+                <h4>Policy Response</h4>
+                <p>The government has pledged to fast-track the Renters' Reform Bill, aiming to abolish "no-fault" evictions. However, landlord associations warn that excessive regulation might lead to a further decrease in rental supply as landlords exit the market.</p>
+            </div>
+        `,
+        date: "2026年2月2日"
+    },
  
  renters_reform_2026: {
         title: "🏠 租務改革法案全面執行：2026 年起禁止所有「無過錯驅逐」",
