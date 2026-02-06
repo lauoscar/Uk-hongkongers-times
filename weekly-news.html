@@ -654,6 +654,40 @@
                 <p>歡迎來到每週重點新聞頻道。本頻道旨在綜合各大新聞媒體的報導，為您提供本週最重要、最具影響力的英國新聞事件的客觀、中立、詳細的報導。我們承諾所有新聞稿均為獨立重新撰寫，不含評論或個人意見。</p>
        
 <div class="news-section">
+  <div class="news-card" onclick="openArticleModal('uk_auto_market_jan26')">
+                        <img src="https://locationpro.org/uk_auto_market_jan26.jpg" alt="英國新車銷售圖表" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">💥 英國新車市場迎來 2026 強勁開局，但電動車達標壓力倍增</div>
+                            <div class="news-subtitle">一月銷量創五年新高，惟電動車市佔率未達政府 ZEV 標竿</div>
+                            <div class="news-origin">汽車 | 經濟 | 工業</div>
+                            <div class="news-tag">最新數據</div>
+                            2026年2月5日
+                        </div>
+                    </div>
+
+                    <div class="news-card" onclick="openArticleModal('uk_eta_enforcement_feb26')">
+                        <img src="https://locationpro.org/uk_eta_enforcement_feb26.jpg" alt="希斯路機場入境大堂" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">旅遊新規：ETA 電子旅行授權 2 月 25 日起全面強制查核</div>
+                            <div class="news-subtitle">85 個免簽國旅客注意：無許可將被拒絕登機入境</div>
+                            <div class="news-origin">旅遊 | 移民 | 交通</div>
+                            <div class="news-tag">政策預警</div>
+                            2026年2月4日
+                        </div>
+                    </div>
+                    
+                    <div class="news-card" onclick="openArticleModal('birmingham_motorhome_show')">
+                        <img src="https://locationpro.org/birmingham_motorhome_show.jpg" alt="伯明翰房車展覽現場" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">伯明翰房車及露營展將開幕 預示春季本地旅遊熱潮</div>
+                            <div class="news-subtitle">數百款最新型號房車亮相，反映英國民眾對戶外旅遊需求持續上升</div>
+                            <div class="news-origin">汽車 | 旅遊 | 生活</div>
+                            <div class="news-tag">展覽盛事</div>
+                            2026年2月6日
+                        </div>
+                    </div>
+
+  
   <div class="news-card" onclick="openArticleModal('boe_interest_rate_feb26')">
                         <img src="https://locationpro.org/boe_interest_rate_feb26.jpg" alt="英國英倫銀行大樓" class="news-image">
                         <div class="news-content">
@@ -1635,11 +1669,139 @@ function calculateTax() {
         const ARTICLE_CONTENT = {
             // --- 新增的 7 則新聞 ---
 
+  uk_auto_market_jan26: {
+        title: "英國新車市場迎來 2026 強勁開局，但電動車達標壓力倍增",
+        subtitle: "一月銷量創五年新高，惟電動車市佔率未達政府 ZEV 標竿",
+        content: `
+            <div class="chinese-section">
+            <img src="https://locationpro.org/uk_auto_market_jan26.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>市場數據回升</h4>
+                <p>根據 SMMT 最新數據，2026 年 1 月英國新車註冊量增長 3.4%，達到 144,127 輛，這是自 2020 年以來表現最強勁的 1 月。車隊採購（Fleet sales）仍是市場主力，佔比超過六成。</p>
+                <h4>電動車（EV）的挑戰</h4>
+                <p>儘管市場整體成長，純電動車（BEV）的市場份額降至 20.6%，低於政府零排放汽車（ZEV）授權設定的 28% 目標。車廠警告，目前的增長高度依賴數千英鎊的折扣維持，這在長期而言是不可持續的。此外，政府計劃引入的電動車按里程計稅（per-mile tax）亦令不少潛在買家持觀望態度。</p>
+            </div>
+            <div class="english-section">
+                <h4>UK Car Market Starts 2026 Strong, but EV Targets Elusive</h4>
+                <p>The UK new car market grew by 3.4% in January 2026, reaching 144,127 registrations—the strongest January since 2020. Fleet purchases continue to dominate the market.</p>
+                <h4>EV Struggles</h4>
+                <p>Battery Electric Vehicle (BEV) market share dipped to 20.6%, falling short of the government’s 28% ZEV mandate target. Manufacturers warn that growth is currently propped up by heavy discounts, and a proposed per-mile tax on EVs may further dampen demand.</p>
+            </div>
+        `,
+        date: "2026年2月5日"
+    },
+    uk_eta_enforcement_feb26: {
+        title: "旅遊新規：ETA 電子旅行授權 2 月 25 日起全面強制查核",
+        subtitle: "85 個免簽國旅客注意：無許可將被拒絕登機入境",
+        content: `
+            <div class="chinese-section">
+            <img src="https://locationpro.org/uk_eta_enforcement_feb26.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>邊境全面數位化</h4>
+                <p>內政部發出最後提醒，從 2026 年 2 月 25 日起，來自包括美國、歐盟、加拿大及台灣等 85 個免簽國家/地區的遊客，必須持有有效的「電子旅行授權」（ETA）才能啟程前往英國。這是一項強制性的數位許可，費用為 10 英鎊，有效期兩年。</p>
+                <h4>航空與航運公司的責任</h4>
+                <p>從當天起，所有承運商（航空公司、渡輪等）有法律義務在旅客登機前檢查其 ETA 狀態。若旅客未持有有效許可，承運商將面臨每人 2,000 英鎊的罰款。此舉標誌著英國邊防邁向全面「無接觸式」查驗的重要一步。</p>
+            </div>
+            <div class="english-section">
+                <h4>Mandatory UK ETA Enforcement from February 25</h4>
+                <p>The Home Office has issued a final warning: from February 25, 2026, visitors from 85 non-visa countries must hold a valid Electronic Travel Authorisation (ETA) to travel to the UK. The £10 digital permit is valid for two years.</p>
+                <h4>Carrier Responsibility</h4>
+                <p>Airlines and ferries will be legally required to verify ETA status before boarding. Non-compliant carriers face fines of £2,000 per passenger. This is a key step towards a fully digitalized and contactless UK border.</p>
+            </div>
+        `,
+        date: "2026年2月4日"
+    },
+    
+    birmingham_motorhome_show: {
+        title: "伯明翰房車及露營展將開幕 預示春季本地旅遊熱潮",
+        subtitle: "數百款最新型號房車亮相，反映英國民眾對戶外旅遊需求持續上升",
+        content: `
+            <div class="chinese-section">
+            <img src="https://locationpro.org/birmingham_motorhome_show.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>伯明翰 NEC 房車展覽</h4>
+                <p>英國最大規模的房車、營地及露營博覽會將於 2026 年 2 月 17 日至 22 日在伯明翰 NEC 舉行。本次展覽將展示來自歐洲頂尖製造商的數百款房車與露營車，並加入更多「智慧營地」的科技展示。</p>
+                <h4>本地旅遊（Staycation）熱度不減</h4>
+                <p>隨著國外旅遊成本上升及環保意識抬頭，英國本地的房車旅遊市場持續火熱。展覽預計將吸引數萬名參觀者，反映出後疫情時代民眾對彈性、自主式旅遊（Caravanning）的偏愛已成為長期趨勢。</p>
+            </div>
+            <div class="english-section">
+                <h4>Birmingham Motorhome & Caravanning Show to Signal Spring Travel Boom</h4>
+                <p>The UK's largest motorhome exhibition will take place at the Birmingham NEC from February 17–22, 2026. Hundreds of new models and "smart campsite" technologies will be on display.</p>
+                <h4>The Rise of Staycations</h4>
+                <p>As international travel costs remain high, the demand for local caravanning and flexible travel remains strong, with tens of thousands expected to attend the show, highlighting a long-term shift in British holiday habits.</p>
+            </div>
+        `,
+        date: "2026年2月6日"
+    },
+  
+  
+  
+  
+  
+    uk_auto_market_jan26: {
+        title: "英國新車市場迎來 2026 強勁開局，但電動車達標壓力倍增",
+        subtitle: "一月銷量創五年新高，惟電動車市佔率未達政府 ZEV 標竿",
+        content: `
+            <div class="chinese-section">
+            <img src="https://locationpro.org/uk_auto_market_jan26.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>市場數據回升</h4>
+                <p>根據 SMMT 最新數據，2026 年 1 月英國新車註冊量增長 3.4%，達到 144,127 輛，這是自 2020 年以來表現最強勁的 1 月。車隊採購（Fleet sales）仍是市場主力，佔比超過六成。</p>
+                <h4>電動車（EV）的挑戰</h4>
+                <p>儘管市場整體成長，純電動車（BEV）的市場份額降至 20.6%，低於政府零排放汽車（ZEV）授權設定的 28% 目標。車廠警告，目前的增長高度依賴數千英鎊的折扣維持，這在長期而言是不可持續的。此外，政府計劃引入的電動車按里程計稅（per-mile tax）亦令不少潛在買家持觀望態度。</p>
+            </div>
+            <div class="english-section">
+                <h4>UK Car Market Starts 2026 Strong, but EV Targets Elusive</h4>
+                <p>The UK new car market grew by 3.4% in January 2026, reaching 144,127 registrations—the strongest January since 2020. Fleet purchases continue to dominate the market.</p>
+                <h4>EV Struggles</h4>
+                <p>Battery Electric Vehicle (BEV) market share dipped to 20.6%, falling short of the government’s 28% ZEV mandate target. Manufacturers warn that growth is currently propped up by heavy discounts, and a proposed per-mile tax on EVs may further dampen demand.</p>
+            </div>
+        `,
+        date: "2026年2月5日"
+    },
+    uk_eta_enforcement_feb26: {
+        title: "旅遊新規：ETA 電子旅行授權 2 月 25 日起全面強制查核",
+        subtitle: "85 個免簽國旅客注意：無許可將被拒絕登機入境",
+        content: `
+            <div class="chinese-section">
+            <img src="https://locationpro.org/uk_eta_enforcement_feb26.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>邊境全面數位化</h4>
+                <p>內政部發出最後提醒，從 2026 年 2 月 25 日起，來自包括美國、歐盟、加拿大及台灣等 85 個免簽國家/地區的遊客，必須持有有效的「電子旅行授權」（ETA）才能啟程前往英國。這是一項強制性的數位許可，費用為 10 英鎊，有效期兩年。</p>
+                <h4>航空與航運公司的責任</h4>
+                <p>從當天起，所有承運商（航空公司、渡輪等）有法律義務在旅客登機前檢查其 ETA 狀態。若旅客未持有有效許可，承運商將面臨每人 2,000 英鎊的罰款。此舉標誌著英國邊防邁向全面「無接觸式」查驗的重要一步。</p>
+            </div>
+            <div class="english-section">
+                <h4>Mandatory UK ETA Enforcement from February 25</h4>
+                <p>The Home Office has issued a final warning: from February 25, 2026, visitors from 85 non-visa countries must hold a valid Electronic Travel Authorisation (ETA) to travel to the UK. The £10 digital permit is valid for two years.</p>
+                <h4>Carrier Responsibility</h4>
+                <p>Airlines and ferries will be legally required to verify ETA status before boarding. Non-compliant carriers face fines of £2,000 per passenger. This is a key step towards a fully digitalized and contactless UK border.</p>
+            </div>
+        `,
+        date: "2026年2月4日"
+    },
+    birmingham_motorhome_show: {
+        title: "伯明翰房車及露營展將開幕 預示春季本地旅遊熱潮",
+        subtitle: "數百款最新型號房車亮相，反映英國民眾對戶外旅遊需求持續上升",
+        content: `
+            <div class="chinese-section">
+            <img src="https://locationpro.org/birmingham_motorhome_show.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>伯明翰 NEC 房車展覽</h4>
+                <p>英國最大規模的房車、營地及露營博覽會將於 2026 年 2 月 17 日至 22 日在伯明翰 NEC 舉行。本次展覽將展示來自歐洲頂尖製造商的數百款房車與露營車，並加入更多「智慧營地」的科技展示。</p>
+                <h4>本地旅遊（Staycation）熱度不減</h4>
+                <p>隨著國外旅遊成本上升及環保意識抬頭，英國本地的房車旅遊市場持續火熱。展覽預計將吸引數萬名參觀者，反映出後疫情時代民眾對彈性、自主式旅遊（Caravanning）的偏愛已成為長期趨勢。</p>
+            </div>
+            <div class="english-section">
+                <h4>Birmingham Motorhome & Caravanning Show to Signal Spring Travel Boom</h4>
+                <p>The UK's largest motorhome exhibition will take place at the Birmingham NEC from February 17–22, 2026. Hundreds of new models and "smart campsite" technologies will be on display.</p>
+                <h4>The Rise of Staycations</h4>
+                <p>As international travel costs remain high, the demand for local caravanning and flexible travel remains strong, with tens of thousands expected to attend the show, highlighting a long-term shift in British holiday habits.</p>
+            </div>
+        `,
+        date: "2026年2月6日"
+    },
+
 boe_interest_rate_feb26: {
         title: "英倫銀行維持利率不變 貨幣政策委員會對通脹仍持審慎態度",
         subtitle: "基準利率維持在 5% 水平，行長貝利暗示降息仍需時日",
         content: `
             <div class="chinese-section">
+            <img src="https://locationpro.org/boe_interest_rate_feb26.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
                 <h4>貨幣政策委員會決議</h4>
                 <p>英倫銀行（Bank of England）在 2026 年 2 月的會議上，以 7 比 2 的投票結果決定將基準利率維持在 5%。儘管近期數據顯示通脹已接近 2% 的目標水平，但委員會表示，服務業通脹和工資增長仍具有韌性，這可能導致通脹在中期內回升。</p>
                 
@@ -1660,6 +1822,7 @@ boe_interest_rate_feb26: {
         subtitle: "撥款數十億英鎊引入 AI 技術，旨在縮短專科輪候時間",
         content: `
             <div class="chinese-section">
+            <img src="https://locationpro.org/nhs_reform_plan_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
                 <h4>醫療體系大改革</h4>
                 <p>衛生部本週宣布了一項具有里程碑意義的 NHS 改革計劃。該計劃將核心重點放在「從病床轉向預防，從醫院轉向社區，從模擬轉向數位」。政府承諾投入額外資金，全面升級現有的 IT 系統。</p>
                 <h4>人工智慧的應用</h4>
@@ -1679,6 +1842,7 @@ boe_interest_rate_feb26: {
         subtitle: "國際天然氣價格回落，預計四月起帳單金額將顯著下降",
         content: `
             <div class="chinese-section">
+            <img src="https://locationpro.org/energy_price_cap_update.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
                 <h4>生活成本壓力緩解</h4>
                 <p>能源監管機構 Ofgem 指出，由於歐洲天然氣儲備充足且冬季氣候較往年溫和，批發能源價格持續走低。預計從 2026 年 4 月 1 日起，年度能源價格上限將從目前的水平下降約 12%，平均家庭每年可節省約 200 英鎊。</p>
                 <h4>長期穩定性</h4>
@@ -1698,6 +1862,8 @@ boe_interest_rate_feb26: {
         subtitle: "單月租金升幅超通脹，政府面臨落實《住房改革法案》壓力",
         content: `
             <div class="chinese-section">
+            <img src="https://locationpro.org/rental_market_crisis_london.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+            
                 <h4>租金危機持續</h4>
                 <p>最新房地產數據顯示，倫敦平均月租已突破歷史水平，部分熱門區域（如 Canary Wharf 和 Stratford）的租金較去年同期增長 15%。租客組織批評市場「已失控」，許多年輕專業人士被迫遷往更遠的郊區。</p>
                 <h4>政策回應</h4>
