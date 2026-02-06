@@ -654,6 +654,51 @@
                 <p>歡迎來到每週重點新聞頻道。本頻道旨在綜合各大新聞媒體的報導，為您提供本週最重要、最具影響力的英國新聞事件的客觀、中立、詳細的報導。我們承諾所有新聞稿均為獨立重新撰寫，不含評論或個人意見。</p>
        
 <div class="news-section">
+  <div class="news-card" onclick="openArticleModal('boe_interest_rate_feb26')">
+                        <img src="https://locationpro.org/boe_interest_rate_feb26.jpg" alt="英國英倫銀行大樓" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">💥 英倫銀行維持利率不變 貨幣政策委員會對通脹仍持審慎態度</div>
+                            <div class="news-subtitle">基準利率維持在 5% 水平，行長貝利暗示降息仍需時日</div>
+                            <div class="news-origin">經濟 | 財政 | 銀行</div>
+                            <div class="news-tag">最新數據</div>
+                            2026年2月5日
+                        </div>
+                    </div>
+
+                    <div class="news-card" onclick="openArticleModal('nhs_reform_plan_2026')">
+                        <img src="https://locationpro.org/nhs_reform_plan_2026.jpg" alt="NHS 醫院內部" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">政府公佈 NHS 十年現代化計劃 聚焦數位化診斷</div>
+                            <div class="news-subtitle">撥款數十億英鎊引入 AI 技術，旨在縮短專科輪候時間</div>
+                            <div class="news-origin">醫療 | 社會 | 科技</div>
+                            <div class="news-tag">全國重點</div>
+                            2026年2月4日
+                        </div>
+                    </div>
+                    
+                    <div class="news-card" onclick="openArticleModal('energy_price_cap_update')">
+                        <img src="https://locationpro.org/energy_price_cap_update.jpg" alt="風力發電機組" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">Ofgem 預告春季能源價格上限下調 紓緩家庭負擔</div>
+                            <div class="news-subtitle">國際天然氣價格回落，預計四月起帳單金額將顯著下降</div>
+                            <div class="news-origin">生活 | 能源 | 經濟</div>
+                            <div class="news-tag">生活影響</div>
+                            2026年2月3日
+                        </div>
+                    </div>
+
+                    <div class="news-card" onclick="openArticleModal('rental_market_crisis_london')">
+                        <img src="https://locationpro.org/rental_market_crisis_london.jpg" alt="倫敦住宅區" class="news-image">
+                        <div class="news-content">
+                            <div class="news-title">倫敦平均租金再創新高 租客權益團體呼籲加強管制</div>
+                            <div class="news-subtitle">單月租金升幅超通脹，政府面臨落實《住房改革法案》壓力</div>
+                            <div class="news-origin">住房 | 社會 | 法律</div>
+                            <div class="news-tag">本週重點</div>
+                            2026年2月2日
+                        </div>
+                    </div>
+  
+  
     <div class="news-card" onclick="openArticleModal('nhs_ai_cancer_pilot')">
         <img src="https://locationpro.org/nhs_ai_cancer_pilot.jpg" alt="NHS AI 醫療科技" class="news-image">
         <div class="news-content">
@@ -1589,6 +1634,84 @@ function calculateTax() {
         // 文章内容数据 - 新增與原有文章合併
         const ARTICLE_CONTENT = {
             // --- 新增的 7 則新聞 ---
+
+boe_interest_rate_feb26: {
+        title: "英倫銀行維持利率不變 貨幣政策委員會對通脹仍持審慎態度",
+        subtitle: "基準利率維持在 5% 水平，行長貝利暗示降息仍需時日",
+        content: `
+            <div class="chinese-section">
+                <h4>貨幣政策委員會決議</h4>
+                <p>英倫銀行（Bank of England）在 2026 年 2 月的會議上，以 7 比 2 的投票結果決定將基準利率維持在 5%。儘管近期數據顯示通脹已接近 2% 的目標水平，但委員會表示，服務業通脹和工資增長仍具有韌性，這可能導致通脹在中期內回升。</p>
+                
+                <h4>未來利率走勢</h4>
+                <p>行長安德魯·貝利（Andrew Bailey）表示：「我們看到了積極的通脹降溫跡象，但在確保物價壓力完全消失之前，我們需要保持謹慎。目前討論降息時間表還為時過早。」市場分析師普遍預計，首次降息可能要到今年夏季才會出現。</p>
+            </div>
+            <div class="english-section">
+                <h4>Bank of England Maintains Interest Rates as MPC Remains Cautious</h4>
+                <p>The Bank of England's Monetary Policy Committee (MPC) voted 7-2 to keep the base rate at 5% during its February 2026 meeting. Although inflation is near the 2% target, the committee noted that persistence in service price inflation and wage growth remains a concern.</p>
+                <h4>Outlook on Rate Cuts</h4>
+                <p>Governor Andrew Bailey stated: "We've seen positive signs on inflation, but we must be prudent. It's too early to declare victory or discuss the timing of rate cuts." Analysts expect the first reduction might not occur until summer 2026.</p>
+            </div>
+        `,
+        date: "2026年2月5日"
+    },
+    nhs_reform_plan_2026: {
+        title: "政府公佈 NHS 十年現代化計劃 聚焦數位化診斷",
+        subtitle: "撥款數十億英鎊引入 AI 技術，旨在縮短專科輪候時間",
+        content: `
+            <div class="chinese-section">
+                <h4>醫療體系大改革</h4>
+                <p>衛生部本週宣布了一項具有里程碑意義的 NHS 改革計劃。該計劃將核心重點放在「從病床轉向預防，從醫院轉向社區，從模擬轉向數位」。政府承諾投入額外資金，全面升級現有的 IT 系統。</p>
+                <h4>人工智慧的應用</h4>
+                <p>重點項目包括在全英範圍內推廣 AI 影像診斷工具，協助醫生更快速地識別早期癌症。此舉預計將使專科醫師的診斷效率提高 30%，從而緩解積壓嚴重的輪候名單。然而，反對黨及工會質疑基層醫護人手不足問題若不解決，科技升級的成效將大打折扣。</p>
+            </div>
+            <div class="english-section">
+                <h4>Government Unveils 10-Year NHS Modernisation Plan</h4>
+                <p>The Department of Health announced a landmark reform for the NHS, shifting focus from "sickness to prevention" and "analogue to digital." The government committed billions to upgrade IT infrastructure and integrate AI diagnostics nationwide.</p>
+                <h4>AI Integration</h4>
+                <p>The plan aims to deploy AI tools to assist in early cancer detection, potentially boosting efficiency by 30%. While the tech focus is welcomed, unions warn that these advancements cannot replace the urgent need for more frontline medical staff.</p>
+            </div>
+        `,
+        date: "2026年2月4日"
+    },
+    energy_price_cap_update: {
+        title: "Ofgem 預告春季能源價格上限下調 紓緩家庭負擔",
+        subtitle: "國際天然氣價格回落，預計四月起帳單金額將顯著下降",
+        content: `
+            <div class="chinese-section">
+                <h4>生活成本壓力緩解</h4>
+                <p>能源監管機構 Ofgem 指出，由於歐洲天然氣儲備充足且冬季氣候較往年溫和，批發能源價格持續走低。預計從 2026 年 4 月 1 日起，年度能源價格上限將從目前的水平下降約 12%，平均家庭每年可節省約 200 英鎊。</p>
+                <h4>長期穩定性</h4>
+                <p>儘管降價是利好消息，但能源專家警告，能源市場仍易受地緣政治波動影響。政府表示將繼續推廣綠色能源補貼，鼓勵家庭安裝熱泵及加強房屋隔熱，以減少長期對進口化石燃料的依賴。</p>
+            </div>
+            <div class="english-section">
+                <h4>Ofgem Signals Energy Price Cap Drop for Spring</h4>
+                <p>Energy regulator Ofgem indicated that wholesale gas prices have continued to fall due to high storage levels. The price cap is expected to decrease by approximately 12% starting April 1, 2026, saving the average household around £200 annually.</p>
+                <h4>Long-term Stability</h4>
+                <p>While the reduction is welcomed, experts warn that the market remains vulnerable to geopolitical events. The government continues to advocate for green energy transitions to ensure energy security and lower costs permanently.</p>
+            </div>
+        `,
+        date: "2026年2月3日"
+    },
+    rental_market_crisis_london: {
+        title: "倫敦平均租金再創新高 租客權益團體呼籲加強管制",
+        subtitle: "單月租金升幅超通脹，政府面臨落實《住房改革法案》壓力",
+        content: `
+            <div class="chinese-section">
+                <h4>租金危機持續</h4>
+                <p>最新房地產數據顯示，倫敦平均月租已突破歷史水平，部分熱門區域（如 Canary Wharf 和 Stratford）的租金較去年同期增長 15%。租客組織批評市場「已失控」，許多年輕專業人士被迫遷往更遠的郊區。</p>
+                <h4>政策回應</h4>
+                <p>副首相兼住房部大臣表示，政府將加快落實《住房改革法案》，其中包括廢除「無過錯驅逐」（Section 21 evictions）以及加強對物業質量的監管。然而，房東協會警告，過度的租金限制可能導致更多小業主退出市場，反而加劇供應短缺。</p>
+            </div>
+            <div class="english-section">
+                <h4>London Rents Reach New Heights Amid Housing Crisis</h4>
+                <p>New data reveals that average monthly rents in London have shattered previous records, with some areas seeing a 15% annual increase. Tenant advocacy groups describe the market as "out of control," forcing many to relocate further from the city center.</p>
+                <h4>Policy Response</h4>
+                <p>The government has pledged to fast-track the Renters' Reform Bill, aiming to abolish "no-fault" evictions. However, landlord associations warn that excessive regulation might lead to a further decrease in rental supply as landlords exit the market.</p>
+            </div>
+        `,
+        date: "2026年2月2日"
+    },
 
     nhs_ai_cancer_pilot: {
         title: "NHS 啟動全球首個「AI 與機器人」肺癌早期篩查計劃",
