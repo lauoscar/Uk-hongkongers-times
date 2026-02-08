@@ -654,6 +654,62 @@
                 <p>歡迎來到每週重點新聞頻道。本頻道旨在綜合各大新聞媒體的報導，為您提供本週最重要、最具影響力的英國新聞事件的客觀、中立、詳細的報導。我們承諾所有新聞稿均為獨立重新撰寫，不含評論或個人意見。</p>
        
 <div class="news-section">
+  
+  <div class="news-card" onclick="openArticleModal('tv_licence_increase_2026')">
+        <img src="https://locationpro.org/tv_licence_increase_2026.jpg" alt="家庭觀看電視" class="news-image">
+        <div class="news-content">
+            <div class="news-title">📺 2026/27 年度電視牌照費將調升至 £180</div>
+            <div class="news-subtitle">隨通脹調整政策落實，4 月起生效，引發公共服務經費爭議</div>
+            <div class="news-origin">社會 | 財政 | 生活</div>
+            <div class="news-tag">民生快訊</div>
+            2026年2月6日
+        </div>
+    </div>
+
+    <div class="news-card" onclick="openArticleModal('social_media_ban_consultation')">
+        <img src="https://locationpro.org/social_media_ban_consultation.jpg" alt="青少年使用手機" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🚫 政府啟動青少年社交媒體禁令諮詢 擬設 16 歲門檻</div>
+            <div class="news-subtitle">應對「演算法成癮」與心理健康危機，TikTok 被指設計具誘導性</div>
+            <div class="news-origin">社會 | 科技 | 教育</div>
+            <div class="news-tag">政策討論</div>
+            2026年2月5日
+        </div>
+    </div>
+    
+    <div class="news-card" onclick="openArticleModal('renters_rights_2025_update')">
+        <img src="https://locationpro.org/renters_rights_2025_update.jpg" alt="租賃物業外觀" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🔑 《2025年租客權利法案》落實進展：全面廢除「無過錯驅逐」</div>
+            <div class="news-subtitle">上議院本週審議實施細則，租客將獲得更強居住保障</div>
+            <div class="news-origin">社會 | 房屋 | 法律</div>
+            <div class="news-tag">權益改革</div>
+            2026年2月6日
+        </div>
+    </div>
+
+    <div class="news-card" onclick="openArticleModal('social_worker_support_fund')">
+        <img src="https://locationpro.org/social_worker_support_fund.jpg" alt="社區關懷服務" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🤝 內政部宣布撥款資助社工學生 緩解人手短缺危機</div>
+            <div class="news-subtitle">針對特定地區提供定額生活津貼，鼓勵青年投身福利事業</div>
+            <div class="news-origin">社會 | 勞工 | 福利</div>
+            <div class="news-tag">政府動態</div>
+            2026年2月6日
+        </div>
+    </div>
+
+    <div class="news-card" onclick="openArticleModal('energy_drink_ban_debate')">
+        <img src="https://locationpro.org/energy_drink_ban_debate.jpg" alt="青少年健康教育" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🥤 國會推進「能量飲品禁售令」 嚴禁向 16 歲以下人士銷售</div>
+            <div class="news-subtitle">醫學界強烈支持：過量咖啡因影響青少年心血管與學業表現</div>
+            <div class="news-origin">社會 | 健康 | 商業</div>
+            <div class="news-tag">健康政策</div>
+            2026年2月5日
+        </div>
+    </div>
+  
   <div class="news-card" onclick="openArticleModal('uk_auto_market_jan26')">
                         <img src="https://locationpro.org/uk_auto_market_jan26.jpg" alt="英國新車銷售圖表" class="news-image">
                         <div class="news-content">
@@ -1668,6 +1724,99 @@ function calculateTax() {
         // 文章内容数据 - 新增與原有文章合併
         const ARTICLE_CONTENT = {
             // --- 新增的 7 則新聞 ---
+
+
+tv_licence_increase_2026: {
+        title: "2026/27 年度電視牌照費將調升至 £180",
+        subtitle: "隨著生活成本調整協議生效，英格蘭家庭需面對更多開支壓力。",
+        content: `
+            <div class="chinese-section">
+                        <img src="https://locationpro.org/tv_licence_increase_2026.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>費用調整細節</h4>
+                <p>根據 2022 年牌照費結算協議及最新的通脹數據，英國政府本週確認，從 2026 年 4 月 1 日起，電視牌照費（TV Licence）將由現行的 £169.50 調升至 £180。</p>
+                <h4>社會迴響</h4>
+                <p>BBC 表示這筆資金對維持公共服務質量至關重要，但反對者認為在物價持續高企的背景下，調升費用將加重基層家庭負擔。政府重申，未來的撥款模式仍在審查中，包括考慮更公平的資助替代方案。</p>
+            </div>
+            <div class="english-section">
+                <h4>Social & Cost of Living</h4>
+                <p>The UK government has confirmed that the TV licence fee will rise to £180 on April 1, 2026, up from the current £169.50. This increase follows the 2022 Licence Fee Settlement, which links the cost to inflation. While the BBC emphasizes the need for funding to sustain public services, critics argue the rise places an unfair burden on households still struggling with the cost of living.</p>
+            </div>
+        `,
+        date: "2026年2月6日"
+    },
+    social_media_ban_consultation: {
+        title: "政府啟動青少年社交媒體禁令諮詢 擬設 16 歲門檻",
+        subtitle: "旨在解決平台「成癮性設計」對青少年心理健康造成的負面影響。",
+        content: `
+            <div class="chinese-section">
+                        <img src="https://locationpro.org/social_media_ban_consultation.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>政策背景</h4>
+                <p>英國政府於 2026 年 2 月初正式啟動全國諮詢，探討禁止 16 歲以下青少年使用特定社交媒體平台的可能性。此前，歐洲委員會初步判定 TikTok 的「無限滾動」和「自動播放」功能違反了數位服務法（DSA）。</p>
+                <h4>家長與業界看法</h4>
+                <p>政府計劃推動更嚴格的身份驗證機制，並考慮強制平台限制對未成年人的精準推送。首相 Keir Starmer 指出，建立「強大的社會」必須從保護數位時代下的兒童開始。</p>
+            </div>
+            <div class="english-section">
+                <h4>Youth & Digital Safety</h4>
+                <p>The UK government has launched a consultation on a potential social media ban for children under 16. The move follows growing evidence of the harmful effects of "addictive design" on minors' mental health. This aligns with recent European actions against platforms like TikTok for features such as infinite scroll. Ministers are exploring age-verification tech and simplified parental controls to foster a safer online environment.</p>
+            </div>
+        `,
+        date: "2026年2月5日"
+    },
+    renters_rights_2025_update: {
+        title: "《2025年租客權利法案》落實進展：全面廢除「無過錯驅逐」",
+        subtitle: "租賃市場迎來重大改革，上議院本週審議相關實施細則。",
+        content: `
+            <div class="chinese-section">
+                        <img src="https://locationpro.org/renters_rights_2025_update.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>租客保障再升級</h4>
+                <p>隨著《2025年租客權利法案》進入最後立法階段，政府確認將在今年內正式全面廢除第 21 條（Section 21）「無過錯驅逐」規定。這意味著業主未來必須提供合法理由（如拖欠租金或出售物業）才能要求租客搬離。</p>
+                <h4>市場影響</h4>
+                <p>法案還包括禁止「租金拍賣」及限制業主過度加租的機制。儘管部分房東團體擔心法庭系統處理爭議的能力，但房屋組織對此表示歡迎，認為這是改善租賃穩定性的重要一步。</p>
+            </div>
+            <div class="english-section">
+                <h4>Housing & Rights</h4>
+                <p>The UK Parliament is progressing with the implementation of the Renters’ Rights Act 2025. A key focus this week in the House of Lords is the final abolition of "no-fault" evictions under Section 21. The bill aims to provide greater security for tenants, ending the practice of "rental bidding wars" and ensuring that any rent increases are fair and challengeable.</p>
+            </div>
+        `,
+        date: "2026年2月6日"
+    },
+    social_worker_support_fund: {
+        title: "內政部宣布撥款資助社工學生 緩解人手短缺危機",
+        subtitle: "推出定向財政支持計劃，吸引人才填補成人與兒童福利空缺。",
+        content: `
+            <div class="chinese-section">
+                        <img src="https://locationpro.org/social_worker_support_fund.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>職業資助計劃</h4>
+                <p>內政部於 2026 年 2 月 6 日發布諮詢文件，計劃為攻讀社工學位的學生提供額外的定向補助。這項措施旨在吸引更多人進入這項被視為「社會安全網核心」的職業。</p>
+                <h4>緩解系統壓力</h4>
+                <p>目前英國多個地區的社工短缺率超過 15%，導致大量個案無法得到及時跟進。新津貼將重點覆蓋生活成本較高的地區，並提供帶薪實習機會，確保學生在受訓期間無後顧之憂。</p>
+            </div>
+            <div class="english-section">
+                <h4>Welfare & Workforce</h4>
+                <p>The government has launched a consultation for "targeted financial support for aspiring social workers" on February 6, 2026. This initiative aims to bolster the social care workforce by providing grants and stipends to social work students, particularly in high-demand regions, to ensure a stable pipeline of professionals for the struggling child and adult welfare systems.</p>
+            </div>
+        `,
+        date: "2026年2月6日"
+    },
+    energy_drink_ban_debate: {
+        title: "國會推進「能量飲品禁售令」 嚴禁向 16 歲以下人士銷售",
+        subtitle: "禁止高咖啡因飲品進入校園與商店，關注青少年心臟健康。",
+        content: `
+            <div class="chinese-section">
+                        <img src="https://locationpro.org/energy_drink_ban_debate.jpg" alt="英國薪酬權益檢查清單" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>健康優先</h4>
+                <p>上議院本週就禁止向 16 歲以下青少年銷售高能量飲品的提案進行二讀。根據 NHS 數據，頻繁飲用此類飲品的青少年更易出現心悸、失眠及專注力下降等問題。</p>
+                <h4>零售業與學校反應</h4>
+                <p>多數大型超市已自發實施此限制，但政府希望透過立法將其統一化。如果法案通過，零售商向未成年人售賣能量飲品將面臨巨額罰款。教師工會普遍支持此舉，認為能有效減少課堂上的焦慮情緒與秩序混亂。</p>
+            </div>
+            <div class="english-section">
+                <h4>Health & Policy</h4>
+                <p>Lawmakers are pushing forward with a national ban on the sale of high-caffeine energy drinks to under-16s. This week, members of the House of Lords questioned ministers on the implementation timeline. Health experts have long warned about the link between these drinks and heart palpitations, sleep issues, and behavioral problems in teenagers. The ban aims to standardize restrictions that many supermarkets have already adopted voluntarily.</p>
+            </div>
+        `,
+        date: "2026年2月5日"
+    },
+
 
   uk_auto_market_jan26: {
         title: "英國新車市場迎來 2026 強勁開局，但電動車達標壓力倍增",
