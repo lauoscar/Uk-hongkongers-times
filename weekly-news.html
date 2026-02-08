@@ -655,6 +655,61 @@
        
 <div class="news-section">
   
+    <div class="news-card" onclick="openArticleModal('cancer_vaccine_trial')">
+        <img src="https://locationpro.org/cancer_vaccine_trial.jpg" alt="實驗室研發疫苗" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🧬 英國啟動史上規模最大「個人化癌症疫苗」臨床試驗</div>
+            <div class="news-subtitle">牛津與莫德納合作，針對數千名患者定制專屬免疫療法</div>
+            <div class="news-origin">醫療 | 科研 | 牛津</div>
+            <div class="news-tag">醫學突破</div>
+            2026年2月8日
+        </div>
+    </div>
+
+    <div class="news-card" onclick="openArticleModal('fusion_energy_milestone')">
+        <img src="https://locationpro.org/fusion_energy_milestone.jpg" alt="核融合反應爐模擬圖" class="news-image">
+        <div class="news-content">
+            <div class="news-title">⚛️ 英國核融合實驗取得重大進展 商業化供電邁進一大步</div>
+            <div class="news-subtitle">卡勒姆中心成功維持電漿穩定，目標 2030 年代併網發電</div>
+            <div class="news-origin">能源 | 科技 | 創新</div>
+            <div class="news-tag">綠色能源</div>
+            2026年2月8日
+        </div>
+    </div>
+    
+    <div class="news-card" onclick="openArticleModal('3d_printed_housing')">
+        <img src="https://locationpro.org/3d_printed_housing.jpg" alt="3D打印房屋建築現場" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🏗️ 政府推行「未來住屋」計劃：利用 3D 打印技術大規模興建社會房屋</div>
+            <div class="news-subtitle">首批低碳建築在曼徹斯特落成，成本降低 30%，建造週期縮短一半</div>
+            <div class="news-origin">社會 | 房屋 | 科技</div>
+            <div class="news-tag">居住正義</div>
+            2026年2月8日
+        </div>
+    </div>
+
+    <div class="news-card" onclick="openArticleModal('dementia_wearable_tech')">
+        <img src="https://locationpro.org/dementia_wearable_tech.jpg" alt="高齡人士佩戴智慧裝置" class="news-image">
+        <div class="news-content">
+            <div class="news-title">⌚ <倫敦大學學院開發穿戴式裝置 可提早十年偵測腦退化症徵兆</div>
+            <div class="news-subtitle">透過監測行走模式與睡眠結構，AI 輔助早期失智症診斷</div>
+            <div class="news-origin">醫療 | 科技 | 研究</div>
+            <div class="news-tag">健康預警</div>
+            2026年2月8日
+        </div>
+    </div>
+
+    <div class="news-card" onclick="openArticleModal('self_driving_bus_rollout')">
+        <img src="https://locationpro.org/self_driving_bus_rollout.jpg" alt="自動駕駛巴士" class="news-image">
+        <div class="news-content">
+            <div class="news-title">🚌 英國首個自動駕駛巴士網絡於蘇格蘭正式投入服務</div>
+            <div class="news-subtitle">連接愛丁堡與法夫郡，標誌著公共交通進入 AI 無人駕駛時代</div>
+            <div class="news-origin">交通 | 科技 | 社會</div>
+            <div class="news-tag">智慧城市</div>
+            2026年2月8日
+        </div>
+    </div>
+  
   <div class="news-card" onclick="openArticleModal('tv_licence_increase_2026')">
         <img src="https://locationpro.org/tv_licence_increase_2026.jpg" alt="家庭觀看電視" class="news-image">
         <div class="news-content">
@@ -1725,6 +1780,96 @@ function calculateTax() {
         const ARTICLE_CONTENT = {
             // --- 新增的 7 則新聞 ---
 
+    cancer_vaccine_trial: {
+        title: "英國啟動史上規模最大「個人化癌症疫苗」臨床試驗",
+        subtitle: "NHS 與頂尖藥廠合作，利用 mRNA 技術為患者打造專屬抗癌武器。",
+        content: `
+            <div class="chinese-section">
+                                    <img src="https://locationpro.org/cancer_vaccine_trial.jpg" alt="英國臨床試驗" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>科研領先</h4>
+                <p>2026 年 2 月初，NHS England 宣布與牛津大學及莫德納（Moderna）展開深度合作。這項名為「癌症疫苗發射台」的計劃，預計在全英範圍內招募 5,000 名患者，針對黑色素瘤、肺癌及大腸癌進行個人化 mRNA 疫苗試驗。</p>
+                <h4>運作原理</h4>
+                <p>研究人員先提取患者腫瘤的 DNA 片段，利用 AI 分析其特有的基因突變，隨後在幾週內製作出專屬該患者的 mRNA 疫苗。疫苗進入體內後，會教導免疫系統精確識別並攻擊殘餘的癌細胞，大幅降低復發風險。</p>
+            </div>
+            <div class="english-section">
+                <h4>Medical Landmark</h4>
+                <p>In early February 2026, NHS England launched the largest-ever clinical trial for personalized cancer vaccines. In partnership with the University of Oxford and Moderna, the "Cancer Vaccine Launchpad" aims to treat 5,000 patients with custom-made mRNA therapies tailored to their specific tumors, representing a major shift towards precision oncology.</p>
+            </div>
+        `,
+        date: "2026年2月8日"
+    },
+    fusion_energy_milestone: {
+        title: "英國核融合實驗取得重大進展 商業化供電邁進一大步",
+        subtitle: "卡勒姆聚變能源中心（CCFE）成功延長電漿穩定時間，打破世界紀錄。",
+        content: `
+            <div class="chinese-section">
+                                    <img src="https://locationpro.org/fusion_energy_milestone.jpg" alt="英國核融合實驗" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>能源革命</h4>
+                <p>位於牛津郡的卡勒姆聚變能源中心本週宣布，其新一代實驗裝置成功將超高溫電漿穩定維持了超過 10 分鐘，產出的能量效率顯著提升。這被視為從「實驗室科學」轉向「商業工程」的關鍵節點。</p>
+                <h4>未來願景</h4>
+                <p>核融合被譽為能源的「聖杯」，能提供近乎無限且零碳的電力。英國政府已撥款支持「STEP」計劃，目標是在 2030 年代末期於諾丁漢郡建成全球首座併網發電的核融合電廠。</p>
+            </div>
+            <div class="english-section">
+                <h4>Technological Innovation</h4>
+                <p>The UK Atomic Energy Authority reported a breakthrough this week at the Culham Centre for Fusion Energy. Scientists achieved a sustained high-power plasma state for over 10 minutes, a record for their current device. This success bolsters the UK's STEP program, which aims to deliver the world's first prototype fusion power plant by the late 2030s.</p>
+            </div>
+        `,
+        date: "2026年2月8日"
+    },
+    "3d_printed_housing": {
+        title: "政府推行「未來住屋」計劃：利用 3D 打印技術大規模興建社會房屋",
+        subtitle: "曼徹斯特首批住戶入住科技公屋，應對住房短缺與氣候變化。",
+        content: `
+            <div class="chinese-section">
+                                    <img src="https://locationpro.org/3d_printed_housing.jpg" alt="英國未來住屋" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>建築革新</h4>
+                <p>為了達成每年興建 30 萬間房屋的目標，英國政府在曼徹斯特啟動了 3D 打印社會住宅示範區。利用巨大的機械手臂噴塗特製混凝土，一棟兩層樓住宅的結構僅需 48 小時即可完工。</p>
+                <h4>經濟與環境效益</h4>
+                <p>與傳統建築相比，這項技術減少了 60% 的建築廢料，並能大幅降低供暖支出。政府計劃在未來三年內，將此技術推廣至伯明翰、利物浦等地區，以緩解基層家庭的住房壓力。</p>
+            </div>
+            <div class="english-section">
+                <h4>Social Development</h4>
+                <p>The UK government has unveiled a new fleet of 3D-printed social homes in Manchester as part of the "Homes of the Future" initiative. By using automated robotic arms to layer concrete, homes can be built in a fraction of the time and cost. The initiative aims to address the national housing shortage while cutting carbon emissions and construction waste.</p>
+            </div>
+        `,
+        date: "2026年2月8日"
+    },
+    dementia_wearable_tech: {
+        title: "倫敦大學學院開發穿戴式裝置 可提早十年偵測腦退化症徵兆",
+        subtitle: "結合生物傳感器與機器學習，讓失智症防治進入「主動監測」時代。",
+        content: `
+            <div class="chinese-section">
+                                    <img src="https://locationpro.org/dementia_wearable_tech.jpg" alt="開發穿戴式裝置" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>智慧醫療</h4>
+                <p>倫敦大學學院（UCL）的研究團隊開發出一款外型類似運動手錶的裝置，能精確追蹤佩戴者的微小行走偏差及深度睡眠質量。大數據顯示，這些細微變化早在認知症狀出現前十年就已發生。</p>
+                <h4>NHS 整合</h4>
+                <p>NHS 計劃從明年起為 65 歲以上的高風險族群提供此類裝置，幫助早期介入治療，延緩病情惡化。這項研發被視為改善高齡化社會醫療壓力的重要工具。</p>
+            </div>
+            <div class="english-section">
+                <h4>Health Innovation</h4>
+                <p>Researchers at University College London (UCL) have developed a wearable sensor capable of detecting early signs of dementia up to a decade before symptoms appear. By analyzing subtle gait changes and sleep patterns via AI, the device offers a non-invasive way to monitor brain health and enable early intervention for at-risk individuals.</p>
+            </div>
+        `,
+        date: "2026年2月8日"
+    },
+    self_driving_bus_rollout: {
+        title: "英國首個自動駕駛巴士網絡於蘇格蘭正式投入服務",
+        subtitle: "全長 14 英里的路徑，每週可載運超過 1 萬名通勤者。",
+        content: `
+            <div class="chinese-section">
+                                    <img src="https://locationpro.org/self_driving_bus_rollout.jpg" alt="自動駕駛巴士" style="width: 100%; border-radius: 8px; margin: 10px 0;">
+                <h4>智慧城市里程碑</h4>
+                <p>本週一，蘇格蘭正式開通了全球首條全尺寸自動駕駛巴士線路。巴士配備了先進的激光雷達（LiDAR）與雷達系統，能以高達時速 50 英里的速度在繁忙公路上行駛。</p>
+                <h4>安全與轉型</h4>
+                <p>雖然車上仍配有「安全監管員」以防萬一，但整個操作已完全自動化。政府希望透過此技術降低營運成本並提高偏遠地區的交通覆蓋率，這也是英國「交通零排放」目標的一部分。</p>
+            </div>
+            <div class="english-section">
+                <h4>Infrastructure & Tech</h4>
+                <p>The UK's first full-size autonomous bus service has officially launched in Scotland this week. Navigating a 14-mile route between Edinburgh and Fife, the fleet of self-driving buses uses AI and sensor technology to transport thousands of passengers weekly, marking a significant step toward the future of automated public transport.</p>
+            </div>
+        `,
+        date: "2026年2月8日"
+    },
 
 tv_licence_increase_2026: {
         title: "2026/27 年度電視牌照費將調升至 £180",
