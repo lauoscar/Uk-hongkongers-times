@@ -749,6 +749,22 @@ a:hover { text-decoration:underline; }
       <div class="widget-head"><h3>每週重點新聞頻道<p>港英時報 - The UK Hong Konger Times </p></h3><div class="widget-sub">Click on article titles to read full content</div></div>
       <div id="weeklyContent" class="small">
         
+                        <div class="weekly-column-title" onclick="openArticleModal('uk_study_abroad_applications_2026')">
+          <strong>🎓 英國留學申請創十年新高 中國學生人數大幅增長</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>                      
+        
+                      <div class="weekly-column-title" onclick="openArticleModal('uk_airport_route_expansion_2026')">
+          <strong>✈️ 倫敦蓋威機場新增 12 條國際航線 旅遊選擇大增</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>                      
+        
+                      <div class="weekly-column-title" onclick="openArticleModal('uk_global_bucket_list_wales_2026')">
+          <strong>🚶‍♂️ 北威爾士Pilgrim’s Way 入選全球旅遊清單 2026</p></strong>
+          <div class="widget-sub">Click to read</div>
+        </div>                      
+        
+        
                       <div class="weekly-column-title" onclick="openArticleModal('uk_public_charging_expansion_2026')">
           <strong>🔌 全英公共充電站突破 75,000 個</p></strong>
           <div class="widget-sub">Click to read</div>
@@ -1136,6 +1152,69 @@ const MONTHLY_DATA = {
 
 // 文章内容数据
 const ARTICLE_CONTENT = {
+ 
+ uk_study_abroad_applications_2026: {
+    title: "英國留學申請創十年新高",
+    subtitle: "2026 秋季國際學生申請顯著增加 亞洲市場需求強勁",
+    content: `
+        <div class="chinese-section">
+            <img src="https://locationpro.org/uk_study_abroad_applications_20262.jpg" alt="留學趨勢" style="width:100%; border-radius:8px; margin:10px 0;">
+            <h4>申請數據與熱門科系</h4>
+            <p>根據英國大學招生委員會（UCAS）最新公佈的截止數據顯示，2026 年秋季入學的國際學生申請人數創下過去十年來的新高。其中，來自中國、印度及東南亞地區的申請增幅最為明顯。在科系選擇上，除了傳統的商管與金融外，人工智慧（AI）、資料科學及綠色能源工程等 STEM 領域成為國際學生的首選。</p>
+            <h4>教育與經濟影響</h4>
+            <p>英國多所羅素集團（Russell Group）大學表示，國際學生的穩健回流為校園帶來了更豐富的文化多樣性，同時也大幅緩解了近年來因本地學費凍漲而帶來的財務壓力。教育界專家指出，英國畢業生工作簽證（Graduate Route）政策的延續，是維持英國高等教育全球競爭力的關鍵因素。</p>
+        </div>
+        <div class="english-section">
+            <h4>Application Surge and Popular Courses</h4>
+            <p>Latest figures released by UCAS reveal that the number of international applications for the autumn 2026 intake has hit a decade-high. Demand has surged particularly from China, India, and Southeast Asia. Beyond traditional business and finance courses, STEM subjects—especially Artificial Intelligence (AI), data science, and green energy engineering—have emerged as top choices for prospective students.</p>
+            <h4>Educational and Economic Impact</h4>
+            <p>Several Russell Group universities noted that the robust return of international students enhances campus diversity and provides crucial financial stability amidst frozen domestic tuition fees. Higher education experts highlight that the continuation of the Graduate Route visa remains a pivotal factor in sustaining the UK's global competitiveness in education.</p>
+        </div>
+    `,
+    date: "2026年2月23日"
+},
+ 
+ uk_airport_route_expansion_2026: {
+    title: "倫敦蓋威機場新增 12 條國際航線",
+    subtitle: "拓展全球航空網絡 促進亞洲與北美旅遊復甦",
+    content: `
+        <div class="chinese-section">
+            <img src="https://locationpro.org/uk_airport_route_expansion_2026.jpg" alt="英國機場新航線" style="width:100%; border-radius:8px; margin:10px 0;">
+            <h4>航線新增與戰略佈局</h4>
+            <p>為迎接 2026 年的旅遊熱潮，倫敦蓋威機場（Gatwick Airport）宣布與英國航空、易捷航空及多家國際航空公司達成合作，正式新增 12 條直飛國際航線。此次擴張重點放在亞洲新興市場及北美主要商業樞紐，包括直飛首爾、曼谷以及美國西岸的全新航班，進一步強化了蓋威機場作為英國第二大航空樞紐的地位。</p>
+            <h4>經濟效益與永續發展</h4>
+            <p>新航線的開通預計每年將為機場增加超過 150 萬名旅客，並為倫敦及周邊地區創造約 2,000 個直接與間接就業機會。同時，蓋威機場也強調新航線將配合其「綠色航空計畫」，優先提供給採用新一代節能客機及承諾使用永續航空燃料（SAF）的航空公司營運。</p>
+        </div>
+        <div class="english-section">
+            <h4>Route Expansion and Strategic Vision</h4>
+            <p>In anticipation of a busy 2026 travel season, London Gatwick Airport has partnered with major carriers including British Airways and easyJet to launch 12 new international routes. The expansion strategically targets emerging Asian markets and major North American commercial hubs, featuring new direct flights to Seoul, Bangkok, and the US West Coast, solidifying Gatwick's role as the UK's second-largest aviation hub.</p>
+            <h4>Economic Impact and Sustainability</h4>
+            <p>The new routes are projected to attract over 1.5 million additional passengers annually and create approximately 2,000 direct and indirect jobs in London and the Southeast. Concurrently, Gatwick emphasized that the expansion aligns with its 'Green Aviation' initiative, prioritizing slots for airlines operating next-generation fuel-efficient aircraft and those committing to Sustainable Aviation Fuel (SAF).</p>
+        </div>
+    `,
+    date: "2026年2月23日"
+},
+ 
+ uk_global_bucket_list_wales_2026: {
+    title: "北威爾士 Pilgrim’s Way 入選全球旅遊榜",
+    subtitle: "歷史步道吸引國際旅客 探索豐富的凱爾特文化",
+    content: `
+        <div class="chinese-section">
+            <img src="https://locationpro.org/uk_global_bucket_list_wales_2026.jpg" alt="北威爾士步道" style="width:100%; border-radius:8px; margin:10px 0;">
+            <h4>國際級徒步勝地</h4>
+            <p>北威爾士著名的朝聖者步道（North Wales Pilgrim’s Way / Taith Pererin Gogledd Cymru）近日被多家國際旅遊權威媒體（如《國家地理》與《孤獨星球》）評選為 2026 年全球必訪目的地之一。這條全長 135 英里的壯麗步道，從聖阿薩夫（St Asaph）一路延伸至有「兩萬聖人島」之稱的巴德西島（Bardsey Island）。</p>
+            <h4>帶動地方觀光經濟</h4>
+            <p>步道沿途融合了雄偉的雪墩國家公園（Eryri）山景、古老的凱爾特歷史遺跡與壯闊的海岸線。該路線的國際知名度大增，不僅吸引了大量來自北美和歐洲的徒步愛好者，也為沿線的威爾士小鎮、民宿及傳統酒館注入了龐大的觀光收益，成為英國推廣深度文化旅遊的成功典範。</p>
+        </div>
+        <div class="english-section">
+            <h4>A World-Class Trekking Destination</h4>
+            <p>The North Wales Pilgrim’s Way (Taith Pererin Gogledd Cymru) has been named one of the top global must-visit destinations for 2026 by leading travel publications like National Geographic and Lonely Planet. This stunning 135-mile trail stretches from St Asaph all the way to Bardsey Island, famously known as the 'Island of 20,000 Saints'.</p>
+            <h4>Boosting Local Tourism Economies</h4>
+            <p>The route offers a unique blend of the majestic Eryri (Snowdonia) mountain landscapes, ancient Celtic historical sites, and dramatic coastlines. The surge in its international profile is attracting a wave of hiking enthusiasts from North America and Europe. This influx is injecting vital tourism revenue into rural Welsh towns, B&Bs, and traditional pubs, standing out as a prime example of successful deep-cultural tourism in the UK.</p>
+        </div>
+    `,
+    date: "2026年2月23日"
+},
  
  uk_public_charging_expansion_2026: {
         title: "全英公共充電站突破 75,000 個：高速充電網絡加速擴張",
