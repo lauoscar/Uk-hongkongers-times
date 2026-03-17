@@ -577,7 +577,7 @@
             <li><a href="uk-cities.html">🏙️ 城市專題A Pulse of Nation</a></li>
             <li><a href="uk-society.html">🧐 週刊專題Weekly Nexus</a></li>
             <li><a href="lifeinuk.html">📚 Life in the UK Test-Practice Quiz</a></li>
-           <li><a href="lifeinuk2.html">📚 Life in the UK Test-Practice Quiz 2</a></li>
+           <li><a href="lifeinuk2.html">📚 Life in the UK Test-Practice Quiz （第二輯）</a></li>
             <li><a href="bnoguide.html">&#127468;&#127463 BNO移民指南</a></li>
         </ul>
         <div style="padding: 20px; text-align: center; font-size: 12px; color: var(--muted);">
@@ -640,7 +640,7 @@
       <li><a href="uk-cities.html" >城市專題A Pulse of Nation</a></li>
       <li><a href="uk-society.html" >週刊專題Weekly Nexus</a></li>
       <li><a href="lifeinuk.html" >Life in the UK Test-Practice Quiz</a></li>
-      <li><a href="lifeinuk2.html" >Life in the UK Test-Practice Quiz 2</a></li>      
+      <li><a href="lifeinuk2.html" >Life in the UK Test-Practice Quiz（第二輯）</a></li>      
                 <li><a href="bnoguide.html" >BNO移民指南</a></li>    
             </ul>
         </div>
@@ -656,6 +656,40 @@
                 <p>歡迎來到每週重點新聞頻道。本頻道旨在綜合各大新聞媒體的報導，為您提供本週最重要、最具影響力的英國新聞事件的客觀、中立、詳細的報導。我們承諾所有新聞稿均為獨立重新撰寫，不含評論或個人意見。</p>
        
 <div class="news-section">
+
+<div class="news-card" onclick="openArticleModal('uk_food_waste_collection_2026')">
+    <img src="https://locationpro.org/uk_food_waste_collection_2026.jpg" alt="廚餘回收政策" class="news-image">
+    <div class="news-content">
+        <div class="news-title">♻️ 英國推行強制廚餘回收 2026 全面實施</div>
+        <div class="news-subtitle">所有家庭需分開處理廚餘 每週收集減少堆填</div>
+        <div class="news-origin">環保 | 政策 | 生活</div>
+        <div class="news-tag">環保措施</div>
+        2026年3月18日
+    </div>
+</div>
+
+<div class="news-card" onclick="openArticleModal('london_ulez_update_2026')">
+    <img src="https://locationpro.org/london_ulez_update_2026.jpg" alt="ULEZ政策" class="news-image">
+    <div class="news-content">
+        <div class="news-title">🚧 倫敦ULEZ政策持續收緊 駕駛成本進一步增加</div>
+        <div class="news-subtitle">排放標準提升 違規罰款與監控全面升級</div>
+        <div class="news-origin">交通 | 政策 | 城市</div>
+        <div class="news-tag">低排放區</div>
+        2026年3月18日
+    </div>
+</div>
+
+<div class="news-card" onclick="openArticleModal('manchester_regeneration_2026')">
+    <img src="https://locationpro.org/manchester_regeneration_2026.jpg" alt="城市發展計劃" class="news-image">
+    <div class="news-content">
+        <div class="news-title">🏙️ 曼徹斯特大型重建計劃啟動 投資數十億英鎊</div>
+        <div class="news-subtitle">新增住宅與綠色空間 打造未來智慧城市</div>
+        <div class="news-origin">城市發展 | 投資 | 英國生活</div>
+        <div class="news-tag">城市規劃</div>
+        2026年3月18日
+    </div>
+</div>
+
 
 <div class="news-card" onclick="openArticleModal('glasgow_central_fire_2026')">
     <img src="https://locationpro.org/glasgow_central_fire_2026.jpg" alt="glasgow central fire 2026" class="news-image">
@@ -2686,6 +2720,93 @@ function calculateTax() {
         // 文章内容数据 - 新增與原有文章合併
         const ARTICLE_CONTENT = {
             // --- 新增的 7 則新聞 ---
+
+
+uk_food_waste_collection_2026: {
+    title: "英國全面推行家居廚餘回收政策 2026 起強制實施",
+    subtitle: "所有地方政府需提供每週廚餘收集服務 減少垃圾堆填",
+    content: `
+        <div class="chinese-section">
+            <img src="https://locationpro.org/uk_food_waste_collection_2026.jpg" style="width:100%;border-radius:8px;margin:10px 0;">
+            
+            <h4>廚餘回收新政策</h4>
+            <p>英國政府確認，所有地方政府將於 <b>2026年起</b> 必須提供家居廚餘回收服務，作為「資源與廢物策略」的一部分。</p>
+
+            <p>政策要求每週收集廚餘，包括剩菜、果皮及過期食物，以減少垃圾堆填與溫室氣體排放。</p>
+
+            <h4>環保影響</h4>
+            <p>政府估計，廚餘回收將大幅減少甲烷排放，並轉化為生物能源與肥料。</p>
+
+            <p>地方議會正逐步向居民派發專用廚餘回收桶。</p>
+        </div>
+
+        <div class="english-section">
+            <h4>Food Waste Recycling</h4>
+            <p>The UK will introduce mandatory weekly food waste collections by 2026.</p>
+
+            <p>The policy aims to reduce landfill waste and convert food waste into renewable energy.</p>
+        </div>
+    `,
+    date: "2026年3月18日"
+},
+
+london_ultra_low_emission_update_2026: {
+    title: "倫敦超低排放區政策持續收緊 影響更多駕駛者",
+    subtitle: "ULEZ 擴展後違規罰款與監控全面提升",
+    content: `
+        <div class="chinese-section">
+            <img src="https://locationpro.org/london_ultra_low_emission_update_2026.jpg" style="width:100%;border-radius:8px;margin:10px 0;">
+
+            <h4>環保交通政策</h4>
+            <p>倫敦超低排放區（ULEZ）在擴展至大倫敦後，於 <b>2026年</b> 持續執行更嚴格排放標準。</p>
+
+            <p>未符合標準的車輛需支付每日費用，違規者將被自動攝影系統記錄。</p>
+
+            <h4>對市民影響</h4>
+            <p>政策有效減少空氣污染，但亦增加部分駕駛者成本。</p>
+
+            <p>政府提供車輛更換補助以協助低收入家庭。</p>
+        </div>
+
+        <div class="english-section">
+            <h4>ULEZ Policy</h4>
+            <p>London continues enforcing stricter emission rules under ULEZ.</p>
+
+            <p>Non-compliant vehicles are charged daily fees.</p>
+        </div>
+    `,
+    date: "2026年3月18日"
+},
+
+manchester_city_regeneration_2026: {
+    title: "曼徹斯特大型城市重建計劃啟動 打造未來智慧城市",
+    subtitle: "數十億投資推動住房、交通與商業發展",
+    content: `
+        <div class="chinese-section">
+            <img src="https://locationpro.org/manchester_city_regeneration_2026.jpg" style="width:100%;border-radius:8px;margin:10px 0;">
+
+            <h4>城市發展計劃</h4>
+            <p>曼徹斯特市政府於 <b>2026年</b> 啟動新一輪城市重建項目，涉及住宅、商業區及交通改善。</p>
+
+            <p>項目包括興建數千個新住宅單位及綠色公共空間。</p>
+
+            <h4>經濟影響</h4>
+            <p>該計劃預計吸引數十億英鎊投資，並創造大量就業機會。</p>
+
+            <p>同時推動城市向低碳與智慧城市轉型。</p>
+        </div>
+
+        <div class="english-section">
+            <h4>City Development</h4>
+            <p>Manchester has launched a major regeneration programme in 2026.</p>
+
+            <p>The project includes housing, transport upgrades and green spaces.</p>
+        </div>
+    `,
+    date: "2026年3月18日"
+},
+
+
 
     glasgow_central_fire_2026: {
         title: "2026年 Glasgow Central Station 火警事件",
