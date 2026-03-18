@@ -657,6 +657,44 @@
        
 <div class="news-section">
 
+
+<div class="news-card" onclick="openArticleModal('uk_snl_launch_2026')">
+    <img src="https://locationpro.org/uk_snl_launch_2026.jpg" alt="英國版SNL" class="news-image">
+    <div class="news-content">
+        <div class="news-title">🎭 英國版《Saturday Night Live》正式登陸倫敦</div>
+        <div class="news-subtitle">經典美國喜劇節目首次英國化 本地喜劇人崛起</div>
+        <div class="news-origin">娛樂 | 電視 | 倫敦</div>
+        <div class="news-tag">文化娛樂</div>
+        2026年3月19日
+    </div>
+</div>
+
+
+<div class="news-card" onclick="openArticleModal('uk_comic_relief_2026')">
+    <img src="https://locationpro.org/uk_comic_relief_2026.jpg" alt="Comic Relief" class="news-image">
+    <div class="news-content">
+        <div class="news-title">😂 Comic Relief 2026 慈善節目即將舉行</div>
+        <div class="news-subtitle">明星雲集籌款 支援全球弱勢群體</div>
+        <div class="news-origin">活動 | 慈善 | BBC</div>
+        <div class="news-tag">慈善活動</div>
+        2026年3月19日
+    </div>
+</div>
+
+
+<div class="news-card" onclick="openArticleModal('uk_coastal_path_2026')">
+    <img src="https://locationpro.org/uk_coastal_path_2026.jpg" alt="英國海岸步道" class="news-image">
+    <div class="news-content">
+        <div class="news-title">🌊 英國將開放全球最長海岸步道</div>
+        <div class="news-subtitle">全長2700英里 串連英格蘭整個海岸線</div>
+        <div class="news-origin">旅遊 | 自然 | 戶外</div>
+        <div class="news-tag">旅遊景點</div>
+        2026年3月19日
+    </div>
+</div>
+
+
+
 <div class="news-card" onclick="openArticleModal('uk_food_waste_collection_2026')">
     <img src="https://locationpro.org/uk_food_waste_collection_2026.jpg" alt="廚餘回收政策" class="news-image">
     <div class="news-content">
@@ -2718,9 +2756,111 @@ function calculateTax() {
     
     <script>
         // 文章内容数据 - 新增與原有文章合併
-        const ARTICLE_CONTENT = {
-            // --- 新增的 7 則新聞 ---
 
+const ARTICLE_CONTENT = {
+
+    uk_snl_launch_2026: {
+        title: "英國版《Saturday Night Live》正式登陸倫敦",
+        subtitle: "經典美國喜劇節目首次英國化，本地新一代喜劇人崛起",
+
+        content: `
+                    <img src="https://locationpro.org/uk_snl_launch_2026.jpg" style="width:100%;border-radius:8px;margin:10px 0;">
+            <p>英國電視娛樂市場迎來重大突破，經典美國節目《Saturday Night Live》（SNL）將於 <strong>2026年3月21日</strong> 正式推出英國版本，並於倫敦現場直播播出。</p>
+
+            <h3>節目背景與製作</h3>
+            <p>該節目由原版SNL創辦人 <strong>Lorne Michaels</strong> 親自監製，延續其標誌性的現場喜劇形式，包括：</p>
+            <ul>
+                <li>即時政治與社會諷刺短劇</li>
+                <li>「Weekend Update」新聞搞笑評論</li>
+                <li>名人主持開場獨白</li>
+                <li>現場音樂表演</li>
+            </ul>
+
+            <h3>首批嘉賓陣容</h3>
+            <p>節目首三集主持包括：</p>
+            <ul>
+                <li>Tina Fey（原SNL核心成員）</li>
+                <li>Jamie Dornan（影視演員）</li>
+                <li>Riz Ahmed（英國著名演員）</li>
+            </ul>
+
+            <h3>英國喜劇新勢力</h3>
+            <p>節目將啟用11名年輕英國喜劇演員，很多來自 <strong>Cambridge Footlights</strong> 及 <strong>Edinburgh Fringe</strong>，代表英國喜劇界新世代。</p>
+
+            <h3>文化影響</h3>
+            <p>業界普遍認為，此節目有望成為英國版的文化標誌，並帶動本地喜劇產業國際化。</p>
+        </div>
+    `,
+    date: "2026年3月19日"
+},
+
+    uk_comic_relief_2026: {
+        title: "Comic Relief 2026 大型慈善節目即將舉行",
+        subtitle: "明星雲集籌款，幫助全球弱勢群體",
+
+        content: `
+                    <img src="https://locationpro.org/uk_comic_relief_2026.jpg" style="width:100%;border-radius:8px;margin:10px 0;">
+            <p>英國年度慈善盛事 <strong>Comic Relief 2026</strong> 將於 <strong>3月20日</strong> 在 BBC One 現場直播，主題為「Funny for Money」。</p>
+
+            <h3>主持與嘉賓</h3>
+            <ul>
+                <li>Davina McCall（主持）</li>
+                <li>Catherine Tate（經典角色回歸）</li>
+                <li>Idris Elba（參與特別短劇）</li>
+            </ul>
+
+            <h3>節目亮點</h3>
+            <ul>
+                <li>《The Traitors》特別搞笑版</li>
+                <li>《The Weakest Link》慈善版</li>
+                <li>1000公里單車籌款挑戰</li>
+            </ul>
+
+            <h3>社會影響</h3>
+            <p>Comic Relief 多年來為全球弱勢群體提供：</p>
+            <ul>
+                <li>食物與住所</li>
+                <li>醫療援助</li>
+                <li>教育資源</li>
+            </ul>
+
+        </div>
+    `,
+    date: "2026年3月19日"
+},
+
+    uk_coastal_path_2026: {
+        title: "英國將開放全球最長海岸步道",
+        subtitle: "全長2700英里，串連英格蘭整個海岸線",
+
+        content: `
+                    <img src="https://locationpro.org/uk_coastal_path_2026.jpg" style="width:100%;border-radius:8px;margin:10px 0;">
+            <p>英國即將正式開放 <strong>King Charles III England Coast Path</strong>，總長約 <strong>2700英里</strong>，成為全球最長的沿海步道。</p>
+
+            <h3>建設歷時16年</h3>
+            <p>該項目由 Natural England 主導，經過16年建設，目前約80%已開放。</p>
+
+            <h3>主要特色</h3>
+            <ul>
+                <li>連接英格蘭整個海岸線</li>
+                <li>新增橋樑與步道提升可達性</li>
+                <li>開放多個隱藏海灘</li>
+            </ul>
+
+            <h3>熱門景點</h3>
+            <ul>
+                <li>White Cliffs of Dover</li>
+                <li>Jurassic Coast</li>
+                <li>Brighton、St Ives 等海濱城市</li>
+            </ul>
+
+            <h3>旅遊價值</h3>
+            <p>該步道將大幅推動英國生態旅遊與本地經濟，吸引全球徒步旅行者。</p>
+
+        </div>
+    `,
+    date: "2026年3月19日"
+},
 
 uk_food_waste_collection_2026: {
     title: "英國全面推行家居廚餘回收政策 2026 起強制實施",
