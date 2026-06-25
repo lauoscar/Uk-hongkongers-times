@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交回單位期限計算 </title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ---------- 全局變數 (沿用參考網站) ---------- */
+        :root {
+            --bg: #f4efe6;
+            --paper: #fffdf8;
+            --ink: #111;
+            --muted: #666;
+            --card-radius: 12px;
+            --pad: 14px;
+            --soft-gray: rgba(34,34,34,0.06);
+            --accent: #000;
+            --food-red: #cc3333;
+            --food-brown: #996633;
+            --food-gold: #cc9900;
+            --primary: #1a5f8a;
+            --primary-light: #2b7ab3;
+            --primary-dark: #0e3d5c;
+            --success: #2a8e5c;
+            --danger: #b33a4a;
+            --radius-sm: 6px;
+            --border: #d0d9e5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+            background-size: 10px 10px, 10px 10px;
+        }
+
+        /* ---------- Header ---------- */
+        header {
+            background: var(--paper);
+            border-bottom: 3px double #000;
+            padding: 8px 12px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            position: relative;
+            z-index: 2200;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        }
+
+        .header-left {
+            flex: 1;
+            text-align: left;
+            min-width: 260px;
+        }
+
+        .site-title {
+            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-size: 48px;
+            color: #000;
+            margin: 0;
+            text-align: center;
+            flex: 1;
+            letter-spacing: 1px;
+        }
+
+        .site-subtitle {
+            font-family: 'serif';
+            font-size: 22px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: -8px;
+        }
+
+        .header-right {
+            width: 300px;
+            text-align: right;
+        }
+
+        /* ---------- Navigation ---------- */
+        .main-nav {
+            background: var(--paper);
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'UnifrakturCook', serif;
+            font-size: 24px;
+            color: #000;
+            text-decoration: none;
+            margin-right: 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .nav-menu li {
+            margin: 0;
+        }
+
+        .nav-menu a {
+            color: var(--ink);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(0,0,0,0.02);
+        }
+
+        .nav-menu a:hover {
+            background: rgba(0,0,0,0.05);
+            border-color: var(--muted);
+            text-decoration: none;
+        }
+
+        .nav-menu a.active {
+            background: rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+
+        /* ---------- Main Layout ---------- */
+        .main-wrap {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 18px;
+        }
+
+        .card {
+            background: var(--paper);
+            padding: var(--pad);
+            border-radius: var(--card-radius);
+            border: 1px solid var(--soft-gray);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+
+        .widget-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--soft-gray);
+            padding-bottom: 10px;
+        }
+
+        .widget-head h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .widget-sub {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* ---------- 廣告 ---------- */
+        .ad-box {
+            background: #fafafa;
+            border: 1px dashed #ccc;
+            padding: 12px;
+            text-align: center;
+            color: #777;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .ad-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .ad-link {
+            display: block;
+            font-size: 20px;
+            color: #0066cc;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            background: var(--paper);
+            border-top: 3px double #000;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .footer-left {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        /* ---------- 工具表格樣式 (整合原有) ---------- */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 820px;
+        }
+
+        thead {
+            background: var(--primary-dark);
+            color: #fff;
+        }
+
+        thead th {
+            padding: 10px 10px;
+            text-align: center;
+            font-weight: 500;
+            white-space: nowrap;
+            font-size: 13px;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+        thead th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: background 0.1s;
+        }
+
+        tbody tr:hover { background: #f7faff; }
+
+        tbody td {
+            padding: 8px 8px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        tbody td .row-index {
+            font-weight: 500;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        select, input[type="date"] {
+            padding: 5px 8px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            background: #fff;
+            width: 100%;
+            min-width: 80px;
+            transition: border 0.2s, box-shadow 0.2s;
+            font-family: Georgia, serif;
+        }
+
+        select:focus, input[type="date"]:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26,95,138,0.15);
+        }
+
+        select { min-width: 70px; cursor: pointer; }
+        .date-input { min-width: 130px; }
+
+        .result-cell {
+            font-weight: 500;
+            color: var(--primary-dark);
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        .result-cell.empty { color: #a0b0c0; font-weight: 400; }
+        .result-cell.highlight { color: var(--success); }
+
+        .row-actions {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+        }
+        .row-actions button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background 0.2s;
+            color: var(--text-light);
+        }
+        .row-actions button:hover { background: #e8edf4; }
+        .row-actions .del-row { color: var(--danger); }
+        .row-actions .del-row:hover { background: #fde8ec; }
+
+        .table-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .table-footer .info {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .table-footer .info strong { color: var(--text); }
+
+        .btn-add-row {
+            padding: 8px 24px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-add-row:hover { background: var(--primary-light); }
+
+        .tip {
+            font-size: 13px;
+            color: var(--text-light);
+            background: #f8fafc;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px dashed var(--border);
+            display: inline-block;
+        }
+
+        .empty-state {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-light);
+        }
+        .empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
+        .empty-state p { font-size: 16px; }
+
+        /* ---------- 假期卡片 ---------- */
+        .holiday-card {
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 20px;
+        }
+        .holiday-card .label {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .holiday-card .badge {
+            background: var(--primary);
+            color: #fff;
+            border-radius: 20px;
+            padding: 0 12px;
+            font-size: 13px;
+            line-height: 24px;
+        }
+        .holiday-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+            min-width: 120px;
+        }
+        .holiday-tag {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2px 12px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        .status-msg {
+            font-size: 14px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            background: #fff3e0;
+            border: 1px solid #ffcc80;
+        }
+        .status-msg.success {
+            background: #e8f5e9;
+            border-color: #a5d6a7;
+            color: #2a8e5c;
+        }
+        .status-msg.error {
+            background: #ffebee;
+            border-color: #ef9a9a;
+            color: #b33a4a;
+        }
+        .refresh-btn {
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .refresh-btn:hover { background: var(--primary-light); }
+        .refresh-btn:active { transform: rotate(180deg); }
+        .refresh-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 900px) {
+            .main-wrap {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            .site-title { font-size: 32px; }
+            .nav-container { flex-direction: column; gap: 12px; }
+            .nav-menu { justify-content: center; }
+            .nav-menu a { padding: 6px 12px; font-size: 13px; }
+            .header-right { width: auto; }
+            .footer-container { grid-template-columns: 1fr; text-align: center; }
+            .footer-right { text-align: center; }
+            table { font-size: 13px; min-width: 700px; }
+            thead th, tbody td { padding: 6px 6px; }
+            .date-input { min-width: 100px; }
+        }
+
+        @media (max-width: 500px) {
+            .app-container { padding: 10px; }
+            table { font-size: 12px; min-width: 600px; }
+            thead th, tbody td { padding: 4px 4px; }
+            .date-input { min-width: 80px; }
+            select { min-width: 55px; font-size: 12px; }
+            .header-actions button { font-size: 12px; padding: 6px 12px; }
+        }
+
+        .fade-in { animation: fadeIn 0.2s ease-out; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header>
+        <div class="header-left">
+            <div id="dateNow">2025年1月15日 星期三</div>
+            <div id="headerQuote">"準確計算交回單位期限"</div>
+        </div>
+        <div>
+            <div class="site-title">The Housing Times</div>
+            <div class="site-subtitle">交回單位期限計算</div>
+        </div>
+        <div class="header-right">
+            <div class="ad-box">
+                <h4>NordVPN - Premium Security</h4>
+                <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=134195&url_id=902" target="_blank" class="ad-link">Get Protected Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">The Housing Times</a>
+            <ul class="nav-menu">
+                <li><a href="#">首頁 Home</a></li>
+                <li><a href="#">增加戶籍</a></li>
+                <li><a href="#">還原租金</a></li>
+                <li><a href="#">租金援助</a></li>
+                <li><a href="#">EAS</a></li>
+                <li><a href="#" class="active">交回單位期限計算</a></li>
+                <li><a href="#">申請PRH</a></li>
+                <li><a href="#">WTP</a></li>
+                <li><a href="#">HD88</a></li>
+                <li><a href="#">EAS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <div class="main-wrap">
+        <main>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>📋 交回單位期限計算</h3>
+                    <div class="widget-sub">房委會 ｜ 自動計算起計日期、60天限期及延期30天</div>
+                </div>
+
+                <!-- 假期卡片 -->
+                <div class="holiday-card">
+                    <span class="label">🗓️ 公眾假期 <span class="badge" id="holidayCount">0</span></span>
+                    <span id="holidayStatus" class="status-msg">載入中…</span>
+                    <div class="holiday-list" id="holidayList"></div>
+                    <button class="refresh-btn" onclick="fetchHolidays()" title="重新整理假期">
+                        <svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3"/><path d="M12 18v-3l-4 4 4 4v-3"/></svg>
+                    </button>
+                </div>
+
+                <!-- 表格 -->
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:40px;">#</th>
+                                <th style="width:90px;">分類</th>
+                                <th style="min-width:130px;">日期①</th>
+                                <th style="min-width:130px;">日期②</th>
+                                <th style="min-width:130px;">第10個工作天</th>
+                                <th style="min-width:130px;">起計日期</th>
+                                <th style="min-width:130px;">60天交回限期</th>
+                                <th style="min-width:130px;">延期30天最後限期</th>
+                                <th style="width:70px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="table-footer">
+                    <div class="info">
+                        共 <strong id="rowCount">0</strong> 項
+                        <span class="tip">💡 分類 2/4 需填寫兩個日期，自動取較早者</span>
+                    </div>
+                    <button class="btn-add-row" onclick="addRow()">➕ 新增一行</button>
+                </div>
+
+                <!-- 操作按鈕列 -->
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; border-top: 1px solid var(--soft-gray); padding-top: 16px;">
+
+                    <button onclick="clearAllData()" style="padding:6px 16px; background:var(--danger); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer;">🗑️ 清空所有</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- ========== SIDEBAR ========== -->
+        <aside>
+            <div class="card">
+                <div class="widget-head">
+                    <h3>廣告贊助</h3>
+                </div>
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/47HvT9A" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+                <div class="ad-box">
+                    <h4>NordPass - Password Manager</h4>
+                    <a href="https://go.nordpass.io/aff_c?offer_id=488&aff_id=134195&url_id=9356" target="_blank" class="ad-link">Secure Your Passwords</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="widget-head">
+                    <h3>關於本工具</h3>
+                </div>
+                <p>此計算機根據房委會指引，協助計算交回原住單位期限。自動從 <strong>Nager.Date</strong> 獲取香港公眾假期，確保工作天計算準確。</p>
+                <p style="margin-top:10px; font-size:13px; color:var(--muted);">數據儲存於本地瀏覽器，可匯出備份。</p>
+            </div>
+
+            <div class="card">
+                <div class="widget-head">
+                    <h3>使用小貼士</h3>
+                </div>
+                <ul style="padding-left: 20px; font-size:14px;">
+                    <li>分類 1：只填「生效日期」</li>
+                    <li>分類 2 &amp; 4：填寫「收樓日」及「簽署轉讓契據日期」</li>
+                    <li>分類 3：只填「轉讓契據日期」</li>
+                    <li>按「重新整理假期」可手動更新公眾假期</li>
+                    <li>所有日期均以 ISO 格式 (YYYY-MM-DD) 顯示</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <strong>The Housing Times</strong><br>
+                <div style="margin-top: 8px;">
+                    <strong>About:</strong> 提供實用工具與資訊，協助迷途人士。
+                </div>
+                <div style="font-size: 12px; margin-top: 8px;">
+                    <strong>免責聲明：</strong> 計算結果僅供參考，實際期限請以官方文件為準。
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="ad-box">
+                    <h4>Visit Amazon for Great Deals</h4>
+                    <a href="https://amzn.to/3L35nyP" target="_blank" class="ad-link">Shop Amazon Today</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT (工具邏輯) ========== -->
+    <script>
+        // --------------------------------------------
+        //  1. 日期與時鐘 (保留參考網站功能)
+        // --------------------------------------------
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dateNow').innerText = now.toLocaleDateString('zh-HK', options);
+        }
+        document.addEventListener('DOMContentLoaded', updateDate);
+
+        // --------------------------------------------
+        //  2. 交回單位期限計算核心邏輯
+        // --------------------------------------------
+
+        // 狀態
+        let holidays = [];
+        let rows = [];
+        let nextId = 1;
+
+        // DOM 參考
+        const tbody = document.getElementById('tableBody');
+        const holidayListEl = document.getElementById('holidayList');
+        const holidayCountEl = document.getElementById('holidayCount');
+        const holidayStatusEl = document.getElementById('holidayStatus');
+        const rowCountEl = document.getElementById('rowCount');
+
+        // 工具函數
+        function parseDate(str) {
+            if (!str) return null;
+            const d = new Date(str + 'T00:00:00');
+            return isNaN(d.getTime()) ? null : d;
+        }
+
+        function toISODate(d) {
+            if (!d || isNaN(d.getTime())) return '';
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${day}`;
+        }
+
+        function formatDisplay(dateStr) {
+            if (!dateStr) return '';
+            const d = parseDate(dateStr);
+            return d ? `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}` : dateStr;
+        }
+
+        function isWeekend(d) { return d.getDay() === 0 || d.getDay() === 6; }
+
+        function isHoliday(d, holidaySet) { return holidaySet.has(toISODate(d)); }
+
+        function getNthWorkingDay(startDateStr, n, holidaySet) {
+            if (!startDateStr) return '';
+            const start = parseDate(startDateStr);
+            if (!start) return '';
+            let current = new Date(start);
+            let count = 0;
+            current.setDate(current.getDate() + 1);
+            while (count < n) {
+                if (!isWeekend(current) && !isHoliday(current, holidaySet)) count++;
+                if (count < n) current.setDate(current.getDate() + 1);
+            }
+            return toISODate(current);
+        }
+
+        function calcStartDate(category, date1, date2, workingDay10) {
+            if (!date1) return '';
+            const cat = String(category);
+            if (cat === '1' || cat === '3') return date1;
+            if (cat === '2' || cat === '4') {
+                if (!date2 || !workingDay10) return '';
+                const d1 = parseDate(date1);
+                const d2 = parseDate(workingDay10);
+                if (!d1 || !d2) return '';
+                return d1 <= d2 ? date1 : workingDay10;
+            }
+            return '';
+        }
+
+        function calc60DayLimit(startDate) {
+            if (!startDate) return '';
+            const d = parseDate(startDate);
+            if (!d) return '';
+            d.setDate(d.getDate() + 59);
+            return toISODate(d);
+        }
+
+        function calcExtension(day60) {
+            if (!day60) return '';
+            const d = parseDate(day60);
+            if (!d) return '';
+            d.setDate(d.getDate() + 30);
+            return toISODate(d);
+        }
+
+        function getHolidaySet() { return new Set(holidays); }
+
+        // 渲染表格
+        function renderTable() {
+            const holidaySet = getHolidaySet();
+
+            if (rows.length === 0) {
+                tbody.innerHTML = `
+                    <tr><td colspan="9">
+                        <div class="empty-state"><div class="icon">📭</div><p>暫無數據，點擊「新增一行」開始</p></div>
+                    </td></tr>`;
+                rowCountEl.textContent = '0';
+                return;
+            }
+
+            let html = '';
+            rows.forEach((row, index) => {
+                const cat = row.category || '';
+                const date1 = row.date1 || '';
+                const date2 = row.date2 || '';
+
+                let workingDay10 = date2 ? getNthWorkingDay(date2, 10, holidaySet) : '';
+                let startDate = (cat && date1) ? calcStartDate(cat, date1, date2, workingDay10) : '';
+                let day60 = startDate ? calc60DayLimit(startDate) : '';
+                let extension = day60 ? calcExtension(day60) : '';
+
+                const catLabels = { '1':'1. 新租約DOC', '2':'2. 一手居屋', '3':'3. 二手居屋', '4':'4. 私人物業' };
+                const label1 = (cat==='1')?'生效日期':(cat==='2'?'收樓日':(cat==='3'?'轉讓契據日期':(cat==='4'?'收樓日':'日期①')));
+                const showDate2 = (cat==='2' || cat==='4');
+
+                html += `
+                    <tr class="fade-in" data-id="${row.id}">
+                        <td><span class="row-index">${index+1}</span></td>
+                        <td>
+                            <select onchange="updateRow(${row.id}, 'category', this.value)">
+                                <option value="">請選擇</option>
+                                <option value="1" ${cat==='1'?'selected':''}>1. 新租約DOC</option>
+                                <option value="2" ${cat==='2'?'selected':''}>2. 一手居屋</option>
+                                <option value="3" ${cat==='3'?'selected':''}>3. 二手居屋</option>
+                                <option value="4" ${cat==='4'?'selected':''}>4. 私人物業</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="date" class="date-input" value="${date1}" 
+                                   onchange="updateRow(${row.id}, 'date1', this.value)" />
+                            <div style="font-size:11px;color:#8a9aaa;">${label1}</div>
+                        </td>
+                        <td>
+                            ${showDate2 ? `
+                                <input type="date" class="date-input" value="${date2}" 
+                                       onchange="updateRow(${row.id}, 'date2', this.value)" />
+                                <div style="font-size:11px;color:#8a9aaa;">簽署轉讓契據日期</div>
+                            ` : `<span style="color:#b0c0d0;">—</span>`}
+                        </td>
+                        <td class="result-cell ${workingDay10?'':'empty'}">${workingDay10 ? formatDisplay(workingDay10) : '—'}</td>
+                        <td class="result-cell ${startDate?'highlight':'empty'}">${startDate ? formatDisplay(startDate) : '—'}</td>
+                        <td class="result-cell ${day60?'':'empty'}">${day60 ? formatDisplay(day60) : '—'}</td>
+                        <td class="result-cell ${extension?'':'empty'}">${extension ? formatDisplay(extension) : '—'}</td>
+                        <td>
+                            <div class="row-actions">
+                                <button onclick="duplicateRow(${row.id})" title="複製">📋</button>
+                                <button class="del-row" onclick="deleteRow(${row.id})" title="刪除">✕</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+            rowCountEl.textContent = rows.length;
+            saveToStorage();
+        }
+
+        // 數據操作
+        function addRow(category='', date1='', date2='') {
+            const id = nextId++;
+            rows.push({ id, category, date1, date2 });
+            renderTable();
+            const tr = tbody.querySelector(`tr[data-id="${id}"]`);
+            if (tr) tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function deleteRow(id) {
+            if (!confirm('確定要刪除這一行嗎？')) return;
+            rows = rows.filter(r => r.id !== id);
+            renderTable();
+        }
+
+        function duplicateRow(id) {
+            const row = rows.find(r => r.id === id);
+            if (!row) return;
+            const newId = nextId++;
+            rows.push({ id: newId, category: row.category, date1: row.date1, date2: row.date2 });
+            renderTable();
+            const tr = tbody.querySelector(`tr[data-id="${newId}"]`);
+            if (tr) tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function updateRow(id, field, value) {
+            const row = rows.find(r => r.id === id);
+            if (!row) return;
+            row[field] = value;
+            if (field === 'category' && value !== '2' && value !== '4') row.date2 = '';
+            renderTable();
+        }
+
+        function clearAllData() {
+            if (rows.length === 0) return;
+            if (!confirm('確定要刪除所有數據嗎？')) return;
+            rows = [];
+            renderTable();
+        }
+
+        // 假期獲取 (Nager.Date API)
+        async function fetchHolidays() {
+            holidayStatusEl.textContent = '⏳ 載入中…';
+            holidayStatusEl.className = 'status-msg';
+
+            const currentYear = new Date().getFullYear();
+            const years = [];
+            for (let y = currentYear - 1; y <= currentYear + 2; y++) {
+                years.push(y);
+            }
+
+            let allDates = [];
+            let errors = [];
+
+            for (const year of years) {
+                try {
+                    const url = `https://date.nager.at/api/v3/PublicHolidays/${year}/HK`;
+                    const resp = await fetch(url);
+                    if (!resp.ok) throw new Error(`HTTP ${resp.status} for ${year}`);
+                    const data = await resp.json();
+                    const dates = data.map(item => item.date).filter(d => d);
+                    allDates = allDates.concat(dates);
+                } catch (err) {
+                    errors.push(`${year}: ${err.message}`);
+                }
+            }
+
+            if (allDates.length === 0) {
+                holidayStatusEl.textContent = `❌ 無法獲取假期 (${errors.join('; ')})`;
+                holidayStatusEl.className = 'status-msg error';
+                return;
+            }
+
+            holidays = [...new Set(allDates)].sort();
+            renderHolidays();
+            renderTable();
+            saveToStorage();
+            holidayStatusEl.textContent = `✅ 已載入 ${holidays.length} 個假期 (來源: Nager.Date)`;
+            holidayStatusEl.className = 'status-msg success';
+        }
+
+        function renderHolidays() {
+            if (holidays.length === 0) {
+                holidayListEl.innerHTML = '暫無假期數據';
+                holidayCountEl.textContent = '0';
+                return;
+            }
+            const thisYear = new Date().getFullYear();
+            const filtered = holidays.filter(h => parseInt(h.substring(0,4)) >= thisYear - 1);
+            const displayList = filtered.length > 0 ? filtered : holidays;
+            holidayListEl.innerHTML = displayList.map(h => `<span class="holiday-tag">${formatDisplay(h)}</span>`).join('');
+            holidayCountEl.textContent = holidays.length;
+        }
+
+        // 持久化
+        function saveToStorage() {
+            try {
+                localStorage.setItem('unitReturnCalculator', JSON.stringify({ holidays, rows, nextId }));
+            } catch(e) {}
+        }
+
+        function loadFromStorage() {
+            try {
+                const raw = localStorage.getItem('unitReturnCalculator');
+                if (!raw) return false;
+                const data = JSON.parse(raw);
+                if (data.holidays) holidays = data.holidays;
+                if (data.rows) rows = data.rows;
+                if (data.nextId) nextId = data.nextId;
+                return true;
+            } catch(e) { return false; }
+        }
+
+        // 導入導出
+        function exportData() {
+            const data = { holidays, rows, nextId };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `交回單位期限_${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    if (!data.holidays || !data.rows) { alert('無效的數據文件'); return; }
+                    if (!confirm('匯入將覆蓋當前所有數據，確定繼續嗎？')) return;
+                    holidays = data.holidays || [];
+                    rows = data.rows || [];
+                    nextId = data.nextId || 1;
+                    renderHolidays();
+                    renderTable();
+                    saveToStorage();
+                    alert('匯入成功！');
+                } catch(err) { alert('匯入失敗：'+err.message); }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        // 初始化
+        function init() {
+            const hasStorage = loadFromStorage();
+
+            if (rows.length === 0) {
+                addRow('1', '2026-06-01', '');
+                addRow('2', '2026-06-15', '2026-06-10');
+                addRow('3', '2026-07-01', '');
+                addRow('4', '2026-07-15', '2026-07-10');
+            }
+
+            if (holidays.length > 0) {
+                renderHolidays();
+                renderTable();
+                holidayStatusEl.textContent = `✅ 已載入 ${holidays.length} 個假期 (來源: 儲存)`;
+                holidayStatusEl.className = 'status-msg success';
+            } else {
+                fetchHolidays();
+            }
+        }
+
+        // 全局暴露
+        window.addRow = addRow;
+        window.deleteRow = deleteRow;
+        window.duplicateRow = duplicateRow;
+        window.updateRow = updateRow;
+        window.clearAllData = clearAllData;
+        window.exportData = exportData;
+        window.importData = importData;
+        window.fetchHolidays = fetchHolidays;
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+
+</body>
+</html>
