@@ -785,7 +785,7 @@
                 const date1 = row.date1 || '';
                 const date2 = row.date2 || '';
 
-                let workingDay10 = date2 ? getNthWorkingDay(date2, 10, holidaySet) : '';
+                let workingDay10 = date2 ? getNthWorkingDay(date2, 9, holidaySet) : '';
                 let startDate = (cat && date1) ? calcStartDate(cat, date1, date2, workingDay10) : '';
                 let day60 = startDate ? calc60DayLimit(startDate) : '';
                 let extension = day60 ? calcExtension(day60) : '';
