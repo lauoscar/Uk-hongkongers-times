@@ -18,7 +18,7 @@
 
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
-    <!-- 加入 jsPDF 和 html2canvas CDN -->
+    <!-- jsPDF 和 html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -436,11 +436,11 @@
     <header>
         <div class="header-left">
             <div id="dateNow">2025年1月15日 星期三</div>
-            <div id="headerQuote">"準確計算收入"</div>
+            <div id="headerQuote">"準確計算收入，順利申請公屋。"</div>
         </div>
         <div>
             <div class="site-title">The Housing Times</div>
-            <div class="site-subtitle">模擬公屋申請工具</div>
+            <div class="site-subtitle">公屋申請工具</div>
         </div>
         <div class="header-right">
             <div class="ad-box">
@@ -460,8 +460,8 @@
                 <li><a href="#">還原租金</a></li>
                 <li><a href="#">租金援助</a></li>
                 <li><a href="#">EAS</a></li>
-                <li><a href="60days.html" target="_blank">交回單位期限計算</a></li>
-                <li><a href="prh.html" class="active">申請PRH</a></li>
+                <li><a href="#">交回單位期限計算</a></li>
+                <li><a href="#" class="active">申請PRH</a></li>
                 <li><a href="#">WTP</a></li>
                 <li><a href="#">HD88</a></li>
                 <li><a href="#">EAS</a></li>
@@ -475,7 +475,7 @@
             <div class="card">
                 <div class="widget-head">
                     <h3>🏠 公屋每月平均收入計算</h3>
-                    <div class="widget-sub">以下是模擬計算，請參閱官方 HD300C 申請須知 4.4 節為準</div>
+                    <div class="widget-sub">參照 HD300C 申請須知 4.4 節</div>
                 </div>
 
                 <form id="incomeForm" onsubmit="return false;">
@@ -483,7 +483,6 @@
                     <div class="income-form-group">
                         <label for="declarationDate">📅 申報日期 (簽署申請表/聲明書日期)</label>
                         <input type="date" id="declarationDate" class="date-input" style="max-width:200px;" required>
-                        <!-- 申報期方塊 -->
                         <div id="declarationPeriodDisplay" class="declaration-period-box" style="margin-top:8px;">
                             📆 申報期：<span id="periodStart">—</span> 至 <span id="periodEnd">—</span>
                         </div>
@@ -521,11 +520,20 @@
                         <button type="button" class="btn-add-income" onclick="addOtherIncomeRow()">➕ 新增其他收入</button>
                     </div>
 
-                    <!-- 強積金/公積金供款 -->
+                    <!-- 強積金/公積金供款 (扣減項目) -->
                     <div class="income-form-group">
                         <label for="mpfContribution">💳 強制性強積金/公積金供款 (每月)</label>
                         <input type="number" id="mpfContribution" step="0.01" min="0" placeholder="每月強制供款額" style="max-width:200px;">
                         <span class="hint">(法定5%，上限$1,500，可手動輸入)</span>
+                    </div>
+
+                    <!-- 其他豁免計算項目 (可重複) -->
+                    <div class="income-form-group">
+                        <label>✅ 其他豁免計算項目 <span class="hint">(贍養費等，每月金額)</span></label>
+                        <div id="exemptionList">
+                            <!-- 動態加入 -->
+                        </div>
+                        <button type="button" class="btn-add-income" onclick="addExemptionRow()">➕ 新增豁免項目</button>
                     </div>
 
                     <!-- 計算按鈕 -->
@@ -536,7 +544,6 @@
                 <div id="incomeResult" class="income-summary" style="display:none; margin-top:20px;">
                     <h4 style="margin-bottom:10px;">📊 每月平均收入計算結果</h4>
                     <div id="incomeDetail"></div>
-                    <!-- 下載PDF按鈕 -->
                     <button class="btn-pdf" onclick="downloadPDF()">⬇️ 下載PDF</button>
                 </div>
             </div>
@@ -562,7 +569,7 @@
                 <div class="widget-head">
                     <h3>關於本工具</h3>
                 </div>
-                <p><strong>公屋收入計算</strong> 依據 HD300C 申請須知第 4.4 節，協助計算每月平均收入，涵蓋受僱、自僱、租金及其他收入，並扣減強積金供款。</p>
+                <p><strong>公屋收入計算</strong> 依據 HD300C 申請須知第 4.4 節，協助計算每月平均收入，涵蓋受僱、自僱、租金及其他收入，並扣減強積金供款及豁免計算項目。</p>
                 <p style="margin-top:10px; font-size:13px; color:var(--muted);">數據僅儲存於本地瀏覽器，不會上傳至伺服器。</p>
             </div>
 
@@ -576,6 +583,7 @@
                     <li>非固定收入請填寫過去6或12個月的總額</li>
                     <li>其他收入為過去6個月總額</li>
                     <li>強積金供款僅扣減法定強制部分</li>
+                    <li>豁免項目包括贍養費、傷殘津貼、高齡津貼等，請按每月金額填寫</li>
                 </ul>
             </div>
         </aside>
@@ -590,7 +598,7 @@
                     <strong>About:</strong> 提供實用工具與資訊
                 </div>
                 <div style="font-size: 12px; margin-top: 8px;">
-                    <strong>免責聲明：</strong> 計算結果僅供參考，實際收入計算以官方最終審批為準。
+                    <strong>免責聲明：</strong> 計算結果僅供參考，實際收入計算以房屋委員會最終審批為準。
                 </div>
             </div>
             <div class="footer-right">
@@ -614,7 +622,6 @@
         }
         document.addEventListener('DOMContentLoaded', updateDate);
 
-        // 計算並更新申報期
         function updateDeclarationPeriod() {
             const dateInput = document.getElementById('declarationDate');
             const dateStr = dateInput.value;
@@ -629,26 +636,21 @@
                 document.getElementById('periodEnd').textContent = '—';
                 return;
             }
-            // 計算過去六個月的第一天：月份減6，日設為1
             const start = new Date(d);
             start.setMonth(start.getMonth() - 6);
             start.setDate(1);
-            // 上個月的最後一天：即當前月份的前一個月的最後一天
             const end = new Date(d);
-            end.setDate(1); // 當月1日
-            end.setDate(0); // 上個月最後一天
-            // 格式化
+            end.setDate(1);
+            end.setDate(0);
             const startStr = start.getFullYear() + '-' + String(start.getMonth()+1).padStart(2,'0') + '-' + String(start.getDate()).padStart(2,'0');
             const endStr = end.getFullYear() + '-' + String(end.getMonth()+1).padStart(2,'0') + '-' + String(end.getDate()).padStart(2,'0');
             document.getElementById('periodStart').textContent = startStr;
             document.getElementById('periodEnd').textContent = endStr;
         }
 
-        // 監聽申報日期變更
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('declarationDate');
             dateInput.addEventListener('change', updateDeclarationPeriod);
-            // 初始化時也要計算一次
             updateDeclarationPeriod();
         });
 
@@ -671,13 +673,14 @@
         }
 
         // ------------------------------------------------------------
-        //  3. 收入計算邏輯
+        //  3. 動態列管理
         // ------------------------------------------------------------
         let employmentRowCounter = 0;
         let otherIncomeRowCounter = 0;
+        let exemptionRowCounter = 0;
 
-        // 新增受僱收入行
-        function addEmploymentRow(type = 'fixed', desc = '') {
+        // 受僱收入 — 年終酬金 default 12個月
+        function addEmploymentRow() {
             const container = document.getElementById('employmentIncomeList');
             const rowId = ++employmentRowCounter;
             const div = document.createElement('div');
@@ -693,7 +696,7 @@
                     <option value="fixed">固定</option>
                     <option value="variable">非固定</option>
                 </select>
-                <input type="number" class="income-amount" step="0.01" min="0" placeholder="每月金額或總額" style="flex:1.2;">
+                <input type="number" class="income-amount" step="0.01" min="0" placeholder="金額或總額" style="flex:1.2;">
                 <div class="income-period" style="display:flex; gap:6px; align-items:center; flex:1;">
                     <span>過去</span>
                     <input type="number" class="income-months" value="6" min="1" max="24" style="width:60px;">
@@ -702,9 +705,13 @@
                 <input type="text" class="income-desc" placeholder="描述 (可選)" style="flex:1;">
                 <button type="button" class="del-row" onclick="this.parentElement.remove()">✕</button>
             `;
-            // 根據是否固定顯示/隱藏月份輸入
+            
+            const typeSelect = div.querySelector('.income-type');
+            const monthsInput = div.querySelector('.income-months');
             const fixedSelect = div.querySelector('.income-fixed');
             const periodDiv = div.querySelector('.income-period');
+
+            // 固定/非固定顯示切換
             function togglePeriod() {
                 if (fixedSelect.value === 'fixed') {
                     periodDiv.style.display = 'none';
@@ -715,10 +722,25 @@
             fixedSelect.addEventListener('change', togglePeriod);
             togglePeriod();
 
+            // 當類型變更時，調整月份數 default
+            // 年終酬金 → 12個月；其他 → 6個月
+            typeSelect.addEventListener('change', function() {
+                const currentVal = parseInt(monthsInput.value);
+                if (this.value === 'bonus') {
+                    if (currentVal === 6) {
+                        monthsInput.value = 12;
+                    }
+                } else {
+                    if (currentVal === 12) {
+                        monthsInput.value = 6;
+                    }
+                }
+            });
+
             container.appendChild(div);
         }
 
-        // 新增其他收入行
+        // 其他收入
         function addOtherIncomeRow() {
             const container = document.getElementById('otherIncomeList');
             const rowId = ++otherIncomeRowCounter;
@@ -734,20 +756,35 @@
             container.appendChild(div);
         }
 
-        // 計算收入
+        // 豁免項目 — default 為「贍養費」
+        function addExemptionRow() {
+            const container = document.getElementById('exemptionList');
+            const rowId = ++exemptionRowCounter;
+            const div = document.createElement('div');
+            div.className = 'income-row';
+            div.dataset.rowId = rowId;
+            div.innerHTML = `
+                <input type="text" class="exemption-desc" placeholder="豁免項目 (如贍養費等)" style="flex:1.5;" value="贍養費">
+                <input type="number" class="exemption-amount" step="0.01" min="0" placeholder="每月金額" style="flex:1;">
+                <span style="font-size:13px;color:var(--muted);">每月</span>
+                <button type="button" class="del-row" onclick="this.parentElement.remove()">✕</button>
+            `;
+            container.appendChild(div);
+        }
+
+        // ------------------------------------------------------------
+        //  4. 計算邏輯
+        // ------------------------------------------------------------
         function calculateIncome() {
-            // 收集申報日期
             const declarationDate = document.getElementById('declarationDate').value;
             if (!declarationDate) {
                 alert('請選擇申報日期。');
                 return;
             }
 
-            // 初始化各項收入
+            // --- 受僱收入 ---
             let employmentDetails = [];
             let totalEmploymentMonthly = 0;
-
-            // 處理受僱收入
             const empRows = document.querySelectorAll('#employmentIncomeList .income-row');
             empRows.forEach(row => {
                 const type = row.querySelector('.income-type').value;
@@ -756,64 +793,65 @@
                 const months = parseInt(row.querySelector('.income-months').value) || 6;
                 const desc = row.querySelector('.income-desc').value || '';
 
-                let monthly = 0;
-                let periodDesc = '';
+                let monthly = 0, periodDesc = '';
                 if (fixed === 'fixed') {
                     monthly = amount;
                     periodDesc = '固定每月';
                 } else {
-                    // 非固定：總額除以月份數
                     if (months <= 0) { alert('月份數必須大於0'); return; }
                     monthly = amount / months;
                     periodDesc = `過去${months}個月平均`;
                 }
-                // 年終酬金：過去12個月平均，但我們也按輸入處理
-                if (type === 'bonus') {
-                    // 若輸入是總額，除以12
-                    if (fixed === 'variable') {
-                        monthly = amount / 12;
-                        periodDesc = '過去12個月平均';
-                    } else {
-                        // 若固定，但年終酬金通常是年度，我們強制除以12
-                        monthly = amount / 12;
-                        periodDesc = '年度總額平均每月';
-                    }
+                // 年終酬金：若是固定，也按年度平均處理（但用戶可自行調整）
+                if (type === 'bonus' && fixed === 'fixed') {
+                    // 若固定但用戶輸入的是年度總額，我們仍除以12，但用戶可能已手動調整
+                    // 此處保持原邏輯：固定則直接使用輸入值
                 }
                 const typeLabel = { base:'底薪', allowance:'津貼/獎金', bonus:'年終酬金' }[type] || type;
                 totalEmploymentMonthly += monthly;
-                employmentDetails.push({ label: typeLabel, desc: desc, monthly: monthly, period: periodDesc });
+                employmentDetails.push({ label: typeLabel, desc, monthly, period: periodDesc });
             });
 
-            // 自僱收入
+            // --- 自僱 ---
             const selfEmployed = parseFloat(document.getElementById('selfEmployedIncome').value) || 0;
             const selfEmployedMonthly = selfEmployed / 12;
 
-            // 租金收入
+            // --- 租金 ---
             const rental = parseFloat(document.getElementById('rentalIncome').value) || 0;
-            const rentalMonthly = rental; // 已是每月
+            const rentalMonthly = rental;
 
-            // 其他收入
-            const otherRows = document.querySelectorAll('#otherIncomeList .income-row');
+            // --- 其他收入 ---
             let otherDetails = [];
             let totalOtherMonthly = 0;
+            const otherRows = document.querySelectorAll('#otherIncomeList .income-row');
             otherRows.forEach(row => {
                 const desc = row.querySelector('.income-desc').value || '其他';
                 const amount = parseFloat(row.querySelector('.income-amount').value) || 0;
-                const monthly = amount / 6; // 過去6個月平均
+                const monthly = amount / 6;
                 totalOtherMonthly += monthly;
                 otherDetails.push({ desc, monthly, period: '過去6個月平均' });
             });
 
-            // 強積金供款 (每月)
+            // --- 強積金扣減 ---
             const mpf = parseFloat(document.getElementById('mpfContribution').value) || 0;
 
-            // 計算總收入 (扣稅前)
+            // --- 其他豁免項目扣減 ---
+            let exemptionDetails = [];
+            let totalExemptionMonthly = 0;
+            const exRows = document.querySelectorAll('#exemptionList .income-row');
+            exRows.forEach(row => {
+                const desc = row.querySelector('.exemption-desc').value || '豁免項目';
+                const amount = parseFloat(row.querySelector('.exemption-amount').value) || 0;
+                totalExemptionMonthly += amount;
+                exemptionDetails.push({ desc, monthly: amount });
+            });
+
+            // --- 計算總收入與淨收入 ---
             let grossMonthly = totalEmploymentMonthly + selfEmployedMonthly + rentalMonthly + totalOtherMonthly;
-            // 扣減強積金供款
-            let netMonthly = grossMonthly - mpf;
+            let netMonthly = grossMonthly - mpf - totalExemptionMonthly;
             if (netMonthly < 0) netMonthly = 0;
 
-            // 顯示結果
+            // --- 顯示結果 ---
             const resultDiv = document.getElementById('incomeResult');
             const detailDiv = document.getElementById('incomeDetail');
             let html = `<table>
@@ -843,18 +881,24 @@
             }
             html += `<tr><td colspan="2" style="font-weight:bold;padding-top:10px;">扣減項目</td></tr>`;
             html += `<tr><td>強制性強積金/公積金供款 (每月)</td><td>$${mpf.toFixed(2)}</td></tr>`;
+            if (exemptionDetails.length > 0) {
+                exemptionDetails.forEach(item => {
+                    html += `<tr><td>豁免項目：${item.desc}</td><td>$${item.monthly.toFixed(2)}</td></tr>`;
+                });
+                html += `<tr><td style="font-weight:bold;">豁免項目合計</td><td>$${totalExemptionMonthly.toFixed(2)}</td></tr>`;
+            } else {
+                html += `<tr><td colspan="2" style="color:var(--muted);">沒有其他豁免項目</td></tr>`;
+            }
             html += `<tr><td colspan="2" style="font-weight:bold;padding-top:10px;">總結</td></tr>`;
             html += `<tr><td style="font-weight:bold;">每月平均收入 (扣稅前淨收入)</td><td class="total">$${netMonthly.toFixed(2)}</td></tr>`;
             html += `</table>`;
             detailDiv.innerHTML = html;
             resultDiv.style.display = 'block';
-
-            // 保存結果HTML以便PDF導出
             window._resultHTML = detailDiv.innerHTML;
         }
 
         // ------------------------------------------------------------
-        //  4. 下載PDF功能
+        //  5. PDF 下載
         // ------------------------------------------------------------
         function downloadPDF() {
             const resultDiv = document.getElementById('incomeResult');
@@ -862,8 +906,6 @@
                 alert('請先計算收入。');
                 return;
             }
-
-            // 使用html2canvas和jsPDF
             const element = document.getElementById('incomeDetail');
             html2canvas(element, {
                 scale: 2,
@@ -885,22 +927,32 @@
         }
 
         // ------------------------------------------------------------
-        //  5. 初始化
+        //  6. 初始化
         // ------------------------------------------------------------
         function init() {
-            // 預設一項受僱及一項其他收入
             addEmploymentRow();
             addOtherIncomeRow();
-            // 設定今日日期為默認申報日期
+            // 預設一項豁免項目（贍養費）
+            const exContainer = document.getElementById('exemptionList');
+            const div = document.createElement('div');
+            div.className = 'income-row';
+            div.innerHTML = `
+                <input type="text" class="exemption-desc" placeholder="豁免項目 (如贍養費、傷殘津貼等)" style="flex:1.5;" value="贍養費">
+                <input type="number" class="exemption-amount" step="0.01" min="0" placeholder="每月金額" style="flex:1;">
+                <span style="font-size:13px;color:var(--muted);">每月</span>
+                <button type="button" class="del-row" onclick="this.parentElement.remove()">✕</button>
+            `;
+            exContainer.appendChild(div);
+
             const today = new Date();
             document.getElementById('declarationDate').value = toISODate(today);
-            // 更新申報期
             updateDeclarationPeriod();
         }
 
-        // 暴露函數給 HTML onclick 使用
+        // 全局暴露
         window.addEmploymentRow = addEmploymentRow;
         window.addOtherIncomeRow = addOtherIncomeRow;
+        window.addExemptionRow = addExemptionRow;
         window.calculateIncome = calculateIncome;
         window.downloadPDF = downloadPDF;
 
