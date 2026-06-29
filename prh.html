@@ -520,7 +520,7 @@
 
                     <!-- 其他收入 (可重複) -->
                     <div class="income-form-group">
-                        <label>📈 其他收入 <span class="hint">(股息、利息、退休金、綜援、贍養費、親友資助等，過去6個月總額)</span></label>
+                        <label>📈 其他收入 <span class="hint">(股息、利息、退休金、綜援、收取贍養費、親友資助等，過去6個月總額)</span></label>
                         <div id="otherIncomeList">
                             <!-- 動態加入 -->
                         </div>
@@ -536,7 +536,7 @@
 
                     <!-- 其他豁免計算項目 (可重複) -->
                     <div class="income-form-group">
-                        <label>✅ 其他豁免計算項目 <span class="hint">(贍養費等，每月金額)</span></label>
+                        <label>✅ 其他豁免計算項目 <span class="hint">(贍養費支出等，每月金額)</span></label>
                         <div id="exemptionList">
                             <!-- 動態加入 -->
                         </div>
@@ -591,7 +591,7 @@
                     <li>自僱收入請輸入總純利及實際經營月數及日數</li>
                     <li>其他收入為過去6個月總額，系統自動平均</li>
                     <li>強積金供款僅扣減法定強制部分</li>
-                    <li>豁免項目包括贍養費、傷殘津貼、高齡津貼等，請按每月金額填寫</li>
+                    <li>豁免項目包括贍養費支出、傷殘津貼、高齡津貼等，請按每月金額填寫</li>
                 </ul>
             </div>
         </aside>
@@ -765,7 +765,7 @@
             container.appendChild(div);
         }
 
-        // 豁免項目 — default 為「贍養費」
+        // 豁免項目 — default 為「贍養費支出」
         function addExemptionRow() {
             const container = document.getElementById('exemptionList');
             const rowId = ++exemptionRowCounter;
@@ -962,12 +962,12 @@
         function init() {
             addEmploymentRow();
             addOtherIncomeRow();
-            // 預設一項豁免項目（贍養費）
+            // 預設一項豁免項目（贍養費支出）
             const exContainer = document.getElementById('exemptionList');
             const div = document.createElement('div');
             div.className = 'income-row';
             div.innerHTML = `
-                <input type="text" class="exemption-desc" placeholder="豁免項目 (如贍養費、傷殘津貼等)" style="flex:1.5;" value="贍養費">
+                <input type="text" class="exemption-desc" placeholder="豁免項目 (如贍養費支出、傷殘津貼等)" style="flex:1.5;" value="贍養費支出">
                 <input type="number" class="exemption-amount" step="0.01" min="0" placeholder="每月金額" style="flex:1;">
                 <span style="font-size:13px;color:var(--muted);">每月</span>
                 <button type="button" class="del-row" onclick="this.parentElement.remove()">✕</button>
