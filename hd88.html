@@ -1396,6 +1396,37 @@
         // ------------------------------------------------------------
         //  8. PDF 下載（修正版）
         // ------------------------------------------------------------
+               // ------------------------------------------------------------
+        //  8. PDF 下載
+        // ------------------------------------------------------------
+        function downloadPDF() {
+            const resultDiv = document.getElementById('incomeResult');
+            if (resultDiv.style.display === 'none' || !window._resultHTML) {
+                alert('請先計算收入及資產。');
+                return;
+            }
+            const element = document.getElementById('incomeDetail');
+            html2canvas(element, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                logging: false,
+                useCORS: true
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgWidth = 210;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, imgHeight);
+                pdf.save('入住公屋入息資產申報結果.pdf');
+            }).catch(err => {
+                alert('生成PDF失敗，請稍後再試。');
+                console.error(err);
+            });
+        }
+
+       
+       
         function downloadPDF() {
             const resultDiv = document.getElementById('incomeResult');
             if (resultDiv.style.display === 'none' || !lastResult) {
