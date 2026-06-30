@@ -1392,67 +1392,101 @@
         }
 
         // ------------------------------------------------------------
-        //  8. PDF 下載（使用您指定的方式）
+        //  8. PDF 下載（修正版 - 直接克隆 DOM 截圖）
         // ------------------------------------------------------------
         function downloadPDF() {
             const resultDiv = document.getElementById('incomeResult');
-            if (resultDiv.style.display === 'none' || !window._resultHTML) {
+            if (resultDiv.style.display === 'none' || !lastResult) {
                 alert('請先計算收入及資產。');
                 return;
             }
-            
-            // 建立包含申報期間資訊的完整內容
-            const content = document.createElement('div');
-            content.style.padding = '20px';
-            content.style.fontFamily = '"Times New Roman", "新細明體", serif';
-            
-            // 標題
-            const title = document.createElement('h3');
-            title.textContent = '📊 家庭總收入及總資產淨值計算結果';
-            title.style.textAlign = 'center';
-            title.style.marginBottom = '10px';
-            content.appendChild(title);
-            
-            // 申報期間資訊
-            const infoDiv = document.createElement('div');
-            infoDiv.style.marginBottom = '12px';
-            infoDiv.style.fontSize = '14px';
-            infoDiv.style.color = '#333';
-            infoDiv.innerHTML = `
-                <div>📆 簽約日期：${lastResult.signDateDisplay}</div>
-                <div>📊 固定收入申報月份：${lastResult.fixedMonth}</div>
-                <div>📊 非固定收入申報期間：${lastResult.period6Months}</div>
-                <div>📊 年終酬金申報期間：${lastResult.period12Months}</div>
-                <div>📊 租金/其他收入申報期間：${lastResult.periodRent}</div>
-            `;
-            content.appendChild(infoDiv);
-            
-            // 複製結果表格
-            const tableClone = document.querySelector('#incomeDetail table');
-            if (tableClone) {
-                const tableCopy = tableClone.cloneNode(true);
-                tableCopy.style.fontFamily = '"Times New Roman", "新細明體", serif';
-                content.appendChild(tableCopy);
+
+            // 檢查 html2canvas 是否可用
+            if (typeof html2canvas === 'undefined') {
+                alert('PDF 生成庫未加載，請檢查網絡連線後再試。');
+                return;
             }
 
-            // 使用 html2canvas 轉為圖片
-            html2canvas(content, {
-                scale: 2,
-                backgroundColor: '#ffffff',
-                logging: false,
-                useCORS: true
-            }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                const imgWidth = 210;
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, imgHeight);
-                pdf.save('入住公屋入息資產申報結果.pdf');
-            }).catch(err => {
-                alert('生成PDF失敗，請稍後再試。');
-                console.error(err);
-            });
+            try {
+                // 克隆結果區域
+                const clone = resultDiv.cloneNode(true);
+                // 在頂部插入申報期間資訊
+                const infoDiv = document.createElement('div');
+                infoDiv.style.marginBottom = '15px';
+                infoDiv.style.padding = '10px';
+                infoDiv.style.backgroundColor = '#f0f4f8';
+                infoDiv.style.borderRadius = '6px';
+                infoDiv.style.fontSize = '14px';
+                infoDiv.style.color = '#333';
+                infoDiv.style.lineHeight = '1.8';
+                infoDiv.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                infoDiv.innerHTML = `
+                    <div>📆 簽約日期：${lastResult.signDateDisplay}</div>
+                    <div>📊 固定收入申報月份：${lastResult.fixedMonth}</div>
+                    <div>📊 非固定收入申報期間：${lastResult.period6Months}</div>
+                    <div>📊 年終酬金申報期間：${lastResult.period12Months}</div>
+                    <div>📊 租金/其他收入申報期間：${lastResult.periodRent}</div>
+                `;
+                clone.insertBefore(infoDiv, clone.firstChild);
+
+                // 確保表格邊框完整
+                const table = clone.querySelector('table');
+                if (table) {
+                    table.style.width = '100%';
+                    table.style.borderCollapse = 'collapse';
+                    const cells = table.querySelectorAll('td, th');
+                    cells.forEach(cell => {
+                        cell.style.border = '1px solid #ccc';
+                        cell.style.padding = '6px 8px';
+                        cell.style.textAlign = 'left';
+                        cell.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                    });
+                }
+
+                // 設定克隆的樣式以便截圖
+                clone.style.position = 'absolute';
+                clone.style.left = '-9999px';
+                clone.style.top = '0';
+                clone.style.width = '800px';
+                clone.style.backgroundColor = '#ffffff';
+                clone.style.padding = '20px';
+                clone.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                document.body.appendChild(clone);
+
+                // 使用 html2canvas 截圖
+                html2canvas(clone, {
+                    scale: 2,
+                    backgroundColor: '#ffffff',
+                    useCORS: true,
+                    logging: false,
+                    width: 800,
+                    onclone: function(doc) {
+                        // 確保字體正確
+                        const elements = doc.querySelectorAll('*');
+                        elements.forEach(el => {
+                            el.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                        });
+                    }
+                }).then(canvas => {
+                    // 移除克隆
+                    document.body.removeChild(clone);
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgWidth = 210;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                    pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, Math.min(imgHeight, 280));
+                    pdf.save('入住公屋入息資產申報結果.pdf');
+                }).catch(err => {
+                    // 確保移除克隆
+                    if (clone.parentNode) document.body.removeChild(clone);
+                    alert('生成PDF失敗，請稍後再試。錯誤訊息：' + err.message);
+                    console.error('html2canvas error:', err);
+                });
+            } catch (e) {
+                alert('生成PDF失敗：' + e.message);
+                console.error(e);
+            }
         }
 
         // ------------------------------------------------------------
