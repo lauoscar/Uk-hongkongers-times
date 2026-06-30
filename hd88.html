@@ -22,6 +22,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+    <!-- SheetJS (Excel) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
     <style>
         /* ---------- 全局變數 ---------- */
         :root {
@@ -41,6 +44,16 @@
             --radius-sm: 6px;
             --border: #d0d9e5;
             --text-light: #4a5a6e;
+            --food-gold: #cc9900;
+            --excel-green: #217346;
+        }
+
+        /* 字體設定：英文/數字 Times New Roman，中文新細明體 */
+        * {
+            font-family: 'Times New Roman', '新細明體', 'PMingLiU', serif;
+        }
+        .site-title, .nav-logo {
+            font-family: 'UnifrakturCook', 'Old English Text MT', '新細明體', serif;
         }
 
         * {
@@ -51,7 +64,6 @@
 
         body {
             margin: 0;
-            font-family: Georgia, 'Times New Roman', serif;
             background-color: var(--bg);
             color: var(--ink);
             -webkit-font-smoothing: antialiased;
@@ -81,8 +93,17 @@
             min-width: 260px;
         }
 
+        #headerQuote {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--primary-dark);
+            min-height: 28px;
+            transition: opacity 0.8s ease;
+            font-family: 'Times New Roman', '新細明體', serif;
+        }
+
         .site-title {
-            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-family: 'UnifrakturCook', 'Old English Text MT', '新細明體', serif;
             font-size: 48px;
             color: #000;
             margin: 0;
@@ -92,7 +113,7 @@
         }
 
         .site-subtitle {
-            font-family: 'serif';
+            font-family: 'Times New Roman', '新細明體', serif;
             font-size: 22px;
             color: var(--muted);
             text-align: center;
@@ -125,7 +146,7 @@
         }
 
         .nav-logo {
-            font-family: 'UnifrakturCook', serif;
+            font-family: 'UnifrakturCook', 'Old English Text MT', '新細明體', serif;
             font-size: 24px;
             color: #000;
             text-decoration: none;
@@ -156,6 +177,7 @@
             transition: all 0.3s ease;
             background: rgba(0,0,0,0.02);
             cursor: pointer;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .nav-menu a:hover {
@@ -188,6 +210,7 @@
             position: relative;
             overflow: visible;
             margin-bottom: 20px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .widget-head {
@@ -203,11 +226,13 @@
             margin: 0;
             font-size: 24px;
             font-weight: 700;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .widget-sub {
             font-size: 14px;
             color: var(--muted);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         /* ---------- 廣告 ---------- */
@@ -219,11 +244,13 @@
             color: #777;
             border-radius: 8px;
             margin-bottom: 20px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .ad-box h4 {
             margin-top: 0;
             margin-bottom: 10px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .ad-link {
@@ -233,6 +260,7 @@
             text-decoration: none;
             margin-top: 10px;
             font-weight: bold;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         /* ---------- Footer ---------- */
@@ -254,6 +282,7 @@
         .footer-left {
             font-size: 14px;
             color: var(--muted);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .footer-right {
@@ -271,11 +300,13 @@
             font-weight: 500;
             margin-bottom: 4px;
             font-size: 15px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .form-group .hint {
             font-size: 13px;
             color: var(--muted);
             margin-left: 8px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .member-block {
@@ -284,6 +315,7 @@
             padding: 12px 16px;
             margin-bottom: 16px;
             border: 1px solid var(--border);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .member-block .member-header {
             display: flex;
@@ -292,6 +324,7 @@
             margin-bottom: 10px;
             font-weight: bold;
             font-size: 16px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .member-block .member-header .del-member {
             background: transparent;
@@ -316,6 +349,7 @@
             font-size: 13px;
             color: var(--text-light);
             flex: 0 0 auto;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         select, input[type="date"], input[type="number"], input[type="text"] {
@@ -326,7 +360,7 @@
             background: #fff;
             width: 100%;
             transition: border 0.2s, box-shadow 0.2s;
-            font-family: Georgia, serif;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         select:focus, input:focus {
             border-color: var(--primary);
@@ -342,6 +376,7 @@
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 13px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-add-member:hover {
             background: var(--primary-light);
@@ -354,6 +389,7 @@
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 12px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-add-income:hover {
             background: var(--primary);
@@ -366,6 +402,7 @@
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 12px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-add-exemption:hover {
             background: #b8860b;
@@ -378,6 +415,7 @@
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 12px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-add-asset:hover {
             background: #1f7a4a;
@@ -393,14 +431,14 @@
             font-weight: 500;
             cursor: pointer;
             transition: background 0.2s;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-calculate:hover {
             background: #1f7a4a;
         }
-        .btn-pdf {
+
+        .btn-pdf, .btn-excel, .btn-csv {
             padding: 8px 20px;
-            background: var(--danger);
-            color: #fff;
             border: none;
             border-radius: var(--radius-sm);
             font-size: 14px;
@@ -408,9 +446,34 @@
             cursor: pointer;
             transition: background 0.2s;
             margin-top: 12px;
+            margin-right: 10px;
+            color: #fff;
+            font-family: 'Times New Roman', '新細明體', serif;
+        }
+        .btn-pdf {
+            background: var(--danger);
         }
         .btn-pdf:hover {
             background: #9e2d3b;
+        }
+        .btn-excel {
+            background: var(--excel-green);
+        }
+        .btn-excel:hover {
+            background: #1a5c3a;
+        }
+        .btn-csv {
+            background: var(--primary);
+        }
+        .btn-csv:hover {
+            background: var(--primary-light);
+        }
+
+        .export-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
         }
 
         /* 申報期間方塊 */
@@ -425,14 +488,17 @@
             display: block;
             line-height: 1.8;
             max-width: 100%;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .declaration-period-box .label {
             font-weight: 700;
             display: inline-block;
             min-width: 120px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .declaration-period-box .value {
             font-weight: 400;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .declaration-period-box .period-row {
             display: flex;
@@ -441,7 +507,7 @@
             gap: 4px 8px;
         }
 
-        /* 收入項目行 */
+        /* 收入項目行 - 使用下拉選單選擇收入描述 */
         .income-item {
             display: flex;
             flex-wrap: wrap;
@@ -452,18 +518,23 @@
             border: 1px solid var(--border);
             margin-top: 4px;
             align-items: center;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .income-item > * {
             flex: 1 1 120px;
             min-width: 80px;
         }
-        .income-item select.income-type {
+        .income-item select.income-desc-select {
             flex: 1 1 180px;
             min-width: 160px;
         }
+        .income-item select.income-type {
+            flex: 1 1 150px;
+            min-width: 130px;
+        }
         .income-item select.income-category {
-            flex: 0 0 120px;
-            min-width: 100px;
+            flex: 0 0 100px;
+            min-width: 80px;
         }
         .income-item .income-period {
             display: flex;
@@ -480,6 +551,7 @@
         .income-item .income-period span {
             font-size: 13px;
             white-space: nowrap;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .income-item .del-item {
             flex: 0 0 auto;
@@ -488,6 +560,10 @@
             color: var(--danger);
             cursor: pointer;
             font-size: 16px;
+        }
+        .income-item input.income-amount {
+            flex: 1 1 100px;
+            min-width: 80px;
         }
 
         /* 豁免項目行 */
@@ -501,6 +577,7 @@
             border: 1px solid var(--border);
             margin-top: 4px;
             align-items: center;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .exemption-item > * {
             flex: 1 1 120px;
@@ -526,6 +603,7 @@
             border: 1px solid var(--border);
             margin-top: 4px;
             align-items: center;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .asset-item > * {
             flex: 1 1 120px;
@@ -560,21 +638,25 @@
             padding: 16px;
             margin-top: 16px;
             overflow-x: auto;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .result-table table {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .result-table td, .result-table th {
             padding: 6px 8px;
             border-bottom: 1px solid var(--soft-gray);
             text-align: left;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .result-table .total {
             font-weight: 700;
             font-size: 18px;
             color: var(--primary-dark);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         /* ---------- Responsive ---------- */
@@ -590,18 +672,22 @@
             .member-row { flex-direction: column; align-items: stretch; }
             .member-row > * { flex: 1 1 auto; }
             .income-item { flex-direction: column; align-items: stretch; }
+            .income-item select.income-desc-select { flex: 1 1 auto; min-width: 100%; }
             .income-item select.income-type { flex: 1 1 auto; min-width: 100%; }
             .exemption-item { flex-direction: column; align-items: stretch; }
             .asset-item { flex-direction: column; align-items: stretch; }
             .asset-item select.asset-type { flex: 1 1 auto; min-width: 100%; }
             .declaration-period-box .period-row { flex-direction: column; align-items: flex-start; }
+            .export-buttons { flex-direction: column; }
         }
 
         @media (max-width: 500px) {
             .date-input { min-width: 80px; }
             select { min-width: 55px; font-size: 12px; }
+            .income-item select.income-desc-select { min-width: 100%; }
             .income-item select.income-type { min-width: 100%; }
             .asset-item select.asset-type { min-width: 100%; }
+            .export-buttons { flex-direction: column; }
         }
     </style>
 </head>
@@ -611,7 +697,7 @@
     <header>
         <div class="header-left">
             <div id="dateNow">2025年1月15日 星期三</div>
-            <div id="headerQuote">"準確申報入息及資產，順利入住公屋"</div>
+            <div id="headerQuote">"你們要將一切的憂慮卸給神，因為他顧念你們。" — 彼得前書 5:7</div>
         </div>
         <div>
             <div class="site-title">The Housing Times</div>
@@ -632,13 +718,10 @@
             <ul class="nav-menu">
                 <li><a href="#">首頁 Home</a></li>
                 <li><a href="addition.html" target="_blank">增加戶籍</a></li>
-
                 <li><a href="ras.html" target="_blank">租金援助 RAS</a></li>
-
-                <li><a href="60days.html" target="_blank">交回單位期限計算</a></li
-                <li><a href="prh.html" target="_blank">申請PRH</a></li>
-                <li><a href="#"class="active">入住公屋申報HD88</a></li>
-
+                <li><a href="60days.html" target="_blank">交回單位期限計算</a></li>
+                <li><a href="prh.html" target="_blank">申請公屋 PRH</a></li>
+                <li><a href="#" class="active">入住公屋申報 HD88</a></li>
             </ul>
         </div>
     </nav>
@@ -649,7 +732,7 @@
             <div class="card">
                 <div class="widget-head">
                     <h3>📋 入住公屋聲明 - 入息及資產申報 (HD88C)</h3>
-                    <div class="widget-sub"></div>
+                    <div class="widget-sub">參照 HD300C 收入計算方法｜各成員獨立申報收入、強積金、豁免項目及資產</div>
                 </div>
 
                 <form id="incomeForm" onsubmit="return false;">
@@ -698,7 +781,11 @@
                 <div id="incomeResult" class="result-table" style="display:none;">
                     <h4 style="margin-bottom:10px;">📊 家庭總收入及總資產淨值計算結果</h4>
                     <div id="incomeDetail"></div>
-                    <button class="btn-pdf" onclick="downloadPDF()">⬇️ 下載PDF</button>
+                    <div class="export-buttons">
+                        <button class="btn-pdf" onclick="downloadPDF()">⬇️ 下載PDF</button>
+                        <button class="btn-excel" onclick="downloadExcel()">⬇️ 下載Excel</button>
+                        <button class="btn-csv" onclick="downloadCSV()">⬇️ 下載CSV</button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -728,10 +815,11 @@
                 <ul style="padding-left: 20px; font-size:14px;">
                     <li>填寫簽訂新租約日期，系統自動顯示各申報期間</li>
                     <li>點擊「新增家庭成員」加入申請者及每位成員</li>
-                    <li>每個成員可新增多項收入（受僱、自僱、租金、其他）</li>
+                    <li>收入描述已按 HD300C 分類，直接在下拉選單選擇</li>
                     <li>非固定收入請填寫總額及對應的月數及日數</li>
                     <li>每位成員可獨立輸入強積金供款及新增豁免項目（贍養費支出等）</li>
                     <li>資產項目可新增土地、房產、車輛、投資、業務、存款等</li>
+                    <li>可匯出 PDF、Excel 及 CSV 檔案</li>
                 </ul>
             </div>
         </aside>
@@ -755,6 +843,33 @@
 
     <!-- ========== JAVASCRIPT ========== -->
     <script>
+        // 聖經金句輪播
+        const bibleVerses = [
+            '"你們要將一切的憂慮卸給神，因為他顧念你們。" — 彼得前書 5:7',
+            '"我靠著那加給我力量的，凡事都能做。" — 腓立比書 4:13',
+            '"神是我們的避難所，是我們的力量，是我們在患難中隨時的幫助。" — 詩篇 46:1',
+            '"你們祈求，就給你們；尋找，就尋見；叩門，就給你們開門。" — 馬太福音 7:7',
+            '"當將你的事交託耶和華，並倚靠他，他就必成全。" — 詩篇 37:5',
+            '"主耶和華啊，你是我所盼望的；從我年幼，你是我所倚靠的。" — 詩篇 71:5',
+            '"你的話是我腳前的燈，是我路上的光。" — 詩篇 119:105',
+            '"神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。" — 約翰福音 3:16'
+        ];
+        let verseIndex = 0;
+
+        function rotateVerse() {
+            const quoteEl = document.getElementById('headerQuote');
+            if (!quoteEl) return;
+            verseIndex = (verseIndex + 1) % bibleVerses.length;
+            quoteEl.style.opacity = '0';
+            setTimeout(() => {
+                quoteEl.textContent = bibleVerses[verseIndex];
+                quoteEl.style.opacity = '1';
+            }, 400);
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(rotateVerse, 15000);
+        });
+
         // ------------------------------------------------------------
         //  1. 日期與申報期間計算
         // ------------------------------------------------------------
@@ -839,7 +954,7 @@
         }
 
         // ------------------------------------------------------------
-        //  3. 家庭成員管理（各成員獨立申報強積金及豁免項目）
+        //  3. 家庭成員管理
         // ------------------------------------------------------------
         let memberCounter = 0;
 
@@ -887,7 +1002,7 @@
                     <input type="text" class="member-property-address" placeholder="物業地址 (如有)" style="flex:2;">
                 </div>
 
-                <!-- 收入部分 -->
+                <!-- 收入部分 - 描述改為下拉選單 -->
                 <div style="margin-top:8px; border-top: 1px dashed var(--border); padding-top:8px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                         <span class="label-sm">💰 收入項目</span>
@@ -955,7 +1070,7 @@
         }
 
         // ------------------------------------------------------------
-        //  4. 收入項目管理
+        //  4. 收入項目管理 - 使用下拉選單
         // ------------------------------------------------------------
         function addIncomeItem(btn) {
             const container = btn.closest('.member-block').querySelector('.income-list');
@@ -966,19 +1081,58 @@
             const div = document.createElement('div');
             div.className = 'income-item';
             div.innerHTML = `
-                <select class="income-category" style="flex:0 0 110px; min-width:90px;">
+                <select class="income-category" style="flex:0 0 100px; min-width:80px;">
                     <option value="main">主要收入</option>
                     <option value="self">自僱收入</option>
                     <option value="rental">租金收入</option>
                     <option value="other">其他收入</option>
                 </select>
-                <input type="text" class="income-desc" placeholder="描述 (如底薪/津貼等)" style="flex:1 1 120px; min-width:80px;">
-                <select class="income-type" style="flex:1 1 180px; min-width:160px;">
-                    <option value="fixed">固定月薪</option>
-                    <option value="variable">非固定（過去6個月平均）</option>
-                    <option value="annual">年終酬金（過去12個月平均）</option>
+                <!-- 收入描述改為下拉選單（按HD300C分類） -->
+                <select class="income-desc-select" style="flex:1 1 180px; min-width:160px;">
+                    <optgroup label="固定/非固定底薪">
+                        <option value="固定底薪">固定底薪</option>
+                        <option value="非固定底薪">非固定底薪</option>
+                    </optgroup>
+                    <optgroup label="津貼/獎金">
+                        <option value="生活津貼">生活津貼</option>
+                        <option value="逾時工作收入">逾時工作收入</option>
+                        <option value="花紅">花紅</option>
+                        <option value="佣金">佣金</option>
+                        <option value="其他津貼或獎金">其他津貼或獎金</option>
+                    </optgroup>
+                    <optgroup label="年終酬金">
+                        <option value="年終雙薪">年終雙薪</option>
+                        <option value="年終花紅">年終花紅</option>
+                        <option value="其他年終酬金">其他年終酬金</option>
+                    </optgroup>
+                    <optgroup label="自僱收入">
+                        <option value="自僱業務收入">自僱業務收入</option>
+                        <option value="獨資經營">獨資經營</option>
+                        <option value="合夥經營">合夥經營</option>
+                        <option value="有限公司股份持有人">有限公司股份持有人</option>
+                    </optgroup>
+                    <optgroup label="租金收入">
+                        <option value="住宅租金收入">住宅租金收入</option>
+                        <option value="商業租金收入">商業租金收入</option>
+                        <option value="土地租金收入">土地租金收入</option>
+                        <option value="車位租金收入">車位租金收入</option>
+                    </optgroup>
+                    <optgroup label="其他收入">
+                        <option value="股息">股息</option>
+                        <option value="利息">利息</option>
+                        <option value="退休金">退休金</option>
+                        <option value="綜援金">綜援金</option>
+                        <option value="贍養費">贍養費</option>
+                        <option value="親友資助">親友資助</option>
+                        <option value="年金">年金</option>
+                        <option value="議員酬金">議員酬金</option>
+                    </optgroup>
                 </select>
-                <input type="number" class="income-amount" step="0.01" min="0" placeholder="總額" style="flex:1 1 100px; min-width:80px;">
+                <select class="income-type" style="flex:1 1 150px; min-width:130px;">
+                    <option value="fixed">固定</option>
+                    <option value="variable">非固定</option>
+                </select>
+                <input type="number" class="income-amount" step="0.01" min="0" placeholder="金額" style="flex:1 1 100px; min-width:80px;">
                 <div class="income-period" style="display:flex; gap:4px; align-items:center; flex:0 1 150px; min-width:100px;">
                     <span style="font-size:13px; white-space:nowrap;">涉及</span>
                     <input type="number" class="income-months" value="6" min="0" step="0.01" style="width:50px; min-width:40px; flex:0 0 auto;">
@@ -990,7 +1144,6 @@
             `;
             container.appendChild(div);
 
-            // 根據收入類型顯示/隱藏月份及日數
             const typeSelect = div.querySelector('.income-type');
             const periodDiv = div.querySelector('.income-period');
             const monthsInput = div.querySelector('.income-months');
@@ -1004,9 +1157,6 @@
                     periodDiv.style.display = 'flex';
                     if (type === 'variable') {
                         monthsInput.value = 6;
-                        daysInput.value = 0;
-                    } else if (type === 'annual') {
-                        monthsInput.value = 12;
                         daysInput.value = 0;
                     }
                 }
@@ -1068,6 +1218,8 @@
         // ------------------------------------------------------------
         //  7. 計算邏輯
         // ------------------------------------------------------------
+        let lastResult = null;
+
         function calculateIncome() {
             const blocks = document.querySelectorAll('.member-block');
             if (blocks.length === 0) {
@@ -1117,7 +1269,7 @@
 
                 incomeItems.forEach(item => {
                     const category = item.querySelector('.income-category').value;
-                    const desc = item.querySelector('.income-desc').value || '未命名';
+                    const desc = item.querySelector('.income-desc-select').value || '未命名';
                     const type = item.querySelector('.income-type').value;
                     const amount = parseFloat(item.querySelector('.income-amount').value) || 0;
                     const months = parseFloat(item.querySelector('.income-months').value) || 0;
@@ -1180,30 +1332,30 @@
                 totalFamilyAsset += memberTotalAsset;
             });
 
+            // 儲存結果
+            lastResult = {
+                signDate,
+                membersData,
+                totalFamilyIncome,
+                totalFamilyAsset,
+                signDateDisplay: document.getElementById('signDate').textContent,
+                period6Months: document.getElementById('period6Months').textContent,
+                period12Months: document.getElementById('period12Months').textContent,
+                periodRent: document.getElementById('periodRent').textContent
+            };
+
             // --- 顯示結果 ---
             const resultDiv = document.getElementById('incomeResult');
             const detailDiv = document.getElementById('incomeDetail');
             let html = `<table>
-                <tr><th style="font-weight:bold;">成員</th><th>關係</th><th>職業</th><th>每月平均收入 (港元)</th><th>強積金扣減</th><th>豁免扣減</th><th>淨收入</th><th>總資產淨值</th></tr>`;
+                <tr><th style="font-weight:bold;">成員</th><th>關係</th><th>職業</th><th>收入詳情</th><th>強積金扣減</th><th>豁免扣減</th><th>淨收入</th><th>總資產淨值</th></tr>`;
             membersData.forEach(m => {
-                let incomeStr = '';
-                if (m.incomeDetails.length === 0) {
-                    incomeStr = '無收入';
-                } else {
-                    incomeStr = m.incomeDetails.map(d => `${d.category}: ${d.desc} (${d.periodDesc}) $${d.monthly.toFixed(2)}`).join('<br>');
-                }
-                let exemptionStr = '';
-                if (m.exemptionDetails.length === 0) {
-                    exemptionStr = '無';
-                } else {
-                    exemptionStr = m.exemptionDetails.map(e => `${e.desc} $${e.monthly.toFixed(2)}`).join('<br>');
-                }
-                let assetStr = '';
-                if (m.assetDetails.length === 0) {
-                    assetStr = '無資產';
-                } else {
-                    assetStr = m.assetDetails.map(a => `${a.type}: ${a.desc} 淨值 $${a.netValue.toFixed(2)}`).join('<br>');
-                }
+                let incomeStr = m.incomeDetails.map(d => `${d.desc} (${d.periodDesc}) $${d.monthly.toFixed(2)}`).join('<br>');
+                if (!incomeStr) incomeStr = '無收入';
+                let exemptionStr = m.exemptionDetails.map(e => `${e.desc} $${e.monthly.toFixed(2)}`).join('<br>');
+                if (!exemptionStr) exemptionStr = '無';
+                let assetStr = m.assetDetails.map(a => `${a.type}: ${a.desc} 淨值 $${a.netValue.toFixed(2)}`).join('<br>');
+                if (!assetStr) assetStr = '無資產';
                 html += `<tr>
                     <td>${m.name}</td>
                     <td>${m.relation}</td>
@@ -1217,23 +1369,44 @@
             });
             html += `<tr><td colspan="6" style="font-weight:bold; text-align:right;">家庭總收入（淨額）</td><td class="total">$${totalFamilyIncome.toFixed(2)}</td><td class="total">$${totalFamilyAsset.toFixed(2)}</td></tr>`;
             html += `</table>`;
-            html += `<div style="margin-top:12px; font-size:13px; color:var(--muted);">簽約日期：${formatDisplay(signDate)}</div>`;
             detailDiv.innerHTML = html;
             resultDiv.style.display = 'block';
-            window._resultHTML = detailDiv.innerHTML;
         }
 
         // ------------------------------------------------------------
         //  8. PDF 下載
         // ------------------------------------------------------------
         function downloadPDF() {
-            const resultDiv = document.getElementById('incomeResult');
-            if (resultDiv.style.display === 'none' || !window._resultHTML) {
+            if (!lastResult) {
                 alert('請先計算收入及資產。');
                 return;
             }
-            const element = document.getElementById('incomeDetail');
-            html2canvas(element, {
+            const content = document.createElement('div');
+            content.style.padding = '20px';
+            content.style.fontFamily = '"Times New Roman", "新細明體", serif';
+            const title = document.createElement('h3');
+            title.textContent = '📊 家庭總收入及總資產淨值計算結果';
+            title.style.textAlign = 'center';
+            title.style.marginBottom = '10px';
+            content.appendChild(title);
+            const infoDiv = document.createElement('div');
+            infoDiv.style.marginBottom = '12px';
+            infoDiv.style.fontSize = '14px';
+            infoDiv.style.color = '#333';
+            infoDiv.innerHTML = `
+                <div>📆 簽約日期：${lastResult.signDateDisplay}</div>
+                <div>📊 非固定收入申報期間：${lastResult.period6Months}</div>
+                <div>📊 年終酬金/按年發放申報期間：${lastResult.period12Months}</div>
+                <div>📊 租金/其他收入申報期間：${lastResult.periodRent}</div>
+            `;
+            content.appendChild(infoDiv);
+            const tableClone = document.querySelector('#incomeDetail table');
+            if (tableClone) {
+                const tableCopy = tableClone.cloneNode(true);
+                tableCopy.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                content.appendChild(tableCopy);
+            }
+            html2canvas(content, {
                 scale: 2,
                 backgroundColor: '#ffffff',
                 logging: false,
@@ -1253,7 +1426,96 @@
         }
 
         // ------------------------------------------------------------
-        //  9. 初始化
+        //  9. Excel 下載
+        // ------------------------------------------------------------
+        function downloadExcel() {
+            if (!lastResult) {
+                alert('請先計算收入及資產。');
+                return;
+            }
+            const data = prepareExportDataWithPeriod();
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.json_to_sheet(data);
+            XLSX.utils.book_append_sheet(wb, ws, '入住公屋入息資產申報');
+            XLSX.writeFile(wb, '入住公屋入息資產申報結果(HD88C).xlsx');
+        }
+
+        // ------------------------------------------------------------
+        //  10. CSV 下載
+        // ------------------------------------------------------------
+        function downloadCSV() {
+            if (!lastResult) {
+                alert('請先計算收入及資產。');
+                return;
+            }
+            const data = prepareExportDataWithPeriod();
+            const headers = Object.keys(data[0]);
+            let csv = headers.join(',') + '\n';
+            data.forEach(row => {
+                const values = headers.map(h => {
+                    let val = row[h] || '';
+                    if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n'))) {
+                        val = '"' + val.replace(/"/g, '""') + '"';
+                    }
+                    return val;
+                });
+                csv += values.join(',') + '\n';
+            });
+            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '入住公屋入息資產申報結果(HD88C).csv';
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
+        // ------------------------------------------------------------
+        //  11. 準備導出數據
+        // ------------------------------------------------------------
+        function prepareExportDataWithPeriod() {
+            const rows = [];
+            const r = lastResult;
+            rows.push({ '成員姓名': '--- 申報期間資訊 ---', '與戶主關係': '', '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '簽約日期', '與戶主關係': r.signDateDisplay, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '非固定收入申報期間', '與戶主關係': r.period6Months, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '年終酬金/按年發放申報期間', '與戶主關係': r.period12Months, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '租金/其他收入申報期間', '與戶主關係': r.periodRent, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '--- 成員申報詳情 ---', '與戶主關係': '', '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            r.membersData.forEach(m => {
+                let incomeDetail = m.incomeDetails.map(d => `${d.desc} (${d.periodDesc}) $${d.monthly.toFixed(2)}`).join('; ');
+                if (!incomeDetail) incomeDetail = '無';
+                let exemptionDetail = m.exemptionDetails.map(e => `${e.desc} $${e.monthly.toFixed(2)}`).join('; ');
+                if (!exemptionDetail) exemptionDetail = '無';
+                let assetDetail = m.assetDetails.map(a => `${a.type}:${a.desc} 淨值 $${a.netValue.toFixed(2)}`).join('; ');
+                if (!assetDetail) assetDetail = '無';
+                rows.push({
+                    '成員姓名': m.name,
+                    '與戶主關係': m.relation,
+                    '職業': m.occupation,
+                    '收入詳情': incomeDetail,
+                    '強積金扣減 (港元)': m.mpf.toFixed(2),
+                    '豁免扣減詳情': exemptionDetail,
+                    '淨收入 (港元)': m.netIncome.toFixed(2),
+                    '資產詳情': assetDetail,
+                    '總資產淨值 (港元)': m.totalAsset.toFixed(2)
+                });
+            });
+            rows.push({
+                '成員姓名': '家庭總計',
+                '與戶主關係': '',
+                '職業': '',
+                '收入詳情': '',
+                '強積金扣減 (港元)': '',
+                '豁免扣減詳情': '',
+                '淨收入 (港元)': r.totalFamilyIncome.toFixed(2),
+                '資產詳情': '',
+                '總資產淨值 (港元)': r.totalFamilyAsset.toFixed(2)
+            });
+            return rows;
+        }
+
+        // ------------------------------------------------------------
+        //  12. 初始化
         // ------------------------------------------------------------
         function init() {
             addMember(); // 預設申請者
@@ -1270,6 +1532,8 @@
         window.addAssetItem = addAssetItem;
         window.calculateIncome = calculateIncome;
         window.downloadPDF = downloadPDF;
+        window.downloadExcel = downloadExcel;
+        window.downloadCSV = downloadCSV;
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
