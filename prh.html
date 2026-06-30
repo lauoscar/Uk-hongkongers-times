@@ -18,8 +18,11 @@
 
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
+    <!-- jsPDF 和 html2canvas (使用可靠 CDN) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- SheetJS (Excel) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <style>
@@ -715,7 +718,9 @@
     </footer>
 
     <script>
-        // 聖經金句輪播
+        // ============================================================
+        //  1. 聖經金句輪播
+        // ============================================================
         const bibleVerses = [
             '"你們要將一切的憂慮卸給神，因為他顧念你們。" — 彼得前書 5:7',
             '"我靠著那加給我力量的，凡事都能做。" — 腓立比書 4:13',
@@ -742,7 +747,9 @@
             setInterval(rotateVerse, 15000);
         });
 
-        // 日期與申報期間計算
+        // ============================================================
+        //  2. 日期與申報期間計算
+        // ============================================================
         function updateDate() {
             const now = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -781,15 +788,12 @@
                 return;
             }
 
-            // 申報日期
             document.getElementById('signDate').textContent = formatDateYMD(d);
 
-            // 固定收入申報月份：申報日期當月
             const fixedMonthDate = new Date(d.getFullYear(), d.getMonth(), 1);
             document.getElementById('fixedMonth').textContent = formatDateYM(fixedMonthDate) + 
                 '（' + formatDateYMD(fixedMonthDate) + ' 至 ' + formatDateYMD(new Date(d.getFullYear(), d.getMonth()+1, 0)) + '）';
 
-            // 非固定收入：過去6個月
             const monthStart = new Date(d.getFullYear(), d.getMonth(), 1);
             const period6Start = new Date(monthStart);
             period6Start.setMonth(period6Start.getMonth() - 6);
@@ -797,14 +801,12 @@
             period6End.setDate(0);
             document.getElementById('period6Months').textContent = formatDateYMD(period6Start) + ' 至 ' + formatDateYMD(period6End);
 
-            // 年終酬金：過去12個月
             const period12Start = new Date(monthStart);
             period12Start.setMonth(period12Start.getMonth() - 12);
             const period12End = new Date(monthStart);
             period12End.setDate(0);
             document.getElementById('period12Months').textContent = formatDateYMD(period12Start) + ' 至 ' + formatDateYMD(period12End);
 
-            // 租金/其他收入：過去6個月
             document.getElementById('periodRent').textContent = formatDateYMD(period6Start) + ' 至 ' + formatDateYMD(period6End);
         }
 
@@ -831,7 +833,9 @@
             return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
         }
 
-        // 家庭成員管理
+        // ============================================================
+        //  3. 家庭成員管理
+        // ============================================================
         let memberCounter = 0;
 
         function addMember() {
@@ -868,7 +872,6 @@
                     <input type="text" class="member-property-address" placeholder="物業地址 (如有)" style="flex:2;">
                 </div>
 
-                <!-- 收入部分 - 描述改為下拉選單 -->
                 <div style="margin-top:8px; border-top: 1px dashed var(--border); padding-top:8px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                         <span class="label-sm">💰 收入項目</span>
@@ -877,7 +880,6 @@
                     <div class="income-list" style="width:100%; margin-top:4px;"></div>
                 </div>
 
-                <!-- 強積金供款 -->
                 <div style="margin-top:8px; border-top: 1px dashed var(--border); padding-top:8px;">
                     <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
                         <label class="label-sm">💳 強制性強積金/公積金供款 (每月)</label>
@@ -886,7 +888,6 @@
                     </div>
                 </div>
 
-                <!-- 豁免項目 -->
                 <div style="margin-top:8px; border-top: 1px dashed var(--border); padding-top:8px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                         <span class="label-sm">✅ 豁免計算項目 (贍養費支出等，每月金額)</span>
@@ -895,7 +896,6 @@
                     <div class="exemption-list" style="width:100%; margin-top:4px;"></div>
                 </div>
 
-                <!-- 資產部分 -->
                 <div style="margin-top:8px; border-top: 1px dashed var(--border); padding-top:8px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                         <span class="label-sm">🏦 資產項目</span>
@@ -927,7 +927,9 @@
             });
         }
 
-        // 收入項目管理 - 使用下拉選單選擇收入描述
+        // ============================================================
+        //  4. 收入、豁免、資產項目管理
+        // ============================================================
         function addIncomeItem(btn) {
             const container = btn.closest('.member-block').querySelector('.income-list');
             addIncomeItemToContainer(container);
@@ -1020,13 +1022,8 @@
             togglePeriod();
         }
 
-        // 豁免項目管理
         function addExemptionItem(btn) {
             const container = btn.closest('.member-block').querySelector('.exemption-list');
-            addExemptionItemToContainer(container);
-        }
-
-        function addExemptionItemToContainer(container) {
             const div = document.createElement('div');
             div.className = 'exemption-item';
             div.innerHTML = `
@@ -1038,13 +1035,8 @@
             container.appendChild(div);
         }
 
-        // 資產項目管理
         function addAssetItem(btn) {
             const container = btn.closest('.member-block').querySelector('.asset-list');
-            addAssetItemToContainer(container);
-        }
-
-        function addAssetItemToContainer(container) {
             const div = document.createElement('div');
             div.className = 'asset-item';
             div.innerHTML = `
@@ -1066,7 +1058,9 @@
             container.appendChild(div);
         }
 
-        // 計算邏輯
+        // ============================================================
+        //  5. 計算邏輯
+        // ============================================================
         let lastResult = null;
 
         function calculateIncome() {
@@ -1204,23 +1198,48 @@
             html += `</table>`;
             detailDiv.innerHTML = html;
             resultDiv.style.display = 'block';
+            // 儲存結果 HTML 以便 PDF 匯出
+            window._resultHTML = detailDiv.innerHTML;
         }
 
-        // PDF下載
+        // ============================================================
+        //  6. PDF 下載（修正版）
+        // ============================================================
         function downloadPDF() {
-            if (!lastResult) { alert('請先計算收入及資產。'); return; }
+            const resultDiv = document.getElementById('incomeResult');
+            if (resultDiv.style.display === 'none' || !lastResult) {
+                alert('請先計算收入及資產。');
+                return;
+            }
+
+            // 檢查 html2canvas 是否可用
+            if (typeof html2canvas === 'undefined') {
+                alert('PDF 生成庫未加載，請檢查網絡連線後再試。');
+                return;
+            }
+
+            // 建立 PDF 內容
             const content = document.createElement('div');
             content.style.padding = '20px';
             content.style.fontFamily = '"Times New Roman", "新細明體", serif';
+            content.style.width = '800px';
+            content.style.backgroundColor = '#ffffff';
+            
+            // 標題
             const title = document.createElement('h3');
             title.textContent = '📊 家庭總收入及總資產淨值計算結果';
             title.style.textAlign = 'center';
-            title.style.marginBottom = '10px';
+            title.style.marginBottom = '15px';
+            title.style.fontFamily = '"Times New Roman", "新細明體", serif';
             content.appendChild(title);
+            
+            // 申報期間資訊
             const infoDiv = document.createElement('div');
-            infoDiv.style.marginBottom = '12px';
+            infoDiv.style.marginBottom = '15px';
             infoDiv.style.fontSize = '14px';
             infoDiv.style.color = '#333';
+            infoDiv.style.lineHeight = '1.8';
+            infoDiv.style.fontFamily = '"Times New Roman", "新細明體", serif';
             infoDiv.innerHTML = `
                 <div>📆 申報日期：${lastResult.signDate}</div>
                 <div>📊 固定收入申報月份：${lastResult.fixedMonth}</div>
@@ -1229,57 +1248,108 @@
                 <div>📊 租金/其他收入申報期間：${lastResult.periodRent}</div>
             `;
             content.appendChild(infoDiv);
+            
+            // 複製結果表格
             const tableClone = document.querySelector('#incomeDetail table');
             if (tableClone) {
                 const tableCopy = tableClone.cloneNode(true);
+                tableCopy.style.width = '100%';
+                tableCopy.style.borderCollapse = 'collapse';
+                tableCopy.style.fontSize = '13px';
                 tableCopy.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                // 確保表格邊框
+                const cells = tableCopy.querySelectorAll('td, th');
+                cells.forEach(cell => {
+                    cell.style.border = '1px solid #ccc';
+                    cell.style.padding = '6px 8px';
+                    cell.style.textAlign = 'left';
+                    cell.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                });
                 content.appendChild(tableCopy);
             }
-            html2canvas(content, { scale: 2, backgroundColor: '#ffffff', logging: false, useCORS: true }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                const imgWidth = 210;
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, imgHeight);
-                pdf.save('公屋入息資產申報結果.pdf');
-            }).catch(err => { alert('生成PDF失敗，請稍後再試。'); console.error(err); });
-        }
 
-        // Excel下載
-        function downloadExcel() {
-            if (!lastResult) { alert('請先計算收入及資產。'); return; }
-            const data = prepareExportDataWithPeriod();
-            const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.json_to_sheet(data);
-            XLSX.utils.book_append_sheet(wb, ws, '公屋入息資產申報');
-            XLSX.writeFile(wb, '公屋入息資產申報結果(HD300C).xlsx');
-        }
-
-        // CSV下載
-        function downloadCSV() {
-            if (!lastResult) { alert('請先計算收入及資產。'); return; }
-            const data = prepareExportDataWithPeriod();
-            const headers = Object.keys(data[0]);
-            let csv = headers.join(',') + '\n';
-            data.forEach(row => {
-                const values = headers.map(h => {
-                    let val = row[h] || '';
-                    if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n'))) {
-                        val = '"' + val.replace(/"/g, '""') + '"';
-                    }
-                    return val;
-                });
-                csv += values.join(',') + '\n';
+            // 使用 html2canvas 生成圖片
+            html2canvas(content, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                logging: false,
+                useCORS: true,
+                width: 800,
+                height: content.scrollHeight
+            }).then(canvas => {
+                try {
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgWidth = 210;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                    pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, Math.min(imgHeight, 280));
+                    pdf.save('公屋入息資產申報結果.pdf');
+                } catch (err) {
+                    console.error('PDF 生成錯誤:', err);
+                    alert('生成 PDF 失敗，請稍後再試。錯誤訊息：' + err.message);
+                }
+            }).catch(err => {
+                console.error('html2canvas 錯誤:', err);
+                alert('生成 PDF 失敗，請稍後再試。錯誤訊息：' + err.message);
             });
-            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = '公屋入息資產申報結果(HD300C).csv';
-            link.click();
-            URL.revokeObjectURL(link.href);
         }
 
+        // ============================================================
+        //  7. Excel 下載
+        // ============================================================
+        function downloadExcel() {
+            if (!lastResult) {
+                alert('請先計算收入及資產。');
+                return;
+            }
+            try {
+                const data = prepareExportDataWithPeriod();
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.json_to_sheet(data);
+                XLSX.utils.book_append_sheet(wb, ws, '公屋入息資產申報');
+                XLSX.writeFile(wb, '公屋入息資產申報結果(HD300C).xlsx');
+            } catch (err) {
+                alert('匯出 Excel 失敗：' + err.message);
+            }
+        }
+
+        // ============================================================
+        //  8. CSV 下載
+        // ============================================================
+        function downloadCSV() {
+            if (!lastResult) {
+                alert('請先計算收入及資產。');
+                return;
+            }
+            try {
+                const data = prepareExportDataWithPeriod();
+                const headers = Object.keys(data[0]);
+                let csv = headers.join(',') + '\n';
+                data.forEach(row => {
+                    const values = headers.map(h => {
+                        let val = row[h] || '';
+                        if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n'))) {
+                            val = '"' + val.replace(/"/g, '""') + '"';
+                        }
+                        return val;
+                    });
+                    csv += values.join(',') + '\n';
+                });
+                const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = '公屋入息資產申報結果(HD300C).csv';
+                link.click();
+                URL.revokeObjectURL(link.href);
+            } catch (err) {
+                alert('匯出 CSV 失敗：' + err.message);
+            }
+        }
+
+        // ============================================================
+        //  9. 準備導出數據
+        // ============================================================
         function prepareExportDataWithPeriod() {
             const rows = [];
             const r = lastResult;
@@ -1323,6 +1393,9 @@
             return rows;
         }
 
+        // ============================================================
+        //  10. 初始化
+        // ============================================================
         function init() {
             addMember();
             const today = new Date();
