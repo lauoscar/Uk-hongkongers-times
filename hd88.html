@@ -476,7 +476,7 @@
             margin-top: 12px;
         }
 
-        /* 申報期間方塊 */
+        /* 申報期間方塊 - 修正：加入固定收入申報月份 */
         .declaration-period-box {
             background: #eef4f8;
             border: 1px solid var(--border);
@@ -732,7 +732,7 @@
             <div class="card">
                 <div class="widget-head">
                     <h3>📋 入住公屋聲明 - 入息及資產申報 (HD88C)</h3>
-                    <div class="widget-sub">參照 HD300C 收入計算方法｜各成員獨立申報收入、強積金、豁免項目及資產</div>
+                    <div class="widget-sub">參照 HD88C 入息及資產計算方法｜各成員獨立申報收入、強積金、豁免項目及資產</div>
                 </div>
 
                 <form id="incomeForm" onsubmit="return false;">
@@ -740,11 +740,16 @@
                     <div class="form-group">
                         <label for="declarationDate">📅 簽訂新租約日期</label>
                         <input type="date" id="declarationDate" class="date-input" style="max-width:200px;" required>
-                        <!-- 申報期間顯示 -->
+                        <!-- 申報期間顯示 - 修正：加入固定收入申報月份 -->
                         <div id="declarationPeriodDisplay" class="declaration-period-box" style="margin-top:8px;">
                             <div class="period-row">
                                 <span class="label">📆 簽約日期：</span>
                                 <span id="signDate" class="value">—</span>
+                            </div>
+                            <div class="period-row">
+                                <span class="label">📊 固定收入申報月份：</span>
+                                <span id="fixedMonth" class="value">—</span>
+                                <span style="font-size:13px;color:var(--muted);">（簽約當月）</span>
                             </div>
                             <div class="period-row">
                                 <span class="label">📊 非固定收入申報期間：</span>
@@ -752,7 +757,7 @@
                                 <span style="font-size:13px;color:var(--muted);">（過去6個月平均）</span>
                             </div>
                             <div class="period-row">
-                                <span class="label">📊 年終酬金/按年發放申報期間：</span>
+                                <span class="label">📊 年終酬金申報期間：</span>
                                 <span id="period12Months" class="value">—</span>
                                 <span style="font-size:13px;color:var(--muted);">（過去12個月平均）</span>
                             </div>
@@ -806,7 +811,7 @@
 
             <div class="card">
                 <div class="widget-head"><h3>關於本工具</h3></div>
-                <p>根據 <strong>HD88C (Rev. 3_2026)</strong> 的入息及資產申報要求，收入計算參照 HD300C 邏輯。每位成員可獨立申報收入、強積金供款及豁免項目（如贍養費支出）。</p>
+                <p>根據 <strong>HD88C (Rev. 3_2026)</strong> 的入息及資產申報要求，協助計算家庭總收入及總資產淨值。</p>
                 <p style="margin-top:10px; font-size:13px; color:var(--muted);">數據僅儲存於本地瀏覽器，不會上傳至伺服器。</p>
             </div>
 
@@ -815,9 +820,10 @@
                 <ul style="padding-left: 20px; font-size:14px;">
                     <li>填寫簽訂新租約日期，系統自動顯示各申報期間</li>
                     <li>點擊「新增家庭成員」加入申請者及每位成員</li>
-                    <li>收入描述已按 HD300C 分類，直接在下拉選單選擇</li>
-                    <li>非固定收入請填寫總額及對應的月數及日數</li>
-                    <li>每位成員可獨立輸入強積金供款及新增豁免項目（贍養費支出等）</li>
+                    <li>收入描述已按分類，直接在下拉選單選擇</li>
+                    <li>固定收入（固定底薪）只需填寫金額，無需輸入月數/日數</li>
+                    <li>非固定收入及年終酬金請填寫總額及對應的月數及日數</li>
+                    <li>每位成員可獨立輸入強積金供款及新增豁免項目</li>
                     <li>資產項目可新增土地、房產、車輛、投資、業務、存款等</li>
                     <li>可匯出 PDF、Excel 及 CSV 檔案</li>
                 </ul>
@@ -871,7 +877,7 @@
         });
 
         // ------------------------------------------------------------
-        //  1. 日期與申報期間計算
+        //  1. 日期與申報期間計算（按 HD88C 文件）
         // ------------------------------------------------------------
         function updateDate() {
             const now = new Date();
@@ -887,11 +893,17 @@
                    String(date.getDate()).padStart(2,'0') + '日';
         }
 
+        function formatDateYM(date) {
+            if (!date || isNaN(date.getTime())) return '—';
+            return date.getFullYear() + '年' + String(date.getMonth()+1).padStart(2,'0') + '月';
+        }
+
         function updateDeclarationPeriod() {
             const dateInput = document.getElementById('declarationDate');
             const dateStr = dateInput.value;
             if (!dateStr) {
                 document.getElementById('signDate').textContent = '—';
+                document.getElementById('fixedMonth').textContent = '—';
                 document.getElementById('period6Months').textContent = '—';
                 document.getElementById('period12Months').textContent = '—';
                 document.getElementById('periodRent').textContent = '—';
@@ -900,14 +912,22 @@
             const d = new Date(dateStr + 'T00:00:00');
             if (isNaN(d.getTime())) {
                 document.getElementById('signDate').textContent = '—';
+                document.getElementById('fixedMonth').textContent = '—';
                 document.getElementById('period6Months').textContent = '—';
                 document.getElementById('period12Months').textContent = '—';
                 document.getElementById('periodRent').textContent = '—';
                 return;
             }
 
+            // 簽約日期
             document.getElementById('signDate').textContent = formatDateYMD(d);
 
+            // 固定收入申報月份：簽約當月
+            const fixedMonthDate = new Date(d.getFullYear(), d.getMonth(), 1);
+            document.getElementById('fixedMonth').textContent = formatDateYM(fixedMonthDate) + 
+                '（' + formatDateYMD(fixedMonthDate) + ' 至 ' + formatDateYMD(new Date(d.getFullYear(), d.getMonth()+1, 0)) + '）';
+
+            // 過去6個月期間：從簽約月份往前推6個月
             const monthStart = new Date(d.getFullYear(), d.getMonth(), 1);
             const period6Start = new Date(monthStart);
             period6Start.setMonth(period6Start.getMonth() - 6);
@@ -916,6 +936,7 @@
             document.getElementById('period6Months').textContent = 
                 formatDateYMD(period6Start) + ' 至 ' + formatDateYMD(period6End);
 
+            // 過去12個月期間
             const period12Start = new Date(monthStart);
             period12Start.setMonth(period12Start.getMonth() - 12);
             const period12End = new Date(monthStart);
@@ -923,6 +944,7 @@
             document.getElementById('period12Months').textContent = 
                 formatDateYMD(period12Start) + ' 至 ' + formatDateYMD(period12End);
 
+            // 租金/其他收入（過去6個月）
             document.getElementById('periodRent').textContent = 
                 formatDateYMD(period6Start) + ' 至 ' + formatDateYMD(period6End);
         }
@@ -1002,7 +1024,7 @@
                     <input type="text" class="member-property-address" placeholder="物業地址 (如有)" style="flex:2;">
                 </div>
 
-                <!-- 收入部分 - 描述改為下拉選單 -->
+                <!-- 收入部分 -->
                 <div style="margin-top:8px; border-top: 1px dashed var(--border); padding-top:8px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                         <span class="label-sm">💰 收入項目</span>
@@ -1087,7 +1109,6 @@
                     <option value="rental">租金收入</option>
                     <option value="other">其他收入</option>
                 </select>
-                <!-- 收入描述改為下拉選單（按HD300C分類） -->
                 <select class="income-desc-select" style="flex:1 1 180px; min-width:160px;">
                     <optgroup label="固定/非固定底薪">
                         <option value="固定底薪">固定底薪</option>
@@ -1144,6 +1165,7 @@
             `;
             container.appendChild(div);
 
+            // 根據收入類型顯示/隱藏月份及日數
             const typeSelect = div.querySelector('.income-type');
             const periodDiv = div.querySelector('.income-period');
             const monthsInput = div.querySelector('.income-months');
@@ -1166,7 +1188,7 @@
         }
 
         // ------------------------------------------------------------
-        //  5. 豁免項目管理（個別成員）
+        //  5. 豁免項目管理
         // ------------------------------------------------------------
         function addExemptionItem(btn) {
             const container = btn.closest('.member-block').querySelector('.exemption-list');
@@ -1279,7 +1301,7 @@
                     let periodDesc = '';
                     if (type === 'fixed') {
                         monthly = amount;
-                        periodDesc = '固定月薪';
+                        periodDesc = '固定月薪（簽約當月）';
                     } else {
                         const totalMonths = months + (days / 30);
                         if (totalMonths <= 0) {
@@ -1339,6 +1361,7 @@
                 totalFamilyIncome,
                 totalFamilyAsset,
                 signDateDisplay: document.getElementById('signDate').textContent,
+                fixedMonth: document.getElementById('fixedMonth').textContent,
                 period6Months: document.getElementById('period6Months').textContent,
                 period12Months: document.getElementById('period12Months').textContent,
                 periodRent: document.getElementById('periodRent').textContent
@@ -1395,8 +1418,9 @@
             infoDiv.style.color = '#333';
             infoDiv.innerHTML = `
                 <div>📆 簽約日期：${lastResult.signDateDisplay}</div>
+                <div>📊 固定收入申報月份：${lastResult.fixedMonth}</div>
                 <div>📊 非固定收入申報期間：${lastResult.period6Months}</div>
-                <div>📊 年終酬金/按年發放申報期間：${lastResult.period12Months}</div>
+                <div>📊 年終酬金申報期間：${lastResult.period12Months}</div>
                 <div>📊 租金/其他收入申報期間：${lastResult.periodRent}</div>
             `;
             content.appendChild(infoDiv);
@@ -1477,8 +1501,9 @@
             const r = lastResult;
             rows.push({ '成員姓名': '--- 申報期間資訊 ---', '與戶主關係': '', '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
             rows.push({ '成員姓名': '簽約日期', '與戶主關係': r.signDateDisplay, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '固定收入申報月份', '與戶主關係': r.fixedMonth, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
             rows.push({ '成員姓名': '非固定收入申報期間', '與戶主關係': r.period6Months, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
-            rows.push({ '成員姓名': '年終酬金/按年發放申報期間', '與戶主關係': r.period12Months, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '年終酬金申報期間', '與戶主關係': r.period12Months, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
             rows.push({ '成員姓名': '租金/其他收入申報期間', '與戶主關係': r.periodRent, '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
             rows.push({ '成員姓名': '--- 成員申報詳情 ---', '與戶主關係': '', '職業': '', '收入詳情': '', '強積金扣減 (港元)': '', '豁免扣減詳情': '', '淨收入 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
             r.membersData.forEach(m => {
