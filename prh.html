@@ -22,6 +22,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+    <!-- SheetJS (Excel) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
     <style>
         /* ---------- 全局變數 ---------- */
         :root {
@@ -42,6 +45,7 @@
             --border: #d0d9e5;
             --text-light: #4a5a6e;
             --food-gold: #cc9900;
+            --excel-green: #217346;
         }
 
         * {
@@ -398,10 +402,9 @@
         .btn-calculate:hover {
             background: #1f7a4a;
         }
-        .btn-pdf {
+
+        .btn-pdf, .btn-excel, .btn-csv {
             padding: 8px 20px;
-            background: var(--danger);
-            color: #fff;
             border: none;
             border-radius: var(--radius-sm);
             font-size: 14px;
@@ -409,9 +412,33 @@
             cursor: pointer;
             transition: background 0.2s;
             margin-top: 12px;
+            margin-right: 10px;
+            color: #fff;
+        }
+        .btn-pdf {
+            background: var(--danger);
         }
         .btn-pdf:hover {
             background: #9e2d3b;
+        }
+        .btn-excel {
+            background: var(--excel-green);
+        }
+        .btn-excel:hover {
+            background: #1a5c3a;
+        }
+        .btn-csv {
+            background: var(--primary);
+        }
+        .btn-csv:hover {
+            background: var(--primary-light);
+        }
+
+        .export-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
         }
 
         /* 申報期間方塊 */
@@ -596,6 +623,7 @@
             .asset-item { flex-direction: column; align-items: stretch; }
             .asset-item select.asset-type { flex: 1 1 auto; min-width: 100%; }
             .declaration-period-box .period-row { flex-direction: column; align-items: flex-start; }
+            .export-buttons { flex-direction: column; }
         }
 
         @media (max-width: 500px) {
@@ -603,6 +631,7 @@
             select { min-width: 55px; font-size: 12px; }
             .income-item select.income-type { min-width: 100%; }
             .asset-item select.asset-type { min-width: 100%; }
+            .export-buttons { flex-direction: column; }
         }
     </style>
 </head>
@@ -633,14 +662,10 @@
             <ul class="nav-menu">
                 <li><a href="#">首頁 Home</a></li>
                 <li><a href="addition.html" target="_blank">增加戶籍</a></li>
-                
                 <li><a href="ras.html" target="_blank">租金援助 RAS</a></li>
-                
                 <li><a href="60days.html" target="_blank">交回單位期限計算</a></li>
                 <li><a href="#" class="active">申請公屋 PRH</a></li>
-                
                 <li><a href="hd88.html" target="_blank">入住公屋入息及資產申報 HD88</a></li>
-
             </ul>
         </div>
     </nav>
@@ -700,7 +725,11 @@
                 <div id="incomeResult" class="result-table" style="display:none;">
                     <h4 style="margin-bottom:10px;">📊 家庭總收入及總資產淨值計算結果</h4>
                     <div id="incomeDetail"></div>
-                    <button class="btn-pdf" onclick="downloadPDF()">⬇️ 下載PDF</button>
+                    <div class="export-buttons">
+                        <button class="btn-pdf" onclick="downloadPDF()">⬇️ 下載PDF</button>
+                        <button class="btn-excel" onclick="downloadExcel()">⬇️ 下載Excel</button>
+                        <button class="btn-csv" onclick="downloadCSV()">⬇️ 下載CSV</button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -734,6 +763,7 @@
                     <li>非固定收入請填寫總額及對應的月數及日數</li>
                     <li>每位成員可獨立輸入強積金供款及新增豁免項目（贍養費支出等）</li>
                     <li>資產項目可新增土地、房產、車輛、投資、業務、存款等</li>
+                    <li>可匯出 PDF、Excel 及 CSV 檔案</li>
                 </ul>
             </div>
         </aside>
@@ -1068,8 +1098,10 @@
         }
 
         // ------------------------------------------------------------
-        //  7. 計算邏輯（參照 HD88C 方法）
+        //  7. 計算邏輯（儲存結果至全域變數）
         // ------------------------------------------------------------
+        let lastResult = null;
+
         function calculateIncome() {
             const blocks = document.querySelectorAll('.member-block');
             if (blocks.length === 0) {
@@ -1182,6 +1214,17 @@
                 totalFamilyAsset += memberTotalAsset;
             });
 
+            // 儲存結果
+            lastResult = {
+                declarationDate,
+                membersData,
+                totalFamilyIncome,
+                totalFamilyAsset,
+                period6Months: document.getElementById('period6Months').textContent,
+                period12Months: document.getElementById('period12Months').textContent,
+                periodRent: document.getElementById('periodRent').textContent
+            };
+
             // --- 顯示結果 ---
             const resultDiv = document.getElementById('incomeResult');
             const detailDiv = document.getElementById('incomeDetail');
@@ -1222,7 +1265,6 @@
             html += `<div style="margin-top:12px; font-size:13px; color:var(--muted);">申報日期：${formatDisplay(declarationDate)}</div>`;
             detailDiv.innerHTML = html;
             resultDiv.style.display = 'block';
-            window._resultHTML = detailDiv.innerHTML;
         }
 
         // ------------------------------------------------------------
@@ -1230,7 +1272,7 @@
         // ------------------------------------------------------------
         function downloadPDF() {
             const resultDiv = document.getElementById('incomeResult');
-            if (resultDiv.style.display === 'none' || !window._resultHTML) {
+            if (resultDiv.style.display === 'none' || !lastResult) {
                 alert('請先計算收入及資產。');
                 return;
             }
@@ -1255,7 +1297,91 @@
         }
 
         // ------------------------------------------------------------
-        //  9. 初始化
+        //  9. Excel 下載 (使用 SheetJS)
+        // ------------------------------------------------------------
+        function downloadExcel() {
+            if (!lastResult) {
+                alert('請先計算收入及資產。');
+                return;
+            }
+            const data = prepareExportData();
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.json_to_sheet(data);
+            XLSX.utils.book_append_sheet(wb, ws, '公屋入息資產申報');
+            XLSX.writeFile(wb, '公屋入息資產申報結果(HD300C).xlsx');
+        }
+
+        // ------------------------------------------------------------
+        //  10. CSV 下載
+        // ------------------------------------------------------------
+        function downloadCSV() {
+            if (!lastResult) {
+                alert('請先計算收入及資產。');
+                return;
+            }
+            const data = prepareExportData();
+            const headers = Object.keys(data[0]);
+            let csv = headers.join(',') + '\n';
+            data.forEach(row => {
+                const values = headers.map(h => {
+                    let val = row[h] || '';
+                    if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n'))) {
+                        val = '"' + val.replace(/"/g, '""') + '"';
+                    }
+                    return val;
+                });
+                csv += values.join(',') + '\n';
+            });
+            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '公屋入息資產申報結果(HD300C).csv';
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
+        // ------------------------------------------------------------
+        //  11. 準備導出數據
+        // ------------------------------------------------------------
+        function prepareExportData() {
+            const rows = [];
+            const r = lastResult;
+            r.membersData.forEach(m => {
+                let incomeDetail = m.incomeDetails.map(d => `${d.category}:${d.desc}(${d.periodDesc}) $${d.monthly.toFixed(2)}`).join('; ');
+                if (!incomeDetail) incomeDetail = '無';
+                let exemptionDetail = m.exemptionDetails.map(e => `${e.desc} $${e.monthly.toFixed(2)}`).join('; ');
+                if (!exemptionDetail) exemptionDetail = '無';
+                let assetDetail = m.assetDetails.map(a => `${a.type}:${a.desc} 淨值 $${a.netValue.toFixed(2)}`).join('; ');
+                if (!assetDetail) assetDetail = '無';
+
+                rows.push({
+                    '成員姓名': m.name,
+                    '與戶主關係': m.relation,
+                    '職業': m.occupation,
+                    '收入詳情': incomeDetail,
+                    '強積金扣減 (港元)': m.mpf.toFixed(2),
+                    '豁免扣減詳情': exemptionDetail,
+                    '淨收入 (港元)': m.netIncome.toFixed(2),
+                    '資產詳情': assetDetail,
+                    '總資產淨值 (港元)': m.totalAsset.toFixed(2)
+                });
+            });
+            rows.push({
+                '成員姓名': '家庭總計',
+                '與戶主關係': '',
+                '職業': '',
+                '收入詳情': '',
+                '強積金扣減 (港元)': '',
+                '豁免扣減詳情': '',
+                '淨收入 (港元)': r.totalFamilyIncome.toFixed(2),
+                '資產詳情': '',
+                '總資產淨值 (港元)': r.totalFamilyAsset.toFixed(2)
+            });
+            return rows;
+        }
+
+        // ------------------------------------------------------------
+        //  12. 初始化
         // ------------------------------------------------------------
         function init() {
             addMember(); // 預設申請者
@@ -1272,6 +1398,8 @@
         window.addAssetItem = addAssetItem;
         window.calculateIncome = calculateIncome;
         window.downloadPDF = downloadPDF;
+        window.downloadExcel = downloadExcel;
+        window.downloadCSV = downloadCSV;
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
