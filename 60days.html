@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>交回單位期限計算 </title>
+    <title>交回單位期限計算 - The Housing Times</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8662080629938711" crossorigin="anonymous"></script>
     <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
@@ -17,8 +17,16 @@
     <link rel="apple-touch-icon" href="https://locationpro.org/logo-192x192.png">
 
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+    <!-- jsPDF 和 html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- SheetJS (Excel) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
     <style>
-        /* ---------- 全局變數 (沿用參考網站) ---------- */
+        /* ---------- 全局變數 ---------- */
         :root {
             --bg: #f4efe6;
             --paper: #fffdf8;
@@ -28,9 +36,6 @@
             --pad: 14px;
             --soft-gray: rgba(34,34,34,0.06);
             --accent: #000;
-            --food-red: #cc3333;
-            --food-brown: #996633;
-            --food-gold: #cc9900;
             --primary: #1a5f8a;
             --primary-light: #2b7ab3;
             --primary-dark: #0e3d5c;
@@ -38,6 +43,17 @@
             --danger: #b33a4a;
             --radius-sm: 6px;
             --border: #d0d9e5;
+            --text-light: #4a5a6e;
+            --food-gold: #cc9900;
+            --excel-green: #217346;
+        }
+
+        /* 字體設定：英文/數字 Times New Roman，中文新細明體 */
+        * {
+            font-family: 'Times New Roman', '新細明體', 'PMingLiU', serif;
+        }
+        .site-title, .nav-logo {
+            font-family: 'UnifrakturCook', 'Old English Text MT', '新細明體', serif;
         }
 
         * {
@@ -48,7 +64,6 @@
 
         body {
             margin: 0;
-            font-family: Georgia, 'Times New Roman', serif;
             background-color: var(--bg);
             color: var(--ink);
             -webkit-font-smoothing: antialiased;
@@ -78,8 +93,17 @@
             min-width: 260px;
         }
 
+        #headerQuote {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--primary-dark);
+            min-height: 28px;
+            transition: opacity 0.8s ease;
+            font-family: 'Times New Roman', '新細明體', serif;
+        }
+
         .site-title {
-            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-family: 'UnifrakturCook', 'Old English Text MT', '新細明體', serif;
             font-size: 48px;
             color: #000;
             margin: 0;
@@ -89,7 +113,7 @@
         }
 
         .site-subtitle {
-            font-family: 'serif';
+            font-family: 'Times New Roman', '新細明體', serif;
             font-size: 22px;
             color: var(--muted);
             text-align: center;
@@ -122,7 +146,7 @@
         }
 
         .nav-logo {
-            font-family: 'UnifrakturCook', serif;
+            font-family: 'UnifrakturCook', 'Old English Text MT', '新細明體', serif;
             font-size: 24px;
             color: #000;
             text-decoration: none;
@@ -152,6 +176,8 @@
             font-weight: 500;
             transition: all 0.3s ease;
             background: rgba(0,0,0,0.02);
+            cursor: pointer;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .nav-menu a:hover {
@@ -184,6 +210,7 @@
             position: relative;
             overflow: visible;
             margin-bottom: 20px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .widget-head {
@@ -199,11 +226,13 @@
             margin: 0;
             font-size: 24px;
             font-weight: 700;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .widget-sub {
             font-size: 14px;
             color: var(--muted);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         /* ---------- 廣告 ---------- */
@@ -215,11 +244,13 @@
             color: #777;
             border-radius: 8px;
             margin-bottom: 20px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .ad-box h4 {
             margin-top: 0;
             margin-bottom: 10px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .ad-link {
@@ -229,6 +260,7 @@
             text-decoration: none;
             margin-top: 10px;
             font-weight: bold;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         /* ---------- Footer ---------- */
@@ -250,13 +282,14 @@
         .footer-left {
             font-size: 14px;
             color: var(--muted);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .footer-right {
             text-align: right;
         }
 
-        /* ---------- 工具表格樣式 (整合原有) ---------- */
+        /* ---------- 工具表格樣式 ---------- */
         .table-wrapper {
             overflow-x: auto;
             margin-top: 12px;
@@ -269,6 +302,7 @@
             border-collapse: collapse;
             font-size: 14px;
             min-width: 820px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         thead {
@@ -285,6 +319,7 @@
             position: sticky;
             top: 0;
             z-index: 2;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
@@ -301,12 +336,14 @@
             padding: 8px 8px;
             vertical-align: middle;
             text-align: center;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         tbody td .row-index {
             font-weight: 500;
             color: var(--text-light);
             font-size: 13px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         select, input[type="date"] {
@@ -318,7 +355,7 @@
             width: 100%;
             min-width: 80px;
             transition: border 0.2s, box-shadow 0.2s;
-            font-family: Georgia, serif;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         select:focus, input[type="date"]:focus {
@@ -335,6 +372,7 @@
             color: var(--primary-dark);
             font-size: 13px;
             white-space: nowrap;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .result-cell.empty { color: #a0b0c0; font-weight: 400; }
         .result-cell.highlight { color: var(--success); }
@@ -353,6 +391,7 @@
             border-radius: 4px;
             transition: background 0.2s;
             color: var(--text-light);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .row-actions button:hover { background: #e8edf4; }
         .row-actions .del-row { color: var(--danger); }
@@ -370,6 +409,7 @@
         .table-footer .info {
             font-size: 14px;
             color: var(--text-light);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .table-footer .info strong { color: var(--text); }
 
@@ -383,8 +423,48 @@
             font-size: 14px;
             cursor: pointer;
             transition: background 0.2s;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-add-row:hover { background: var(--primary-light); }
+
+        .btn-pdf, .btn-excel, .btn-csv {
+            padding: 8px 20px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 12px;
+            margin-right: 10px;
+            color: #fff;
+            font-family: 'Times New Roman', '新細明體', serif;
+        }
+        .btn-pdf {
+            background: var(--danger);
+        }
+        .btn-pdf:hover {
+            background: #9e2d3b;
+        }
+        .btn-excel {
+            background: var(--excel-green);
+        }
+        .btn-excel:hover {
+            background: #1a5c3a;
+        }
+        .btn-csv {
+            background: var(--primary);
+        }
+        .btn-csv:hover {
+            background: var(--primary-light);
+        }
+
+        .export-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
 
         .tip {
             font-size: 13px;
@@ -394,12 +474,14 @@
             border-radius: 20px;
             border: 1px dashed var(--border);
             display: inline-block;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .empty-state {
             padding: 40px 20px;
             text-align: center;
             color: var(--text-light);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
         .empty-state p { font-size: 16px; }
@@ -415,6 +497,7 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 10px 20px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .holiday-card .label {
             font-weight: 500;
@@ -423,6 +506,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .holiday-card .badge {
             background: var(--primary);
@@ -431,6 +515,7 @@
             padding: 0 12px;
             font-size: 13px;
             line-height: 24px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .holiday-list {
             display: flex;
@@ -446,6 +531,7 @@
             padding: 2px 12px;
             font-size: 13px;
             white-space: nowrap;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .status-msg {
             font-size: 14px;
@@ -453,6 +539,7 @@
             border-radius: 20px;
             background: #fff3e0;
             border: 1px solid #ffcc80;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .status-msg.success {
             background: #e8f5e9;
@@ -504,6 +591,7 @@
             table { font-size: 13px; min-width: 700px; }
             thead th, tbody td { padding: 6px 6px; }
             .date-input { min-width: 100px; }
+            .export-buttons { flex-direction: column; }
         }
 
         @media (max-width: 500px) {
@@ -512,7 +600,7 @@
             thead th, tbody td { padding: 4px 4px; }
             .date-input { min-width: 80px; }
             select { min-width: 55px; font-size: 12px; }
-            .header-actions button { font-size: 12px; padding: 6px 12px; }
+            .export-buttons { flex-direction: column; }
         }
 
         .fade-in { animation: fadeIn 0.2s ease-out; }
@@ -521,26 +609,11 @@
 </head>
 <body>
 
-  <amp-auto-ads type="adsense"
-        data-ad-client="ca-pub-8662080629938711">
-</amp-auto-ads>
-  
-  <amp-ad
-     layout="fixed"
-     width="360"
-     height="800"
-     type="adsense"
-     data-ad-client="ca-pub-8662080629938711"
-     data-ad-slot="4077366440">
-</amp-ad>
-  
-
-    
     <!-- ========== HEADER ========== -->
     <header>
         <div class="header-left">
             <div id="dateNow">2025年1月15日 星期三</div>
-            <div id="headerQuote">"準確計算交回單位期限"</div>
+            <div id="headerQuote">"你們要將一切的憂慮卸給神，因為他顧念你們。" — 彼得前書 5:7</div>
         </div>
         <div>
             <div class="site-title">The Housing Times</div>
@@ -561,14 +634,10 @@
             <ul class="nav-menu">
                 <li><a href="#">首頁 Home</a></li>
                 <li><a href="addition.html" target="_blank">增加戶籍</a></li>
-           
-                <li><a href="ras.html" target="_blank">租金援助</a></li>
-               
+                <li><a href="ras.html" target="_blank">租金援助 RAS</a></li>
                 <li><a href="60days.html" class="active">交回單位期限計算</a></li>
-                <li><a href="prh.html" target="_blank">申請PRH</a></li>
-               
-                <li><a href="hd88.html" target="_blank">HD88</a></li>
-              
+                <li><a href="prh.html" target="_blank">申請公屋 PRH</a></li>
+                <li><a href="hd88.html" target="_blank">入住公屋入息及資產申報 HD88</a></li>
             </ul>
         </div>
     </nav>
@@ -579,7 +648,7 @@
             <div class="card">
                 <div class="widget-head">
                     <h3>📋 交回單位期限計算</h3>
-                    <div class="widget-sub"> ｜ 自動計算起計日期、60天限期及延期30天</div>
+                    <div class="widget-sub">房委會｜自動計算起計日期、60天限期及延期30天</div>
                 </div>
 
                 <!-- 假期卡片 -->
@@ -620,10 +689,23 @@
                     <button class="btn-add-row" onclick="addRow()">➕ 新增一行</button>
                 </div>
 
+                <!-- 結果顯示及匯出按鈕 -->
+                <div id="resultContainer" style="display:none; margin-top:20px; border-top:1px solid var(--soft-gray); padding-top:16px;">
+                    <div id="resultDetail"></div>
+                    <div class="export-buttons">
+                        <button class="btn-pdf" onclick="downloadPDF()">⬇️ 下載PDF</button>
+                        <button class="btn-excel" onclick="downloadExcel()">⬇️ 下載Excel</button>
+                        <button class="btn-csv" onclick="downloadCSV()">⬇️ 下載CSV</button>
+                    </div>
+                </div>
+
                 <!-- 操作按鈕列 -->
                 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; border-top: 1px solid var(--soft-gray); padding-top: 16px;">
-
-                    <button onclick="clearAllData()" style="padding:6px 16px; background:var(--danger); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer;">🗑️ 清空所有</button>
+                    <button onclick="exportData()" style="padding:6px 16px; background:var(--primary); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-family:'Times New Roman','新細明體',serif;">📥 匯出 JSON</button>
+                    <button onclick="document.getElementById('importInput').click()" style="padding:6px 16px; background:var(--primary); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-family:'Times New Roman','新細明體',serif;">📤 匯入 JSON</button>
+                    <input type="file" id="importInput" accept=".json" style="display:none" onchange="importData(event)" />
+                    <button onclick="clearAllData()" style="padding:6px 16px; background:var(--danger); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-family:'Times New Roman','新細明體',serif;">🗑️ 清空所有</button>
+                    <button onclick="showResult()" style="padding:6px 16px; background:var(--success); color:#fff; border:none; border-radius:var(--radius-sm); cursor:pointer; font-family:'Times New Roman','新細明體',serif;">📊 顯示計算結果</button>
                 </div>
             </div>
         </main>
@@ -649,14 +731,14 @@
                     <h3>關於本工具</h3>
                 </div>
                 <p>此計算機協助計算交回原住單位期限。自動從 <strong>Nager.Date</strong> 獲取香港公眾假期，確保工作天計算準確。</p>
-                <p style="margin-top:10px; font-size:13px; color:var(--muted);">數據儲存於本地瀏覽器</p>
+                <p style="margin-top:10px; font-size:13px; color:var(--muted);">數據儲存於本地瀏覽器，可匯出備份。</p>
             </div>
 
             <div class="card">
                 <div class="widget-head">
                     <h3>使用說明</h3>
                 </div>
-                <ul style="padding-left: 20px; font-size:14px;">
+                <ul style="padding-left: 20px; font-size:14px; font-family:'Times New Roman','新細明體',serif;">
                     <li>分類 1：只填「生效日期」</li>
                     <li>分類 2 &amp; 4：填寫「收樓日」及「簽署轉讓契據日期」</li>
                     <li>分類 3：只填「轉讓契據日期」</li>
@@ -688,10 +770,39 @@
         </div>
     </footer>
 
-    <!-- ========== JAVASCRIPT (工具邏輯) ========== -->
+    <!-- ========== JAVASCRIPT ========== -->
     <script>
+        // ============================================================
+        //  1. 聖經金句輪播
+        // ============================================================
+        const bibleVerses = [
+            '"你們要將一切的憂慮卸給神，因為他顧念你們。" — 彼得前書 5:7',
+            '"我靠著那加給我力量的，凡事都能做。" — 腓立比書 4:13',
+            '"神是我們的避難所，是我們的力量，是我們在患難中隨時的幫助。" — 詩篇 46:1',
+            '"你們祈求，就給你們；尋找，就尋見；叩門，就給你們開門。" — 馬太福音 7:7',
+            '"當將你的事交託耶和華，並倚靠他，他就必成全。" — 詩篇 37:5',
+            '"主耶和華啊，你是我所盼望的；從我年幼，你是我所倚靠的。" — 詩篇 71:5',
+            '"你的話是我腳前的燈，是我路上的光。" — 詩篇 119:105',
+            '"神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。" — 約翰福音 3:16'
+        ];
+        let verseIndex = 0;
+
+        function rotateVerse() {
+            const quoteEl = document.getElementById('headerQuote');
+            if (!quoteEl) return;
+            verseIndex = (verseIndex + 1) % bibleVerses.length;
+            quoteEl.style.opacity = '0';
+            setTimeout(() => {
+                quoteEl.textContent = bibleVerses[verseIndex];
+                quoteEl.style.opacity = '1';
+            }, 400);
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(rotateVerse, 15000);
+        });
+
         // --------------------------------------------
-        //  1. 日期與時鐘 (保留參考網站功能)
+        //  2. 日期顯示
         // --------------------------------------------
         function updateDate() {
             const now = new Date();
@@ -701,13 +812,14 @@
         document.addEventListener('DOMContentLoaded', updateDate);
 
         // --------------------------------------------
-        //  2. 交回單位期限計算核心邏輯
+        //  3. 交回單位期限計算核心邏輯
         // --------------------------------------------
 
         // 狀態
         let holidays = [];
         let rows = [];
         let nextId = 1;
+        let lastResult = null;
 
         // DOM 參考
         const tbody = document.getElementById('tableBody');
@@ -715,6 +827,8 @@
         const holidayCountEl = document.getElementById('holidayCount');
         const holidayStatusEl = document.getElementById('holidayStatus');
         const rowCountEl = document.getElementById('rowCount');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultDetail = document.getElementById('resultDetail');
 
         // 工具函數
         function parseDate(str) {
@@ -896,6 +1010,69 @@
             if (!confirm('確定要刪除所有數據嗎？')) return;
             rows = [];
             renderTable();
+            resultContainer.style.display = 'none';
+            lastResult = null;
+        }
+
+        // 顯示計算結果
+        function showResult() {
+            if (rows.length === 0) {
+                alert('請先新增數據。');
+                return;
+            }
+
+            const holidaySet = getHolidaySet();
+            let resultRows = [];
+            let totalItems = rows.length;
+
+            rows.forEach((row, index) => {
+                const cat = row.category || '';
+                const date1 = row.date1 || '';
+                const date2 = row.date2 || '';
+                const workingDay10 = date2 ? getNthWorkingDay(date2, 10, holidaySet) : '';
+                const startDate = (cat && date1) ? calcStartDate(cat, date1, date2, workingDay10) : '';
+                const day60 = startDate ? calc60DayLimit(startDate) : '';
+                const extension = day60 ? calcExtension(day60) : '';
+                const catLabel = { '1':'新租約DOC', '2':'一手居屋', '3':'二手居屋', '4':'私人物業' }[cat] || cat;
+
+                resultRows.push({
+                    no: index + 1,
+                    category: catLabel,
+                    date1: date1 || '—',
+                    date2: date2 || '—',
+                    workingDay10: workingDay10 || '—',
+                    startDate: startDate || '—',
+                    day60: day60 || '—',
+                    extension: extension || '—'
+                });
+            });
+
+            lastResult = {
+                rows: resultRows,
+                totalItems: totalItems,
+                holidayCount: holidays.length,
+                generatedAt: new Date().toLocaleString('zh-HK')
+            };
+
+            let html = `<table>
+                <tr><th style="font-weight:bold;">#</th><th>分類</th><th>日期①</th><th>日期②</th><th>第10個工作天</th><th>起計日期</th><th>60天交回限期</th><th>延期30天最後限期</th></tr>`;
+            resultRows.forEach(r => {
+                html += `<tr>
+                    <td>${r.no}</td>
+                    <td>${r.category}</td>
+                    <td>${r.date1}</td>
+                    <td>${r.date2}</td>
+                    <td>${r.workingDay10}</td>
+                    <td>${r.startDate}</td>
+                    <td>${r.day60}</td>
+                    <td>${r.extension}</td>
+                </tr>`;
+            });
+            html += `</table>`;
+            html += `<div style="margin-top:12px; font-size:13px; color:var(--muted);">共 ${totalItems} 項｜假期數量：${holidays.length} 個｜生成時間：${lastResult.generatedAt}</div>`;
+            resultDetail.innerHTML = html;
+            resultContainer.style.display = 'block';
+            window._resultHTML = resultDetail.innerHTML;
         }
 
         // 假期獲取 (Nager.Date API)
@@ -1005,7 +1182,181 @@
             event.target.value = '';
         }
 
-        // 初始化
+        // ============================================================
+        //  4. PDF 下載（克隆 DOM 方式）
+        // ============================================================
+        function downloadPDF() {
+            if (!lastResult) {
+                alert('請先點擊「顯示計算結果」生成結果。');
+                return;
+            }
+
+            if (typeof html2canvas === 'undefined') {
+                alert('PDF 生成庫未加載，請檢查網絡連線後再試。');
+                return;
+            }
+
+            try {
+                const clone = resultContainer.cloneNode(true);
+                
+                // 設定克隆的樣式以便截圖
+                clone.style.position = 'absolute';
+                clone.style.left = '-9999px';
+                clone.style.top = '0';
+                clone.style.width = '800px';
+                clone.style.backgroundColor = '#ffffff';
+                clone.style.padding = '20px';
+                clone.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                document.body.appendChild(clone);
+
+                html2canvas(clone, {
+                    scale: 2,
+                    backgroundColor: '#ffffff',
+                    useCORS: true,
+                    logging: false,
+                    width: 800,
+                    onclone: function(doc) {
+                        const elements = doc.querySelectorAll('*');
+                        elements.forEach(el => {
+                            el.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                        });
+                    }
+                }).then(canvas => {
+                    if (clone.parentNode) document.body.removeChild(clone);
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgWidth = 210;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                    pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, Math.min(imgHeight, 280));
+                    pdf.save('交回單位期限計算結果.pdf');
+                }).catch(err => {
+                    if (clone.parentNode) document.body.removeChild(clone);
+                    alert('生成PDF失敗，請稍後再試。錯誤訊息：' + err.message);
+                    console.error('html2canvas error:', err);
+                });
+            } catch (e) {
+                alert('生成PDF失敗：' + e.message);
+                console.error(e);
+            }
+        }
+
+        // ============================================================
+        //  5. Excel 下載
+        // ============================================================
+        function downloadExcel() {
+            if (!lastResult) {
+                alert('請先點擊「顯示計算結果」生成結果。');
+                return;
+            }
+            try {
+                const data = prepareExportData();
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.json_to_sheet(data);
+                XLSX.utils.book_append_sheet(wb, ws, '交回單位期限');
+                XLSX.writeFile(wb, '交回單位期限計算結果.xlsx');
+            } catch (err) {
+                alert('匯出 Excel 失敗：' + err.message);
+            }
+        }
+
+        // ============================================================
+        //  6. CSV 下載
+        // ============================================================
+        function downloadCSV() {
+            if (!lastResult) {
+                alert('請先點擊「顯示計算結果」生成結果。');
+                return;
+            }
+            try {
+                const data = prepareExportData();
+                const headers = Object.keys(data[0]);
+                let csv = headers.join(',') + '\n';
+                data.forEach(row => {
+                    const values = headers.map(h => {
+                        let val = row[h] || '';
+                        if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n'))) {
+                            val = '"' + val.replace(/"/g, '""') + '"';
+                        }
+                        return val;
+                    });
+                    csv += values.join(',') + '\n';
+                });
+                const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = '交回單位期限計算結果.csv';
+                link.click();
+                URL.revokeObjectURL(link.href);
+            } catch (err) {
+                alert('匯出 CSV 失敗：' + err.message);
+            }
+        }
+
+        // ============================================================
+        //  7. 準備導出數據
+        // ============================================================
+        function prepareExportData() {
+            const rows = [];
+            const r = lastResult;
+            rows.push({
+                '序號': '--- 基本資訊 ---',
+                '分類': '',
+                '日期①': '',
+                '日期②': '',
+                '第10個工作天': '',
+                '起計日期': '',
+                '60天交回限期': '',
+                '延期30天最後限期': ''
+            });
+            rows.push({
+                '序號': '假期數量',
+                '分類': r.holidayCount + ' 個',
+                '日期①': '',
+                '日期②': '',
+                '第10個工作天': '',
+                '起計日期': '',
+                '60天交回限期': '',
+                '延期30天最後限期': ''
+            });
+            rows.push({
+                '序號': '生成時間',
+                '分類': r.generatedAt,
+                '日期①': '',
+                '日期②': '',
+                '第10個工作天': '',
+                '起計日期': '',
+                '60天交回限期': '',
+                '延期30天最後限期': ''
+            });
+            rows.push({
+                '序號': '--- 計算結果 ---',
+                '分類': '',
+                '日期①': '',
+                '日期②': '',
+                '第10個工作天': '',
+                '起計日期': '',
+                '60天交回限期': '',
+                '延期30天最後限期': ''
+            });
+            r.rows.forEach(row => {
+                rows.push({
+                    '序號': row.no,
+                    '分類': row.category,
+                    '日期①': row.date1,
+                    '日期②': row.date2,
+                    '第10個工作天': row.workingDay10,
+                    '起計日期': row.startDate,
+                    '60天交回限期': row.day60,
+                    '延期30天最後限期': row.extension
+                });
+            });
+            return rows;
+        }
+
+        // ============================================================
+        //  8. 初始化
+        // ============================================================
         function init() {
             const hasStorage = loadFromStorage();
 
@@ -1035,11 +1386,13 @@
         window.exportData = exportData;
         window.importData = importData;
         window.fetchHolidays = fetchHolidays;
+        window.showResult = showResult;
+        window.downloadPDF = downloadPDF;
+        window.downloadExcel = downloadExcel;
+        window.downloadCSV = downloadCSV;
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-
-
 
 </body>
 </html>
