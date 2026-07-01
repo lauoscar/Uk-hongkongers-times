@@ -18,7 +18,7 @@
 
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
-    <!-- jsPDF 和 html2canvas (使用可靠 CDN) -->
+    <!-- jsPDF 和 html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -695,7 +695,7 @@
                     <li>收入描述已按 HD300C 分類，直接在下拉選單選擇</li>
                     <li>非固定收入請填寫總額及對應的月數及日數</li>
                     <li>每位成員可獨立輸入強積金供款及新增豁免項目</li>
-                    <li>資產項目可新增土地、房產、車輛、投資、業務、存款等</li>
+                    <li>資產項目預設為「存款」和「現金」兩項，可新增更多資產</li>
                     <li>可匯出 PDF、Excel 及 CSV 檔案</li>
                 </ul>
             </div>
@@ -834,7 +834,7 @@
         }
 
         // ============================================================
-        //  3. 家庭成員管理
+        //  3. 家庭成員管理（資產預設：存款 + 現金）
         // ============================================================
         let memberCounter = 0;
 
@@ -911,7 +911,9 @@
             const exemptionList = div.querySelector('.exemption-list');
             addExemptionItemToContainer(exemptionList);
             const assetList = div.querySelector('.asset-list');
-            addAssetItemToContainer(assetList);
+            // 資產預設：存款 + 現金
+            addAssetItemToContainer(assetList, '存款/現金');
+            addAssetItemToContainer(assetList, '可動用現金');
         }
 
         function removeMember(btn) {
@@ -1037,18 +1039,26 @@
 
         function addAssetItem(btn) {
             const container = btn.closest('.member-block').querySelector('.asset-list');
+            addAssetItemToContainer(container, '');
+        }
+
+        function addAssetItemToContainer(container, defaultDesc) {
             const div = document.createElement('div');
             div.className = 'asset-item';
+            const descPlaceholder = defaultDesc || '描述/地址';
             div.innerHTML = `
                 <select class="asset-type" style="flex:0 0 130px; min-width:100px;">
+                    <option value="deposit">存款/現金</option>
+                    <option value="investment">投資</option>
+                    <option value="vehicle">車輛</option>   
+                    <option value="business">經營業務</option>
                     <option value="land">土地</option>
                     <option value="property">房產</option>
-                    <option value="vehicle">車輛</option>
-                    <option value="investment">投資</option>
-                    <option value="business">經營業務</option>
-                    <option value="deposit">存款/現金</option>
+
+
+
                 </select>
-                <input type="text" class="asset-desc" placeholder="描述/地址" style="flex:1 1 150px; min-width:100px;">
+                <input type="text" class="asset-desc" placeholder="${descPlaceholder}" style="flex:1 1 150px; min-width:100px;" value="${defaultDesc || ''}">
                 <input type="number" class="asset-value" step="0.01" min="0" placeholder="價值/淨值" style="flex:1 1 120px; min-width:100px;">
                 <input type="number" class="asset-loan" step="0.01" min="0" placeholder="未償還貸款 (如有)" style="flex:1 1 120px; min-width:80px;">
                 <input type="number" class="asset-ownership" step="0.01" min="0" max="100" placeholder="業權%" style="flex:0.7; width:70px;" value="100">
@@ -1203,7 +1213,7 @@
         }
 
         // ============================================================
-        //  6. PDF 下載（修正版）
+        //  6. PDF 下載（修正版：克隆 DOM 方式）
         // ============================================================
         function downloadPDF() {
             const resultDiv = document.getElementById('incomeResult');
@@ -1218,66 +1228,68 @@
                 return;
             }
 
-            // 建立 PDF 內容
-            const content = document.createElement('div');
-            content.style.padding = '20px';
-            content.style.fontFamily = '"Times New Roman", "新細明體", serif';
-            content.style.width = '800px';
-            content.style.backgroundColor = '#ffffff';
-            
-            // 標題
-            const title = document.createElement('h3');
-            title.textContent = '📊 家庭總收入及總資產淨值計算結果';
-            title.style.textAlign = 'center';
-            title.style.marginBottom = '15px';
-            title.style.fontFamily = '"Times New Roman", "新細明體", serif';
-            content.appendChild(title);
-            
-            // 申報期間資訊
-            const infoDiv = document.createElement('div');
-            infoDiv.style.marginBottom = '15px';
-            infoDiv.style.fontSize = '14px';
-            infoDiv.style.color = '#333';
-            infoDiv.style.lineHeight = '1.8';
-            infoDiv.style.fontFamily = '"Times New Roman", "新細明體", serif';
-            infoDiv.innerHTML = `
-                <div>📆 申報日期：${lastResult.signDate}</div>
-                <div>📊 固定收入申報月份：${lastResult.fixedMonth}</div>
-                <div>📊 非固定收入申報期間：${lastResult.period6Months}</div>
-                <div>📊 年終酬金/按年發放申報期間：${lastResult.period12Months}</div>
-                <div>📊 租金/其他收入申報期間：${lastResult.periodRent}</div>
-            `;
-            content.appendChild(infoDiv);
-            
-            // 複製結果表格
-            const tableClone = document.querySelector('#incomeDetail table');
-            if (tableClone) {
-                const tableCopy = tableClone.cloneNode(true);
-                tableCopy.style.width = '100%';
-                tableCopy.style.borderCollapse = 'collapse';
-                tableCopy.style.fontSize = '13px';
-                tableCopy.style.fontFamily = '"Times New Roman", "新細明體", serif';
-                // 確保表格邊框
-                const cells = tableCopy.querySelectorAll('td, th');
-                cells.forEach(cell => {
-                    cell.style.border = '1px solid #ccc';
-                    cell.style.padding = '6px 8px';
-                    cell.style.textAlign = 'left';
-                    cell.style.fontFamily = '"Times New Roman", "新細明體", serif';
-                });
-                content.appendChild(tableCopy);
-            }
+            try {
+                // 克隆結果區域
+                const clone = resultDiv.cloneNode(true);
+                // 在頂部插入申報期間資訊
+                const infoDiv = document.createElement('div');
+                infoDiv.style.marginBottom = '15px';
+                infoDiv.style.padding = '10px';
+                infoDiv.style.backgroundColor = '#f0f4f8';
+                infoDiv.style.borderRadius = '6px';
+                infoDiv.style.fontSize = '14px';
+                infoDiv.style.color = '#333';
+                infoDiv.style.lineHeight = '1.8';
+                infoDiv.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                infoDiv.innerHTML = `
+                    <div>📆 申報日期：${lastResult.signDate}</div>
+                    <div>📊 固定收入申報月份：${lastResult.fixedMonth}</div>
+                    <div>📊 非固定收入申報期間：${lastResult.period6Months}</div>
+                    <div>📊 年終酬金/按年發放申報期間：${lastResult.period12Months}</div>
+                    <div>📊 租金/其他收入申報期間：${lastResult.periodRent}</div>
+                `;
+                clone.insertBefore(infoDiv, clone.firstChild);
 
-            // 使用 html2canvas 生成圖片
-            html2canvas(content, {
-                scale: 2,
-                backgroundColor: '#ffffff',
-                logging: false,
-                useCORS: true,
-                width: 800,
-                height: content.scrollHeight
-            }).then(canvas => {
-                try {
+                // 確保表格邊框完整
+                const table = clone.querySelector('table');
+                if (table) {
+                    table.style.width = '100%';
+                    table.style.borderCollapse = 'collapse';
+                    const cells = table.querySelectorAll('td, th');
+                    cells.forEach(cell => {
+                        cell.style.border = '1px solid #ccc';
+                        cell.style.padding = '6px 8px';
+                        cell.style.textAlign = 'left';
+                        cell.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                    });
+                }
+
+                // 設定克隆的樣式以便截圖
+                clone.style.position = 'absolute';
+                clone.style.left = '-9999px';
+                clone.style.top = '0';
+                clone.style.width = '800px';
+                clone.style.backgroundColor = '#ffffff';
+                clone.style.padding = '20px';
+                clone.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                document.body.appendChild(clone);
+
+                // 使用 html2canvas 截圖
+                html2canvas(clone, {
+                    scale: 2,
+                    backgroundColor: '#ffffff',
+                    useCORS: true,
+                    logging: false,
+                    width: 800,
+                    onclone: function(doc) {
+                        const elements = doc.querySelectorAll('*');
+                        elements.forEach(el => {
+                            el.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                        });
+                    }
+                }).then(canvas => {
+                    // 移除克隆
+                    if (clone.parentNode) document.body.removeChild(clone);
                     const imgData = canvas.toDataURL('image/png');
                     const { jsPDF } = window.jspdf;
                     const pdf = new jsPDF('p', 'mm', 'a4');
@@ -1285,14 +1297,15 @@
                     const imgHeight = (canvas.height * imgWidth) / canvas.width;
                     pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, Math.min(imgHeight, 280));
                     pdf.save('公屋入息資產申報結果.pdf');
-                } catch (err) {
-                    console.error('PDF 生成錯誤:', err);
-                    alert('生成 PDF 失敗，請稍後再試。錯誤訊息：' + err.message);
-                }
-            }).catch(err => {
-                console.error('html2canvas 錯誤:', err);
-                alert('生成 PDF 失敗，請稍後再試。錯誤訊息：' + err.message);
-            });
+                }).catch(err => {
+                    if (clone.parentNode) document.body.removeChild(clone);
+                    alert('生成PDF失敗，請稍後再試。錯誤訊息：' + err.message);
+                    console.error('html2canvas error:', err);
+                });
+            } catch (e) {
+                alert('生成PDF失敗：' + e.message);
+                console.error(e);
+            }
         }
 
         // ============================================================
