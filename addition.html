@@ -18,8 +18,11 @@
 
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
+    <!-- jsPDF 和 html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- SheetJS (Excel) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <style>
@@ -45,6 +48,14 @@
             --excel-green: #217346;
         }
 
+        /* 字體設定：英文/數字 Times New Roman，中文新細明體 */
+        * {
+            font-family: 'Times New Roman', '新細明體', 'PMingLiU', serif;
+        }
+        .site-title, .nav-logo {
+            font-family: 'UnifrakturCook', 'Old English Text MT', '新細明體', serif;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -53,7 +64,6 @@
 
         body {
             margin: 0;
-            font-family: Georgia, 'Times New Roman', serif;
             background-color: var(--bg);
             color: var(--ink);
             -webkit-font-smoothing: antialiased;
@@ -83,8 +93,17 @@
             min-width: 260px;
         }
 
+        #headerQuote {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--primary-dark);
+            min-height: 28px;
+            transition: opacity 0.8s ease;
+            font-family: 'Times New Roman', '新細明體', serif;
+        }
+
         .site-title {
-            font-family: 'UnifrakturCook', 'Old English Text MT', serif;
+            font-family: 'UnifrakturCook', 'Old English Text MT', '新細明體', serif;
             font-size: 48px;
             color: #000;
             margin: 0;
@@ -94,7 +113,7 @@
         }
 
         .site-subtitle {
-            font-family: 'serif';
+            font-family: 'Times New Roman', '新細明體', serif;
             font-size: 22px;
             color: var(--muted);
             text-align: center;
@@ -127,7 +146,7 @@
         }
 
         .nav-logo {
-            font-family: 'UnifrakturCook', serif;
+            font-family: 'UnifrakturCook', 'Old English Text MT', '新細明體', serif;
             font-size: 24px;
             color: #000;
             text-decoration: none;
@@ -158,6 +177,7 @@
             transition: all 0.3s ease;
             background: rgba(0,0,0,0.02);
             cursor: pointer;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .nav-menu a:hover {
@@ -190,6 +210,7 @@
             position: relative;
             overflow: visible;
             margin-bottom: 20px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .widget-head {
@@ -205,11 +226,13 @@
             margin: 0;
             font-size: 24px;
             font-weight: 700;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .widget-sub {
             font-size: 14px;
             color: var(--muted);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         /* ---------- 廣告 ---------- */
@@ -221,11 +244,13 @@
             color: #777;
             border-radius: 8px;
             margin-bottom: 20px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .ad-box h4 {
             margin-top: 0;
             margin-bottom: 10px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .ad-link {
@@ -235,6 +260,7 @@
             text-decoration: none;
             margin-top: 10px;
             font-weight: bold;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         /* ---------- Footer ---------- */
@@ -256,6 +282,7 @@
         .footer-left {
             font-size: 14px;
             color: var(--muted);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .footer-right {
@@ -273,11 +300,13 @@
             font-weight: 500;
             margin-bottom: 4px;
             font-size: 15px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .form-group .hint {
             font-size: 13px;
             color: var(--muted);
             margin-left: 8px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .member-block {
@@ -286,6 +315,7 @@
             padding: 12px 16px;
             margin-bottom: 16px;
             border: 1px solid var(--border);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .member-block .member-header {
             display: flex;
@@ -294,6 +324,7 @@
             margin-bottom: 10px;
             font-weight: bold;
             font-size: 16px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .member-block .member-header .del-member {
             background: transparent;
@@ -318,6 +349,7 @@
             font-size: 13px;
             color: var(--text-light);
             flex: 0 0 auto;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         select, input[type="date"], input[type="number"], input[type="text"] {
@@ -328,7 +360,7 @@
             background: #fff;
             width: 100%;
             transition: border 0.2s, box-shadow 0.2s;
-            font-family: Georgia, serif;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         select:focus, input:focus {
             border-color: var(--primary);
@@ -344,6 +376,7 @@
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 13px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-add-member:hover {
             background: var(--primary-light);
@@ -356,6 +389,7 @@
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 12px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-add-income:hover {
             background: var(--primary);
@@ -368,6 +402,7 @@
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 12px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-add-asset:hover {
             background: #1f7a4a;
@@ -380,6 +415,7 @@
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 12px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-add-other-income:hover {
             background: #b8860b;
@@ -395,6 +431,7 @@
             font-weight: 500;
             cursor: pointer;
             transition: background 0.2s;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-calculate:hover {
             background: #1f7a4a;
@@ -411,6 +448,7 @@
             margin-top: 12px;
             margin-right: 10px;
             color: #fff;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .btn-pdf {
             background: var(--danger);
@@ -443,14 +481,17 @@
             display: block;
             line-height: 1.8;
             max-width: 100%;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .declaration-period-box .label {
             font-weight: 700;
             display: inline-block;
             min-width: 120px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .declaration-period-box .value {
             font-weight: 400;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .declaration-period-box .period-row {
             display: flex;
@@ -459,7 +500,7 @@
             gap: 4px 8px;
         }
 
-        /* ---------- 主要收入項目行（修改：選項形式） ---------- */
+        /* ---------- 主要收入項目行（選項形式） ---------- */
         .income-item {
             display: flex;
             flex-wrap: wrap;
@@ -470,12 +511,12 @@
             border: 1px solid var(--border);
             margin-top: 4px;
             align-items: center;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .income-item > * {
             flex: 1 1 120px;
             min-width: 80px;
         }
-        /* 收入描述改用下拉選單 */
         .income-item select.income-desc {
             flex: 1 1 150px;
             min-width: 130px;
@@ -503,6 +544,7 @@
         .income-item .income-period span {
             font-size: 13px;
             white-space: nowrap;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .income-item .del-item {
             flex: 0 0 auto;
@@ -528,6 +570,7 @@
             border: 1px solid var(--border);
             margin-top: 4px;
             align-items: center;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .other-income-item > * {
             flex: 1 1 120px;
@@ -553,6 +596,7 @@
             border: 1px solid var(--border);
             margin-top: 4px;
             align-items: center;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .asset-item > * {
             flex: 1 1 120px;
@@ -594,6 +638,7 @@
             font-size: 14px;
             color: var(--text-light);
             flex: 0 0 auto;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .mpf-section input {
             max-width: 200px;
@@ -602,6 +647,7 @@
         .mpf-section .hint {
             font-size: 13px;
             color: var(--muted);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         /* 結果表格 */
@@ -612,21 +658,25 @@
             padding: 16px;
             margin-top: 16px;
             overflow-x: auto;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .result-table table {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .result-table td, .result-table th {
             padding: 6px 8px;
             border-bottom: 1px solid var(--soft-gray);
             text-align: left;
+            font-family: 'Times New Roman', '新細明體', serif;
         }
         .result-table .total {
             font-weight: 700;
             font-size: 18px;
             color: var(--primary-dark);
+            font-family: 'Times New Roman', '新細明體', serif;
         }
 
         .export-buttons {
@@ -657,6 +707,7 @@
             .declaration-period-box .period-row { flex-direction: column; align-items: flex-start; }
             .mpf-section { flex-direction: column; align-items: stretch; }
             .mpf-section input { max-width: 100%; flex: 1 1 auto; }
+            .export-buttons { flex-direction: column; }
         }
 
         @media (max-width: 500px) {
@@ -675,7 +726,7 @@
     <header>
         <div class="header-left">
             <div id="dateNow">2025年1月15日 星期三</div>
-            <div id="headerQuote">"準確申報入息及資產，順利增加戶籍"</div>
+            <div id="headerQuote">"你們要將一切的憂慮卸給神，因為他顧念你們。" — 彼得前書 5:7</div>
         </div>
         <div>
             <div class="site-title">The Housing Times</div>
@@ -796,7 +847,7 @@
                     <li><strong>主要收入</strong>：選擇收入類型（底薪/津貼/花紅等），固定收入只填金額，非固定收入預設12個月</li>
                     <li><strong>強積金供款</strong>：在成員級別獨立申報，統一扣減</li>
                     <li><strong>其他收入</strong>：退休金、綜援、贍養費、親友資助等</li>
-                    <li><strong>資產</strong>：存款、投資、業務、車輛、牌照、物業、土地及扣除額</li>
+                    <li><strong>資產</strong>：存款、現金、投資、業務、車輛、牌照、物業、土地及扣除額、其他，預設有「存款」</li>
                     <li>可匯出 PDF、Excel 及 CSV 檔案</li>
                 </ul>
             </div>
@@ -821,8 +872,37 @@
 
     <!-- ========== JAVASCRIPT ========== -->
     <script>
+        // ============================================================
+        //  1. 聖經金句輪播
+        // ============================================================
+        const bibleVerses = [
+            '"你們要將一切的憂慮卸給神，因為他顧念你們。" — 彼得前書 5:7',
+            '"我靠著那加給我力量的，凡事都能做。" — 腓立比書 4:13',
+            '"神是我們的避難所，是我們的力量，是我們在患難中隨時的幫助。" — 詩篇 46:1',
+            '"你們祈求，就給你們；尋找，就尋見；叩門，就給你們開門。" — 馬太福音 7:7',
+            '"當將你的事交託耶和華，並倚靠他，他就必成全。" — 詩篇 37:5',
+            '"主耶和華啊，你是我所盼望的；從我年幼，你是我所倚靠的。" — 詩篇 71:5',
+            '"你的話是我腳前的燈，是我路上的光。" — 詩篇 119:105',
+            '"神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。" — 約翰福音 3:16'
+        ];
+        let verseIndex = 0;
+
+        function rotateVerse() {
+            const quoteEl = document.getElementById('headerQuote');
+            if (!quoteEl) return;
+            verseIndex = (verseIndex + 1) % bibleVerses.length;
+            quoteEl.style.opacity = '0';
+            setTimeout(() => {
+                quoteEl.textContent = bibleVerses[verseIndex];
+                quoteEl.style.opacity = '1';
+            }, 400);
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(rotateVerse, 15000);
+        });
+
         // ------------------------------------------------------------
-        //  1. 日期與申報期間計算
+        //  1b. 日期與申報期間計算
         // ------------------------------------------------------------
         function updateDate() {
             const now = new Date();
@@ -915,7 +995,7 @@
         }
 
         // ------------------------------------------------------------
-        //  3. 家庭成員管理
+        //  3. 家庭成員管理（資產預設：存款 + 現金）
         // ------------------------------------------------------------
         let memberCounter = 0;
 
@@ -959,7 +1039,7 @@
                     <input type="text" class="member-employer" placeholder="僱主/公司名稱" style="flex:1.5;">
                 </div>
 
-                <!-- 主要收入（修改：描述用下拉選單） -->
+                <!-- 主要收入 -->
                 <div style="margin-top:8px; border-top: 1px dashed var(--border); padding-top:8px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                         <span class="label-sm">💰 主要收入（受僱/自僱）</span>
@@ -997,13 +1077,15 @@
 
             renumberMembers();
 
-            // 預設一個主要收入、一個其他收入和一個資產項目
+            // 預設一個主要收入、一個其他收入和兩個資產（存款+現金）
             const incomeList = div.querySelector('.income-list');
             addIncomeItemToContainer(incomeList);
             const otherIncomeList = div.querySelector('.other-income-list');
             addOtherIncomeItemToContainer(otherIncomeList);
             const assetList = div.querySelector('.asset-list');
-            addAssetItemToContainer(assetList);
+            // 預設資產：存款
+            addAssetItemToContainer(assetList, '存款');
+            
         }
 
         function removeMember(btn) {
@@ -1025,7 +1107,7 @@
         }
 
         // ------------------------------------------------------------
-        //  4. 主要收入項目管理（描述改為下拉選單，固定/非固定分開處理）
+        //  4. 主要收入項目管理（描述下拉選單，固定/非固定處理）
         // ------------------------------------------------------------
         function addIncomeItem(btn) {
             const container = btn.closest('.member-block').querySelector('.income-list');
@@ -1120,19 +1202,21 @@
         }
 
         // ------------------------------------------------------------
-        //  6. 資產項目管理
+        //  6. 資產項目管理（支援預設描述）
         // ------------------------------------------------------------
         function addAssetItem(btn) {
             const container = btn.closest('.member-block').querySelector('.asset-list');
-            addAssetItemToContainer(container);
+            addAssetItemToContainer(container, '');
         }
 
-        function addAssetItemToContainer(container) {
+        function addAssetItemToContainer(container, defaultDesc) {
             const div = document.createElement('div');
             div.className = 'asset-item';
+            const descPlaceholder = defaultDesc || '描述/地址';
             div.innerHTML = `
                 <select class="asset-type" style="flex:0 0 130px; min-width:100px;">
-                    <option value="deposit">存款/現金/貸款</option>
+                    <option value="deposit">存款</option>
+                    <option value="cash">現金</option>
                     <option value="investment">投資</option>
                     <option value="business">經營業務</option>
                     <option value="vehicle">車輛</option>
@@ -1140,8 +1224,9 @@
                     <option value="property">物業</option>
                     <option value="land">土地</option>
                     <option value="deduction">扣除額(退休金/賠償金)</option>
+                    <option value="others">其他</option>
                 </select>
-                <input type="text" class="asset-desc" placeholder="描述/地址" style="flex:1 1 150px; min-width:100px;">
+                <input type="text" class="asset-desc" placeholder="${descPlaceholder}" style="flex:1 1 150px; min-width:100px;" value="${defaultDesc || ''}">
                 <input type="number" class="asset-value" step="0.01" min="0" placeholder="價值/淨值" style="flex:1 1 120px; min-width:100px;">
                 <input type="number" class="asset-loan" step="0.01" min="0" placeholder="未償還貸款 (如有)" style="flex:1 1 120px; min-width:80px;">
                 <input type="number" class="asset-ownership" step="0.01" min="0" max="100" placeholder="業權%" style="flex:0.7; width:70px;" value="100">
@@ -1275,9 +1360,9 @@
                     }
                     memberTotalAsset += netValue;
                     const typeLabel = {
-                        deposit:'存款/現金/貸款', investment:'投資', business:'經營業務',
+                        deposit:'存款', cash :'現金', investment:'投資', business:'經營業務',
                         vehicle:'車輛', license:'的士/小巴牌照', property:'物業',
-                        land:'土地', deduction:'扣除額'
+                        land:'土地', deduction:'扣除額', others: '其他'
                     }[type] || type;
                     assetDetails.push({ type: typeLabel, desc, value, loan, ownership, netValue });
                 });
@@ -1297,11 +1382,13 @@
                 totalFamilyAsset += memberTotalAsset;
             });
 
+            // 儲存結果
             lastResult = {
                 declarationDate,
                 membersData,
                 totalFamilyIncome,
                 totalFamilyAsset,
+                signDate: document.getElementById('signDate').textContent,
                 reportMonth: document.getElementById('reportMonth').textContent,
                 reportYear: document.getElementById('reportYear').textContent,
                 reportPeriod: document.getElementById('reportPeriod').textContent
@@ -1344,13 +1431,14 @@
             });
             html += `<tr><td colspan="6" style="font-weight:bold; text-align:right;">家庭總入息（淨額）</td><td class="total">$${totalFamilyIncome.toFixed(2)}</td><td class="total">$${totalFamilyAsset.toFixed(2)}</td></tr>`;
             html += `</table>`;
-            html += `<div style="margin-top:12px; font-size:13px; color:var(--muted);">申報日期：${formatDisplay(declarationDate)}</div>`;
             detailDiv.innerHTML = html;
             resultDiv.style.display = 'block';
+            // 儲存結果 HTML 以便 PDF 匯出
+            window._resultHTML = detailDiv.innerHTML;
         }
 
         // ------------------------------------------------------------
-        //  8. PDF 下載
+        //  8. PDF 下載（修正版：克隆 DOM 方式）
         // ------------------------------------------------------------
         function downloadPDF() {
             const resultDiv = document.getElementById('incomeResult');
@@ -1358,76 +1446,156 @@
                 alert('請先計算收入及資產。');
                 return;
             }
-            const element = document.getElementById('incomeDetail');
-            html2canvas(element, {
-                scale: 2,
-                backgroundColor: '#ffffff',
-                logging: false,
-                useCORS: true
-            }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                const imgWidth = 210;
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, imgHeight);
-                pdf.save('入息資產申報結果(HD1040C).pdf');
-            }).catch(err => {
-                alert('生成PDF失敗，請稍後再試。');
-                console.error(err);
-            });
+
+            // 檢查 html2canvas 是否可用
+            if (typeof html2canvas === 'undefined') {
+                alert('PDF 生成庫未加載，請檢查網絡連線後再試。');
+                return;
+            }
+
+            try {
+                // 克隆結果區域
+                const clone = resultDiv.cloneNode(true);
+                // 在頂部插入申報期間資訊
+                const infoDiv = document.createElement('div');
+                infoDiv.style.marginBottom = '15px';
+                infoDiv.style.padding = '10px';
+                infoDiv.style.backgroundColor = '#f0f4f8';
+                infoDiv.style.borderRadius = '6px';
+                infoDiv.style.fontSize = '14px';
+                infoDiv.style.color = '#333';
+                infoDiv.style.lineHeight = '1.8';
+                infoDiv.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                infoDiv.innerHTML = `
+                    <div>📆 申報表日期：${lastResult.signDate}</div>
+                    <div>📊 申報月份（過去1個月）：${lastResult.reportMonth}</div>
+                    <div>📊 申報年（過去12個月）：${lastResult.reportYear}</div>
+                    <div>📊 申報時段（過去13個月）：${lastResult.reportPeriod}</div>
+                `;
+                clone.insertBefore(infoDiv, clone.firstChild);
+
+                // 確保表格邊框完整
+                const table = clone.querySelector('table');
+                if (table) {
+                    table.style.width = '100%';
+                    table.style.borderCollapse = 'collapse';
+                    const cells = table.querySelectorAll('td, th');
+                    cells.forEach(cell => {
+                        cell.style.border = '1px solid #ccc';
+                        cell.style.padding = '6px 8px';
+                        cell.style.textAlign = 'left';
+                        cell.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                    });
+                }
+
+                // 設定克隆的樣式以便截圖
+                clone.style.position = 'absolute';
+                clone.style.left = '-9999px';
+                clone.style.top = '0';
+                clone.style.width = '800px';
+                clone.style.backgroundColor = '#ffffff';
+                clone.style.padding = '20px';
+                clone.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                document.body.appendChild(clone);
+
+                // 使用 html2canvas 截圖
+                html2canvas(clone, {
+                    scale: 2,
+                    backgroundColor: '#ffffff',
+                    useCORS: true,
+                    logging: false,
+                    width: 800,
+                    onclone: function(doc) {
+                        const elements = doc.querySelectorAll('*');
+                        elements.forEach(el => {
+                            el.style.fontFamily = '"Times New Roman", "新細明體", serif';
+                        });
+                    }
+                }).then(canvas => {
+                    // 移除克隆
+                    if (clone.parentNode) document.body.removeChild(clone);
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgWidth = 210;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                    pdf.addImage(imgData, 'PNG', 0, 10, imgWidth, Math.min(imgHeight, 280));
+                    pdf.save('入息資產申報結果(HD1040C).pdf');
+                }).catch(err => {
+                    if (clone.parentNode) document.body.removeChild(clone);
+                    alert('生成PDF失敗，請稍後再試。錯誤訊息：' + err.message);
+                    console.error('html2canvas error:', err);
+                });
+            } catch (e) {
+                alert('生成PDF失敗：' + e.message);
+                console.error(e);
+            }
         }
 
         // ------------------------------------------------------------
-        //  9. Excel 下載
+        //  9. Excel 下載（加入申報期間資訊）
         // ------------------------------------------------------------
         function downloadExcel() {
             if (!lastResult) {
                 alert('請先計算收入及資產。');
                 return;
             }
-            const data = prepareExportData();
-            const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.json_to_sheet(data);
-            XLSX.utils.book_append_sheet(wb, ws, '入息資產申報');
-            XLSX.writeFile(wb, '入息資產申報結果(HD1040C).xlsx');
+            try {
+                const data = prepareExportDataWithPeriod();
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.json_to_sheet(data);
+                XLSX.utils.book_append_sheet(wb, ws, '入息資產申報');
+                XLSX.writeFile(wb, '入息資產申報結果(HD1040C).xlsx');
+            } catch (err) {
+                alert('匯出 Excel 失敗：' + err.message);
+            }
         }
 
         // ------------------------------------------------------------
-        //  10. CSV 下載
+        //  10. CSV 下載（加入申報期間資訊）
         // ------------------------------------------------------------
         function downloadCSV() {
             if (!lastResult) {
                 alert('請先計算收入及資產。');
                 return;
             }
-            const data = prepareExportData();
-            const headers = Object.keys(data[0]);
-            let csv = headers.join(',') + '\n';
-            data.forEach(row => {
-                const values = headers.map(h => {
-                    let val = row[h] || '';
-                    if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n'))) {
-                        val = '"' + val.replace(/"/g, '""') + '"';
-                    }
-                    return val;
+            try {
+                const data = prepareExportDataWithPeriod();
+                const headers = Object.keys(data[0]);
+                let csv = headers.join(',') + '\n';
+                data.forEach(row => {
+                    const values = headers.map(h => {
+                        let val = row[h] || '';
+                        if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n'))) {
+                            val = '"' + val.replace(/"/g, '""') + '"';
+                        }
+                        return val;
+                    });
+                    csv += values.join(',') + '\n';
                 });
-                csv += values.join(',') + '\n';
-            });
-            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = '入息資產申報結果(HD1040C).csv';
-            link.click();
-            URL.revokeObjectURL(link.href);
+                const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = '入息資產申報結果(HD1040C).csv';
+                link.click();
+                URL.revokeObjectURL(link.href);
+            } catch (err) {
+                alert('匯出 CSV 失敗：' + err.message);
+            }
         }
 
         // ------------------------------------------------------------
-        //  11. 準備導出數據
+        //  11. 準備導出數據（含申報期間）
         // ------------------------------------------------------------
-        function prepareExportData() {
+        function prepareExportDataWithPeriod() {
             const rows = [];
             const r = lastResult;
+            rows.push({ '成員姓名': '--- 申報期間資訊 ---', '與戶主關係': '', '職業': '', '主要收入詳情': '', '其他收入詳情': '', '強積金扣減 (港元)': '', '淨入息 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '申報表日期', '與戶主關係': r.signDate, '職業': '', '主要收入詳情': '', '其他收入詳情': '', '強積金扣減 (港元)': '', '淨入息 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '申報月份（過去1個月）', '與戶主關係': r.reportMonth, '職業': '', '主要收入詳情': '', '其他收入詳情': '', '強積金扣減 (港元)': '', '淨入息 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '申報年（過去12個月）', '與戶主關係': r.reportYear, '職業': '', '主要收入詳情': '', '其他收入詳情': '', '強積金扣減 (港元)': '', '淨入息 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '申報時段（過去13個月）', '與戶主關係': r.reportPeriod, '職業': '', '主要收入詳情': '', '其他收入詳情': '', '強積金扣減 (港元)': '', '淨入息 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
+            rows.push({ '成員姓名': '--- 成員申報詳情 ---', '與戶主關係': '', '職業': '', '主要收入詳情': '', '其他收入詳情': '', '強積金扣減 (港元)': '', '淨入息 (港元)': '', '資產詳情': '', '總資產淨值 (港元)': '' });
             r.membersData.forEach(m => {
                 let incomeDetail = m.incomeDetails.map(d => `${d.desc}(${d.periodDesc}) $${d.monthly.toFixed(2)}`).join('; ');
                 if (!incomeDetail) incomeDetail = '無';
