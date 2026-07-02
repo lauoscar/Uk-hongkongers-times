@@ -747,7 +747,6 @@
             <ul class="nav-menu">
                 <li><a href="housing.html">首頁 Home</a></li>
                 <li><a href="#" class="active">增加戶籍</a></li>
-                <li><a href="addition.html" target="_blank">增加戶籍</a></li>
                 <li><a href="ras.html" target="_blank">租金援助 RAS</a></li>
                 <li><a href="60days.html" target="_blank">交回單位期限計算</a></li>
                 <li><a href="prh.html" target="_blank">申請公屋 PRH</a></li>
@@ -763,7 +762,7 @@
             <div class="card">
                 <div class="widget-head">
                     <h3>📋 入息及資產申報 (增加戶籍申請)</h3>
-                    <div class="widget-sub">依據 HD1040C (Rev. 03-2026)｜計算家庭總入息及總資產淨值</div>
+                    <div class="widget-sub">依據 HD1040C｜計算家庭總入息及總資產淨值</div>
                 </div>
 
                 <form id="incomeForm" onsubmit="return false;">
@@ -833,7 +832,7 @@
 
             <div class="card">
                 <div class="widget-head"><h3>關於本工具</h3></div>
-                <p>根據 <strong>HD1040C (Rev. 03-2026)</strong> 表格，協助計算增加戶籍申請的家庭總入息及總資產淨值。</p>
+                <p>根據 <strong>HD1040C</strong> 表格，協助計算增加戶籍申請的家庭總入息及總資產淨值。</p>
                 <p style="margin-top:10px; font-size:13px; color:var(--muted);">數據僅儲存於本地瀏覽器，不會上傳至伺服器。</p>
             </div>
 
@@ -1082,7 +1081,7 @@
             addOtherIncomeItemToContainer(otherIncomeList);
             const assetList = div.querySelector('.asset-list');
             // 預設資產：存款
-            addAssetItemToContainer(assetList, '存款');
+            addAssetItemToContainer(assetList, '詳細描述(可選）');
             
         }
 
@@ -1181,12 +1180,12 @@
             div.className = 'other-income-item';
             div.innerHTML = `
                 <select class="other-income-type" style="flex:0 0 140px; min-width:120px;">
+                    <option value="interest">利息/股息/紅利</option>
+                    <option value="annuity">年金</option>
                     <option value="retirement">退休金</option>
                     <option value="cssa">綜援金</option>
-                    <option value="alimony">贍養費</option>
+                    <option value="alimony">收取贍養費</option>
                     <option value="family">親友資助</option>
-                    <option value="annuity">年金</option>
-                    <option value="interest">利息/股息/紅利</option>
                     <option value="rental">土地/物業租金</option>
                     <option value="commercial">商用車輛收入</option>
                     <option value="other">其他</option>
