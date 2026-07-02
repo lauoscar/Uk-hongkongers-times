@@ -993,7 +993,7 @@
                 <!-- 其他扣減項目（成員級別） -->
                 <div style="margin-top:8px; border-top: 1px dashed var(--border); padding-top:8px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-                        <span class="label-sm">✅ 其他扣減項目 (贍養費支出等，每月金額)</span>
+                        <span class="label-sm">✅ 其他扣減項目 (每月金額)</span>
                         <button type="button" class="btn-add-deduction" onclick="addDeductionItem(this)">➕ 新增扣減項目</button>
                     </div>
                     <div class="deduction-list" style="width:100%; margin-top:4px;"></div>
@@ -1120,7 +1120,7 @@
             const div = document.createElement('div');
             div.className = 'deduction-item';
             div.innerHTML = `
-                <input type="text" class="deduction-desc" placeholder="扣減項目 (如贍養費支出等)" style="flex:1.5;" value="贍養費支出">
+                <input type="text" class="deduction-desc" placeholder="扣減項目" style="flex:1.5;" value="詳細描述（可選填）">
                 <input type="number" class="deduction-amount" step="0.01" min="0" placeholder="每月金額" style="flex:1;">
                 <span style="font-size:13px;color:var(--muted);">每月</span>
                 <button type="button" class="del-item" onclick="this.parentElement.remove()" style="flex:0 0 auto;">✕</button>
